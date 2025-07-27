@@ -1,4 +1,11 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import {
+  Calendar,
+  ChevronRightIcon,
+  Home,
+  Inbox,
+  Search,
+  Settings,
+} from "lucide-react";
 
 import {
   Collapsible,
@@ -78,7 +85,11 @@ export function AppSidebar() {
                   >
                     <SidebarMenuItem>
                       <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>{topic.name}</SidebarMenuButton>
+                        <SidebarMenuButton className="flex items-center justify-between gap-2 w-full">
+                          <span>{topic.name}</span>
+                          {/* Show right arrow when closed, down arrow when open */}
+                          <ChevronRightIcon className="h-4 w-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                        </SidebarMenuButton>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
                         <SidebarMenuSub>
