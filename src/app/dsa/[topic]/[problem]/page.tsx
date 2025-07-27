@@ -1,6 +1,6 @@
-import ImplementMergeSort from "@/components/DSA/Arrays/ImplementMergeSort";
-import SearchingConcept from "@/components/DSA/Searching/SearchingConcept";
-import { unslugify } from "@/lib/utils";
+import MarkdownPage from "@/components/MarkdownPage/MarkdownPage";
+import { readFile } from "fs/promises";
+import path from "path";
 
 const Page = async ({
   params,
@@ -8,15 +8,15 @@ const Page = async ({
   params: Promise<{ topic: string; problem: string }>;
 }) => {
   const { topic, problem } = await params;
-  if (unslugify(topic) === "Arrays") {
-    if (unslugify(problem) === "Implement Merge Sort") {
-      return <ImplementMergeSort />;
-    }
-  } else if (unslugify(topic) === "Searching") {
-    if (unslugify(problem) === "Concept") {
-      return <SearchingConcept />;
-    }
-  }
-  return <p className="p-4">Problem not added yet</p>;
+  const filePath = path.join(
+    process.cwd(),
+    "public",
+    "markdown",
+    topic,
+    `${problem}.md`
+  );
+  const markdown = await readFile(filePath, "utf-8");
+
+  return <MarkdownPage markdown={markdown} />;
 };
 export default Page;

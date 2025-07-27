@@ -1,3 +1,4 @@
+import { GlobalContextProvider } from "@/app/providers/GlobalContextProvider";
 import { ThemeProvider } from "@/app/providers/ThemeProvider";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
@@ -16,7 +17,9 @@ const Providers: React.FC<ProvidersProps> = async ({ children }) => {
       enableSystem
       disableTransitionOnChange
     >
-      <SidebarProvider defaultOpen={defaultOpen}>{children}</SidebarProvider>
+      <GlobalContextProvider>
+        <SidebarProvider defaultOpen={defaultOpen}>{children}</SidebarProvider>
+      </GlobalContextProvider>
     </ThemeProvider>
   );
 };
