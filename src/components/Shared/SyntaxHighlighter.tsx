@@ -38,16 +38,16 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
     error: "",
   });
   const { md } = useBreakpoints();
-  const [code, setCode] = useState(() => {
-    if (!initialCode) return initialCode;
+  if (initialCode) {
     if (!initialCode.startsWith("\n")) {
       initialCode = "\n" + initialCode;
     }
     if (!initialCode.endsWith("\n")) {
       initialCode = initialCode + "\n";
     }
-    return initialCode;
-  });
+  }
+
+  const [code, setCode] = useState(initialCode);
   const [disabledPointerEvents, setDisabledPointerEvents] = useState(true);
 
   const codeRef = useRef(code);
