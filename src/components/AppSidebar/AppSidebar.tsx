@@ -1,3 +1,4 @@
+"use client";
 import {
   Calendar,
   ChevronRightIcon,
@@ -26,6 +27,7 @@ import {
 } from "@/components/ui/sidebar";
 import { slugify } from "@/lib/utils";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 // Menu items.
 const items = [
@@ -57,6 +59,23 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const [openState, setOpenState] = useState<Record<string, boolean>>({});
+  useEffect(() => {
+    const stored = localStorage.getItem("dsa-collapse-state");
+    if (stored) {
+      setOpenState(JSON.parse(stored));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("dsa-collapse-state", JSON.stringify(openState));
+  }, [openState]);
+  const toggle = (topicName: string) => {
+    setOpenState((prev) => ({
+      ...prev,
+      [topicName]: !prev[topicName],
+    }));
+  };
   return (
     <Sidebar>
       <SidebarContent>
@@ -77,10 +96,12 @@ export function AppSidebar() {
             </SidebarMenu> */}
             <SidebarMenu>
               {topics.map((topic, i) => {
+                const isOpen = openState[topic.name] ?? false; // default close
                 return (
                   <Collapsible
                     key={i}
-                    defaultOpen
+                    open={isOpen}
+                    onOpenChange={() => toggle(topic.name)}
                     className="group/collapsible"
                   >
                     <SidebarMenuItem>
