@@ -15,8 +15,11 @@ const Page = async ({
     topic,
     `${problem}.md`
   );
-  const markdown = await readFile(filePath, "utf-8");
-
-  return <MarkdownPage markdown={markdown} />;
+  try {
+    const markdown = await readFile(filePath, "utf-8");
+    return <MarkdownPage markdown={markdown} />;
+  } catch (err) {
+    return <div className="p-4">Page not implemented</div>;
+  }
 };
 export default Page;
