@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/sidebar";
 import { slugify } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 // Menu items.
@@ -59,6 +60,7 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const pathname = usePathname();
   const [openState, setOpenState] = useState<Record<string, boolean>>({});
   useEffect(() => {
     const stored = localStorage.getItem("dsa-collapse-state");
@@ -124,7 +126,10 @@ export function AppSidebar() {
                             )}`;
                             return (
                               <SidebarMenuSubItem key={i}>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                  asChild
+                                  isActive={pathname === link}
+                                >
                                   <Link href={link}>
                                     <span>{problem.name}</span>
                                   </Link>
@@ -178,7 +183,7 @@ const topics = [
     problems: [
       { name: "Concept" },
       {
-        name: "Contains Element?",
+        name: "Contains Element",
       },
       {
         name: "Search Range",
