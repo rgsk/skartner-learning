@@ -1,4 +1,4 @@
-# 🔍 Understanding Binary Search (with Python Code)
+# Binary Search
 
 [![Binary Search Explanation](https://img.youtube.com/vi/zavvULEZPhc/0.jpg)](https://www.youtube.com/watch?v=zavvULEZPhc)
 

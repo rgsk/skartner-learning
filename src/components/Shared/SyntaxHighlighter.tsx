@@ -98,7 +98,7 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
               "bg-[#50505a] w-full",
               "flex justify-between items-center",
               "px-[16px] py-[8px]",
-              "sticky top-[-16px] z-50"
+              "sticky top-[0px] z-50"
             )}
           >
             <span className={cn("text-white", heading ? "text-sm" : "text-xs")}>
