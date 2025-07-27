@@ -80,7 +80,11 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Data Structures and Algorithms</SidebarGroupLabel>
+          <Link href="/dsa">
+            <SidebarGroupLabel>
+              Data Structures and Algorithms
+            </SidebarGroupLabel>
+          </Link>
           <SidebarGroupContent>
             {/* <SidebarMenu>
               {items.map((item) => (
