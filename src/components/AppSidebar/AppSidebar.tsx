@@ -1,6 +1,11 @@
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
 
 import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
@@ -9,7 +14,11 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { slugify } from "@/lib/utils";
+import Link from "next/link";
 
 // Menu items.
 const items = [
@@ -45,9 +54,9 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>Data Structures and Algorithms</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            {/* <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
@@ -58,6 +67,41 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+            </SidebarMenu> */}
+            <SidebarMenu>
+              {topics.map((topic, i) => {
+                return (
+                  <Collapsible
+                    key={i}
+                    defaultOpen
+                    className="group/collapsible"
+                  >
+                    <SidebarMenuItem>
+                      <CollapsibleTrigger asChild>
+                        <SidebarMenuButton>{topic.name}</SidebarMenuButton>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <SidebarMenuSub>
+                          {topic.problems.map((problem, i) => {
+                            const link = `/dsa/${slugify(topic.name)}/${slugify(
+                              problem.name
+                            )}`;
+                            return (
+                              <SidebarMenuSubItem key={i}>
+                                <SidebarMenuButton asChild>
+                                  <Link href={link}>
+                                    <span>{problem.name}</span>
+                                  </Link>
+                                </SidebarMenuButton>
+                              </SidebarMenuSubItem>
+                            );
+                          })}
+                        </SidebarMenuSub>
+                      </CollapsibleContent>
+                    </SidebarMenuItem>
+                  </Collapsible>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -65,3 +109,44 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
+
+const topics = [
+  {
+    name: "Arrays",
+    problems: [
+      {
+        name: "Concept",
+      },
+      {
+        name: "Cumulative Sum",
+      },
+      {
+        name: "Positive Cumulative Sum",
+      },
+      {
+        name: "Identical Twins",
+      },
+      {
+        name: "Even Number of Digits",
+      },
+      {
+        name: "Implement Merge Sort",
+      },
+      {
+        name: "Implement Quicksort",
+      },
+    ],
+  },
+  {
+    name: "Searching",
+    problems: [
+      { name: "Concept" },
+      {
+        name: "Contains Element?",
+      },
+      {
+        name: "Search Range",
+      },
+    ],
+  },
+];

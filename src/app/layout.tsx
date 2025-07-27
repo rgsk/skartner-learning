@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/AppSidebar/AppSidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import Navbar from "@/components/Navbar/Navbar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { cookies } from "next/headers";
@@ -43,10 +44,10 @@ export default async function RootLayout({
         >
           <SidebarProvider defaultOpen={defaultOpen}>
             <AppSidebar />
-            <main>
-              <SidebarTrigger />
-              {children}
-            </main>
+            <div className="w-full">
+              <Navbar />
+              <main>{children}</main>
+            </div>
           </SidebarProvider>
         </ThemeProvider>
       </body>
