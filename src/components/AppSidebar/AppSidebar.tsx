@@ -159,7 +159,7 @@ const topics = [
         name: "Merge Sort",
       },
       {
-        name: "Quicksort",
+        name: "Quick Sort",
       },
     ],
   },
