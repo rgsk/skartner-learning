@@ -1,3 +1,4 @@
+"use client";
 import CsvRenderer from "@/components/Shared/CsvRenderer";
 import { LoadingSpinner } from "@/components/Shared/LoadingSpinner";
 import usePythonRunner, {
