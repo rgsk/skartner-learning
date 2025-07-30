@@ -11,23 +11,30 @@ const PracticeLinks: React.FC<PracticeLinksProps> = ({ leetcode }) => {
   const { theme } = useTheme();
   return (
     <div className="my-[20px]">
-      <TargetBlankLink href={`https://leetcode.com/problems/${leetcode}`}>
-        <span className="flex gap-2 items-center">
-          <Label className="text-lg">Leetcode</Label>
-          <span>
-            {theme === "dark" ? (
-              <Image src="/lc-dark.png" width={20} height={20} alt="leetcode" />
-            ) : (
-              <Image
-                src="/lc-light.png"
-                width={20}
-                height={20}
-                alt="leetcode"
-              />
-            )}
+      <div className="flex">
+        <TargetBlankLink href={`https://leetcode.com/problems/${leetcode}`}>
+          <span className="flex gap-2 items-center">
+            <Label className="text-lg">Leetcode</Label>
+            <span>
+              {theme === "dark" ? (
+                <Image
+                  src="/lc-dark.png"
+                  width={20}
+                  height={20}
+                  alt="leetcode"
+                />
+              ) : (
+                <Image
+                  src="/lc-light.png"
+                  width={20}
+                  height={20}
+                  alt="leetcode"
+                />
+              )}
+            </span>
           </span>
-        </span>
-      </TargetBlankLink>
+        </TargetBlankLink>
+      </div>
     </div>
   );
 };
