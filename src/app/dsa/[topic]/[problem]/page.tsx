@@ -1,17 +1,16 @@
+import MergeSort from "@/components/DSA/Arrays/MergeSort";
+
 const Page = async ({
   params,
 }: {
   params: Promise<{ topic: string; problem: string }>;
 }) => {
   const { topic, problem } = await params;
-  const { default: Component } = await import(
-    `@/markdown/${topic}/${problem}.mdx`
-  );
-
-  return (
-    <div className="messageContent px-[32px]">
-      <Component />
-    </div>
-  );
+  if (topic === "arrays") {
+    if (problem === "merge-sort") {
+      return <MergeSort />;
+    }
+  }
+  return <div className="p-[32px]">Page not implemented</div>;
 };
 export default Page;
