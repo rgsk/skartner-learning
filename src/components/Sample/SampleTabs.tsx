@@ -1,0 +1,88 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import SyntaxHighlighter from "../Shared/SyntaxHighlighter";
+
+export function SampleTabs() {
+  return (
+    <Tabs defaultValue="Python">
+      <TabsList>
+        <TabsTrigger value="Python">Python</TabsTrigger>
+        <TabsTrigger value="C++">C++</TabsTrigger>
+      </TabsList>
+      <TabsContent value="Python">
+        <SyntaxHighlighter
+          isCodeOutput={false}
+          language="python"
+          defaultOutput={`2`}
+          code={`
+from typing import List
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        lo = 0
+        hi = len(nums) - 1
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                hi = mid - 1
+            else:
+                lo = mid + 1
+        return -1
+
+# collapsed-start
+nums = [-1, 0, 3, 5, 9, 12]
+target = 3
+sol = Solution()
+print(sol.search(nums, target))
+# collapsed-end
+
+print('hi')
+print('hello')
+`}
+        />
+      </TabsContent>
+      <TabsContent value="C++">
+        <SyntaxHighlighter
+          isCodeOutput={false}
+          language="cpp"
+          defaultOutput={`2`}
+          code={`
+#include <iostream>
+#include <vector>
+
+class Solution {
+public:
+    int search(const std::vector<int>& nums, int target) {
+        int lo = 0;
+        int hi = nums.size() - 1;
+        
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;  // avoids overflow
+            if (nums[mid] == target)
+                return mid;
+            else if (nums[mid] > target)
+                hi = mid - 1;
+            else
+                lo = mid + 1;
+        }
+        
+        return -1;
+    }
+};
+
+int main() {
+    std::vector<int> nums = {-1, 0, 3, 5, 9, 12};
+    int target = 3;
+    
+    Solution sol;
+    std::cout << sol.search(nums, target) << std::endl;
+    
+    return 0;
+}
+`}
+        />
+      </TabsContent>
+    </Tabs>
+  );
+}

@@ -16,6 +16,7 @@ import useCopyToClipboard from "@/hooks/useCopyToClipboard";
 import useEventListener from "@/hooks/useEventListener";
 import useGlobalContext from "@/hooks/useGlobalContext";
 import { cn, getCsvFile } from "@/lib/utils";
+
 interface SyntaxHighlighterProps {
   language: string;
   code?: string;
@@ -329,7 +330,7 @@ const RenderOutput: React.FC<RenderOutputProps> = ({ code }) => {
     <SyntaxHighlighter
       key="final-code"
       code={code}
-      language={"run output"}
+      language={"output"}
       isCodeOutput={true}
     />
   );

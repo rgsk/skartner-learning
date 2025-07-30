@@ -1,11 +1,10 @@
-import SampleMyComponent from "@/components/Sample/SampleMyComponent";
-import { Button } from "@/components/ui/button";
+import { SampleTabs } from "../Sample/SampleTabs";
+
 interface PracticePageProps {}
 const PracticePage: React.FC<PracticePageProps> = ({}) => {
   return (
     <div>
-      <Button>Click</Button>
-      <SampleMyComponent />
+      <SampleTabs />
     </div>
   );
 };
