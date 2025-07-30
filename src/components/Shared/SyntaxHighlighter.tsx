@@ -366,70 +366,69 @@ const CodeButton: React.FC<CodeButtonProps> = ({
 };
 
 const handleTestBlockCollapse = (editor: any, monaco: any) => {
-  // 1) Utility to find all your custom blocks
+  // find your custom regions exactly
   function findCustomBlocks(model: any) {
     const text = model.getValue();
     const rx = /# (?:imports|tests)-start[\s\S]*?# (?:imports|tests)-end/g;
     let m: RegExpExecArray | null;
     const blocks: { start: number; end: number }[] = [];
+
     while ((m = rx.exec(text))) {
       const start = model.getPositionAt(m.index).lineNumber;
       const end = model.getPositionAt(m.index + m[0].length).lineNumber;
-      if (end - start > 1) blocks.push({ start: start - 1, end: end + 1 });
+      if (end - start > 1) {
+        blocks.push({ start: start - 1, end: end + 1 });
+      }
     }
     return blocks;
   }
 
   const model = editor.getModel()!;
   const blocks = findCustomBlocks(model);
+  const collapsed = new Set<number>(blocks.map((_, i) => i));
 
-  // 2) Keep track of which blocks are collapsed
-  const collapsed = new Set<number>(blocks.map((_, i) => i)); // use block-index
-
-  // 3) Function to refresh hidden areas and widgets
-  function renderCollapseUI(editor: any) {
-    // build hiddenAreas for all collapsed blocks
+  function renderCollapseUI() {
+    // 1) HIDE the inner lines of each collapsed block
     const hiddenAreas = blocks
       .map((b, i) =>
         collapsed.has(i)
-          ? {
-              startLineNumber: b.start + 1,
-              endLineNumber: b.end - 1,
-            }
+          ? { startLineNumber: b.start + 1, endLineNumber: b.end - 1 }
           : null
       )
       .filter((r): r is any => !!r);
 
     editor.setHiddenAreas(hiddenAreas);
 
-    // remove old widgets
-    editor.getContribution("myCollapseWidgets")?.dispose();
-    // we'll collect widgets so we can remove them next time
-    const widgets: any[] = [];
+    // 2) REMOVE any existing widgets
+    const oldWidgets = (editor as any)._myCollapseWidgets || [];
+    oldWidgets.forEach((w: any) => editor.removeContentWidget(w));
+    editor.setHiddenAreas(hiddenAreas);
 
-    // 4) Create a widget for each block
+    // 3) ADD new widgets
+    const newWidgets: any[] = [];
     blocks.forEach((b, i) => {
-      const dom = document.createElement("div");
-      dom.style.background = "#1E1E1E";
-      dom.style.borderRadius = "3px";
+      const dom = document.createElement("button");
+      dom.textContent = collapsed.has(i) ? "➡️" : "⬇️";
+      dom.style.background = "transparent";
+      dom.style.border = "none";
+      dom.style.padding = "0";
+      dom.style.margin = "0";
+      dom.style.width = "24px";
+      dom.style.height = "18px"; // match editor line height
+      dom.style.display = "flex";
+      dom.style.alignItems = "center";
+      dom.style.justifyContent = "center";
+      dom.style.cursor = "pointer";
+      dom.style.userSelect = "none";
+      dom.style.color = "white";
 
-      const btn = document.createElement("button");
-      btn.style.width = "24px";
-      btn.textContent = collapsed.has(i) ? "➡️" : "⬇️";
-      btn.style.fontSize = "16px";
-      btn.style.cursor = "pointer";
-      btn.style.color = "white";
-      btn.style.userSelect = "none";
-
-      btn.onclick = () => {
+      dom.onclick = () => {
         if (collapsed.has(i)) collapsed.delete(i);
         else collapsed.add(i);
-        renderCollapseUI(editor);
+        renderCollapseUI();
       };
 
-      dom.appendChild(btn);
-
-      const widget: any = {
+      const widget = {
         getId: () => `collapse-widget-${i}`,
         getDomNode: () => dom,
         getPosition: () => ({
@@ -439,16 +438,13 @@ const handleTestBlockCollapse = (editor: any, monaco: any) => {
       };
 
       editor.addContentWidget(widget);
-      widgets.push(widget);
+      newWidgets.push(widget);
     });
 
-    // stash widgets on the editor so we can clean up next time
-    (editor as any)._myCollapseWidgets = widgets;
+    // stash for next removal
+    (editor as any)._myCollapseWidgets = newWidgets;
   }
 
-  // 5) Hook it up on model change
-  // editor.onDidChangeModelContent(() => renderCollapseUI(editor));
-
-  // 6) First render
-  renderCollapseUI(editor);
+  editor.onDidChangeModelContent(renderCollapseUI);
+  renderCollapseUI();
 };
