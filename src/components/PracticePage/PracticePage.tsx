@@ -1,32 +1,15 @@
 "use client";
-import PracticeLinks from "@/components/Shared/PracticeLinks";
-import { useEffect, useState } from "react";
-import CodeTabs from "../Shared/CodeTabs";
+import CodeFetcher from "../Shared/CodeFetcher";
 
 interface PracticePageProps {}
 const PracticePage: React.FC<PracticePageProps> = ({}) => {
-  const [pythonCode, setPythonCode] = useState("");
-  useEffect(() => {
-    fetch("/merge-sort.py")
-      .then((res) => res.text())
-      .then((v) => {
-        console.log({ v });
-        setPythonCode(v);
-      });
-  }, []);
   return (
     <div>
-      <p>
-        Practice on: <PracticeLinks leetcode="binary-search" />
-      </p>
-      {pythonCode && (
-        <CodeTabs
-          python={{
-            code: pythonCode,
-            output: "[1, 2, 3]",
-          }}
-        />
-      )}
+      <CodeFetcher
+        pythonFile="/dsa/arrays/merge_sort/sol/merge_sort.py"
+        typescriptFile="/dsa/arrays/merge_sort/sol/merge_sort.ts"
+        cppFile="/dsa/arrays/merge_sort/sol/merge_sort.cpp"
+      />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useLocalStorageState from "@/hooks/useLocalStorageState";
 import SyntaxHighlighter from "../Shared/SyntaxHighlighter";
 interface CodeTabsProps {
-  python: {
+  python?: {
     code: string;
     output: string;
   };
@@ -28,20 +28,22 @@ const CodeTabs: React.FC<CodeTabsProps> = ({ python, cpp, typescript }) => {
         onValueChange={(v) => setPreferredTab(v as any)}
       >
         <TabsList>
-          <TabsTrigger value="Python">Python</TabsTrigger>
+          {python && <TabsTrigger value="Python">Python</TabsTrigger>}
           {cpp && <TabsTrigger value="C++">C++</TabsTrigger>}
           {typescript && (
             <TabsTrigger value="TypeScript">TypeScript</TabsTrigger>
           )}
         </TabsList>
-        <TabsContent value="Python">
-          <SyntaxHighlighter
-            isCodeOutput={false}
-            language="python"
-            defaultOutput={python.output}
-            code={python.code}
-          />
-        </TabsContent>
+        {python && (
+          <TabsContent value="Python">
+            <SyntaxHighlighter
+              isCodeOutput={false}
+              language="python"
+              defaultOutput={python.output}
+              code={python.code}
+            />
+          </TabsContent>
+        )}
         {cpp && (
           <TabsContent value="C++">
             <SyntaxHighlighter
