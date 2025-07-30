@@ -30,15 +30,12 @@ class Solution:
                 lo = mid + 1
         return -1
 
-# collapsed-start
+# test-start
 nums = [-1, 0, 3, 5, 9, 12]
 target = 3
 sol = Solution()
 print(sol.search(nums, target))
-# collapsed-end
-
-print('hi')
-print('hello')
+# test-end
 `}
         />
       </TabsContent>

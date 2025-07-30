@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import CsvRenderer from "@/components/Shared/CsvRenderer";
 import { LoadingSpinner } from "@/components/Shared/LoadingSpinner";
@@ -210,6 +211,8 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
               }}
               onChange={(newValue) => setCode(newValue || "")}
               onMount={(editor, monaco) => {
+                handleTestBlockCollapse(editor, monaco);
+
                 if (!isCodeOutput) {
                   editor.onDidFocusEditorWidget(() => {
                     currentExecuteCodeRef.current = executeCodeRef;
@@ -266,7 +269,7 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
                     return (
                       <React.Fragment key={`fragment-${index}`}>
                         {syntaxHighlighter}
-                        <img key={`img-${index}`} src={line} />
+                        <img key={`img-${index}`} src={line} alt="hi" />
                       </React.Fragment>
                     );
                   } else if (line.startsWith(pythonCSVPrefix)) {
@@ -360,4 +363,92 @@ const CodeButton: React.FC<CodeButtonProps> = ({
       {children}
     </button>
   );
+};
+
+const handleTestBlockCollapse = (editor: any, monaco: any) => {
+  // 1) Utility to find all your custom blocks
+  function findCustomBlocks(model: any) {
+    const text = model.getValue();
+    const rx = /# test-start[\s\S]*?# test-end/g;
+    let m: RegExpExecArray | null;
+    const blocks: { start: number; end: number }[] = [];
+    while ((m = rx.exec(text))) {
+      const start = model.getPositionAt(m.index).lineNumber;
+      const end = model.getPositionAt(m.index + m[0].length).lineNumber;
+      if (end - start > 1) blocks.push({ start: start - 1, end: end + 1 });
+    }
+    return blocks;
+  }
+
+  const model = editor.getModel()!;
+  const blocks = findCustomBlocks(model);
+
+  // 2) Keep track of which blocks are collapsed
+  const collapsed = new Set<number>(blocks.map((_, i) => i)); // use block-index
+
+  // 3) Function to refresh hidden areas and widgets
+  function renderCollapseUI(editor: any) {
+    // build hiddenAreas for all collapsed blocks
+    const hiddenAreas = blocks
+      .map((b, i) =>
+        collapsed.has(i)
+          ? {
+              startLineNumber: b.start + 1,
+              endLineNumber: b.end - 1,
+            }
+          : null
+      )
+      .filter((r): r is any => !!r);
+
+    editor.setHiddenAreas(hiddenAreas);
+
+    // remove old widgets
+    editor.getContribution("myCollapseWidgets")?.dispose();
+    // we'll collect widgets so we can remove them next time
+    const widgets: any[] = [];
+
+    // 4) Create a widget for each block
+    blocks.forEach((b, i) => {
+      const dom = document.createElement("div");
+      dom.style.background = "#1E1E1E";
+      dom.style.borderRadius = "3px";
+
+      const btn = document.createElement("button");
+      btn.style.width = "24px";
+      btn.textContent = collapsed.has(i) ? "➡️" : "⬇️";
+      btn.style.fontSize = "16px";
+      btn.style.cursor = "pointer";
+      btn.style.color = "white";
+      btn.style.userSelect = "none";
+
+      btn.onclick = () => {
+        if (collapsed.has(i)) collapsed.delete(i);
+        else collapsed.add(i);
+        renderCollapseUI(editor);
+      };
+
+      dom.appendChild(btn);
+
+      const widget: any = {
+        getId: () => `collapse-widget-${i}`,
+        getDomNode: () => dom,
+        getPosition: () => ({
+          position: { lineNumber: b.start, column: 1 },
+          preference: [monaco.editor.ContentWidgetPositionPreference.EXACT],
+        }),
+      };
+
+      editor.addContentWidget(widget);
+      widgets.push(widget);
+    });
+
+    // stash widgets on the editor so we can clean up next time
+    (editor as any)._myCollapseWidgets = widgets;
+  }
+
+  // 5) Hook it up on model change
+  // editor.onDidChangeModelContent(() => renderCollapseUI(editor));
+
+  // 6) First render
+  renderCollapseUI(editor);
 };
