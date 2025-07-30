@@ -13,30 +13,32 @@ interface CodeTabsProps {
 }
 const CodeTabs: React.FC<CodeTabsProps> = ({ python, cpp }) => {
   return (
-    <Tabs defaultValue="Python">
-      <TabsList>
-        <TabsTrigger value="Python">Python</TabsTrigger>
-        {cpp && <TabsTrigger value="C++">C++</TabsTrigger>}
-      </TabsList>
-      <TabsContent value="Python">
-        <SyntaxHighlighter
-          isCodeOutput={false}
-          language="python"
-          defaultOutput={python.output}
-          code={python.code}
-        />
-      </TabsContent>
-      {cpp && (
-        <TabsContent value="C++">
+    <div className="my-[20px]">
+      <Tabs defaultValue="Python">
+        <TabsList>
+          <TabsTrigger value="Python">Python</TabsTrigger>
+          {cpp && <TabsTrigger value="C++">C++</TabsTrigger>}
+        </TabsList>
+        <TabsContent value="Python">
           <SyntaxHighlighter
             isCodeOutput={false}
-            language="cpp"
-            defaultOutput={cpp.output}
-            code={cpp.code}
+            language="python"
+            defaultOutput={python.output}
+            code={python.code}
           />
         </TabsContent>
-      )}
-    </Tabs>
+        {cpp && (
+          <TabsContent value="C++">
+            <SyntaxHighlighter
+              isCodeOutput={false}
+              language="cpp"
+              defaultOutput={cpp.output}
+              code={cpp.code}
+            />
+          </TabsContent>
+        )}
+      </Tabs>
+    </div>
   );
 };
 export default CodeTabs;
