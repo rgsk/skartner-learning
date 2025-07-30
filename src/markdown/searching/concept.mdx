@@ -1,23 +1,14 @@
-# Binary Search
+import CodeTabs from "@/components/Shared/CodeTabs";
 
-[![Binary Search Explanation](https://img.youtube.com/vi/zavvULEZPhc/0.jpg)](https://www.youtube.com/watch?v=zavvULEZPhc)
+# Searching Concept
 
-Binary Search is one of the most fundamental and efficient algorithms for searching a sorted array. It repeatedly divides the search interval in half, allowing it to find elements in logarithmic time — O(log n).
 
-Let’s walk through a simple implementation in Python.
-
----
-
-### 🧠 How It Works
-
-Given a sorted list, Binary Search starts by comparing the middle element with the target. If it matches, we’re done. If the target is smaller, we search the left half; otherwise, we search the right half. This continues until we either find the element or exhaust the array.
-
----
-
-### 📦 Example Code
-
-```python
+ <CodeTabs
+        python={{
+          code: `
+# imports-start
 from typing import List
+# imports-end
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -33,32 +24,52 @@ class Solution:
                 lo = mid + 1
         return -1
 
-nums = [-1, 0, 3, 5, 9, 12]
-target = 3
+# tests-start
+nums = [1, 3, 5, 9, 12]
+target = 9
 sol = Solution()
 print(sol.search(nums, target))
-```
+# tests-end
+`,
+          output: "3",
+        }}
+        cpp={{
+          code: `
+// imports-start
+#include <bits/stdc++.h>
+using namespace std;
+// imports-end
 
----
+class Solution {
+   public:
+    int search(const vector<int>& nums, int target) {
+        int lo = 0;
+        int hi = nums.size() - 1;
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
+            if (nums[mid] == target)
+                return mid;
+            else if (nums[mid] > target)
+                hi = mid - 1;
+            else
+                lo = mid + 1;
+        }
+        return -1;
+    }
+};
 
-### 💡 Output
+// tests-start
+int main() {
+    vector<int> nums = {1, 3, 5, 9, 12};
+    int target = 9;
 
-```output
-2
-```
+    Solution sol;
+    cout << sol.search(nums, target) << endl;
 
-The target `3` is found at index `2`.
-
----
-
-### ✅ When to Use
-
-- When the array is sorted
-- When you need faster lookups than linear search
-- Perfect for problems involving searching in logs, arrays, or ranges
-
----
-
-Binary Search is not just an algorithm — it's a building block. Master it, and you'll unlock patterns that apply to countless algorithmic problems.
-
----
+    return 0;
+}
+// tests-end
+`,
+          output: "3",
+        }}
+      />

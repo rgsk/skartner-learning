@@ -1,0 +1,42 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import SyntaxHighlighter from "../Shared/SyntaxHighlighter";
+
+interface CodeTabsProps {
+  python: {
+    code: string;
+    output: string;
+  };
+  cpp?: {
+    code: string;
+    output: string;
+  };
+}
+const CodeTabs: React.FC<CodeTabsProps> = ({ python, cpp }) => {
+  return (
+    <Tabs defaultValue="Python">
+      <TabsList>
+        <TabsTrigger value="Python">Python</TabsTrigger>
+        {cpp && <TabsTrigger value="C++">C++</TabsTrigger>}
+      </TabsList>
+      <TabsContent value="Python">
+        <SyntaxHighlighter
+          isCodeOutput={false}
+          language="python"
+          defaultOutput={python.output}
+          code={python.code}
+        />
+      </TabsContent>
+      {cpp && (
+        <TabsContent value="C++">
+          <SyntaxHighlighter
+            isCodeOutput={false}
+            language="cpp"
+            defaultOutput={cpp.output}
+            code={cpp.code}
+          />
+        </TabsContent>
+      )}
+    </Tabs>
+  );
+};
+export default CodeTabs;
