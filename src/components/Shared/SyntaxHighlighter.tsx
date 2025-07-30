@@ -2,7 +2,7 @@
 "use client";
 import CsvRenderer from "@/components/Shared/CsvRenderer";
 import { LoadingSpinner } from "@/components/Shared/LoadingSpinner";
-import usePythonRunner, {
+import {
   getCSVContents,
   pythonCSVPrefix,
   pythonImagePrefix,
@@ -12,6 +12,10 @@ import { Check, Copy, Play, RotateCcw } from "lucide-react";
 import React, { useMemo, useRef, useState } from "react";
 import { isMobile } from "react-device-detect";
 
+import useCodeRunners, {
+  CodeRunnerSupportedLanguages,
+  codeRunnerSupportedLanguages,
+} from "@/hooks/codeRunners/useCodeRunners";
 import useBreakpoints from "@/hooks/useBreakpoints";
 import useCopyToClipboard from "@/hooks/useCopyToClipboard";
 import useEventListener from "@/hooks/useEventListener";
@@ -34,7 +38,7 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
   disableHeader,
   defaultOutput,
 }) => {
-  const { loading: codeRunnersLoading, runCode } = usePythonRunner();
+  const { loading: codeRunnersLoading, runCode } = useCodeRunners();
   const [executeCodeDetails, setExecuteCodeDetails] = useState({
     loading: false,
     output: "",
@@ -63,10 +67,13 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
 
   const executeCode = async () => {
     if (code) {
-      if (["python"].includes(language as any)) {
+      if (codeRunnerSupportedLanguages.includes(language)) {
         setExecuteCodeDetails({ loading: true, output: "", error: "" });
         try {
-          const output = await runCode(code);
+          const output = await runCode({
+            code,
+            language: language as CodeRunnerSupportedLanguages,
+          });
           setExecuteCodeDetails({ loading: false, output: output, error: "" });
         } catch (err: any) {
           setExecuteCodeDetails({
@@ -89,7 +96,8 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
       setDisabledPointerEvents(true);
     }
   });
-  const allowCodeRunning = !isCodeOutput && language === "python";
+  const allowCodeRunning =
+    !isCodeOutput && codeRunnerSupportedLanguages.includes(language);
 
   const codeWithoutImportsAndTests = useMemo(() => {
     if (!code) return code;

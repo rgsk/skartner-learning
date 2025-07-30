@@ -12,12 +12,15 @@ interface CodeTabsProps {
     code: string;
     output: string;
   };
+  typescript?: {
+    code: string;
+    output: string;
+  };
 }
-const CodeTabs: React.FC<CodeTabsProps> = ({ python, cpp }) => {
-  const [preferredTab, setPreferredTab] = useLocalStorage<"Python" | "C++">(
-    "preferredTab",
-    "Python"
-  );
+const CodeTabs: React.FC<CodeTabsProps> = ({ python, cpp, typescript }) => {
+  const [preferredTab, setPreferredTab] = useLocalStorage<
+    "Python" | "C++" | "TypeScript"
+  >("preferredTab", "Python");
 
   return (
     <div className="my-[20px]">
@@ -28,6 +31,9 @@ const CodeTabs: React.FC<CodeTabsProps> = ({ python, cpp }) => {
         <TabsList>
           <TabsTrigger value="Python">Python</TabsTrigger>
           {cpp && <TabsTrigger value="C++">C++</TabsTrigger>}
+          {typescript && (
+            <TabsTrigger value="TypeScript">TypeScript</TabsTrigger>
+          )}
         </TabsList>
         <TabsContent value="Python">
           <SyntaxHighlighter
@@ -44,6 +50,16 @@ const CodeTabs: React.FC<CodeTabsProps> = ({ python, cpp }) => {
               language="cpp"
               defaultOutput={cpp.output}
               code={cpp.code}
+            />
+          </TabsContent>
+        )}
+        {typescript && (
+          <TabsContent value="TypeScript">
+            <SyntaxHighlighter
+              isCodeOutput={false}
+              language="typescript"
+              defaultOutput={typescript.output}
+              code={typescript.code}
             />
           </TabsContent>
         )}
