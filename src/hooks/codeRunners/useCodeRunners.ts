@@ -1,4 +1,6 @@
+import environmentVars from "@/lib/environmentVars";
 import { useCallback } from "react";
+import useCppRunner from "./useCppRunner";
 import usePythonRunner from "./usePythonRunner";
 import useTypeScriptRunner from "./useTypescriptRunner";
 export const codeRunnerSupportedLanguages = [
@@ -6,17 +8,20 @@ export const codeRunnerSupportedLanguages = [
   "javascript",
   "python",
   "typescript",
+  ...(environmentVars.APP_ENV === "development" ? ["cpp"] : []),
 ];
 export type CodeRunnerSupportedLanguages =
   | "node"
   | "javascript"
   | "python"
-  | "typescript";
+  | "typescript"
+  | "cpp";
 const useCodeRunners = () => {
   const { loading: pythonRunnerLoading, runCode: runPythonCode } =
     usePythonRunner();
   const { loading: typeScriptRunnerLoading, runCode: runTypescriptCode } =
     useTypeScriptRunner();
+  const { runCode: runCppCode } = useCppRunner();
   const loading = pythonRunnerLoading || typeScriptRunnerLoading;
   const runCode = useCallback(
     async ({
@@ -38,9 +43,11 @@ const useCodeRunners = () => {
         language === "typescript"
       ) {
         return runTypescriptCode(code);
+      } else if (language === "cpp") {
+        return runCppCode(code);
       }
     },
-    [loading, runPythonCode, runTypescriptCode]
+    [loading, runCppCode, runPythonCode, runTypescriptCode]
   );
   return {
     loading: loading,
