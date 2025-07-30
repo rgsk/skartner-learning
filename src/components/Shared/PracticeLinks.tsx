@@ -14,7 +14,7 @@ const PracticeLinks: React.FC<PracticeLinksProps> = ({ leetcode }) => {
       <div className="flex">
         <TargetBlankLink href={`https://leetcode.com/problems/${leetcode}`}>
           <span className="flex gap-2 items-center">
-            <Label className="text-lg">Leetcode</Label>
+            <Label className="text-lg cursor-pointer">Leetcode</Label>
             <span>
               {theme === "dark" ? (
                 <Image
