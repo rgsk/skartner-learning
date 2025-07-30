@@ -9,7 +9,7 @@ import usePythonRunner, {
 } from "@/hooks/codeRunners/usePythonRunner";
 import Editor from "@monaco-editor/react";
 import { Check, Copy, Play, RotateCcw } from "lucide-react";
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { isMobile } from "react-device-detect";
 
 import useBreakpoints from "@/hooks/useBreakpoints";
@@ -90,6 +90,12 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
     }
   });
   const allowCodeRunning = !isCodeOutput && language === "python";
+
+  const codeWithoutImportsAndTests = useMemo(() => {
+    if (!code) return code;
+    const cleaned = code.replace(rx, "");
+    return cleaned;
+  }, [code]);
   return (
     <div>
       <div>
@@ -110,6 +116,26 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
             <div className="flex gap-3">
               <CodeButton
                 onClick={() => {
+                  if (!codeWithoutImportsAndTests) return;
+
+                  copy(codeWithoutImportsAndTests);
+                }}
+              >
+                {copied && copiedText === codeWithoutImportsAndTests ? (
+                  <Check size={12} />
+                ) : (
+                  <Copy size={12} />
+                )}
+                {md && (
+                  <span>
+                    {copied && copiedText === codeWithoutImportsAndTests
+                      ? "Copied!"
+                      : "Copy Solution"}
+                  </span>
+                )}
+              </CodeButton>
+              <CodeButton
+                onClick={() => {
                   if (code) {
                     copy(code);
                   }
@@ -122,7 +148,9 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
                 )}
                 {md && (
                   <span>
-                    {copied && copiedText === code ? "Copied!" : "Copy"}
+                    {copied && copiedText === code
+                      ? "Copied!"
+                      : "Copy with Tests"}
                   </span>
                 )}
               </CodeButton>
@@ -364,12 +392,12 @@ const CodeButton: React.FC<CodeButtonProps> = ({
     </button>
   );
 };
+const rx = /# (?:imports|tests)-start[\s\S]*?# (?:imports|tests)-end/g;
 
 const handleTestBlockCollapse = (editor: any, monaco: any) => {
   // find your custom regions exactly
   function findCustomBlocks(model: any) {
     const text = model.getValue();
-    const rx = /# (?:imports|tests)-start[\s\S]*?# (?:imports|tests)-end/g;
     let m: RegExpExecArray | null;
     const blocks: { start: number; end: number }[] = [];
 
