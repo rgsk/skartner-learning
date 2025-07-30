@@ -13,7 +13,6 @@ import PracticeLinks from "@/components/Shared/PracticeLinks";
 from typing import List
 # imports-end
 
-
 def merge(arr: List[int], start: int, mid: int, end: int):
     aux = [0 for _ in range(end - start + 1)]
     i = start
@@ -45,11 +44,11 @@ def merge(arr: List[int], start: int, mid: int, end: int):
 
 
 def merge_sort(arr: List[int], start: int, end: int):
-	if start < end:
-		mid = (start + end) // 2
-		merge_sort(arr, start, mid)
-		merge_sort(arr, mid + 1, end)
-		merge(arr, start, mid, end)
+    if start < end:
+        mid = (start + end) // 2
+        merge_sort(arr, start, mid)
+        merge_sort(arr, mid + 1, end)
+        merge(arr, start, mid, end)
 
 
 class Solution:
