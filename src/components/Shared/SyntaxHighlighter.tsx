@@ -114,46 +114,71 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
               {heading ? heading : language === "default" ? "" : language}
             </span>
             <div className="flex gap-3">
-              <CodeButton
-                onClick={() => {
-                  if (!codeWithoutImportsAndTests) return;
+              {codeWithoutImportsAndTests !== code ? (
+                <>
+                  <CodeButton
+                    onClick={() => {
+                      if (!codeWithoutImportsAndTests) return;
 
-                  copy(codeWithoutImportsAndTests);
-                }}
-              >
-                {copied && copiedText === codeWithoutImportsAndTests ? (
-                  <Check size={12} />
-                ) : (
-                  <Copy size={12} />
-                )}
-                {md && (
-                  <span>
-                    {copied && copiedText === codeWithoutImportsAndTests
-                      ? "Copied!"
-                      : "Copy Solution"}
-                  </span>
-                )}
-              </CodeButton>
-              <CodeButton
-                onClick={() => {
-                  if (code) {
-                    copy(code);
-                  }
-                }}
-              >
-                {copied && copiedText === code ? (
-                  <Check size={12} />
-                ) : (
-                  <Copy size={12} />
-                )}
-                {md && (
-                  <span>
-                    {copied && copiedText === code
-                      ? "Copied!"
-                      : "Copy with Tests"}
-                  </span>
-                )}
-              </CodeButton>
+                      copy(codeWithoutImportsAndTests);
+                    }}
+                  >
+                    {copied && copiedText === codeWithoutImportsAndTests ? (
+                      <Check size={12} />
+                    ) : (
+                      <Copy size={12} />
+                    )}
+                    {md && (
+                      <span>
+                        {copied && copiedText === codeWithoutImportsAndTests
+                          ? "Copied!"
+                          : "Copy Solution"}
+                      </span>
+                    )}
+                  </CodeButton>
+                  <CodeButton
+                    onClick={() => {
+                      if (code) {
+                        copy(code);
+                      }
+                    }}
+                  >
+                    {copied && copiedText === code ? (
+                      <Check size={12} />
+                    ) : (
+                      <Copy size={12} />
+                    )}
+                    {md && (
+                      <span>
+                        {copied && copiedText === code
+                          ? "Copied!"
+                          : "Copy with Tests"}
+                      </span>
+                    )}
+                  </CodeButton>
+                </>
+              ) : (
+                <>
+                  <CodeButton
+                    onClick={() => {
+                      if (code) {
+                        copy(code);
+                      }
+                    }}
+                  >
+                    {copied && copiedText === code ? (
+                      <Check size={12} />
+                    ) : (
+                      <Copy size={12} />
+                    )}
+                    {md && (
+                      <span>
+                        {copied && copiedText === code ? "Copied!" : "Copy"}
+                      </span>
+                    )}
+                  </CodeButton>
+                </>
+              )}
 
               {/* <CodeButton
                 onClick={() => {
