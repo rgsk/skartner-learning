@@ -75,7 +75,7 @@ const useLocalStorageState = <T>(
     setLoading(true);
     setStoredValue(undefined);
     const value = localStorageWithExpiry.getItem<T>(key, { version });
-    if (value === null) {
+    if (value === undefined) {
       const finalInitialValue =
         initialValueRef.current instanceof Function
           ? initialValueRef.current()
