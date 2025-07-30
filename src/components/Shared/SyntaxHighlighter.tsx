@@ -94,7 +94,7 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
   const codeWithoutImportsAndTests = useMemo(() => {
     if (!code) return code;
     const cleaned = code.replace(rx, "");
-    return cleaned;
+    return cleaned.trim();
   }, [code]);
   return (
     <div>
