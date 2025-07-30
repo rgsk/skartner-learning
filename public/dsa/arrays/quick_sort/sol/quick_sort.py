@@ -32,7 +32,7 @@ class Solution:
 # tests-start
 nums = [5, 2, 3, 1]
 sol = Solution()
-sol.sortArray(nums)
+print(sol.sortArray(nums))
 # tests-end
 
 '''output
