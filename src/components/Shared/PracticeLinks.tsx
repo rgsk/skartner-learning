@@ -1,6 +1,7 @@
 "use client";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import TargetBlankLink from "./TargetBlankLink";
 
@@ -9,6 +10,13 @@ interface PracticeLinksProps {
 }
 const PracticeLinks: React.FC<PracticeLinksProps> = ({ leetcode }) => {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // Avoid rendering until mounted on client
   return (
     <div className="my-[20px]">
       <div className="flex">

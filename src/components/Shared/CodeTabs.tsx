@@ -21,6 +21,8 @@ const CodeTabs: React.FC<CodeTabsProps> = ({ python, cpp, typescript }) => {
     "Python" | "C++" | "TypeScript"
   >("preferredTab", "Python");
 
+  if (!preferredTab) return null;
+
   return (
     <div className="my-[20px]">
       <Tabs
