@@ -6,6 +6,7 @@ const PracticePage: React.FC<PracticePageProps> = ({}) => {
     <div>
       <CodeTabs
         python={{
+          output: "3",
           code: `
 # imports-start
 from typing import List
@@ -32,9 +33,9 @@ sol = Solution()
 print(sol.search(nums, target))
 # tests-end
 `,
-          output: "3",
         }}
         cpp={{
+          output: "3",
           code: `
 // imports-start
 #include <bits/stdc++.h>
@@ -71,7 +72,6 @@ int main() {
 }
 // tests-end
 `,
-          output: "3",
         }}
       />
     </div>
