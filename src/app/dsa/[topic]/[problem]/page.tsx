@@ -1,4 +1,5 @@
 import MergeSort from "@/components/DSA/Arrays/MergeSort";
+import QuickSort from "@/components/DSA/Arrays/QuickSort";
 
 const Page = async ({
   params,
@@ -9,6 +10,8 @@ const Page = async ({
   if (topic === "arrays") {
     if (problem === "merge-sort") {
       return <MergeSort />;
+    } else if (problem === "quick-sort") {
+      return <QuickSort />;
     }
   }
   return <div className="p-[32px]">Page not implemented</div>;
