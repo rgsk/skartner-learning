@@ -156,38 +156,15 @@ const topics = [
     name: "Arrays",
     problems: [
       {
-        name: "Concept",
+        name: "Merge Sort",
       },
       {
-        name: "Cumulative Sum",
-      },
-      {
-        name: "Positive Cumulative Sum",
-      },
-      {
-        name: "Identical Twins",
-      },
-      {
-        name: "Even Number of Digits",
-      },
-      {
-        name: "Implement Merge Sort",
-      },
-      {
-        name: "Implement Quicksort",
+        name: "Quicksort",
       },
     ],
   },
   {
-    name: "Searching",
-    problems: [
-      { name: "Concept" },
-      {
-        name: "Contains Element",
-      },
-      {
-        name: "Search Range",
-      },
-    ],
+    name: "Binary Search",
+    problems: [{ name: "Binary Search Concept" }],
   },
 ];
