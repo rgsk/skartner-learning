@@ -1,111 +1,32 @@
+"use client";
 import PracticeLinks from "@/components/Shared/PracticeLinks";
+import { useEffect, useState } from "react";
 import CodeTabs from "../Shared/CodeTabs";
 
 interface PracticePageProps {}
 const PracticePage: React.FC<PracticePageProps> = ({}) => {
+  const [pythonCode, setPythonCode] = useState("");
+  useEffect(() => {
+    fetch("/merge-sort.py")
+      .then((res) => res.text())
+      .then((v) => {
+        console.log({ v });
+        setPythonCode(v);
+      });
+  }, []);
   return (
     <div>
       <p>
         Practice on: <PracticeLinks leetcode="binary-search" />
       </p>
-      <CodeTabs
-        python={{
-          output: "3",
-          code: `
-# imports-start
-from typing import List
-# imports-end
-
-class Solution:
-    def search(self, nums: List[int], target: int) -> int:
-        lo = 0
-        hi = len(nums) - 1
-        while lo <= hi:
-            mid = (lo + hi) // 2
-            if nums[mid] == target:
-                return mid
-            elif nums[mid] > target:
-                hi = mid - 1
-            else:
-                lo = mid + 1
-        return -1
-
-# tests-start
-nums = [1, 3, 5, 9, 12]
-target = 9
-sol = Solution()
-print(sol.search(nums, target))
-# tests-end
-`,
-        }}
-        cpp={{
-          output: "3",
-          code: `
-// imports-start
-#include <bits/stdc++.h>
-using namespace std;
-// imports-end
-
-class Solution {
-   public:
-    int search(const vector<int>& nums, int target) {
-        int lo = 0;
-        int hi = nums.size() - 1;
-        while (lo <= hi) {
-            int mid = (lo + hi) / 2;
-            if (nums[mid] == target)
-                return mid;
-            else if (nums[mid] > target)
-                hi = mid - 1;
-            else
-                lo = mid + 1;
-        }
-        return -1;
-    }
-};
-
-// tests-start
-int main() {
-    vector<int> nums = {1, 3, 5, 9, 12};
-    int target = 9;
-
-    Solution sol;
-    cout << sol.search(nums, target) << endl;
-
-    return 0;
-}
-// tests-end
-`,
-        }}
-        typescript={{
-          output: "3",
-          code: `
-function search(nums: number[], target: number): number {
-    let lo = 0;
-    let hi = nums.length - 1;
-
-    while (lo <= hi) {
-        const mid = Math.floor((lo + hi) / 2);
-        if (nums[mid] === target) {
-            return mid;
-        } else if (nums[mid] > target) {
-            hi = mid - 1;
-        } else {
-            lo = mid + 1;
-        }
-    }
-
-    return -1;
-}
-
-// tests-start
-const nums = [1, 3, 5, 9, 12];
-const target = 9;
-console.log(search(nums, target));
-// tests-end
-          `,
-        }}
-      />
+      {pythonCode && (
+        <CodeTabs
+          python={{
+            code: pythonCode,
+            output: "[1, 2, 3]",
+          }}
+        />
+      )}
     </div>
   );
 };
