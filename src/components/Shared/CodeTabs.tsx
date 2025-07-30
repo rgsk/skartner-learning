@@ -1,8 +1,7 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useLocalStorage } from "@uidotdev/usehooks";
+import useLocalStorageState from "@/hooks/useLocalStorageState";
 import SyntaxHighlighter from "../Shared/SyntaxHighlighter";
-
 interface CodeTabsProps {
   python: {
     code: string;
@@ -18,7 +17,7 @@ interface CodeTabsProps {
   };
 }
 const CodeTabs: React.FC<CodeTabsProps> = ({ python, cpp, typescript }) => {
-  const [preferredTab, setPreferredTab] = useLocalStorage<
+  const [preferredTab, setPreferredTab] = useLocalStorageState<
     "Python" | "C++" | "TypeScript"
   >("preferredTab", "Python");
 
