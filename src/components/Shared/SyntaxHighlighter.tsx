@@ -122,6 +122,16 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
               {heading ? heading : language === "default" ? "" : language}
             </span>
             <div className="flex gap-3">
+              {code !== initialCode && (
+                <CodeButton
+                  onClick={() => {
+                    setCode(initialCode);
+                  }}
+                >
+                  <RotateCcw size={12} />
+                  {md && <span>Reset</span>}
+                </CodeButton>
+              )}
               {codeWithoutImportsAndTests !== code ? (
                 <>
                   <CodeButton
@@ -202,10 +212,12 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
                 <>
                   <>
                     <CodeButton
-                      disabled={codeRunnersLoading}
+                      disabled={
+                        codeRunnersLoading || executeCodeDetails.loading
+                      }
                       onClick={executeCode}
                     >
-                      {codeRunnersLoading ? (
+                      {executeCodeDetails.loading ? (
                         <LoadingSpinner size={12} />
                       ) : (
                         <Play size={12} />
@@ -213,17 +225,6 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
                       {md && <span>Run</span>}
                     </CodeButton>
                   </>
-
-                  {code !== initialCode && (
-                    <CodeButton
-                      onClick={() => {
-                        setCode(initialCode);
-                      }}
-                    >
-                      <RotateCcw size={12} />
-                      {md && <span>Reset</span>}
-                    </CodeButton>
-                  )}
                 </>
               )}
             </div>
@@ -416,8 +417,9 @@ const CodeButton: React.FC<CodeButtonProps> = ({
     <button
       disabled={disabled}
       className={cn(
-        "text-white text-xs border border-white rounded-md px-2 flex items-center gap-2 py-1",
-        active && "bg-white text-black"
+        "text-white cursor-pointer text-xs border border-white rounded-md px-2 flex items-center gap-2 py-1",
+        active && "bg-white text-black",
+        "disabled:cursor-not-allowed"
       )}
       onClick={onClick}
     >
