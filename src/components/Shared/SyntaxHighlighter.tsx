@@ -369,7 +369,7 @@ const handleTestBlockCollapse = (editor: any, monaco: any) => {
   // 1) Utility to find all your custom blocks
   function findCustomBlocks(model: any) {
     const text = model.getValue();
-    const rx = /# test-start[\s\S]*?# test-end/g;
+    const rx = /# (?:imports|tests)-start[\s\S]*?# (?:imports|tests)-end/g;
     let m: RegExpExecArray | null;
     const blocks: { start: number; end: number }[] = [];
     while ((m = rx.exec(text))) {

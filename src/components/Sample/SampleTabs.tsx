@@ -14,7 +14,9 @@ export function SampleTabs() {
           language="python"
           defaultOutput={`2`}
           code={`
+# imports-start
 from typing import List
+# imports-end
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -30,12 +32,12 @@ class Solution:
                 lo = mid + 1
         return -1
 
-# test-start
+# tests-start
 nums = [-1, 0, 3, 5, 9, 12]
 target = 3
 sol = Solution()
 print(sol.search(nums, target))
-# test-end
+# tests-end
 `}
         />
       </TabsContent>
