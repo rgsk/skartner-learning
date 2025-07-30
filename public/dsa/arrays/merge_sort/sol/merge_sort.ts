@@ -48,5 +48,5 @@ console.log(sortArray(nums));
 // tests-end
 
 /*output
-[1,2,3,5]
+[ 1, 2, 3, 5 ]
 */
