@@ -12,7 +12,7 @@ export function SampleTabs() {
         <SyntaxHighlighter
           isCodeOutput={false}
           language="python"
-          defaultOutput={`2`}
+          defaultOutput={`3`}
           code={`
 # imports-start
 from typing import List
@@ -33,8 +33,8 @@ class Solution:
         return -1
 
 # tests-start
-nums = [-1, 0, 3, 5, 9, 12]
-target = 3
+nums = [1, 3, 5, 9, 12]
+target = 9
 sol = Solution()
 print(sol.search(nums, target))
 # tests-end
@@ -45,19 +45,20 @@ print(sol.search(nums, target))
         <SyntaxHighlighter
           isCodeOutput={false}
           language="cpp"
-          defaultOutput={`2`}
+          defaultOutput={`3`}
           code={`
-#include <iostream>
-#include <vector>
+// imports-start
+#include <bits/stdc++.h>
+using namespace std;
+// imports-end
 
 class Solution {
-public:
-    int search(const std::vector<int>& nums, int target) {
+   public:
+    int search(const vector<int>& nums, int target) {
         int lo = 0;
         int hi = nums.size() - 1;
-        
         while (lo <= hi) {
-            int mid = lo + (hi - lo) / 2;  // avoids overflow
+            int mid = (lo + hi) / 2;
             if (nums[mid] == target)
                 return mid;
             else if (nums[mid] > target)
@@ -65,20 +66,21 @@ public:
             else
                 lo = mid + 1;
         }
-        
         return -1;
     }
 };
 
+// tests-start
 int main() {
-    std::vector<int> nums = {-1, 0, 3, 5, 9, 12};
-    int target = 3;
-    
+    vector<int> nums = {1, 3, 5, 9, 12};
+    int target = 9;
+
     Solution sol;
-    std::cout << sol.search(nums, target) << std::endl;
-    
+    cout << sol.search(nums, target) << endl;
+
     return 0;
 }
+// tests-end
 `}
         />
       </TabsContent>

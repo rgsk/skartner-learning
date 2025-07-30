@@ -392,7 +392,8 @@ const CodeButton: React.FC<CodeButtonProps> = ({
     </button>
   );
 };
-const rx = /# (?:imports|tests)-start[\s\S]*?# (?:imports|tests)-end/g;
+const rx =
+  /(#|\/\/)\s*(?:imports|tests)-start[\s\S]*?\1\s*(?:imports|tests)-end/g;
 
 const handleTestBlockCollapse = (editor: any, monaco: any) => {
   // find your custom regions exactly
