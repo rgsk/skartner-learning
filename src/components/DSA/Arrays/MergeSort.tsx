@@ -11,7 +11,6 @@ const MergeSort: React.FC<MergeSortProps> = ({}) => {
       <PracticeLinks leetcode="sort-an-array" />
       <CodeFetcher
         pythonFile="/dsa/arrays/merge_sort/sol/merge_sort.py"
-        typescriptFile="/dsa/arrays/merge_sort/sol/merge_sort.ts"
         cppFile="/dsa/arrays/merge_sort/sol/merge_sort.cpp"
       />
     </div>

@@ -11,7 +11,6 @@ const QuickSort: React.FC<QuickSortProps> = ({}) => {
       <PracticeLinks leetcode="sort-an-array" />
       <CodeFetcher
         pythonFile="/dsa/arrays/quick_sort/sol/quick_sort.py"
-        typescriptFile="/dsa/arrays/quick_sort/sol/quick_sort.ts"
         cppFile="/dsa/arrays/quick_sort/sol/quick_sort.cpp"
       />
     </div>
