@@ -24,7 +24,7 @@ const PracticeLinks: React.FC<PracticeLinksProps> = ({
   return (
     <div className="my-[20px]">
       <div className="flex gap-[20px]">
-        {leetcode && (
+        {workattech && (
           <TargetBlankLink
             href={`https://workat.tech/problem-solving/practice/${workattech}`}
           >
