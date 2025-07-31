@@ -1,12 +1,5 @@
 "use client";
-import {
-  Calendar,
-  ChevronRightIcon,
-  Home,
-  Inbox,
-  Search,
-  Settings,
-} from "lucide-react";
+import { ChevronRightIcon } from "lucide-react";
 
 import {
   Collapsible,
@@ -29,35 +22,6 @@ import { slugify } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "#",
-    icon: Home,
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
-];
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -122,7 +86,7 @@ export function AppSidebar() {
                         <SidebarMenuSub>
                           {topic.problems.map((problem, i) => {
                             const link = `/dsa/${slugify(topic.name)}/${slugify(
-                              problem.name
+                              problem
                             )}`;
                             return (
                               <SidebarMenuSubItem key={i}>
@@ -131,7 +95,7 @@ export function AppSidebar() {
                                   isActive={pathname === link}
                                 >
                                   <Link href={link}>
-                                    <span>{problem.name}</span>
+                                    <span>{problem}</span>
                                   </Link>
                                 </SidebarMenuButton>
                               </SidebarMenuSubItem>
@@ -155,16 +119,45 @@ const topics = [
   {
     name: "Arrays",
     problems: [
-      {
-        name: "Merge Sort",
-      },
-      {
-        name: "Quick Sort",
-      },
+      "Array Concept",
+      "Cumulative Sum",
+      "Positive Cumulative Sum",
+      "Identical Twins",
+      "Even Number of Digits",
+      "Implement Insertion Sort",
+      "Merge Two Sorted Arrays",
+      "Merge Sorted Subarrays",
+      "Implement Merge Sort",
+      "Implement Quicksort",
+      "Square sorted array",
+      "Max Consecutive Ones",
+      "Arithmetic Sequence",
+      "Largest Contiguous Sum",
+      "Pascal's Triangle",
+      "Row Column Zero",
+      "Matrix Rotation",
+      "Primes upto N",
+      "Merge Overlapping Intervals",
+      "Kth Largest Element",
+      "Next Greater Permutation",
+      "Inversion Count",
     ],
   },
   {
     name: "Searching",
-    problems: [{ name: "Binary Search Concept" }],
+    problems: [
+      "Binary Search Concept",
+      "Contains Element",
+      "Search Range",
+      "Negative numbers in sorted array",
+      "Next Greater Element In Sorted Array",
+      "Insert Position in Sorted Array",
+      "Is Perfect Square",
+      "Search Rotated Sorted Array",
+      "Non-Repeating Element",
+      "Square Root",
+      "Matrix Search",
+      "Median of Row-wise Sorted Matrix",
+    ],
   },
 ];
