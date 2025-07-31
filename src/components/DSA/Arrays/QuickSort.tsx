@@ -7,8 +7,11 @@ interface QuickSortProps {}
 const QuickSort: React.FC<QuickSortProps> = ({}) => {
   return (
     <div>
-      <Heading>Quick Sort</Heading>
-      <PracticeLinks leetcode="sort-an-array" />
+      <Heading>Implement Quicksort</Heading>
+      <PracticeLinks
+        leetcode="sort-an-array"
+        workattech="implement-quicksort"
+      />
       <CodeFetcher
         pythonFile="/dsa/arrays/quick_sort/sol/quick_sort.py"
         cppFile="/dsa/arrays/quick_sort/sol/quick_sort.cpp"
