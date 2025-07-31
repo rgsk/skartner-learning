@@ -24,20 +24,15 @@ void quick_sort(vector<int>& arr, int start, int end) {
     }
 }
 
-class Solution {
-   public:
-    vector<int> sortArray(vector<int>& nums) {
-        quick_sort(nums, 0, nums.size() - 1);
-        return nums;
-    }
-};
+void quickSort(vector<int>& arr) {
+    quick_sort(arr, 0, arr.size() - 1);
+}
 
 // tests-start
 int main() {
     vector<int> nums = {5, 2, 3, 1};
-    Solution sol;
-    vector<int> sorted = sol.sortArray(nums);
-    for (int n : sorted) {
+    quickSort(nums);
+    for (int n : nums) {
         cout << n << " ";
     }
     cout << endl;

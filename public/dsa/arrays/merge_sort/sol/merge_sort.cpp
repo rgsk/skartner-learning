@@ -39,20 +39,15 @@ void merge_sort(vector<int>& arr, int start, int end) {
     }
 }
 
-class Solution {
-   public:
-    vector<int> sortArray(vector<int>& nums) {
-        merge_sort(nums, 0, nums.size() - 1);
-        return nums;
-    }
-};
+void mergeSort(vector<int>& arr) {
+    merge_sort(arr, 0, arr.size() - 1);
+}
 
 // tests-start
 int main() {
     vector<int> nums = {5, 2, 3, 1};
-    Solution sol;
-    vector<int> sorted = sol.sortArray(nums);
-    for (int n : sorted) {
+    mergeSort(nums);
+    for (int n : nums) {
         cout << n << " ";
     }
     cout << endl;

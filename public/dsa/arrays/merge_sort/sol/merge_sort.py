@@ -43,15 +43,15 @@ def merge_sort(arr: List[int], start: int, end: int):
 
 
 class Solution:
-    def sortArray(self, nums: List[int]) -> List[int]:
-        merge_sort(nums, 0, len(nums) - 1)
-        return nums
+    def mergeSort(self, arr: List[int]) -> List[int]:
+        merge_sort(arr, 0, len(arr) - 1)
+        return arr
 
 
 # tests-start
 nums = [5, 2, 3, 1]
 sol = Solution()
-print(sol.sortArray(nums))
+print(sol.mergeSort(nums))
 # tests-end
 
 '''output
