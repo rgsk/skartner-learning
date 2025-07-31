@@ -10,9 +10,9 @@ const BinarySearchConcept: React.FC<BinarySearchConceptProps> = ({}) => {
       <Heading>Binary Search Concept</Heading>
       <PracticeLinks leetcode="binary-search" />
       <CodeFetcher
-        pythonFile="/dsa/binary_search/binary_search_concept/sol/binary_search.py"
-        typescriptFile="/dsa/binary_search/binary_search_concept/sol/binary_search.ts"
-        cppFile="/dsa/binary_search/binary_search_concept/sol/binary_search.cpp"
+        pythonFile="/dsa/searching/binary_search_concept/sol/binary_search.py"
+        typescriptFile="/dsa/searching/binary_search_concept/sol/binary_search.ts"
+        cppFile="/dsa/searching/binary_search_concept/sol/binary_search.cpp"
       />
     </div>
   );

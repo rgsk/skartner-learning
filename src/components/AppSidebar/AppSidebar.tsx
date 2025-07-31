@@ -164,7 +164,7 @@ const topics = [
     ],
   },
   {
-    name: "Binary Search",
+    name: "Searching",
     problems: [{ name: "Binary Search Concept" }],
   },
 ];
