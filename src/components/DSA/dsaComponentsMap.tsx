@@ -4,6 +4,7 @@ import MergeSort from "@/components/DSA/Arrays/MergeSort";
 import PositiveCumulativeSum from "@/components/DSA/Arrays/PositiveCumulativeSum";
 import QuickSort from "@/components/DSA/Arrays/QuickSort";
 import BinarySearchConcept from "@/components/DSA/Searching/BinarySearchConcept";
+import IdenticalTwins from "./Arrays/IdenticalTwins";
 
 const dsaComponentsMap: any = {
   arrays: {
@@ -12,6 +13,7 @@ const dsaComponentsMap: any = {
     "implement-quicksort": <QuickSort />,
     "cumulative-sum": <CumulativeSum />,
     "positive-cumulative-sum": <PositiveCumulativeSum />,
+    "identical-twins": <IdenticalTwins />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
