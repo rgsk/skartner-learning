@@ -123,8 +123,8 @@ const IdenticalTwins: React.FC<IdenticalTwinsProps> = ({}) => {
                 <sup>N</sup>C<sub>2</sub> = (N * (N - 1) / 2)
               </span>
             </InlineCode>{" "}
-            pairs of that particular number, where N is the frequency of that
-            number in the list.
+            pairs of that particular number, where <InlineCode>N</InlineCode> is
+            the frequency of that number in the list.
           </Paragraph>
         </Section>
         <Section>
