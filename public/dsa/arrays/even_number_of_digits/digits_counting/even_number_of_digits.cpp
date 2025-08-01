@@ -1,7 +1,5 @@
-// imports-start
 #include <bits/stdc++.h>
 using namespace std;
-// imports-end
 
 int getDigitCount(int n) {
     int count = 0;

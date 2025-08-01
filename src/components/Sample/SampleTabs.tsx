@@ -14,9 +14,9 @@ export function SampleTabs() {
           language="python"
           defaultOutput={`3`}
           code={`
-# imports-start
+
 from typing import List
-# imports-end
+
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -47,10 +47,10 @@ print(sol.search(nums, target))
           language="cpp"
           defaultOutput={`3`}
           code={`
-// imports-start
+
 #include <bits/stdc++.h>
 using namespace std;
-// imports-end
+
 
 class Solution {
    public:

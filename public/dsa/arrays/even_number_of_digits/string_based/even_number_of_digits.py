@@ -1,7 +1,5 @@
-# imports-start
-from typing import List, Optional
 
-# imports-end
+from typing import List, Optional
 
 
 class Solution:

@@ -1,7 +1,6 @@
-// imports-start
+
 #include <bits/stdc++.h>
 using namespace std;
-// imports-end
 
 void merge(vector<int>& arr, int start, int mid, int end) {
     vector<int> aux(end - start + 1);

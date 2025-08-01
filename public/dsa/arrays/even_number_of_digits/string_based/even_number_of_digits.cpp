@@ -1,7 +1,6 @@
-// imports-start
+
 #include <bits/stdc++.h>
 using namespace std;
-// imports-end
 
 vector<int> getEvenDigitNumbers(vector<int> &arr) {
     vector<int> result;

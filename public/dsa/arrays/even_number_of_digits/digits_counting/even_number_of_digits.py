@@ -1,7 +1,4 @@
-# imports-start
 from typing import List, Optional
-
-# imports-end
 
 
 def get_digits_count(v: int):

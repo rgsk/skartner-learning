@@ -1,7 +1,6 @@
-// imports-start
+
 #include <bits/stdc++.h>
 using namespace std;
-// imports-end
 
 int getIdenticalTwinsCount(vector<int> &arr) {
     unordered_map<int, int> frequency;

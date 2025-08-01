@@ -1,7 +1,6 @@
-// imports-start
+
 #include <bits/stdc++.h>
 using namespace std;
-// imports-end
 
 int getIdenticalTwinsCount(vector<int> &arr) {
     int count = 0;

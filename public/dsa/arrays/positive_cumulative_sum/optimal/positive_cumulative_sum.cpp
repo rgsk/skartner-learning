@@ -1,7 +1,6 @@
-// imports-start
+
 #include <bits/stdc++.h>
 using namespace std;
-// imports-end
 
 vector<int> getPositiveCumulativeSum(vector<int> &arr) {
     int cumulative_sum = 0;
