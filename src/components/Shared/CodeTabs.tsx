@@ -41,7 +41,7 @@ const CodeTabs: React.FC<CodeTabsProps> = ({ python, cpp, typescript }) => {
     : defaultTab;
 
   return (
-    <div className="my-[20px]">
+    <div>
       <Tabs value={activeTab} onValueChange={(v) => setPreferredTab(v as any)}>
         <TabsList>
           {python && <TabsTrigger value="Python">Python</TabsTrigger>}

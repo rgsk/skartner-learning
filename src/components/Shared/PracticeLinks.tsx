@@ -22,7 +22,7 @@ const PracticeLinks: React.FC<PracticeLinksProps> = ({
 
   if (!mounted) return null; // Avoid rendering until mounted on client
   return (
-    <div className="my-[20px]">
+    <div>
       <div className="flex gap-[20px]">
         {workattech && (
           <TargetBlankLink
