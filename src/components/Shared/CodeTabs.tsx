@@ -17,18 +17,32 @@ interface CodeTabsProps {
   };
 }
 const CodeTabs: React.FC<CodeTabsProps> = ({ python, cpp, typescript }) => {
+  const availableTabs: {
+    label: "Python" | "C++" | "TypeScript";
+    exists: boolean;
+  }[] = [
+    { label: "Python", exists: !!python },
+    { label: "C++", exists: !!cpp },
+    { label: "TypeScript", exists: !!typescript },
+  ];
+
+  const defaultTab = availableTabs.find((tab) => tab.exists)?.label;
+
   const [preferredTab, setPreferredTab] = useLocalStorageState<
     "Python" | "C++" | "TypeScript"
-  >("preferredTab", "Python");
+  >("preferredTab", defaultTab ?? "Python");
 
-  if (!preferredTab) return null;
+  if (!defaultTab) return null; // No tabs to render
+
+  const activeTab = availableTabs.some(
+    (tab) => tab.label === preferredTab && tab.exists
+  )
+    ? preferredTab
+    : defaultTab;
 
   return (
     <div className="my-[20px]">
-      <Tabs
-        value={preferredTab}
-        onValueChange={(v) => setPreferredTab(v as any)}
-      >
+      <Tabs value={activeTab} onValueChange={(v) => setPreferredTab(v as any)}>
         <TabsList>
           {python && <TabsTrigger value="Python">Python</TabsTrigger>}
           {cpp && <TabsTrigger value="C++">C++</TabsTrigger>}

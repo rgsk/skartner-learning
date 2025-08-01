@@ -1,4 +1,5 @@
 import ArrayConcept from "@/components/DSA/Arrays/ArrayConcept";
+import CumulativeSum from "@/components/DSA/Arrays/CumulativeSum";
 import MergeSort from "@/components/DSA/Arrays/MergeSort";
 import QuickSort from "@/components/DSA/Arrays/QuickSort";
 import BinarySearchConcept from "@/components/DSA/Searching/BinarySearchConcept";
@@ -16,6 +17,8 @@ const Page = async ({
       return <MergeSort />;
     } else if (problem === "implement-quicksort") {
       return <QuickSort />;
+    } else if (problem === "cumulative-sum") {
+      return <CumulativeSum />;
     }
   } else if (topic === "searching") {
     if (problem === "binary-search-concept") {

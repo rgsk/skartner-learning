@@ -146,36 +146,48 @@ function wrapLastLineInPrint(codeStr: string): string {
   }
   if (lines.length === 0) return codeStr;
 
-  // Check for a multi-line print block by counting parentheses
-  let inPrintCall = false;
-  let parenBalance = 0;
+  // Check for existing balanced print(...)
+  let sawPrint = false;
+  let balance = 0;
   for (const line of lines) {
-    // Check if this line starts a print statement
-    if (line.includes("print(")) {
-      inPrintCall = true;
-    }
-    for (const char of line) {
-      if (char === "(") parenBalance++;
-      if (char === ")") parenBalance--;
+    if (line.includes("print(")) sawPrint = true;
+    for (const ch of line) {
+      if (ch === "(") balance++;
+      if (ch === ")") balance--;
     }
   }
-  // If we detected a print and the parentheses are balanced, assume the print is complete
-  if (inPrintCall && parenBalance === 0) {
+  if (sawPrint && balance === 0) {
     return codeStr;
   }
 
-  // Otherwise, wrap the last line
-  const lastIndex = lines.length - 1;
-  const lastLine = lines[lastIndex];
-  const strippedLine = lastLine.trim();
-
-  // Skip if the last line is empty or a comment
-  if (strippedLine === "" || strippedLine.startsWith("#")) {
+  // Find the index of the last non-comment, non-empty line
+  let targetIdx = lines.length - 1;
+  while (targetIdx >= 0) {
+    const t = lines[targetIdx].trim();
+    if (t !== "" && !t.startsWith("#")) break;
+    targetIdx--;
+  }
+  if (targetIdx < 0) {
+    // no code line found
     return codeStr;
   }
 
-  const leadingWhitespace = lastLine.match(/^\s*/)?.[0] || "";
-  lines[lastIndex] = `${leadingWhitespace}print(${strippedLine})`;
+  const original = lines[targetIdx];
+  const leadingWs = original.match(/^\s*/)?.[0] ?? "";
+  const trimmed = original.trim();
+
+  // Separate inline comment, if any
+  const [codeOnly, commentOnly] = (() => {
+    const parts = trimmed.split(/(#.*)$/);
+    if (parts.length === 3) {
+      return [parts[0].trim(), parts[1]];
+    } else {
+      return [trimmed, ""];
+    }
+  })();
+
+  // Wrap and reassemble
+  lines[targetIdx] = `${leadingWs}print(${codeOnly})${commentOnly}`;
 
   return lines.join("\n");
 }
