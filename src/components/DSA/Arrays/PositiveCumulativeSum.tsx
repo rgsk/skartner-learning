@@ -1,4 +1,5 @@
 "use client";
+import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Examples from "@/components/Shared/Examples";
 import Heading from "@/components/Shared/Heading";
@@ -7,7 +8,9 @@ import Paragraph from "@/components/Shared/Paragraph";
 import PracticeLinks from "@/components/Shared/PracticeLinks";
 import Problem from "@/components/Shared/Problem";
 import Section from "@/components/Shared/Section";
+import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
+import UnorderedList from "@/components/Shared/UnorderedList";
 
 interface PositiveCumulativeSumProps {}
 const PositiveCumulativeSum: React.FC<PositiveCumulativeSumProps> = ({}) => {
@@ -50,6 +53,28 @@ const PositiveCumulativeSum: React.FC<PositiveCumulativeSumProps> = ({}) => {
           />
         </Section>
       </Problem>
+      <Solution>
+        <Section>
+          <SubHeading>Approach</SubHeading>
+          <Paragraph>
+            We calculate the cumulative_sum, from left to right, and add the
+            only the positive values of cumulative_sum to result.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(n)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/positive_cumulative_sum/optimal/positive_cumulative_sum.py"
+            cppFile="/dsa/arrays/positive_cumulative_sum/optimal/positive_cumulative_sum.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
