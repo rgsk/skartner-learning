@@ -112,6 +112,35 @@ const IdenticalTwins: React.FC<IdenticalTwinsProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Hashing Approach 2 (Optimal)</SubHeading>
+          <Paragraph>
+            We can hash the frequency of all the numbers in the list using a
+            hashmap and for each distinct number, we can form{" "}
+            <InlineCode>
+              <span>
+                <sup>N</sup>C<sub>2</sub> = (N * (N - 1) / 2)
+              </span>
+            </InlineCode>{" "}
+            pairs of that particular number, where N is the frequency of that
+            number in the list.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(n)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/identical_twins/hashing_approach_2/identical_twins.py"
+            cppFile="/dsa/arrays/identical_twins/hashing_approach_2/identical_twins.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
