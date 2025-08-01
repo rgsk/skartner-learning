@@ -12,6 +12,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import YoutubeVideo from "@/components/Shared/YoutubeVideo";
 
 interface CumulativeSumProps {}
 const CumulativeSum: React.FC<CumulativeSumProps> = ({}) => {
@@ -123,6 +124,10 @@ const CumulativeSum: React.FC<CumulativeSumProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Section>
+        <SubHeading>Video Explaination</SubHeading>
+        <YoutubeVideo href="https://www.youtube.com/watch?v=bw7HZk2dpmc" />
+      </Section>
     </Container>
   );
 };
