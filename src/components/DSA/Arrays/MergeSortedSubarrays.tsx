@@ -43,6 +43,30 @@ const MergeSortedSubarrays: React.FC<MergeSortedSubarraysProps> = ({}) => {
       </Problem>
       <Solution>
         <Section>
+          <SubHeading>Naive Approach</SubHeading>
+          <Paragraph>
+            This problem can be solved by just sorting the array.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={[
+              "Time Complexity: O(n * log(n))",
+              "Auxiliary Space Complexity: O(1)",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/merge_sorted_subarrays/naive/merge_sorted_subarrays.py"
+            cppFile="/dsa/arrays/merge_sorted_subarrays/naive/merge_sorted_subarrays.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
           <SubHeading>Optimal Approach</SubHeading>
           <Paragraph>
             The problem can be solved by traversing both the arrays
@@ -54,7 +78,10 @@ const MergeSortedSubarrays: React.FC<MergeSortedSubarraysProps> = ({}) => {
         <Section>
           <SubHeading>Analysis</SubHeading>
           <UnorderedList
-            items={["Time Complexity:O(n)", "Auxiliary Space Complexity: O(n)"]}
+            items={[
+              "Time Complexity: O(n)",
+              "Auxiliary Space Complexity: O(n)",
+            ]}
           />
         </Section>
         <Section>
