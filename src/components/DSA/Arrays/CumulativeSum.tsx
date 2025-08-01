@@ -1,10 +1,13 @@
 "use client";
 import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
+import Example from "@/components/Shared/Example";
 import Heading from "@/components/Shared/Heading";
 import InlineCode from "@/components/Shared/InlineCode";
+import MinorHeading from "@/components/Shared/MinorHeading";
 import Paragraph from "@/components/Shared/Paragraph";
 import PracticeLinks from "@/components/Shared/PracticeLinks";
+import Problem from "@/components/Shared/Problem";
 import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
@@ -16,6 +19,37 @@ const CumulativeSum: React.FC<CumulativeSumProps> = ({}) => {
     <Container>
       <Heading>Cumulative Sum</Heading>
       <PracticeLinks workattech="cumulative-sum" />
+      <Problem>
+        <Section>
+          <SubHeading>Problem Statement</SubHeading>
+          <Paragraph>
+            The cumulative sum of an array at index i is defined as the sum of
+            all elements of the array from index 0 to index i.
+          </Paragraph>
+          <Paragraph>Given an array, return its cumulative sum.</Paragraph>
+        </Section>
+        <Section>
+          <MinorHeading>Examples</MinorHeading>
+          <Example
+            text={`\
+            Initial Array: [1, 2, 3, 4]
+            Cumulative Sum: [1, 3, 6, 10]
+            `}
+          ></Example>
+          <Example
+            text={`\
+            Initial Array: [1, 1, 1, 1, 1]
+            Cumulative Sum: [1, 2, 3, 4, 5]
+            `}
+          ></Example>
+          <Example
+            text={`\
+            Initial Array: [1, 3, 5, 7, 9]
+            Cumulative Sum: [1, 4, 9, 16, 25]
+            `}
+          ></Example>
+        </Section>
+      </Problem>
       <Solution>
         <Section>
           <SubHeading>Naive Approach</SubHeading>

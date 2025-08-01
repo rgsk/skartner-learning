@@ -67,7 +67,7 @@ export default PracticeLinks;
 interface WorkAtTechLogoProps {}
 const WorkAtTechLogo: React.FC<WorkAtTechLogoProps> = ({}) => {
   return (
-    <span className="bg-[#276EF1] rounded-full min-w-[24px] min-h-[24px] flex justify-center items-center">
+    <span className="bg-[#276EF1] text-white rounded-full min-w-[24px] min-h-[24px] flex justify-center items-center">
       @
     </span>
   );
