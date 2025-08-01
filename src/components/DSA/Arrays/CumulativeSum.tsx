@@ -1,7 +1,7 @@
 "use client";
 import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
-import Example from "@/components/Shared/Example";
+import Examples from "@/components/Shared/Examples";
 import Heading from "@/components/Shared/Heading";
 import InlineCode from "@/components/Shared/InlineCode";
 import MinorHeading from "@/components/Shared/MinorHeading";
@@ -30,24 +30,22 @@ const CumulativeSum: React.FC<CumulativeSumProps> = ({}) => {
         </Section>
         <Section>
           <MinorHeading>Examples</MinorHeading>
-          <Example
-            text={`\
+          <Examples
+            items={[
+              `\
             Initial Array: [1, 2, 3, 4]
             Cumulative Sum: [1, 3, 6, 10]
-            `}
-          ></Example>
-          <Example
-            text={`\
+            `,
+              `\
             Initial Array: [1, 1, 1, 1, 1]
             Cumulative Sum: [1, 2, 3, 4, 5]
-            `}
-          ></Example>
-          <Example
-            text={`\
+            `,
+              `\
             Initial Array: [1, 3, 5, 7, 9]
             Cumulative Sum: [1, 4, 9, 16, 25]
-            `}
-          ></Example>
+            `,
+            ]}
+          />
         </Section>
       </Problem>
       <Solution>
