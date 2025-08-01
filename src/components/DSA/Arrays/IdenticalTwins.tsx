@@ -87,6 +87,31 @@ const IdenticalTwins: React.FC<IdenticalTwinsProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Hashing Approach 1 (Optimal)</SubHeading>
+          <Paragraph>
+            We store number of occurrences of a number, while traversing the
+            array from left to right. When the same number occurs later in the
+            sequence, it would form form pair with all it
+            {"'"}s occurrences earlier in the array. So, we add number of
+            occurences of that number to count.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(n)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/identical_twins/hashing_approach_1/identical_twins.py"
+            cppFile="/dsa/arrays/identical_twins/hashing_approach_1/identical_twins.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };

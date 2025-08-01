@@ -1,0 +1,23 @@
+from collections import defaultdict
+from typing import List
+
+
+class Solution:
+    def getIdenticalTwinsCount(self, arr: List[int]) -> int:
+        result = 0
+        mp = defaultdict(int)
+        for v in arr:
+            result += mp[v]
+            mp[v] += 1
+        return result
+
+
+# tests-start
+sol = Solution()
+arr = [1, 2, 3, 2, 1]
+sol.getIdenticalTwinsCount(arr)
+# tests-end
+
+'''output
+2
+'''
