@@ -6,11 +6,9 @@ using namespace std;
 vector<int> getCumulativeSum(vector<int> &arr) {
     int n = arr.size();
     vector<int> result(n);
+    int prefixSum = 0;
     for (int i = 0; i < n; i++) {
-        int prefixSum = 0;
-        for (int j = 0; j <= i; j++) {
-            prefixSum += arr[j];
-        }
+        prefixSum += arr[i];
         result[i] = prefixSum;
     }
     return result;
