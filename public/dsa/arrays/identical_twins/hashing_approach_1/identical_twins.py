@@ -4,12 +4,12 @@ from typing import List
 
 class Solution:
     def getIdenticalTwinsCount(self, arr: List[int]) -> int:
-        result = 0
+        count = 0
         mp = defaultdict(int)
         for v in arr:
-            result += mp[v]
+            count += mp[v]
             mp[v] += 1
-        return result
+        return count
 
 
 # tests-start

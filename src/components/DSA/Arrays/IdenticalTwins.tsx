@@ -95,7 +95,7 @@ const IdenticalTwins: React.FC<IdenticalTwinsProps> = ({}) => {
             array from left to right. When the same number occurs later in the
             sequence, it would form form pair with all it
             {"'"}s occurrences earlier in the array. So, we add number of
-            occurences of that number to count.
+            occurences of that number to the count.
           </Paragraph>
         </Section>
         <Section>
