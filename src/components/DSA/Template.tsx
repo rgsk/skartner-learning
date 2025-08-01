@@ -1,7 +1,7 @@
 "use client";
+import Container from "@/components/Shared/Container";
 import Heading from "@/components/Shared/Heading";
 import PracticeLinks from "@/components/Shared/PracticeLinks";
-import { Container } from "lucide-react";
 
 interface TemplateProps {}
 const Template: React.FC<TemplateProps> = ({}) => {

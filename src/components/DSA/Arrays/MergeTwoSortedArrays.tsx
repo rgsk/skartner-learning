@@ -27,7 +27,7 @@ const MergeTwoSortedArrays: React.FC<MergeTwoSortedArraysProps> = ({}) => {
           </Paragraph>
         </Section>
         <Section>
-          <MinorHeading>Example:</MinorHeading>
+          <MinorHeading>Example</MinorHeading>
           <Examples
             items={[
               `\

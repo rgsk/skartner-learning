@@ -7,6 +7,7 @@ import BinarySearchConcept from "@/components/DSA/Searching/BinarySearchConcept"
 import EvenNumberOfDigits from "./Arrays/EvenNumberOfDigits";
 import IdenticalTwins from "./Arrays/IdenticalTwins";
 import ImplementInsertionSort from "./Arrays/ImplementInsertionSort";
+import MergeSortedSubarrays from "./Arrays/MergeSortedSubarrays";
 import MergeTwoSortedArrays from "./Arrays/MergeTwoSortedArrays";
 
 const dsaComponentsMap: any = {
@@ -20,6 +21,7 @@ const dsaComponentsMap: any = {
     "even-number-of-digits": <EvenNumberOfDigits />,
     "implement-insertion-sort": <ImplementInsertionSort />,
     "merge-two-sorted-arrays": <MergeTwoSortedArrays />,
+    "merge-sorted-subarrays": <MergeSortedSubarrays />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
