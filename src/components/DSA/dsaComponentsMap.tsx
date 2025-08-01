@@ -6,6 +6,7 @@ import QuickSort from "@/components/DSA/Arrays/QuickSort";
 import BinarySearchConcept from "@/components/DSA/Searching/BinarySearchConcept";
 import EvenNumberOfDigits from "./Arrays/EvenNumberOfDigits";
 import IdenticalTwins from "./Arrays/IdenticalTwins";
+import ImplementInsertionSort from "./Arrays/ImplementInsertionSort";
 
 const dsaComponentsMap: any = {
   arrays: {
@@ -16,6 +17,7 @@ const dsaComponentsMap: any = {
     "positive-cumulative-sum": <PositiveCumulativeSum />,
     "identical-twins": <IdenticalTwins />,
     "even-number-of-digits": <EvenNumberOfDigits />,
+    "implement-insertion-sort": <ImplementInsertionSort />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
