@@ -3,6 +3,7 @@ import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Examples from "@/components/Shared/Examples";
 import Heading from "@/components/Shared/Heading";
+import InlineCode from "@/components/Shared/InlineCode";
 import MinorHeading from "@/components/Shared/MinorHeading";
 import Paragraph from "@/components/Shared/Paragraph";
 import PracticeLinks from "@/components/Shared/PracticeLinks";
@@ -54,7 +55,7 @@ const EvenNumberOfDigits: React.FC<EvenNumberOfDigitsProps> = ({}) => {
           <SubHeading>Analysis</SubHeading>
           <UnorderedList
             items={[
-              "Time Complexity: O(n * (average number of digits))",
+              "Time Complexity: O(n * (size of largest number))",
               "Space Complexity: O(n)",
             ]}
           />
@@ -64,6 +65,56 @@ const EvenNumberOfDigits: React.FC<EvenNumberOfDigitsProps> = ({}) => {
           <CodeFetcher
             pythonFile="/dsa/arrays/even_number_of_digits/string_based/even_number_of_digits.py"
             cppFile="/dsa/arrays/even_number_of_digits/string_based/even_number_of_digits.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Digits Counting Approach (Optimal)</SubHeading>
+          <Paragraph>
+            We can count number of digits in a number by repeatedly dividing the
+            number with 10.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={[
+              "Time Complexity: O(n * log<sub>10</sub>(size of largest number))",
+              "Space Complexity: O(n)",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/even_number_of_digits/digits_counting/even_number_of_digits.py"
+            cppFile="/dsa/arrays/even_number_of_digits/digits_counting/even_number_of_digits.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Log Based Approach (Optimal)</SubHeading>
+          <Paragraph>
+            We calculate the number of digits as{" "}
+            <InlineCode>
+              int(log<sub>10</sub>(v)) + 1
+            </InlineCode>
+            .
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(n)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/even_number_of_digits/log_based/even_number_of_digits.py"
+            cppFile="/dsa/arrays/even_number_of_digits/log_based/even_number_of_digits.cpp"
           />
         </Section>
       </Solution>
