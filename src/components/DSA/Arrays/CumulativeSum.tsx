@@ -38,7 +38,10 @@ const CumulativeSum: React.FC<CumulativeSumProps> = ({}) => {
       </Section>
       <Section>
         <SubHeading>Implementation</SubHeading>
-        <CodeFetcher pythonFile="/dsa/arrays/cumulative_sum/naive/cumulative_sum.py" />
+        <CodeFetcher
+          pythonFile="/dsa/arrays/cumulative_sum/naive/cumulative_sum.py"
+          cppFile="/dsa/arrays/cumulative_sum/naive/cumulative_sum.cpp"
+        />
       </Section>
     </Container>
   );
