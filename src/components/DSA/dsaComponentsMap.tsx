@@ -4,6 +4,7 @@ import MergeSort from "@/components/DSA/Arrays/MergeSort";
 import PositiveCumulativeSum from "@/components/DSA/Arrays/PositiveCumulativeSum";
 import QuickSort from "@/components/DSA/Arrays/QuickSort";
 import BinarySearchConcept from "@/components/DSA/Searching/BinarySearchConcept";
+import ArithmeticSequence from "./Arrays/ArithmeticSequence";
 import EvenNumberOfDigits from "./Arrays/EvenNumberOfDigits";
 import IdenticalTwins from "./Arrays/IdenticalTwins";
 import ImplementInsertionSort from "./Arrays/ImplementInsertionSort";
@@ -26,6 +27,7 @@ const dsaComponentsMap: any = {
     "merge-sorted-subarrays": <MergeSortedSubarrays />,
     "square-sorted-array": <SquareSortedArray />,
     "max-consecutive-ones": <MaxConsecutiveOnes />,
+    "arithmetic-sequence": <ArithmeticSequence />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
