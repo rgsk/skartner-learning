@@ -72,8 +72,32 @@ const PascalsTriangle: React.FC<PascalsTriangleProps> = ({}) => {
         <Section>
           <SubHeading>Implementation</SubHeading>
           <CodeFetcher
-            pythonFile="/dsa/arrays/pascals_triangle/recursion/pascals_triangle.py"
-            cppFile="/dsa/arrays/pascals_triangle/recursion/pascals_triangle.cpp"
+            pythonFile="/dsa/arrays/pascals_triangle/recursive/pascals_triangle.py"
+            cppFile="/dsa/arrays/pascals_triangle/recursive/pascals_triangle.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Iterative Approach</SubHeading>
+          <Paragraph>
+            It's the iterative version of recursive approach described above.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={[
+              "Time Complexity: O(n<sup>2</sup>)",
+              "Space Complexity: O(n)",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/pascals_triangle/iterative/pascals_triangle.py"
+            cppFile="/dsa/arrays/pascals_triangle/iterative/pascals_triangle.cpp"
           />
         </Section>
       </Solution>
