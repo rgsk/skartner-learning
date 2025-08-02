@@ -53,7 +53,7 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
       initialCode = initialCode + "\n";
     }
   }
-
+  const [testsBlockExpanded, setTestsBlockExpanded] = useState(false);
   const [code, setCode] = useState(initialCode);
   const [disabledPointerEvents, setDisabledPointerEvents] = useState(true);
 
@@ -102,7 +102,7 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
   const codeWithoutImportsAndTests = useMemo(() => {
     if (!code) return code;
     const cleaned = code.replace(rx, "");
-    return cleaned.trim();
+    return cleaned;
   }, [code]);
   return (
     <div>
@@ -273,7 +273,7 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
               }}
               onChange={(newValue) => setCode(newValue || "")}
               onMount={(editor, monaco) => {
-                handleTestBlockCollapse(editor, monaco);
+                handleTestBlockCollapse(editor, monaco, setTestsBlockExpanded);
 
                 if (!isCodeOutput) {
                   editor.onDidFocusEditorWidget(() => {
@@ -368,9 +368,7 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
             })()}
           </>
         ) : defaultOutput ? (
-          <>
-            <RenderOutput code={defaultOutput} />
-          </>
+          <>{testsBlockExpanded && <RenderOutput code={defaultOutput} />}</>
         ) : (
           <></>
         )}
@@ -430,7 +428,11 @@ const CodeButton: React.FC<CodeButtonProps> = ({
 const rx =
   /(#|\/\/)\s*(?:imports|tests)-start[\s\S]*?\1\s*(?:imports|tests)-end/g;
 
-const handleTestBlockCollapse = (editor: any, monaco: any) => {
+const handleTestBlockCollapse = (
+  editor: any,
+  monaco: any,
+  setTestsBlockExpanded: any
+) => {
   // find your custom regions exactly
   function findCustomBlocks(model: any) {
     const text = model.getValue();
@@ -487,8 +489,13 @@ const handleTestBlockCollapse = (editor: any, monaco: any) => {
       dom.style.color = "white";
 
       dom.onclick = () => {
-        if (collapsed.has(i)) collapsed.delete(i);
-        else collapsed.add(i);
+        if (collapsed.has(i)) {
+          collapsed.delete(i);
+          setTestsBlockExpanded(true);
+        } else {
+          collapsed.add(i);
+          setTestsBlockExpanded(false);
+        }
         renderCollapseUI();
       };
 
