@@ -14,9 +14,9 @@ class Solution:
 
 
 # tests-start
-sol = Solution()
 arr = [1, 2, 3, 4]
-sol.getCumulativeSum(arr)
+sol = Solution()
+print(sol.getCumulativeSum(arr))
 # tests-end
 
 '''output
