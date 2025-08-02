@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Heading from "@/components/Shared/Heading";
 import MinorHeading from "@/components/Shared/MinorHeading";
@@ -7,6 +8,7 @@ import Paragraph from "@/components/Shared/Paragraph";
 import PracticeLinks from "@/components/Shared/PracticeLinks";
 import Problem from "@/components/Shared/Problem";
 import Section from "@/components/Shared/Section";
+import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
 
@@ -49,6 +51,32 @@ const PascalsTriangle: React.FC<PascalsTriangleProps> = ({}) => {
           </Paragraph>
         </Section>
       </Problem>
+      <Solution>
+        <Section>
+          <SubHeading>Recursive Approach</SubHeading>
+          <Paragraph>
+            We find the row of the previous index using recursion and using the
+            previous row's values, calculate the values in the current row.
+            Repeat till we have calculated the value of the nth row.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={[
+              "Time Complexity: O(n<sup>2</sup>)",
+              "Space Complexity: O(n)",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/pascals_triangle/recursion/pascals_triangle.py"
+            cppFile="/dsa/arrays/pascals_triangle/recursion/pascals_triangle.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
