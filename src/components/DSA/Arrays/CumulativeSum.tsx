@@ -126,7 +126,7 @@ const CumulativeSum: React.FC<CumulativeSumProps> = ({}) => {
       </Solution>
       <Section>
         <SubHeading>Video Explaination</SubHeading>
-        <YoutubeVideo href="https://www.youtube.com/watch?v=bw7HZk2dpmc" />
+        <YoutubeVideo id="bw7HZk2dpmc" />
       </Section>
     </Container>
   );

@@ -12,6 +12,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import YoutubeVideo from "@/components/Shared/YoutubeVideo";
 
 interface EvenNumberOfDigitsProps {}
 const EvenNumberOfDigits: React.FC<EvenNumberOfDigitsProps> = ({}) => {
@@ -118,6 +119,10 @@ const EvenNumberOfDigits: React.FC<EvenNumberOfDigitsProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Section>
+        <SubHeading>Video Explaination</SubHeading>
+        <YoutubeVideo id="ZaZJ8WhoWJ8" />
+      </Section>
     </Container>
   );
 };

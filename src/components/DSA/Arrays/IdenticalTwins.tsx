@@ -12,6 +12,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import YoutubeVideo from "@/components/Shared/YoutubeVideo";
 
 interface IdenticalTwinsProps {}
 const IdenticalTwins: React.FC<IdenticalTwinsProps> = ({}) => {
@@ -141,6 +142,10 @@ const IdenticalTwins: React.FC<IdenticalTwinsProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Section>
+        <SubHeading>Video Explaination</SubHeading>
+        <YoutubeVideo id="o5ORwZCpTR4" />
+      </Section>
     </Container>
   );
 };

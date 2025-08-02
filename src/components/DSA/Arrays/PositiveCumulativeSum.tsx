@@ -11,6 +11,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import YoutubeVideo from "@/components/Shared/YoutubeVideo";
 
 interface PositiveCumulativeSumProps {}
 const PositiveCumulativeSum: React.FC<PositiveCumulativeSumProps> = ({}) => {
@@ -75,6 +76,10 @@ const PositiveCumulativeSum: React.FC<PositiveCumulativeSumProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Section>
+        <SubHeading>Video Explaination</SubHeading>
+        <YoutubeVideo id="6_iQ69iPMwI" />
+      </Section>
     </Container>
   );
 };
