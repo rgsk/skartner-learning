@@ -11,6 +11,7 @@ import ImplementInsertionSort from "./Arrays/ImplementInsertionSort";
 import LargestContiguousSum from "./Arrays/LargestContiguousSum";
 import MatrixRotation from "./Arrays/MatrixRotation";
 import MaxConsecutiveOnes from "./Arrays/MaxConsecutiveOnes";
+import MergeOverlappingIntervals from "./Arrays/MergeOverlappingIntervals";
 import MergeSortedSubarrays from "./Arrays/MergeSortedSubarrays";
 import MergeTwoSortedArrays from "./Arrays/MergeTwoSortedArrays";
 import PascalsTriangle from "./Arrays/PascalsTriangle";
@@ -38,6 +39,7 @@ const dsaComponentsMap: any = {
     "row-column-zero": <RowColumnZero />,
     "matrix-rotation": <MatrixRotation />,
     "primes-upto-n": <PrimesUptoN />,
+    "merge-overlapping-intervals": <MergeOverlappingIntervals />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
