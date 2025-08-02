@@ -58,7 +58,8 @@ const InversionCount: React.FC<InversionCountProps> = ({}) => {
             The simple solution for the above problem is to traverse the array
             and count the inversions. Check for the condition specified in the
             problem ie. <InlineCode>{"i < j"}</InlineCode> and{" "}
-            <InlineCode>{"A[i] > A[j]"}</InlineCode>
+            <InlineCode>{"A[i] > A[j]"}</InlineCode> or in alternate form{" "}
+            <InlineCode>{"A[j] < A[i]"}</InlineCode>
           </Paragraph>
         </Section>
         <Section>
