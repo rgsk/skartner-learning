@@ -94,6 +94,44 @@ const RowColumnZero: React.FC<RowColumnZeroProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Optimal Approach</SubHeading>
+          <Paragraph>
+            We don't create separate arrays to track which rows/cols have a
+            zero. We use the matrix itself for this purpose. For eg. if item at
+            index 2, 3 is zero, we set zero at matrix[2][0] and matrix[0][3],
+            indicating that 3rd row and 4th column is zero.
+          </Paragraph>
+          <Paragraph>
+            In second pass, for all matrix[2][j] (3rd row) we would set 0, as
+            matrix[2][0] is zero. Similarly, for all matrix[i][3] (4th column)
+            we would set 0, as matrix[0][3] is zero.
+          </Paragraph>
+          <Paragraph>
+            We need to keep in mind, one edge case. matrix[0][0] is special
+            because it keeps track of two things, both the first row and the
+            first column. So, for deciding about first row or first column, we
+            can't rely on matrix[0][0], so, we keep a separate variables for it.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={[
+              "Time Complexity: O(row_size * column_size)",
+              "Space Complexity: O(1)",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/row_column_zero/optimal/row_column_zero.py"
+            cppFile="/dsa/arrays/row_column_zero/optimal/row_column_zero.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
