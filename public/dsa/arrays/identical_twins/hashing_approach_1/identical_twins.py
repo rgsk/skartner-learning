@@ -13,9 +13,9 @@ class Solution:
 
 
 # tests-start
-sol = Solution()
 arr = [1, 2, 3, 2, 1]
-sol.getIdenticalTwinsCount(arr)
+sol = Solution()
+print(sol.getIdenticalTwinsCount(arr))
 # tests-end
 
 '''output
