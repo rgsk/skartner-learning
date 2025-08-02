@@ -9,6 +9,7 @@ import IdenticalTwins from "./Arrays/IdenticalTwins";
 import ImplementInsertionSort from "./Arrays/ImplementInsertionSort";
 import MergeSortedSubarrays from "./Arrays/MergeSortedSubarrays";
 import MergeTwoSortedArrays from "./Arrays/MergeTwoSortedArrays";
+import SquareSortedArray from "./Arrays/SquareSortedArray";
 
 const dsaComponentsMap: any = {
   arrays: {
@@ -22,6 +23,7 @@ const dsaComponentsMap: any = {
     "implement-insertion-sort": <ImplementInsertionSort />,
     "merge-two-sorted-arrays": <MergeTwoSortedArrays />,
     "merge-sorted-subarrays": <MergeSortedSubarrays />,
+    "square-sorted-array": <SquareSortedArray />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
