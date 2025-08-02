@@ -38,9 +38,9 @@ export default CodeFetcher;
 function extractLastOutputBlock(content?: string) {
   if (!content) return undefined;
   const patterns = [
-    /'''output\s*([\s\S]*?)\s*'''/g,
-    /"""output\s*([\s\S]*?)\s*"""/g,
-    /\/\*output\s*([\s\S]*?)\s*\*\//g,
+    /''' *output\s*([\s\S]*?)\s*'''/g,
+    /""" *output\s*([\s\S]*?)\s*"""/g,
+    /\/\* *output\s*([\s\S]*?)\s*\*\//g,
   ];
 
   let lastMatch = null;

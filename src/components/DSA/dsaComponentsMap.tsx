@@ -15,6 +15,7 @@ import MaxConsecutiveOnes from "./Arrays/MaxConsecutiveOnes";
 import MergeOverlappingIntervals from "./Arrays/MergeOverlappingIntervals";
 import MergeSortedSubarrays from "./Arrays/MergeSortedSubarrays";
 import MergeTwoSortedArrays from "./Arrays/MergeTwoSortedArrays";
+import NextGreaterPermutation from "./Arrays/NextGreaterPermutation";
 import PascalsTriangle from "./Arrays/PascalsTriangle";
 import PrimesUptoN from "./Arrays/PrimesUptoN";
 import RowColumnZero from "./Arrays/RowColumnZero";
@@ -42,6 +43,7 @@ const dsaComponentsMap: any = {
     "primes-upto-n": <PrimesUptoN />,
     "merge-overlapping-intervals": <MergeOverlappingIntervals />,
     "kth-largest-element": <KthLargestElement />,
+    "next-greater-permutation": <NextGreaterPermutation />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
