@@ -12,6 +12,7 @@ import LargestContiguousSum from "./Arrays/LargestContiguousSum";
 import MaxConsecutiveOnes from "./Arrays/MaxConsecutiveOnes";
 import MergeSortedSubarrays from "./Arrays/MergeSortedSubarrays";
 import MergeTwoSortedArrays from "./Arrays/MergeTwoSortedArrays";
+import PascalsTriangle from "./Arrays/PascalsTriangle";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
 
 const dsaComponentsMap: any = {
@@ -30,6 +31,7 @@ const dsaComponentsMap: any = {
     "max-consecutive-ones": <MaxConsecutiveOnes />,
     "arithmetic-sequence": <ArithmeticSequence />,
     "largest-contiguous-sum": <LargestContiguousSum />,
+    "pascals-triangle": <PascalsTriangle />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
