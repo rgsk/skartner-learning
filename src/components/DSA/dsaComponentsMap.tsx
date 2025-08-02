@@ -14,6 +14,7 @@ import MaxConsecutiveOnes from "./Arrays/MaxConsecutiveOnes";
 import MergeSortedSubarrays from "./Arrays/MergeSortedSubarrays";
 import MergeTwoSortedArrays from "./Arrays/MergeTwoSortedArrays";
 import PascalsTriangle from "./Arrays/PascalsTriangle";
+import PrimesUptoN from "./Arrays/PrimesUptoN";
 import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
 
@@ -36,6 +37,7 @@ const dsaComponentsMap: any = {
     "pascals-triangle": <PascalsTriangle />,
     "row-column-zero": <RowColumnZero />,
     "matrix-rotation": <MatrixRotation />,
+    "primes-upto-n": <PrimesUptoN />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
