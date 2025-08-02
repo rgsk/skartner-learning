@@ -110,6 +110,29 @@ const LargestContiguousSum: React.FC<LargestContiguousSumProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Kadane's Algorithm Variation (Intuitive)</SubHeading>
+          <Paragraph>
+            Let's say that in cur_sum, we have negative value, then it would
+            only decrease the sub-array sum ending at index i. So, we reset
+            cur_sum to 0.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/largest_contiguous_sum/kadane_variation/largest_contiguous_sum.py"
+            cppFile="/dsa/arrays/largest_contiguous_sum/kadane_variation/largest_contiguous_sum.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
