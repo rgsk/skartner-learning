@@ -16,7 +16,7 @@ class Solution:
 # tests-start
 intervals = [[1, 2], [2, 3], [1, 4], [5, 6]]
 sol = Solution()
-sol.mergeIntervals(intervals)
+print(sol.mergeIntervals(intervals))
 # tests-end
 
 '''output

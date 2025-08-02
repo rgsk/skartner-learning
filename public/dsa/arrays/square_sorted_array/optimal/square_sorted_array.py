@@ -9,7 +9,7 @@ class Solution:
 # tests-start
 arr = [6, -8, 3, -1, 4]
 sol = Solution()
-sol.getSquareSortedArray(arr)
+print(sol.getSquareSortedArray(arr))
 # tests-end
 
 '''output

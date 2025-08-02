@@ -12,7 +12,7 @@ class Solution:
 arr = [4, 3, 6, 4, 1]
 k = 3
 sol = Solution()
-sol.getKthLargestElement(arr, k)
+print(sol.getKthLargestElement(arr, k))
 # tests-end
 
 '''output

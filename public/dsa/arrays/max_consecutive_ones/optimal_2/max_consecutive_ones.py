@@ -17,7 +17,7 @@ class Solution:
 # tests-start
 arr = [1, 1, 3, 2, 3, 1, 1, 1]
 sol = Solution()
-sol.getMaxConsecutiveOnes(arr)
+print(sol.getMaxConsecutiveOnes(arr))
 # tests-end
 
 '''output

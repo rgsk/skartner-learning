@@ -15,7 +15,7 @@ class Solution:
 # tests-start
 arr = [42, 564, 5775, 34, 123, 454, 1, 5, 45, 3556, 23442]
 sol = Solution()
-sol.getEvenDigitNumbers(arr)
+print(sol.getEvenDigitNumbers(arr))
 # tests-end
 
 '''output

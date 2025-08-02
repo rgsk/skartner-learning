@@ -32,7 +32,7 @@ class Solution:
 arr = [1, 3, 5, 7, 9, 11, 0, 4, 6, 8]
 endIndex = 5
 sol = Solution()
-sol.merge(arr, endIndex)
+print(sol.merge(arr, endIndex))
 # tests-end
 
 '''output

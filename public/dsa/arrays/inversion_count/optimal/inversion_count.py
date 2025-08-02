@@ -55,7 +55,7 @@ class Solution:
 # tests-start
 arr = [8, 4, 1, 2]
 sol = Solution()
-sol.getInversionCount(arr)
+print(sol.getInversionCount(arr))
 
 # tests-end
 

@@ -34,7 +34,7 @@ class Solution:
 A = [1, 2, 3, 4, 4]
 B = [2, 4, 5, 5]
 sol = Solution()
-sol.mergeSortedArrays(A, B)
+print(sol.mergeSortedArrays(A, B))
 # tests-end
 
 '''output

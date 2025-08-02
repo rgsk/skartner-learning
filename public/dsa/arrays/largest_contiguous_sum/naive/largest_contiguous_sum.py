@@ -18,7 +18,7 @@ class Solution:
 # tests-start
 arr = [4, -6, 2, 5]
 sol = Solution()
-sol.largestContiguousSum(arr)
+print(sol.largestContiguousSum(arr))
 # tests-end
 
 '''output

@@ -11,7 +11,7 @@ class Solution:
 # tests-start
 rowNo = 5
 sol = Solution()
-sol.pascalTriangleRow(rowNo)
+print(sol.pascalTriangleRow(rowNo))
 # tests-end
 
 '''output
