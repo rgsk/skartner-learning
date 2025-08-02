@@ -76,6 +76,40 @@ const LargestContiguousSum: React.FC<LargestContiguousSumProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Kadane's Algorithm</SubHeading>
+          <Paragraph>
+            The largest contiguous sum can be solved optimally using Kadane's
+            Algorithm in linear time.
+          </Paragraph>
+          <UnorderedList
+            items={[
+              "Instead of checking all possible subarrays (O(n²)), it keeps track of the maximum sum ending at each position and uses it to build the next.",
+              {
+                text: "At each element, decide:",
+                children: [
+                  "Continue the current subarray (add this element), or",
+                  "Start fresh from this element.",
+                ],
+              },
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/largest_contiguous_sum/kadane/largest_contiguous_sum.py"
+            cppFile="/dsa/arrays/largest_contiguous_sum/kadane/largest_contiguous_sum.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
