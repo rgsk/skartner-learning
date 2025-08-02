@@ -62,7 +62,7 @@ const QuickSort: React.FC<QuickSortProps> = ({}) => {
                 children: [
                   "Best Case: O(n * log(n))",
                   "Average Case: O(n * log(n))",
-                  "Worst Case: O(n2)",
+                  "Worst Case: O(n<sup>2</sup>)",
                 ],
               },
               "Auxiliary Space Complexity: O(log(n))",

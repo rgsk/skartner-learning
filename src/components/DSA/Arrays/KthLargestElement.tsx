@@ -58,6 +58,43 @@ const KthLargestElement: React.FC<KthLargestElementProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Quick Select (Optimal)</SubHeading>
+          <Paragraph>
+            We can solve this problem efficiently with Quick Select Algorithm
+            which is quite similar to the Quicksort Algorithm.
+          </Paragraph>
+          <Paragraph>
+            We simplify the problem of finding kth largest element to finding
+            kth smallest element, and then finding kth smallest element to
+            finding element at particular index in the sorted array.
+          </Paragraph>
+          <Paragraph>
+            So, we need to find element at particular index, in quick sort
+            algorithm, we can take shortcuts. After getting pivot_index, if
+            target_index is larger than pivot_index, we search in right half.
+            And if target_index is smaller than pivot_index, we search in left
+            half.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={[
+              "Time Complexity: O(n)",
+              "Auxiliary Space Complexity: O(log(n))",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/kth_largest_element/optimal/kth_largest_element.py"
+            cppFile="/dsa/arrays/kth_largest_element/optimal/kth_largest_element.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
