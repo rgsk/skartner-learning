@@ -3,6 +3,7 @@
 import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Heading from "@/components/Shared/Heading";
+import InlineCode from "@/components/Shared/InlineCode";
 import MinorHeading from "@/components/Shared/MinorHeading";
 import Paragraph from "@/components/Shared/Paragraph";
 import PracticeLinks from "@/components/Shared/PracticeLinks";
@@ -98,6 +99,81 @@ const PascalsTriangle: React.FC<PascalsTriangleProps> = ({}) => {
           <CodeFetcher
             pythonFile="/dsa/arrays/pascals_triangle/iterative/pascals_triangle.py"
             cppFile="/dsa/arrays/pascals_triangle/iterative/pascals_triangle.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Combinatorics Approach</SubHeading>
+          <Paragraph>
+            The terms in the <InlineCode>(n+1)th row</InlineCode> of the
+            pascal's triangle are the nth binomial coefficients, from{" "}
+            <InlineCode>
+              <sup>n</sup>C<sub>0</sub> to <sup>n</sup>C<sub>n</sub>
+            </InlineCode>
+            .
+          </Paragraph>
+          <Paragraph>
+            4th Pascal Row is -{" "}
+            <InlineCode>
+              <sup>3</sup>C<sub>0</sub>,<sup>3</sup>C<sub>1</sub>,<sup>3</sup>C
+              <sub>2</sub>,<sup>3</sup>C<sub>3</sub>.
+            </InlineCode>
+          </Paragraph>
+          <Paragraph>
+            5th Pascal Row is -{" "}
+            <InlineCode>
+              <sup>4</sup>C<sub>0</sub>,<sup>4</sup>C<sub>1</sub>,<sup>4</sup>C
+              <sub>2</sub>,<sup>4</sup>C<sub>3</sub>,<sup>4</sup>C<sub>4</sub>.
+            </InlineCode>
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={[
+              "Time Complexity: O(n<sup>2</sup>)",
+              "Space Complexity: O(n)",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/pascals_triangle/combinatorics/pascals_triangle.py"
+            cppFile="/dsa/arrays/pascals_triangle/combinatorics/pascals_triangle.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Combinatorics Approach (Optimal)</SubHeading>
+          <Paragraph>
+            We can use the following recurrence to calculate the values of the
+            binomial coefficients efficiently,{" "}
+            <InlineCode>
+              <sup>n</sup>C<sub>k</sub> = <sup>n</sup>C<sub>k - 1</sub> × (n − k
+              + 1) / k
+            </InlineCode>
+          </Paragraph>
+          <Paragraph>Proof:</Paragraph>
+          <img
+            src="/dsa/arrays/pascals_triangle/combinatorics_optimal/proof.png"
+            alt="combinatorics_optimal proof"
+            className="w-[400px]"
+          />
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(n)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/arrays/pascals_triangle/combinatorics_optimal/pascals_triangle.py"
+            cppFile="/dsa/arrays/pascals_triangle/combinatorics_optimal/pascals_triangle.cpp"
           />
         </Section>
       </Solution>
