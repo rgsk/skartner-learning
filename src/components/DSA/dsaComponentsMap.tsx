@@ -9,6 +9,7 @@ import EvenNumberOfDigits from "./Arrays/EvenNumberOfDigits";
 import IdenticalTwins from "./Arrays/IdenticalTwins";
 import ImplementInsertionSort from "./Arrays/ImplementInsertionSort";
 import LargestContiguousSum from "./Arrays/LargestContiguousSum";
+import MatrixRotation from "./Arrays/MatrixRotation";
 import MaxConsecutiveOnes from "./Arrays/MaxConsecutiveOnes";
 import MergeSortedSubarrays from "./Arrays/MergeSortedSubarrays";
 import MergeTwoSortedArrays from "./Arrays/MergeTwoSortedArrays";
@@ -34,6 +35,7 @@ const dsaComponentsMap: any = {
     "largest-contiguous-sum": <LargestContiguousSum />,
     "pascals-triangle": <PascalsTriangle />,
     "row-column-zero": <RowColumnZero />,
+    "matrix-rotation": <MatrixRotation />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
