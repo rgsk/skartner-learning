@@ -8,6 +8,7 @@ import ArithmeticSequence from "./Arrays/ArithmeticSequence";
 import EvenNumberOfDigits from "./Arrays/EvenNumberOfDigits";
 import IdenticalTwins from "./Arrays/IdenticalTwins";
 import ImplementInsertionSort from "./Arrays/ImplementInsertionSort";
+import InversionCount from "./Arrays/InversionCount";
 import KthLargestElement from "./Arrays/KthLargestElement";
 import LargestContiguousSum from "./Arrays/LargestContiguousSum";
 import MatrixRotation from "./Arrays/MatrixRotation";
@@ -44,6 +45,7 @@ const dsaComponentsMap: any = {
     "merge-overlapping-intervals": <MergeOverlappingIntervals />,
     "kth-largest-element": <KthLargestElement />,
     "next-greater-permutation": <NextGreaterPermutation />,
+    "inversion-count": <InversionCount />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
