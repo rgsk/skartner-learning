@@ -8,6 +8,7 @@ import ArithmeticSequence from "./Arrays/ArithmeticSequence";
 import EvenNumberOfDigits from "./Arrays/EvenNumberOfDigits";
 import IdenticalTwins from "./Arrays/IdenticalTwins";
 import ImplementInsertionSort from "./Arrays/ImplementInsertionSort";
+import LargestContiguousSum from "./Arrays/LargestContiguousSum";
 import MaxConsecutiveOnes from "./Arrays/MaxConsecutiveOnes";
 import MergeSortedSubarrays from "./Arrays/MergeSortedSubarrays";
 import MergeTwoSortedArrays from "./Arrays/MergeTwoSortedArrays";
@@ -28,6 +29,7 @@ const dsaComponentsMap: any = {
     "square-sorted-array": <SquareSortedArray />,
     "max-consecutive-ones": <MaxConsecutiveOnes />,
     "arithmetic-sequence": <ArithmeticSequence />,
+    "largest-contiguous-sum": <LargestContiguousSum />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,

@@ -12,27 +12,39 @@ import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
 
-interface MergeSortProps {}
-const MergeSort: React.FC<MergeSortProps> = ({}) => {
+interface LargestContiguousSumProps {}
+const LargestContiguousSum: React.FC<LargestContiguousSumProps> = ({}) => {
   return (
     <Container>
-      <Heading>Implement Merge Sort</Heading>
-      <PracticeLinks
-        leetcode="sort-an-array"
-        workattech="implement-merge-sort"
-      />
+      <Heading>Largest Contiguous Sum</Heading>
+      <PracticeLinks workattech="largest-contiguous" />
       <Problem>
         <Section>
           <SubHeading>Problem Statement</SubHeading>
-          <Paragraph>Given an array, sort it using merge sort.</Paragraph>
+          <Paragraph>
+            A subarray is a part of an array including one or more
+            contiguous/adjacent elements.
+          </Paragraph>
+          <Paragraph>
+            If we find the sum of the elements of any subarray then that sum
+            will be known as a contiguous sum.
+          </Paragraph>
+          <Paragraph>
+            You are given an array of numbers (could be -ve as well). You need
+            to find the largest contiguous sum from the array.
+          </Paragraph>
         </Section>
         <Section>
           <MinorHeading>Examples</MinorHeading>
           <Examples
             items={[
               `\
-            Input: nums = [5,2,3,1]
-            Output: [1,2,3,5]
+            Array: [4, -6, 2, 5]
+            Answer: 7
+            `,
+              `\
+            Array: [1, 2, 3, 4, 5]
+            Answer: 15
             `,
             ]}
           />
@@ -40,35 +52,31 @@ const MergeSort: React.FC<MergeSortProps> = ({}) => {
       </Problem>
       <Solution>
         <Section>
-          <SubHeading>Approach</SubHeading>
+          <SubHeading>Naive Approach</SubHeading>
           <Paragraph>
-            Merge sort is a divide and conquer algorithm. It divides the given
-            array into two halves, sorts the two halves recursively and then
-            merges them to create a new sorted array.
-          </Paragraph>
-          <Paragraph>
-            Note: A sub-array having only one element is considered to be
-            sorted.
+            We can iterate over all possible subarrays of the array and
+            calculate their sum. Then return the maximum possible value of the
+            sum obtained.
           </Paragraph>
         </Section>
         <Section>
           <SubHeading>Analysis</SubHeading>
           <UnorderedList
             items={[
-              "Time Complexity: O(n * log(n))",
-              "Auxiliary Space Complexity: O(n)",
+              "Time Complexity: O(n<sup>2</sup>)",
+              "Space Complexity: O(1)",
             ]}
           />
         </Section>
         <Section>
           <SubHeading>Implementation</SubHeading>
           <CodeFetcher
-            pythonFile="/dsa/arrays/merge_sort/sol/merge_sort.py"
-            cppFile="/dsa/arrays/merge_sort/sol/merge_sort.cpp"
+            pythonFile="/dsa/arrays/largest_contiguous_sum/naive/largest_contiguous_sum.py"
+            cppFile="/dsa/arrays/largest_contiguous_sum/naive/largest_contiguous_sum.cpp"
           />
         </Section>
       </Solution>
     </Container>
   );
 };
-export default MergeSort;
+export default LargestContiguousSum;

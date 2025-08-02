@@ -64,7 +64,7 @@ Explanation: This cannot be reordered to form an arithmetic sequence.`,
         <Section>
           <SubHeading>Analysis</SubHeading>
           <UnorderedList
-            items={["Time Complexity: O(n * log(n)", "Space Complexity: O(1)"]}
+            items={["Time Complexity: O(n * log(n))", "Space Complexity: O(1)"]}
           />
         </Section>
         <Section>
