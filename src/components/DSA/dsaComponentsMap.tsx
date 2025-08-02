@@ -7,6 +7,7 @@ import BinarySearchConcept from "@/components/DSA/Searching/BinarySearchConcept"
 import EvenNumberOfDigits from "./Arrays/EvenNumberOfDigits";
 import IdenticalTwins from "./Arrays/IdenticalTwins";
 import ImplementInsertionSort from "./Arrays/ImplementInsertionSort";
+import MaxConsecutiveOnes from "./Arrays/MaxConsecutiveOnes";
 import MergeSortedSubarrays from "./Arrays/MergeSortedSubarrays";
 import MergeTwoSortedArrays from "./Arrays/MergeTwoSortedArrays";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
@@ -24,6 +25,7 @@ const dsaComponentsMap: any = {
     "merge-two-sorted-arrays": <MergeTwoSortedArrays />,
     "merge-sorted-subarrays": <MergeSortedSubarrays />,
     "square-sorted-array": <SquareSortedArray />,
+    "max-consecutive-ones": <MaxConsecutiveOnes />,
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
