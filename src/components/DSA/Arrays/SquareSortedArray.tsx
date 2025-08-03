@@ -11,6 +11,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import YoutubeVideo from "@/components/Shared/YoutubeVideo";
 
 interface SquareSortedArrayProps {}
 const SquareSortedArray: React.FC<SquareSortedArrayProps> = ({}) => {
@@ -59,6 +60,10 @@ const SquareSortedArray: React.FC<SquareSortedArrayProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Section>
+        <SubHeading>Video Explaination</SubHeading>
+        <YoutubeVideo id="kYiPtQvk8L4" />
+      </Section>
     </Container>
   );
 };

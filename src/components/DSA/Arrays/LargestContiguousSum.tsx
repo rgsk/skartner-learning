@@ -11,6 +11,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import YoutubeVideo from "@/components/Shared/YoutubeVideo";
 
 interface LargestContiguousSumProps {}
 const LargestContiguousSum: React.FC<LargestContiguousSumProps> = ({}) => {
@@ -133,6 +134,10 @@ const LargestContiguousSum: React.FC<LargestContiguousSumProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Section>
+        <SubHeading>Video Explaination</SubHeading>
+        <YoutubeVideo id="ZSYmFRn8Ye8" />
+      </Section>
     </Container>
   );
 };

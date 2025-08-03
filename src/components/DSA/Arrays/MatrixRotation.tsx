@@ -11,6 +11,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import YoutubeVideo from "@/components/Shared/YoutubeVideo";
 
 interface MatrixRotationProps {}
 const MatrixRotation: React.FC<MatrixRotationProps> = ({}) => {
@@ -86,6 +87,10 @@ After rotation:
           />
         </Section>
       </Solution>
+      <Section>
+        <SubHeading>Video Explaination</SubHeading>
+        <YoutubeVideo id="0JLBS0N6Q5A" />
+      </Section>
     </Container>
   );
 };

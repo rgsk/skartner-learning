@@ -11,6 +11,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import YoutubeVideo from "@/components/Shared/YoutubeVideo";
 
 interface MergeSortedSubarraysProps {}
 const MergeSortedSubarrays: React.FC<MergeSortedSubarraysProps> = ({}) => {
@@ -92,6 +93,10 @@ const MergeSortedSubarrays: React.FC<MergeSortedSubarraysProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Section>
+        <SubHeading>Video Explaination</SubHeading>
+        <YoutubeVideo id="oSid0HAa4TU" />
+      </Section>
     </Container>
   );
 };

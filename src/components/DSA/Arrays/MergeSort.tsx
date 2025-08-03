@@ -11,6 +11,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import YoutubeVideo from "@/components/Shared/YoutubeVideo";
 
 interface MergeSortProps {}
 const MergeSort: React.FC<MergeSortProps> = ({}) => {
@@ -68,6 +69,10 @@ const MergeSort: React.FC<MergeSortProps> = ({}) => {
           />
         </Section>
       </Solution>
+      <Section>
+        <SubHeading>Video Explaination</SubHeading>
+        <YoutubeVideo id="dDnWNkw6Iq8" />
+      </Section>
     </Container>
   );
 };
