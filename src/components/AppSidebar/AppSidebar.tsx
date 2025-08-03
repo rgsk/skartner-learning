@@ -25,21 +25,28 @@ import { useEffect, useState } from "react";
 
 export function AppSidebar() {
   const pathname = usePathname();
+
   const [openState, setOpenState] = useState<Record<string, boolean>>({});
+
   useEffect(() => {
     const stored = localStorage.getItem("dsa-collapse-state");
-    if (stored) {
-      setOpenState(JSON.parse(stored));
+    const parsed = stored ? JSON.parse(stored) : {};
+    const topicActive = pathname.split("/")[2];
+
+    if (topicActive && !parsed[topicActive]) {
+      parsed[topicActive] = true;
     }
-  }, []);
+
+    setOpenState(parsed);
+  }, [pathname]);
 
   useEffect(() => {
     localStorage.setItem("dsa-collapse-state", JSON.stringify(openState));
   }, [openState]);
-  const toggle = (topicName: string) => {
+  const toggle = (topic: string) => {
     setOpenState((prev) => ({
       ...prev,
-      [topicName]: !prev[topicName],
+      [topic]: !prev[topic],
     }));
   };
   return (
@@ -66,12 +73,12 @@ export function AppSidebar() {
             </SidebarMenu> */}
             <SidebarMenu>
               {topics.map((topic, i) => {
-                const isOpen = openState[topic.name] ?? false; // default close
+                const isOpen = openState[slugify(topic.name)] ?? false; // default close
                 return (
                   <Collapsible
                     key={i}
                     open={isOpen}
-                    onOpenChange={() => toggle(topic.name)}
+                    onOpenChange={() => toggle(slugify(topic.name))}
                     className="group/collapsible"
                   >
                     <SidebarMenuItem>
