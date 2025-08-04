@@ -26,6 +26,7 @@ import InsertPositionInSortedArray from "./Searching/InsertPositionInSortedArray
 import IsPerfectSquare from "./Searching/IsPerfectSquare";
 import NegativeNumbersInSortedArray from "./Searching/NegativeNumbersInSortedArray";
 import NextGreaterElementInSortedArray from "./Searching/NextGreaterElementInSortedArray";
+import NonRepeatingElement from "./Searching/NonRepeatingElement";
 import SearchRange from "./Searching/SearchRange";
 import SearchRotatedSortedArray from "./Searching/SearchRotatedSortedArray";
 
@@ -63,6 +64,7 @@ const dsaComponentsMap: any = {
     "insert-position-in-sorted-array": <InsertPositionInSortedArray />,
     "is-perfect-square": <IsPerfectSquare />,
     "search-rotated-sorted-array": <SearchRotatedSortedArray />,
+    "non-repeating-element": <NonRepeatingElement />,
   },
 };
 export default dsaComponentsMap;
