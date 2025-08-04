@@ -89,6 +89,27 @@ Answer: false
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Library based Approach</SubHeading>
+          <Paragraph>
+            We use inbuilt library functions for performing binary search.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(log(n))", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/searching/contains_element/lib/contains_element.py"
+            cppFile="/dsa/searching/contains_element/lib/contains_element.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };

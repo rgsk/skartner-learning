@@ -2,13 +2,8 @@
 using namespace std;
 
 bool containsElement(vector<int> &arr, int key) {
-    int n = arr.size();
-    for (int i = 0; i < n; i++) {
-        if (arr[i] == key) {
-            return true;
-        }
-    }
-    return false;
+    auto it = lower_bound(arr.begin(), arr.end(), key);
+    return it != arr.end() && *it == key;
 }
 
 // tests-start
