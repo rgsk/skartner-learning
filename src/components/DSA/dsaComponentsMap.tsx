@@ -22,6 +22,7 @@ import PrimesUptoN from "./Arrays/PrimesUptoN";
 import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
 import ContainsElement from "./Searching/ContainsElement";
+import InsertPositionInSortedArray from "./Searching/InsertPositionInSortedArray";
 import NegativeNumbersInSortedArray from "./Searching/NegativeNumbersInSortedArray";
 import NextGreaterElementInSortedArray from "./Searching/NextGreaterElementInSortedArray";
 import SearchRange from "./Searching/SearchRange";
@@ -57,6 +58,7 @@ const dsaComponentsMap: any = {
     "search-range": <SearchRange />,
     "negative-numbers-in-sorted-array": <NegativeNumbersInSortedArray />,
     "next-greater-element-in-sorted-array": <NextGreaterElementInSortedArray />,
+    "insert-position-in-sorted-array": <InsertPositionInSortedArray />,
   },
 };
 export default dsaComponentsMap;
