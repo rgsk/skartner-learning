@@ -91,7 +91,7 @@ Answer: false
       </Solution>
       <Solution>
         <Section>
-          <SubHeading>Library based Approach</SubHeading>
+          <SubHeading>Library Based Approach</SubHeading>
           <Paragraph>
             We use inbuilt library functions for performing binary search.
           </Paragraph>

@@ -22,6 +22,7 @@ import PrimesUptoN from "./Arrays/PrimesUptoN";
 import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
 import ContainsElement from "./Searching/ContainsElement";
+import SearchRange from "./Searching/SearchRange";
 
 const dsaComponentsMap: any = {
   arrays: {
@@ -51,6 +52,7 @@ const dsaComponentsMap: any = {
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
     "contains-element": <ContainsElement />,
+    "search-range": <SearchRange />,
   },
 };
 export default dsaComponentsMap;
