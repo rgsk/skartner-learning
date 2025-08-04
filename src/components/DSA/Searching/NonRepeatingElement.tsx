@@ -87,6 +87,45 @@ Output: 2
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Binary Search Alternate Approach</SubHeading>
+          <UnorderedList
+            items={[
+              {
+                text: "mid is even",
+
+                children: [
+                  "On left part of single element occurence, value at even index, has same value as value at next index. So, we do low = mid + 1, because single element must be on the right.",
+                  "On right part of single element occurence, value at even index, has same value as value at previous index. So, we do high = mid - 1, because single element must be on the left.",
+                  "if values are not same, arr[mid] is the single occurence.",
+                ],
+              },
+              {
+                text: "mid is odd",
+                children: [
+                  "On left part of single element occurence, value at odd index, has same value as value at previous index. So, we do low = mid + 1, because single element must be on the right.",
+                  "On right part of single element occurence, value at odd index, has same value as value at next index. So, we do high = mid - 1, because single element must be on the left.",
+                  "if values are not same, arr[mid] is the single occurence.",
+                ],
+              },
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/searching/non_repeating_element/binary_search_2/non_repeating_element.py"
+            cppFile="/dsa/searching/non_repeating_element/binary_search_2/non_repeating_element.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
