@@ -76,7 +76,7 @@ Output: 2
         <Section>
           <SubHeading>Analysis</SubHeading>
           <UnorderedList
-            items={["Time Complexity: O(n)", "Space Complexity: O(1)"]}
+            items={["Time Complexity: O(log(n))", "Space Complexity: O(1)"]}
           />
         </Section>
         <Section>
@@ -115,7 +115,7 @@ Output: 2
         <Section>
           <SubHeading>Analysis</SubHeading>
           <UnorderedList
-            items={["Time Complexity: O(n)", "Space Complexity: O(1)"]}
+            items={["Time Complexity: O(log(n))", "Space Complexity: O(1)"]}
           />
         </Section>
         <Section>
@@ -123,6 +123,60 @@ Output: 2
           <CodeFetcher
             pythonFile="/dsa/searching/non_repeating_element/binary_search_2/non_repeating_element.py"
             cppFile="/dsa/searching/non_repeating_element/binary_search_2/non_repeating_element.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Bits Manipulation Approach</SubHeading>
+          <Paragraph>
+            We xor all the elements, elements that occur twice cancel each
+            other. Final xor_value contains the element with single occurence.
+          </Paragraph>
+          <Paragraph>
+            Note: This approach doesn't takes advantage of the fact that array
+            is sorted, so this approach is more suitable for situations, when
+            array is not sorted.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/searching/non_repeating_element/bits/non_repeating_element.py"
+            cppFile="/dsa/searching/non_repeating_element/bits/non_repeating_element.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Hashing Approach</SubHeading>
+          <Paragraph>
+            We store frequency of the elements in map. The element that has
+            frequency of 1 is returned.
+          </Paragraph>
+          <Paragraph>
+            Note: This approach doesn't takes advantage of the fact that array
+            is sorted, so this approach is more suitable for situations, when
+            array is not sorted.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(n)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/searching/non_repeating_element/hashing/non_repeating_element.py"
+            cppFile="/dsa/searching/non_repeating_element/hashing/non_repeating_element.cpp"
           />
         </Section>
       </Solution>
