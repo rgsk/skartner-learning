@@ -1,19 +1,20 @@
+from math import ceil
+
+
 class Solution:
     def searchRoot(self, num: int) -> int:
-        if num == 0 or num == 1:
+        if num <= 1:
             return num
-        low = 1
-        high = num // 2
-        ans = 1
-        while low <= high:
-            mid = (low + high) // 2
-            sq = mid * mid
-            if (sq <= num):
-                ans = mid
-                low = mid + 1
+        l = 0
+        r = num // 2
+        while l < r:
+            m = ceil((l + r) / 2)
+            sq = m * m
+            if sq > num:
+                r = m - 1
             else:
-                high = mid - 1
-        return ans
+                l = m
+        return l
 
 
 # tests-start

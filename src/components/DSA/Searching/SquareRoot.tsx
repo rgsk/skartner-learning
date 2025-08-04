@@ -101,6 +101,31 @@ Answer: 0
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Binary Search (Getting Closer to the Result)</SubHeading>
+          <Paragraph>
+            We calculate, <InlineCode>square = mid * mid</InlineCode>. <br />
+            If <InlineCode>{"square > num"}</InlineCode>, we move to left, by
+            doing <InlineCode>right = mid - 1</InlineCode>. <br />
+            Otherwise, we do <InlineCode>left = mid</InlineCode>, because either
+            current mid could be answer or a value greater than it.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(log(n))", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/searching/square_root/closer/square_root.py"
+            cppFile="/dsa/searching/square_root/closer/square_root.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };

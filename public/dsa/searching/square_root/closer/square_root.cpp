@@ -5,18 +5,18 @@ int searchRoot(int num) {
     if (num == 0 || num == 1) {
         return num;
     }
-    int low = 1, high = num / 2, ans = 1;
-    while (low <= high) {
-        int mid = (low + high) / 2;
-        long long sq = 1LL * mid * mid;
-        if (sq <= num) {
-            ans = mid;
-            low = mid + 1;
+    int l = 0;
+    int r = num / 2;
+    while (l < r) {
+        int m = ceil((l + r) / 2.0);
+        long long sq = 1LL * m * m;  // avoid overflow
+        if (sq > num) {
+            r = m - 1;
         } else {
-            high = mid - 1;
+            l = m;
         }
     }
-    return ans;
+    return l;
 }
 
 // tests-start
