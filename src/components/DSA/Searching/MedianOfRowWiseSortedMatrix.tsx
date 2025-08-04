@@ -74,6 +74,48 @@ Median: 2
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Optimal Approach</SubHeading>
+          <Paragraph>
+            By the use of the binary search algorithm, this problem can be
+            solved much efficiently. Since there will be exactly (r * c)/2
+            numbers less than the median so we will find the [(r * c)/2 +1]th
+            number.
+          </Paragraph>
+          <UnorderedList
+            items={[
+              "First, find the minimum and maximum element in the matrix to get the lower bound and upper bound of the binary search.",
+              "The minimum element can be found by comparing the first element of each row and the maximum element can be found by comparing the last element of each row.",
+              "left is assigned as minimum, and right is assigned as maxium.",
+              "Then we apply binary search on this range.",
+              "Take mid = (left + right)/2 and get the count of numbers less than mid in each row by using bisect_right / upper_bound function and change the value of left or right accordingly.",
+              "If the count of numbers less than the mid, is less than (r * c) / 2 then the median must be in the second half otherwise the median must be in the first half.",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={[
+              {
+                text: "Time Complexity: (log(max - min) * r * log(cols))",
+                children: [
+                  "The binary search from min to max will be performed in log(max - min) time and the upper_bound() function will take log(cols) time which will be performed for each row.",
+                ],
+              },
+              "Space Complexity: O(1)",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/searching/median_of_row_wise_sorted_matrix/optimal/median_of_row_wise_sorted_matrix.py"
+            cppFile="/dsa/searching/median_of_row_wise_sorted_matrix/optimal/median_of_row_wise_sorted_matrix.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
