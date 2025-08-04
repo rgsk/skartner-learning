@@ -3,6 +3,7 @@ import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Examples from "@/components/Shared/Examples";
 import Heading from "@/components/Shared/Heading";
+import InlineCode from "@/components/Shared/InlineCode";
 import MinorHeading from "@/components/Shared/MinorHeading";
 import Paragraph from "@/components/Shared/Paragraph";
 import PracticeLinks from "@/components/Shared/PracticeLinks";
@@ -70,6 +71,33 @@ Answer: 0
           <CodeFetcher
             pythonFile="/dsa/searching/square_root/naive/square_root.py"
             cppFile="/dsa/searching/square_root/naive/square_root.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Binary Search (Storing Previous Result)</SubHeading>
+          <Paragraph>
+            We calculate, <InlineCode>square = mid * mid</InlineCode>. <br />
+            Once, we satisfy the condition that{" "}
+            <InlineCode>{"square <= num"}</InlineCode>, we store it in answer,
+            and look for bigger mid, by doing{" "}
+            <InlineCode>low = mid + 1</InlineCode>. <br /> Otherwise, since{" "}
+            <InlineCode>{"square > num"}</InlineCode>, we want lower mid, so we
+            do <InlineCode>high = mid - 1</InlineCode>.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(log(n))", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/searching/square_root/storing_previous_result/square_root.py"
+            cppFile="/dsa/searching/square_root/storing_previous_result/square_root.cpp"
           />
         </Section>
       </Solution>
