@@ -5,7 +5,9 @@
     "functional": "cpp",
     "iostream": "cpp",
     "ostream": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "cmath": "cpp",
+    "complex": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled"
 }

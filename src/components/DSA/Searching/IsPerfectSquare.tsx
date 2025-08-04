@@ -67,6 +67,24 @@ isPerfectSquare(30) => false
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Binary Search Approach</SubHeading>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(log(n))", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/searching/is_perfect_square/optimal/is_perfect_square.py"
+            cppFile="/dsa/searching/is_perfect_square/optimal/is_perfect_square.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
