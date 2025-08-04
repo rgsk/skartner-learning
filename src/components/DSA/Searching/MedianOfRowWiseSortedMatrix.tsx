@@ -79,9 +79,10 @@ Median: 2
           <SubHeading>Optimal Approach</SubHeading>
           <Paragraph>
             By the use of the binary search algorithm, this problem can be
-            solved much efficiently. Since there will be exactly (r * c)/2
-            numbers less than the median so we will find the [(r * c)/2 +1]th
-            number.
+            solved much efficiently. Since there will be exactly{" "}
+            <InlineCode>(r * c)/2</InlineCode>
+            numbers less than the median so we will find the{" "}
+            <InlineCode>[(r * c)/2 +1]th</InlineCode> number.
           </Paragraph>
           <UnorderedList
             items={[
@@ -89,8 +90,8 @@ Median: 2
               "The minimum element can be found by comparing the first element of each row and the maximum element can be found by comparing the last element of each row.",
               "left is assigned as minimum, and right is assigned as maxium.",
               "Then we apply binary search on this range.",
-              "Take mid = (left + right)/2 and get the count of numbers less than mid in each row by using bisect_right / upper_bound function and change the value of left or right accordingly.",
-              "If the count of numbers less than the mid, is less than (r * c) / 2 then the median must be in the second half otherwise the median must be in the first half.",
+              "Take `mid = (left + right)/2` and get the count of numbers less than mid in each row by using `bisect_right / upper_bound` function and change the value of left or right accordingly.",
+              "If the count of numbers less than the mid, is less than `(r * c) / 2` then the median must be in the second half otherwise the median must be in the first half.",
             ]}
           />
         </Section>
@@ -99,9 +100,9 @@ Median: 2
           <UnorderedList
             items={[
               {
-                text: "Time Complexity: (log(max - min) * r * log(cols))",
+                text: "Time Complexity: O(log(max - min) * r * log(cols))",
                 children: [
-                  "The binary search from min to max will be performed in log(max - min) time and the upper_bound() function will take log(cols) time which will be performed for each row.",
+                  "The binary search from min to max will be performed in `log(max - min)` time and the `upper_bound()` function will take `log(cols)` time which will be performed for each row.",
                 ],
               },
               "Space Complexity: O(1)",

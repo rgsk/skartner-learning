@@ -1,3 +1,4 @@
+import { wrapInlineCode } from "@/lib/utils";
 import React from "react";
 
 export interface UnorderedListProps {
@@ -9,11 +10,16 @@ function renderItem(
   idx: number
 ): React.ReactNode {
   if (typeof item === "string") {
-    return <li key={idx} dangerouslySetInnerHTML={{ __html: item }} />;
+    return (
+      <li
+        key={idx}
+        dangerouslySetInnerHTML={{ __html: wrapInlineCode(item) }}
+      />
+    );
   } else {
     return (
       <li key={idx}>
-        <span dangerouslySetInnerHTML={{ __html: item.text }} />
+        <span dangerouslySetInnerHTML={{ __html: wrapInlineCode(item.text) }} />
         {item.children && item.children.length > 0 && (
           <ul className="list-disc pl-5 space-y-2">
             {item.children.map((child, childIdx) =>

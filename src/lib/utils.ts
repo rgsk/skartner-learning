@@ -57,3 +57,7 @@ export function checkIsYoutubeVideo(url: string): boolean {
     return false;
   }
 }
+
+export function wrapInlineCode(text: string): string {
+  return text.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+}

@@ -121,11 +121,11 @@ Answer: false
           </Paragraph>
           <UnorderedList
             items={[
-              'We use binary search on index range <code class="inline-code">0</code> to <code class="inline-code">rows * cols - 1</code>.',
+              "We use binary search on index range `0` to `rows * cols - 1`.",
               {
-                text: 'For a given mid index <code class="inline-code">m</code>,',
+                text: "For a given mid index `m`,",
                 children: [
-                  'Row is <code class="inline-code">m / cols</code> and column is <code class="inline-code">m % cols</code>.',
+                  "Row is `m / cols` and column is `m % cols`.",
                   "This maps the 1D index back to its 2D matrix position.",
                 ],
               },
