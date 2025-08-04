@@ -25,6 +25,7 @@ import ContainsElement from "./Searching/ContainsElement";
 import InsertPositionInSortedArray from "./Searching/InsertPositionInSortedArray";
 import IsPerfectSquare from "./Searching/IsPerfectSquare";
 import MatrixSearch from "./Searching/MatrixSearch";
+import MedianOfRowWiseSortedMatrix from "./Searching/MedianOfRowWiseSortedMatrix";
 import NegativeNumbersInSortedArray from "./Searching/NegativeNumbersInSortedArray";
 import NextGreaterElementInSortedArray from "./Searching/NextGreaterElementInSortedArray";
 import NonRepeatingElement from "./Searching/NonRepeatingElement";
@@ -69,6 +70,7 @@ const dsaComponentsMap: any = {
     "non-repeating-element": <NonRepeatingElement />,
     "square-root": <SquareRoot />,
     "matrix-search": <MatrixSearch />,
+    "median-of-row-wise-sorted-matrix": <MedianOfRowWiseSortedMatrix />,
   },
 };
 export default dsaComponentsMap;
