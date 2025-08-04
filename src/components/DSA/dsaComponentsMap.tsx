@@ -22,6 +22,7 @@ import PrimesUptoN from "./Arrays/PrimesUptoN";
 import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
 import ContainsElement from "./Searching/ContainsElement";
+import NegativeNumbersInSortedArray from "./Searching/NegativeNumbersInSortedArray";
 import SearchRange from "./Searching/SearchRange";
 
 const dsaComponentsMap: any = {
@@ -53,6 +54,7 @@ const dsaComponentsMap: any = {
     "binary-search-concept": <BinarySearchConcept />,
     "contains-element": <ContainsElement />,
     "search-range": <SearchRange />,
+    "negative-numbers-in-sorted-array": <NegativeNumbersInSortedArray />,
   },
 };
 export default dsaComponentsMap;

@@ -230,13 +230,13 @@ const usePythonRunner = () => {
       try {
         const result = await runPython(
           codeWrapper(
-            wrapLastLineInPrint(
-              replaceToCsvWithEncodedString(
-                await replaceUrlWithCsvString(
-                  replacePltShowWithRenderImageCode(code)
-                )
+            // wrapLastLineInPrint(
+            replaceToCsvWithEncodedString(
+              await replaceUrlWithCsvString(
+                replacePltShowWithRenderImageCode(code)
               )
             )
+            // )
           )
         );
         return result;
