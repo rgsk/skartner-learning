@@ -23,6 +23,7 @@ import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
 import ContainsElement from "./Searching/ContainsElement";
 import InsertPositionInSortedArray from "./Searching/InsertPositionInSortedArray";
+import IsPerfectSquare from "./Searching/IsPerfectSquare";
 import NegativeNumbersInSortedArray from "./Searching/NegativeNumbersInSortedArray";
 import NextGreaterElementInSortedArray from "./Searching/NextGreaterElementInSortedArray";
 import SearchRange from "./Searching/SearchRange";
@@ -59,6 +60,7 @@ const dsaComponentsMap: any = {
     "negative-numbers-in-sorted-array": <NegativeNumbersInSortedArray />,
     "next-greater-element-in-sorted-array": <NextGreaterElementInSortedArray />,
     "insert-position-in-sorted-array": <InsertPositionInSortedArray />,
+    "is-perfect-square": <IsPerfectSquare />,
   },
 };
 export default dsaComponentsMap;
