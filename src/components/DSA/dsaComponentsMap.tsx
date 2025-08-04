@@ -29,6 +29,7 @@ import NextGreaterElementInSortedArray from "./Searching/NextGreaterElementInSor
 import NonRepeatingElement from "./Searching/NonRepeatingElement";
 import SearchRange from "./Searching/SearchRange";
 import SearchRotatedSortedArray from "./Searching/SearchRotatedSortedArray";
+import SquareRoot from "./Searching/SquareRoot";
 
 const dsaComponentsMap: any = {
   arrays: {
@@ -65,6 +66,7 @@ const dsaComponentsMap: any = {
     "is-perfect-square": <IsPerfectSquare />,
     "search-rotated-sorted-array": <SearchRotatedSortedArray />,
     "non-repeating-element": <NonRepeatingElement />,
+    "square-root": <SquareRoot />,
   },
 };
 export default dsaComponentsMap;
