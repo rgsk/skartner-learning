@@ -6,16 +6,16 @@ class Solution:
     def setRowColumnZeroes(self, matrix: List[List[int]]) -> None:
         rows = len(matrix)
         cols = len(matrix[0])
-        row_zero = [False for _ in range(rows)]
-        col_zero = [False for _ in range(cols)]
+        zero_rows = [False for _ in range(rows)]
+        zero_cols = [False for _ in range(cols)]
         for i in range(rows):
             for j in range(cols):
                 if matrix[i][j] == 0:
-                    row_zero[i] = True
-                    col_zero[j] = True
+                    zero_rows[i] = True
+                    zero_cols[j] = True
         for i in range(rows):
             for j in range(cols):
-                if row_zero[i] or col_zero[j]:
+                if zero_rows[i] or zero_cols[j]:
                     matrix[i][j] = 0
 
 
