@@ -16,13 +16,13 @@ class Solution:
         # Binary search to find the median
         while left < right:
             mid = (left + right) // 2
-            place = 0
+            count = 0
 
             # Count elements <= mid in each row using binary search
             for row in matrix:
-                place += bisect_right(row, mid)
+                count += bisect_right(row, mid)
 
-            if place < desired:
+            if count < desired:
                 left = mid + 1
             else:
                 right = mid

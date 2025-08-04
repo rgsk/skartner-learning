@@ -27,14 +27,14 @@ int calculateMedianOfMatrix(vector<vector<int>>& matrix) {
     // Binary search to find the median
     while (left < right) {
         int mid = (left + right) / 2;
-        int place = 0;
+        int count = 0;
 
         // Count how many elements are less than or equal to 'mid'
         for (int i = 0; i < n; i++) {
-            place += countLessEqual(matrix[i], mid);
+            count += countLessEqual(matrix[i], mid);
         }
 
-        if (place < desired) {
+        if (count < desired) {
             left = mid + 1;
         } else {
             right = mid;
