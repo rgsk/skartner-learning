@@ -21,6 +21,7 @@ import PascalsTriangle from "./Arrays/PascalsTriangle";
 import PrimesUptoN from "./Arrays/PrimesUptoN";
 import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
+import ContainsElement from "./Searching/ContainsElement";
 
 const dsaComponentsMap: any = {
   arrays: {
@@ -49,6 +50,7 @@ const dsaComponentsMap: any = {
   },
   searching: {
     "binary-search-concept": <BinarySearchConcept />,
+    "contains-element": <ContainsElement />,
   },
 };
 export default dsaComponentsMap;
