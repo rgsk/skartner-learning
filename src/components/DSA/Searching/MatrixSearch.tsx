@@ -112,6 +112,42 @@ Answer: false
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Optimal Approach 2</SubHeading>
+          <Paragraph>
+            This approach treats the 2D matrix as a flattened 1D sorted array
+            without actually creating a new array.
+          </Paragraph>
+          <UnorderedList
+            items={[
+              'We use binary search on index range <code class="inline-code">0</code> to <code class="inline-code">rows * cols - 1</code>.',
+              {
+                text: 'For a given mid index <code class="inline-code">m</code>,',
+                children: [
+                  'Row is <code class="inline-code">m / cols</code> and column is <code class="inline-code">m % cols</code>.',
+                  "This maps the 1D index back to its 2D matrix position.",
+                ],
+              },
+              "Compare the value at that position with key and adjust the binary search boundaries.",
+              "This works because the matrix rows are sorted and the last element of a row is less than the first element of the next row.",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(log(n * m))", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/searching/matrix_search/optimal_2/matrix_search.py"
+            cppFile="/dsa/searching/matrix_search/optimal_2/matrix_search.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
