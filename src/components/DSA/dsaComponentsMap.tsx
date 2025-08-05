@@ -33,6 +33,7 @@ import SearchRange from "./Searching/SearchRange";
 import SearchRotatedSortedArray from "./Searching/SearchRotatedSortedArray";
 import SquareRoot from "./Searching/SquareRoot";
 import RemoveOccurences from "./TwoPointers/RemoveOccurences";
+import TwoSumSorted from "./TwoPointers/TwoSumSorted";
 
 const dsaComponentsMap: any = {
   arrays: {
@@ -75,6 +76,7 @@ const dsaComponentsMap: any = {
   },
   "two-pointers": {
     "remove-occurences": <RemoveOccurences />,
+    "two-sum-sorted": <TwoSumSorted />,
   },
 };
 export default dsaComponentsMap;
