@@ -69,6 +69,36 @@ Result: [1, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6]
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Pointers Based Approach</SubHeading>
+          <Paragraph>
+            We initialise 2 pointers at start of each array. Depending on which
+            array has smaller element, we increment that pointer.
+          </Paragraph>
+          <Paragraph>
+            Once we have skipped k - 1 elements, the minimum of element pointed
+            by those 2 pointers is our kth element.
+          </Paragraph>
+          <Paragraph>
+            If either array is exhausted, we return the (k - remaining skips)th
+            element from the other array.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(k)", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/two_pointers/kth_element_of_two_sorted_lists/pointers/kth_element_of_two_sorted_lists.py"
+            cppFile="/dsa/two_pointers/kth_element_of_two_sorted_lists/pointers/kth_element_of_two_sorted_lists.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
