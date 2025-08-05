@@ -32,6 +32,7 @@ import NonRepeatingElement from "./Searching/NonRepeatingElement";
 import SearchRange from "./Searching/SearchRange";
 import SearchRotatedSortedArray from "./Searching/SearchRotatedSortedArray";
 import SquareRoot from "./Searching/SquareRoot";
+import DutchNationalFlag from "./TwoPointers/DutchNationalFlag";
 import KDiffPairs from "./TwoPointers/KDiffPairs";
 import KSubarraySum from "./TwoPointers/KSubarraySum";
 import KthElementOfTwoSortedLists from "./TwoPointers/KthElementOfTwoSortedLists";
@@ -90,6 +91,7 @@ const dsaComponentsMap: any = {
     "k-diff-pairs": <KDiffPairs />,
     "kth-element-of-two-sorted-lists": <KthElementOfTwoSortedLists />,
     "sorted-arrays-intersection": <SortedArraysIntersection />,
+    "dutch-national-flag": <DutchNationalFlag />,
   },
 };
 export default dsaComponentsMap;
