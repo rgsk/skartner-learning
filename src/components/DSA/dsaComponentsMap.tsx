@@ -36,6 +36,7 @@ import KDiffPairs from "./TwoPointers/KDiffPairs";
 import KSubarraySum from "./TwoPointers/KSubarraySum";
 import KthElementOfTwoSortedLists from "./TwoPointers/KthElementOfTwoSortedLists";
 import RemoveOccurences from "./TwoPointers/RemoveOccurences";
+import SortedArraysIntersection from "./TwoPointers/SortedArraysIntersection";
 import ThreeSum from "./TwoPointers/ThreeSum";
 import TwoSumSorted from "./TwoPointers/TwoSumSorted";
 import UniqueElementsInSortedArray from "./TwoPointers/UniqueElementsInSortedArray";
@@ -88,6 +89,7 @@ const dsaComponentsMap: any = {
     "three-sum": <ThreeSum />,
     "k-diff-pairs": <KDiffPairs />,
     "kth-element-of-two-sorted-lists": <KthElementOfTwoSortedLists />,
+    "sorted-arrays-intersection": <SortedArraysIntersection />,
   },
 };
 export default dsaComponentsMap;
