@@ -4,6 +4,7 @@ import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Examples from "@/components/Shared/Examples";
 import Heading from "@/components/Shared/Heading";
+import InlineCode from "@/components/Shared/InlineCode";
 import MinorHeading from "@/components/Shared/MinorHeading";
 import Paragraph from "@/components/Shared/Paragraph";
 import PracticeLinks from "@/components/Shared/PracticeLinks";
@@ -100,6 +101,35 @@ The total volume of water is 1 + 3 + 1 + 1 = 6 units.
           <CodeFetcher
             pythonFile="/dsa/two_pointers/trapping_rain_water/prefix_arrays/trapping_rain_water.py"
             cppFile="/dsa/two_pointers/trapping_rain_water/prefix_arrays/trapping_rain_water.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Pointers Based Approach</SubHeading>
+          <Paragraph>
+            We initialise left and right pointers to first and last height
+            respectively.
+          </Paragraph>
+          <Paragraph>
+            If max block on left side is less than max block on right side, then
+            we know the max water that can be stored in left block, is
+            <InlineCode>heights[left] - leftMax</InlineCode>. So, we store water
+            for that block and increment left pointer.
+          </Paragraph>
+          <Paragraph>Same procedure happens for right pointer.</Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/two_pointers/trapping_rain_water/pointers/trapping_rain_water.py"
+            cppFile="/dsa/two_pointers/trapping_rain_water/pointers/trapping_rain_water.cpp"
           />
         </Section>
       </Solution>
