@@ -39,6 +39,7 @@ import KthElementOfTwoSortedLists from "./TwoPointers/KthElementOfTwoSortedLists
 import RemoveOccurences from "./TwoPointers/RemoveOccurences";
 import SortedArraysIntersection from "./TwoPointers/SortedArraysIntersection";
 import ThreeSum from "./TwoPointers/ThreeSum";
+import TrappingRainWater from "./TwoPointers/TrappingRainWater";
 import TwoSumSorted from "./TwoPointers/TwoSumSorted";
 import UniqueElementsInSortedArray from "./TwoPointers/UniqueElementsInSortedArray";
 
@@ -92,6 +93,7 @@ const dsaComponentsMap: any = {
     "kth-element-of-two-sorted-lists": <KthElementOfTwoSortedLists />,
     "sorted-arrays-intersection": <SortedArraysIntersection />,
     "dutch-national-flag": <DutchNationalFlag />,
+    "trapping-rain-water": <TrappingRainWater />,
   },
 };
 export default dsaComponentsMap;
