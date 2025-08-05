@@ -72,6 +72,44 @@ Triplets: [
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Pointers Based Approach</SubHeading>
+          <UnorderedList
+            items={[
+              "Sort the array to make it easier to skip duplicates and use two pointers.",
+              "Fix one element (`A[i]`) in a loop.",
+              "For the subarray to the right of `i`, use the two-pointer technique to find pairs so that the triplet of pair and `A[i]`, sum to 0.",
+              {
+                text: "Duplicate handling:",
+                children: [
+                  "Skip duplicate `A[i]` values to avoid repeating triplets.",
+                  "Skip duplicate `A[left]` values in the two-pointer loop.",
+                ],
+              },
+              "If the sum is greater than zero, move the `right` pointer left to reduce the sum.",
+              "If the sum is less than zero, move the `left` pointer right to increase the sum.",
+              "If the sum equals zero, store the triplet and move both pointers to search for the next valid pair.",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={[
+              "Time Complexity: O(n<sup>2</sup>",
+              "Space Complexity: O(1)",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/two_pointers/three_sum/pointers/three_sum.py"
+            cppFile="/dsa/two_pointers/three_sum/pointers/three_sum.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
