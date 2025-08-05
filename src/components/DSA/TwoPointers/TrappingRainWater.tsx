@@ -113,7 +113,7 @@ The total volume of water is 1 + 3 + 1 + 1 = 6 units.
           </Paragraph>
           <Paragraph>
             If max block on left side is less than max block on right side, then
-            we know the max water that can be stored in left block, is
+            we know the max water that can be stored in left block, is{" "}
             <InlineCode>heights[left] - leftMax</InlineCode>. So, we store water
             for that block and increment left pointer.
           </Paragraph>
@@ -130,6 +130,33 @@ The total volume of water is 1 + 3 + 1 + 1 = 6 units.
           <CodeFetcher
             pythonFile="/dsa/two_pointers/trapping_rain_water/pointers/trapping_rain_water.py"
             cppFile="/dsa/two_pointers/trapping_rain_water/pointers/trapping_rain_water.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Monotonic Stack Based Approach</SubHeading>
+          <UnorderedList
+            items={[
+              "This solution uses a monotonic stack to detect valleys where water can accumulate.",
+              "We scan the array from left to right, maintaining indices of decreasing bar heights.",
+              "These indices represent potential left walls of a valley.",
+              "When a higher bar is found, it acts as a right wall, potentially forming a boundary.",
+              "The stack helps locate the left wall, allowing us to calculate trapped water.",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(n)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/two_pointers/trapping_rain_water/stack/trapping_rain_water.py"
+            cppFile="/dsa/two_pointers/trapping_rain_water/stack/trapping_rain_water.cpp"
           />
         </Section>
       </Solution>
