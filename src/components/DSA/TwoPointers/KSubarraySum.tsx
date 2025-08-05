@@ -11,6 +11,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import YoutubeVideo from "@/components/Shared/YoutubeVideo";
 
 interface KSubarraySumProps {}
 const KSubarraySum: React.FC<KSubarraySumProps> = ({}) => {
@@ -94,6 +95,10 @@ Answer: [14, 13, 12, 13, 19]
           />
         </Section>
       </Solution>
+      <Section>
+        <SubHeading>Video Explaination</SubHeading>
+        <YoutubeVideo id="LgvDjwJyl3g" />
+      </Section>
     </Container>
   );
 };

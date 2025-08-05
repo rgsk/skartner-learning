@@ -12,6 +12,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import YoutubeVideo from "@/components/Shared/YoutubeVideo";
 
 interface KDiffPairsProps {}
 const KDiffPairs: React.FC<KDiffPairsProps> = ({}) => {
@@ -180,6 +181,10 @@ Answer: 0
           />
         </Section>
       </Solution>
+      <Section>
+        <SubHeading>Video Explaination</SubHeading>
+        <YoutubeVideo id="LcXIslX3PoY" />
+      </Section>
     </Container>
   );
 };
