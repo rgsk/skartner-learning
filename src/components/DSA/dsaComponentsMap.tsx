@@ -36,6 +36,7 @@ import DutchNationalFlag from "./TwoPointers/DutchNationalFlag";
 import KDiffPairs from "./TwoPointers/KDiffPairs";
 import KSubarraySum from "./TwoPointers/KSubarraySum";
 import KthElementOfTwoSortedLists from "./TwoPointers/KthElementOfTwoSortedLists";
+import MaximumKSubarraySum from "./TwoPointers/MaximumKSubarraySum";
 import RemoveOccurences from "./TwoPointers/RemoveOccurences";
 import SortedArraysIntersection from "./TwoPointers/SortedArraysIntersection";
 import ThreeSum from "./TwoPointers/ThreeSum";
@@ -94,6 +95,7 @@ const dsaComponentsMap: any = {
     "sorted-arrays-intersection": <SortedArraysIntersection />,
     "dutch-national-flag": <DutchNationalFlag />,
     "trapping-rain-water": <TrappingRainWater />,
+    "maximum-k-subarray-sum": <MaximumKSubarraySum />,
   },
 };
 export default dsaComponentsMap;
