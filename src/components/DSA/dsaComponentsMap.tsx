@@ -35,6 +35,7 @@ import SquareRoot from "./Searching/SquareRoot";
 import KSubarraySum from "./TwoPointers/KSubarraySum";
 import RemoveOccurences from "./TwoPointers/RemoveOccurences";
 import TwoSumSorted from "./TwoPointers/TwoSumSorted";
+import UniqueElementsInSortedArray from "./TwoPointers/UniqueElementsInSortedArray";
 
 const dsaComponentsMap: any = {
   arrays: {
@@ -80,6 +81,7 @@ const dsaComponentsMap: any = {
     "two-sum-sorted": <TwoSumSorted />,
     "merge-two-sorted-arrays": <MergeTwoSortedArrays />,
     "k-subarray-sum": <KSubarraySum />,
+    "unique-elements-in-sorted-array": <UniqueElementsInSortedArray />,
   },
 };
 export default dsaComponentsMap;

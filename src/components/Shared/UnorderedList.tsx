@@ -20,6 +20,7 @@ function renderItem(
     return (
       <li key={idx}>
         <span dangerouslySetInnerHTML={{ __html: wrapInlineCode(item.text) }} />
+        <div className="h-2"></div>
         {item.children && item.children.length > 0 && (
           <ul className="list-disc pl-5 space-y-2">
             {item.children.map((child, childIdx) =>
