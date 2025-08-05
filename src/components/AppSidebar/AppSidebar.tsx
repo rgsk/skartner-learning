@@ -167,4 +167,23 @@ const topics = [
       "Median of Row-wise Sorted Matrix",
     ],
   },
+  {
+    name: "Two Pointers",
+    problems: [
+      "Remove occurences",
+      "Two Sum Sorted",
+      "Merge Two Sorted Arrays",
+      "K-Subarray Sum",
+      "Unique Elements in Sorted Array",
+      "Three Sum",
+      "k-diff pairs",
+      "Kth element of two sorted lists",
+      "Sorted Arrays Intersection",
+      "Dutch National Flag",
+      "Trapping Rain Water",
+      "Maximum K-Subarray Sum",
+      "k-Substring Vowels",
+      "Maximum k-Substring Vowels",
+    ],
+  },
 ];

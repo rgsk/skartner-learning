@@ -32,6 +32,7 @@ import NonRepeatingElement from "./Searching/NonRepeatingElement";
 import SearchRange from "./Searching/SearchRange";
 import SearchRotatedSortedArray from "./Searching/SearchRotatedSortedArray";
 import SquareRoot from "./Searching/SquareRoot";
+import RemoveOccurences from "./TwoPointers/RemoveOccurences";
 
 const dsaComponentsMap: any = {
   arrays: {
@@ -71,6 +72,9 @@ const dsaComponentsMap: any = {
     "square-root": <SquareRoot />,
     "matrix-search": <MatrixSearch />,
     "median-of-row-wise-sorted-matrix": <MedianOfRowWiseSortedMatrix />,
+  },
+  "two-pointers": {
+    "remove-occurences": <RemoveOccurences />,
   },
 };
 export default dsaComponentsMap;
