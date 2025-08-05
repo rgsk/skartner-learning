@@ -1,0 +1,78 @@
+"use client";
+import CodeFetcher from "@/components/Shared/CodeFetcher";
+import Container from "@/components/Shared/Container";
+import Examples from "@/components/Shared/Examples";
+import Heading from "@/components/Shared/Heading";
+import MinorHeading from "@/components/Shared/MinorHeading";
+import Paragraph from "@/components/Shared/Paragraph";
+import PracticeLinks from "@/components/Shared/PracticeLinks";
+import Problem from "@/components/Shared/Problem";
+import Section from "@/components/Shared/Section";
+import Solution from "@/components/Shared/Solution";
+import SubHeading from "@/components/Shared/SubHeading";
+import UnorderedList from "@/components/Shared/UnorderedList";
+
+interface ThreeSumProps {}
+const ThreeSum: React.FC<ThreeSumProps> = ({}) => {
+  return (
+    <Container>
+      <Heading>Three Sum</Heading>
+      <PracticeLinks workattech="three-sum" />
+      <Problem>
+        <Section>
+          <SubHeading>Problem Statement</SubHeading>
+          <Paragraph>
+            Given an array A, find all unique triplets in the array whose sum is
+            equal to zero.
+          </Paragraph>
+          <Paragraph>
+            Note: Each triplet should be sorted. The resultant array should be
+            sorted as well.
+          </Paragraph>
+        </Section>
+        <Section>
+          <MinorHeading>Example</MinorHeading>
+          <Examples
+            items={[
+              `\
+A: [1, 1, 0, -1, -2]
+Triplets: [
+&nbsp;&nbsp;[-2, 1, 1],
+&nbsp;&nbsp;[-1, 0, 1]
+]
+            `,
+            ]}
+          />
+        </Section>
+      </Problem>
+      <Solution>
+        <Section>
+          <SubHeading>Naive Approach</SubHeading>
+          <Paragraph>
+            In this approach, we can iterate over all possible triplets of the
+            given array and check if each triplet is valid, push them into an
+            appropriate data structure such as a set of tuples, to remove
+            duplicates.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={[
+              "Time Complexity: O(n<sup>3</sup> * logn)",
+              "Space Complexity: O(n<sup>2</sup>)",
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/two_pointers/three_sum/naive/three_sum.py"
+            cppFile="/dsa/two_pointers/three_sum/naive/three_sum.cpp"
+          />
+        </Section>
+      </Solution>
+    </Container>
+  );
+};
+export default ThreeSum;

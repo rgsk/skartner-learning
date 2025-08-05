@@ -34,6 +34,7 @@ import SearchRotatedSortedArray from "./Searching/SearchRotatedSortedArray";
 import SquareRoot from "./Searching/SquareRoot";
 import KSubarraySum from "./TwoPointers/KSubarraySum";
 import RemoveOccurences from "./TwoPointers/RemoveOccurences";
+import ThreeSum from "./TwoPointers/ThreeSum";
 import TwoSumSorted from "./TwoPointers/TwoSumSorted";
 import UniqueElementsInSortedArray from "./TwoPointers/UniqueElementsInSortedArray";
 
@@ -82,6 +83,7 @@ const dsaComponentsMap: any = {
     "merge-two-sorted-arrays": <MergeTwoSortedArrays />,
     "k-subarray-sum": <KSubarraySum />,
     "unique-elements-in-sorted-array": <UniqueElementsInSortedArray />,
+    "three-sum": <ThreeSum />,
   },
 };
 export default dsaComponentsMap;
