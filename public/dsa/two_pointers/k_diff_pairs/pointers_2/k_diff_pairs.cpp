@@ -1,22 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int kDiffPairs(vector<int> &A, int k) {
+int kDiffPairs(vector<int>& A, int k) {
     int n = A.size();
+    int l = 0, r = 0;
     int result = 0;
-    unordered_map<int, int> freq;
-    for (int i = 0; i < n; i++) {
-        if (k == 0) {
-            if (freq[A[i]] == 1) {
-                result += 1;
+
+    while (r < n) {
+        int diff = A[r] - A[l];
+
+        if (diff == k && l != r) {
+            result++;
+            while (r + 1 < n && A[r] == A[r + 1]) {
+                r++;
             }
+            l++;
+            r++;
+        } else if (diff <= k) {
+            r++;
         } else {
-            if (freq[A[i] - k] != 0 && freq[A[i]] == 0) {
-                result += 1;
-            }
+            l++;
         }
-        freq[A[i]]++;
     }
+
     return result;
 }
 

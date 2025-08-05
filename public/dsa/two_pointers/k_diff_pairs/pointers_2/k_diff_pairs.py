@@ -5,18 +5,22 @@ from typing import List
 class Solution:
     def kDiffPairs(self, A: List[int], k: int) -> int:
         n = len(A)
+        l = 0
+        r = 0
         result = 0
-        freq = defaultdict(int)
+        while r < n:
+            diff = A[r] - A[l]
+            if diff == k and l != r:
+                result += 1
+                while r + 1 < n and A[r] == A[r+1]:
+                    r += 1
+                l += 1
+                r += 1
 
-        for i in range(n):
-            if k == 0:
-                if freq[A[i]] == 1:
-                    result += 1
+            elif diff <= k:
+                r += 1
             else:
-                if freq[A[i] - k] != 0 and freq[A[i]] == 0:
-                    result += 1
-            freq[A[i]] += 1
-
+                l += 1
         return result
 
 
