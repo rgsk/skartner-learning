@@ -32,6 +32,7 @@ import NonRepeatingElement from "./Searching/NonRepeatingElement";
 import SearchRange from "./Searching/SearchRange";
 import SearchRotatedSortedArray from "./Searching/SearchRotatedSortedArray";
 import SquareRoot from "./Searching/SquareRoot";
+import KSubarraySum from "./TwoPointers/KSubarraySum";
 import RemoveOccurences from "./TwoPointers/RemoveOccurences";
 import TwoSumSorted from "./TwoPointers/TwoSumSorted";
 
@@ -77,6 +78,8 @@ const dsaComponentsMap: any = {
   "two-pointers": {
     "remove-occurences": <RemoveOccurences />,
     "two-sum-sorted": <TwoSumSorted />,
+    "merge-two-sorted-arrays": <MergeTwoSortedArrays />,
+    "k-subarray-sum": <KSubarraySum />,
   },
 };
 export default dsaComponentsMap;
