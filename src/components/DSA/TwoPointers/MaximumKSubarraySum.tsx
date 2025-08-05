@@ -70,6 +70,56 @@ Answer: 19
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Sliding Window Approach</SubHeading>
+          <Paragraph>
+            We will use the sliding window technique to calculate the sum in
+            linear time. We keep erasing the i - kth element from the current
+            sum and add the ith element to the sum, and store sum in max_sum, if
+            it is greater.
+          </Paragraph>
+          <Paragraph>
+            In this approach, we do explicit initialization of the first window,
+            then slide it.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/two_pointers/maximum_k_subarray_sum/optimal_1/maximum_k_subarray_sum.py"
+            cppFile="/dsa/two_pointers/maximum_k_subarray_sum/optimal_1/maximum_k_subarray_sum.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Sliding Window Variation</SubHeading>
+          <Paragraph>
+            We do everything in one for-loop, no explicit initialization of the
+            first window.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(1)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/two_pointers/maximum_k_subarray_sum/optimal_2/maximum_k_subarray_sum.py"
+            cppFile="/dsa/two_pointers/maximum_k_subarray_sum/optimal_2/maximum_k_subarray_sum.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
