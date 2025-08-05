@@ -32,6 +32,7 @@ import NonRepeatingElement from "./Searching/NonRepeatingElement";
 import SearchRange from "./Searching/SearchRange";
 import SearchRotatedSortedArray from "./Searching/SearchRotatedSortedArray";
 import SquareRoot from "./Searching/SquareRoot";
+import KDiffPairs from "./TwoPointers/KDiffPairs";
 import KSubarraySum from "./TwoPointers/KSubarraySum";
 import RemoveOccurences from "./TwoPointers/RemoveOccurences";
 import ThreeSum from "./TwoPointers/ThreeSum";
@@ -84,6 +85,7 @@ const dsaComponentsMap: any = {
     "k-subarray-sum": <KSubarraySum />,
     "unique-elements-in-sorted-array": <UniqueElementsInSortedArray />,
     "three-sum": <ThreeSum />,
+    "k-diff-pairs": <KDiffPairs />,
   },
 };
 export default dsaComponentsMap;
