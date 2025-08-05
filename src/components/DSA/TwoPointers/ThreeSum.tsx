@@ -59,8 +59,8 @@ Triplets: [
           <SubHeading>Analysis</SubHeading>
           <UnorderedList
             items={[
-              "Time Complexity: O(n<sup>3</sup> * logn)",
-              "Space Complexity: O(n<sup>2</sup>)",
+              "Time Complexity: O(n<sup>3</sup>)",
+              "Space Complexity: O(1)",
             ]}
           />
         </Section>
@@ -97,7 +97,7 @@ Triplets: [
           <SubHeading>Analysis</SubHeading>
           <UnorderedList
             items={[
-              "Time Complexity: O(n<sup>2</sup>",
+              "Time Complexity: O(n<sup>2</sup>)",
               "Space Complexity: O(1)",
             ]}
           />
@@ -107,6 +107,45 @@ Triplets: [
           <CodeFetcher
             pythonFile="/dsa/two_pointers/three_sum/pointers/three_sum.py"
             cppFile="/dsa/two_pointers/three_sum/pointers/three_sum.cpp"
+          />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Hashing Based Approach</SubHeading>
+          <Paragraph>
+            This approach, is an extension of 2 Sum hashing approach.
+          </Paragraph>
+          <Paragraph>
+            We fix some element at index i as A[i], we need to find pair in
+            right of the array that sums up to -A[i], so that the sum of all
+            three is zero.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={[
+              {
+                text: "Time Complexity: O(n<sup>2</sup>)",
+                children: [
+                  "n<sup>2</sup>, for 2 for loops",
+                  "k * log(k), for sorting result of k triplets, but ignored, as lesser than n<sup>2</sup>.",
+                ],
+              },
+
+              {
+                text: "Space Complexity: O(n)",
+                children: ["n for storing elements in `seen` set"],
+              },
+            ]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/two_pointers/three_sum/hashing/three_sum.py"
+            cppFile="/dsa/two_pointers/three_sum/hashing/three_sum.cpp"
           />
         </Section>
       </Solution>
