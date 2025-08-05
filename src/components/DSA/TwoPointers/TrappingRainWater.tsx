@@ -80,6 +80,29 @@ The total volume of water is 1 + 3 + 1 + 1 = 6 units.
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Prefix Arrays Approach</SubHeading>
+          <Paragraph>
+            Rather than calculating maxOnLeft and maxOnRight, for each block. We
+            precompute them, and then use the precomputed result to calculate
+            water trapped in each block.
+          </Paragraph>
+        </Section>
+        <Section>
+          <SubHeading>Analysis</SubHeading>
+          <UnorderedList
+            items={["Time Complexity: O(n)", "Space Complexity: O(n)"]}
+          />
+        </Section>
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            pythonFile="/dsa/two_pointers/trapping_rain_water/prefix_arrays/trapping_rain_water.py"
+            cppFile="/dsa/two_pointers/trapping_rain_water/prefix_arrays/trapping_rain_water.cpp"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
