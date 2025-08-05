@@ -38,6 +38,7 @@ import KSubarraySum from "./TwoPointers/KSubarraySum";
 import KSubstringVowels from "./TwoPointers/KSubstringVowels";
 import KthElementOfTwoSortedLists from "./TwoPointers/KthElementOfTwoSortedLists";
 import MaximumKSubarraySum from "./TwoPointers/MaximumKSubarraySum";
+import MaximumKSubstringVowels from "./TwoPointers/MaximumKSubstringVowels";
 import RemoveOccurences from "./TwoPointers/RemoveOccurences";
 import SortedArraysIntersection from "./TwoPointers/SortedArraysIntersection";
 import ThreeSum from "./TwoPointers/ThreeSum";
@@ -98,6 +99,7 @@ const dsaComponentsMap: any = {
     "trapping-rain-water": <TrappingRainWater />,
     "maximum-k-subarray-sum": <MaximumKSubarraySum />,
     "k-substring-vowels": <KSubstringVowels />,
+    "maximum-k-substring-vowels": <MaximumKSubstringVowels />,
   },
 };
 export default dsaComponentsMap;
