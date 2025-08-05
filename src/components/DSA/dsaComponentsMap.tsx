@@ -35,6 +35,7 @@ import SquareRoot from "./Searching/SquareRoot";
 import DutchNationalFlag from "./TwoPointers/DutchNationalFlag";
 import KDiffPairs from "./TwoPointers/KDiffPairs";
 import KSubarraySum from "./TwoPointers/KSubarraySum";
+import KSubstringVowels from "./TwoPointers/KSubstringVowels";
 import KthElementOfTwoSortedLists from "./TwoPointers/KthElementOfTwoSortedLists";
 import MaximumKSubarraySum from "./TwoPointers/MaximumKSubarraySum";
 import RemoveOccurences from "./TwoPointers/RemoveOccurences";
@@ -96,6 +97,7 @@ const dsaComponentsMap: any = {
     "dutch-national-flag": <DutchNationalFlag />,
     "trapping-rain-water": <TrappingRainWater />,
     "maximum-k-subarray-sum": <MaximumKSubarraySum />,
+    "k-substring-vowels": <KSubstringVowels />,
   },
 };
 export default dsaComponentsMap;
