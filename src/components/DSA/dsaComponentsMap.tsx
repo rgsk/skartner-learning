@@ -22,6 +22,7 @@ import PrimesUptoN from "./Arrays/PrimesUptoN";
 import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
 import AddElementAtKthPositionInLinkedList from "./LinkedLists/AddElementAtKthPositionInLinkedList";
+import AppendLinkedLists from "./LinkedLists/AppendLinkedLists";
 import KthElementInLinkedList from "./LinkedLists/KthElementInLinkedList";
 import LinkedListToArray from "./LinkedLists/LinkedListToArray";
 import PrintLinkedList from "./LinkedLists/PrintLinkedList";
@@ -118,6 +119,7 @@ const dsaComponentsMap: any = {
     "remove-element-at-kth-position-in-linked-list": (
       <RemoveElementAtKthPositionInLinkedList />
     ),
+    "append-linked-lists": <AppendLinkedLists />,
   },
 };
 export default dsaComponentsMap;
