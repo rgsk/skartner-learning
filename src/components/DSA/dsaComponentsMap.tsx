@@ -26,6 +26,7 @@ import KthElementInLinkedList from "./LinkedLists/KthElementInLinkedList";
 import LinkedListToArray from "./LinkedLists/LinkedListToArray";
 import PrintLinkedList from "./LinkedLists/PrintLinkedList";
 import PrintReversedLinkedList from "./LinkedLists/PrintReversedLinkedList";
+import RemoveElementAtKthPositionInLinkedList from "./LinkedLists/RemoveElementAtKthPositionInLinkedList";
 import ContainsElement from "./Searching/ContainsElement";
 import InsertPositionInSortedArray from "./Searching/InsertPositionInSortedArray";
 import IsPerfectSquare from "./Searching/IsPerfectSquare";
@@ -113,6 +114,9 @@ const dsaComponentsMap: any = {
     "kth-element-in-linked-list": <KthElementInLinkedList />,
     "add-element-at-kth-position-in-linked-list": (
       <AddElementAtKthPositionInLinkedList />
+    ),
+    "remove-element-at-kth-position-in-linked-list": (
+      <RemoveElementAtKthPositionInLinkedList />
     ),
   },
 };
