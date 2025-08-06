@@ -20,7 +20,10 @@ const MaximumKSubstringVowels: React.FC<
   return (
     <Container>
       <Heading>Maximum k-Substring Vowels</Heading>
-      <PracticeLinks workattech="maximum-k-substring-vowels" />
+      <PracticeLinks
+        workattech="maximum-k-substring-vowels"
+        leetcode="maximum-number-of-vowels-in-a-substring-of-given-length"
+      />
       <Problem>
         <Section>
           <SubHeading>Problem Statement</SubHeading>

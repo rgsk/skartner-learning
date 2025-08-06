@@ -18,7 +18,10 @@ const TwoSumSorted: React.FC<TwoSumSortedProps> = ({}) => {
   return (
     <Container>
       <Heading>Two Sum Sorted</Heading>
-      <PracticeLinks workattech="two-sum-sorted" />
+      <PracticeLinks
+        workattech="two-sum-sorted"
+        leetcode="two-sum-ii-input-array-is-sorted"
+      />
       <Problem>
         <Section>
           <SubHeading>Problem Statement</SubHeading>

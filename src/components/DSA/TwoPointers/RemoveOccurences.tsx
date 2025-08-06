@@ -18,7 +18,7 @@ const RemoveOccurences: React.FC<RemoveOccurencesProps> = ({}) => {
   return (
     <Container>
       <Heading>Remove occurences</Heading>
-      <PracticeLinks workattech="remove-occurences" />
+      <PracticeLinks workattech="remove-occurences" leetcode="remove-element" />
       <Problem>
         <Section>
           <SubHeading>Problem Statement</SubHeading>

@@ -19,7 +19,10 @@ const SortedArraysIntersection: React.FC<
   return (
     <Container>
       <Heading>Sorted Arrays Intersection</Heading>
-      <PracticeLinks workattech="sorted-arrays-intersection" />
+      <PracticeLinks
+        workattech="sorted-arrays-intersection"
+        leetcode="intersection-of-two-arrays"
+      />
       <Problem>
         <Section>
           <SubHeading>Problem Statement</SubHeading>

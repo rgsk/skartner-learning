@@ -20,7 +20,10 @@ const TrappingRainWater: React.FC<TrappingRainWaterProps> = ({}) => {
   return (
     <Container>
       <Heading>Trapping Rain Water</Heading>
-      <PracticeLinks workattech="trapped-rain-water" />
+      <PracticeLinks
+        workattech="trapped-rain-water"
+        leetcode="trapping-rain-water"
+      />
       <Problem>
         <Section>
           <SubHeading>Problem Statement</SubHeading>

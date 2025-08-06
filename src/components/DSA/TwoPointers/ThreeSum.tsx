@@ -18,7 +18,7 @@ const ThreeSum: React.FC<ThreeSumProps> = ({}) => {
   return (
     <Container>
       <Heading>Three Sum</Heading>
-      <PracticeLinks workattech="three-sum" />
+      <PracticeLinks workattech="three-sum" leetcode="3sum" />
       <Problem>
         <Section>
           <SubHeading>Problem Statement</SubHeading>

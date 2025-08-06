@@ -19,7 +19,10 @@ const KDiffPairs: React.FC<KDiffPairsProps> = ({}) => {
   return (
     <Container>
       <Heading>k-diff pairs</Heading>
-      <PracticeLinks workattech="k-diff-pairs" />
+      <PracticeLinks
+        workattech="k-diff-pairs"
+        leetcode="k-diff-pairs-in-an-array"
+      />
       <Problem>
         <Section>
           <SubHeading>Problem Statement</SubHeading>

@@ -18,7 +18,7 @@ const DutchNationalFlag: React.FC<DutchNationalFlagProps> = ({}) => {
   return (
     <Container>
       <Heading>Dutch National Flag</Heading>
-      <PracticeLinks workattech="dutch-national-flag" />
+      <PracticeLinks workattech="dutch-national-flag" leetcode="sort-colors" />
       <Problem>
         <Section>
           <SubHeading>Problem Statement</SubHeading>

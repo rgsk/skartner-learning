@@ -18,7 +18,10 @@ const MergeTwoSortedArrays: React.FC<MergeTwoSortedArraysProps> = ({}) => {
   return (
     <Container>
       <Heading>Merge Two Sorted Arrays</Heading>
-      <PracticeLinks workattech="merge-two-sorted-arrays" />
+      <PracticeLinks
+        workattech="merge-two-sorted-arrays"
+        leetcode="merge-sorted-array"
+      />
       <Problem>
         <Section>
           <SubHeading>Problem Statement</SubHeading>
