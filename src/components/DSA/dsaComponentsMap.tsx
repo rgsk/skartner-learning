@@ -23,6 +23,7 @@ import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
 import LinkedListToArray from "./LinkedLists/LinkedListToArray";
 import PrintLinkedList from "./LinkedLists/PrintLinkedList";
+import PrintReversedLinkedList from "./LinkedLists/PrintReversedLinkedList";
 import ContainsElement from "./Searching/ContainsElement";
 import InsertPositionInSortedArray from "./Searching/InsertPositionInSortedArray";
 import IsPerfectSquare from "./Searching/IsPerfectSquare";
@@ -106,6 +107,7 @@ const dsaComponentsMap: any = {
   "linked-lists": {
     "print-linked-list": <PrintLinkedList />,
     "linked-list-to-array": <LinkedListToArray />,
+    "print-reversed-linked-list": <PrintReversedLinkedList />,
   },
 };
 export default dsaComponentsMap;
