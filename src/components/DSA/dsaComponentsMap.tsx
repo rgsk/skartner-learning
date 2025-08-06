@@ -21,6 +21,7 @@ import PascalsTriangle from "./Arrays/PascalsTriangle";
 import PrimesUptoN from "./Arrays/PrimesUptoN";
 import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
+import LinkedListToArray from "./LinkedLists/LinkedListToArray";
 import PrintLinkedList from "./LinkedLists/PrintLinkedList";
 import ContainsElement from "./Searching/ContainsElement";
 import InsertPositionInSortedArray from "./Searching/InsertPositionInSortedArray";
@@ -104,6 +105,7 @@ const dsaComponentsMap: any = {
   },
   "linked-lists": {
     "print-linked-list": <PrintLinkedList />,
+    "linked-list-to-array": <LinkedListToArray />,
   },
 };
 export default dsaComponentsMap;

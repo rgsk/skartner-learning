@@ -13,15 +13,18 @@ class ListNode {
         this->next = NULL;
     }
 };
+
 // defs-end
 
-void printLinkedList(ListNode* head) {
+vector<int> linkedListToArray(ListNode* head) {
     // add your logic here
+    vector<int> arr;
     auto temp = head;
     while (temp) {
-        cout << temp->data << " ";
+        arr.push_back(temp->data);
         temp = temp->next;
     }
+    return arr;
 }
 
 // tests-start
@@ -31,7 +34,11 @@ int main() {
     head->next->next = new ListNode(4);
     head->next->next->next = new ListNode(7);
 
-    printLinkedList(head);
+    auto arr = linkedListToArray(head);
+
+    for (int v : arr) {
+        cout << v << " ";
+    }
 
     return 0;
 }
