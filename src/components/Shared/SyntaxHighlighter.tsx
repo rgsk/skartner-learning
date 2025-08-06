@@ -426,7 +426,7 @@ const CodeButton: React.FC<CodeButtonProps> = ({
   );
 };
 const rx =
-  /(#|\/\/)\s*(?:imports|tests)-start[\s\S]*?\1\s*(?:imports|tests)-end/g;
+  /(#|\/\/)\s*(?:imports|tests|defs)-start[\s\S]*?\1\s*(?:imports|tests|defs)-end/g;
 
 const handleTestBlockCollapse = (
   editor: any,

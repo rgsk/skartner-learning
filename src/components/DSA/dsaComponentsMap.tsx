@@ -21,6 +21,7 @@ import PascalsTriangle from "./Arrays/PascalsTriangle";
 import PrimesUptoN from "./Arrays/PrimesUptoN";
 import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
+import PrintLinkedList from "./LinkedLists/PrintLinkedList";
 import ContainsElement from "./Searching/ContainsElement";
 import InsertPositionInSortedArray from "./Searching/InsertPositionInSortedArray";
 import IsPerfectSquare from "./Searching/IsPerfectSquare";
@@ -100,6 +101,9 @@ const dsaComponentsMap: any = {
     "maximum-k-subarray-sum": <MaximumKSubarraySum />,
     "k-substring-vowels": <KSubstringVowels />,
     "maximum-k-substring-vowels": <MaximumKSubstringVowels />,
+  },
+  "linked-lists": {
+    "print-linked-list": <PrintLinkedList />,
   },
 };
 export default dsaComponentsMap;
