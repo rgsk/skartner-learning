@@ -28,6 +28,7 @@ import LinkedListToArray from "./LinkedLists/LinkedListToArray";
 import PrintLinkedList from "./LinkedLists/PrintLinkedList";
 import PrintReversedLinkedList from "./LinkedLists/PrintReversedLinkedList";
 import RemoveElementAtKthPositionInLinkedList from "./LinkedLists/RemoveElementAtKthPositionInLinkedList";
+import RemoveOccurrencesInLinkedList from "./LinkedLists/RemoveOccurrencesInLinkedList";
 import ReverseALinkedList from "./LinkedLists/ReverseALinkedList";
 import ContainsElement from "./Searching/ContainsElement";
 import InsertPositionInSortedArray from "./Searching/InsertPositionInSortedArray";
@@ -122,6 +123,7 @@ const dsaComponentsMap: any = {
     ),
     "append-linked-lists": <AppendLinkedLists />,
     "reverse-a-linked-list": <ReverseALinkedList />,
+    "remove-occurrences-in-linked-list": <RemoveOccurrencesInLinkedList />,
   },
 };
 export default dsaComponentsMap;

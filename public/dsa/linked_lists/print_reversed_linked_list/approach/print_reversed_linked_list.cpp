@@ -7,11 +7,7 @@ class ListNode {
    public:
     int data;
     ListNode* next;
-
-    ListNode(int data) {
-        this->data = data;
-        this->next = NULL;
-    }
+    ListNode(int data, ListNode* next = nullptr) : data(data), next(next) {}
 };
 // defs-end
 
