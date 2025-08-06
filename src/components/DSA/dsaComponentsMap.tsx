@@ -21,6 +21,7 @@ import PascalsTriangle from "./Arrays/PascalsTriangle";
 import PrimesUptoN from "./Arrays/PrimesUptoN";
 import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
+import AddElementAtKthPositionInLinkedList from "./LinkedLists/AddElementAtKthPositionInLinkedList";
 import KthElementInLinkedList from "./LinkedLists/KthElementInLinkedList";
 import LinkedListToArray from "./LinkedLists/LinkedListToArray";
 import PrintLinkedList from "./LinkedLists/PrintLinkedList";
@@ -110,6 +111,9 @@ const dsaComponentsMap: any = {
     "linked-list-to-array": <LinkedListToArray />,
     "print-reversed-linked-list": <PrintReversedLinkedList />,
     "kth-element-in-linked-list": <KthElementInLinkedList />,
+    "add-element-at-kth-position-in-linked-list": (
+      <AddElementAtKthPositionInLinkedList />
+    ),
   },
 };
 export default dsaComponentsMap;
