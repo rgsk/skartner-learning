@@ -28,6 +28,7 @@ import LinkedListToArray from "./LinkedLists/LinkedListToArray";
 import PrintLinkedList from "./LinkedLists/PrintLinkedList";
 import PrintReversedLinkedList from "./LinkedLists/PrintReversedLinkedList";
 import RemoveElementAtKthPositionInLinkedList from "./LinkedLists/RemoveElementAtKthPositionInLinkedList";
+import ReverseALinkedList from "./LinkedLists/ReverseALinkedList";
 import ContainsElement from "./Searching/ContainsElement";
 import InsertPositionInSortedArray from "./Searching/InsertPositionInSortedArray";
 import IsPerfectSquare from "./Searching/IsPerfectSquare";
@@ -120,6 +121,7 @@ const dsaComponentsMap: any = {
       <RemoveElementAtKthPositionInLinkedList />
     ),
     "append-linked-lists": <AppendLinkedLists />,
+    "reverse-a-linked-list": <ReverseALinkedList />,
   },
 };
 export default dsaComponentsMap;
