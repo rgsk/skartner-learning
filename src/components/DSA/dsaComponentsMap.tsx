@@ -23,6 +23,7 @@ import RowColumnZero from "./Arrays/RowColumnZero";
 import SquareSortedArray from "./Arrays/SquareSortedArray";
 import AddElementAtKthPositionInLinkedList from "./LinkedLists/AddElementAtKthPositionInLinkedList";
 import AppendLinkedLists from "./LinkedLists/AppendLinkedLists";
+import DeleteNodeFromLinkedList from "./LinkedLists/DeleteNodeFromLinkedList";
 import KthElementInLinkedList from "./LinkedLists/KthElementInLinkedList";
 import LinkedListToArray from "./LinkedLists/LinkedListToArray";
 import MergeTwoSortedLinkedList from "./LinkedLists/MergeTwoSortedLinkedList";
@@ -128,6 +129,7 @@ const dsaComponentsMap: any = {
     "remove-occurrences-in-linked-list": <RemoveOccurrencesInLinkedList />,
     "middle-element-of-linked-list": <MiddleElementOfLinkedList />,
     "merge-two-sorted-linked-list": <MergeTwoSortedLinkedList />,
+    "delete-node-from-linked-list": <DeleteNodeFromLinkedList />,
   },
 };
 export default dsaComponentsMap;
