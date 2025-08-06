@@ -25,6 +25,7 @@ import AddElementAtKthPositionInLinkedList from "./LinkedLists/AddElementAtKthPo
 import AppendLinkedLists from "./LinkedLists/AppendLinkedLists";
 import DeleteNodeFromLinkedList from "./LinkedLists/DeleteNodeFromLinkedList";
 import KthElementInLinkedList from "./LinkedLists/KthElementInLinkedList";
+import LinkedListPalindrome from "./LinkedLists/LinkedListPalindrome";
 import LinkedListToArray from "./LinkedLists/LinkedListToArray";
 import MergeTwoSortedLinkedList from "./LinkedLists/MergeTwoSortedLinkedList";
 import MiddleElementOfLinkedList from "./LinkedLists/MiddleElementOfLinkedList";
@@ -130,6 +131,7 @@ const dsaComponentsMap: any = {
     "middle-element-of-linked-list": <MiddleElementOfLinkedList />,
     "merge-two-sorted-linked-list": <MergeTwoSortedLinkedList />,
     "delete-node-from-linked-list": <DeleteNodeFromLinkedList />,
+    "linked-list-palindrome": <LinkedListPalindrome />,
   },
 };
 export default dsaComponentsMap;
