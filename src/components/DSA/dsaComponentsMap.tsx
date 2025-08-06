@@ -25,6 +25,7 @@ import AddElementAtKthPositionInLinkedList from "./LinkedLists/AddElementAtKthPo
 import AppendLinkedLists from "./LinkedLists/AppendLinkedLists";
 import KthElementInLinkedList from "./LinkedLists/KthElementInLinkedList";
 import LinkedListToArray from "./LinkedLists/LinkedListToArray";
+import MergeTwoSortedLinkedList from "./LinkedLists/MergeTwoSortedLinkedList";
 import MiddleElementOfLinkedList from "./LinkedLists/MiddleElementOfLinkedList";
 import PrintLinkedList from "./LinkedLists/PrintLinkedList";
 import PrintReversedLinkedList from "./LinkedLists/PrintReversedLinkedList";
@@ -126,6 +127,7 @@ const dsaComponentsMap: any = {
     "reverse-a-linked-list": <ReverseALinkedList />,
     "remove-occurrences-in-linked-list": <RemoveOccurrencesInLinkedList />,
     "middle-element-of-linked-list": <MiddleElementOfLinkedList />,
+    "merge-two-sorted-linked-list": <MergeTwoSortedLinkedList />,
   },
 };
 export default dsaComponentsMap;
