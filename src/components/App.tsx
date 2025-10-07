@@ -3,7 +3,7 @@ import { AppSidebar } from "@/components/AppSidebar/AppSidebar";
 import Navbar from "@/components/Navbar/Navbar";
 import { usePathname } from "next/navigation";
 
-export const noSidebarPaths = ["/"];
+export const noSidebarPaths = ["/", "/practice"];
 interface AppProps {
   children: any;
 }

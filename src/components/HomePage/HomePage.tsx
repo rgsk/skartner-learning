@@ -24,10 +24,24 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
         <h3 className="text-2xl">Learn Now</h3>
       </div> */}
       {/* <div className="h-5"></div> */}
-      <div>
+      <div className="flex flex-col gap-y-3 w-[320px]">
         <Link href="/dsa">
-          <Button variant="outline" size="lg">
+          <Button
+            variant="outline"
+            className="w-full flex justify-between"
+            size="lg"
+          >
             <span>Learn Data Structures and Algorithms</span>
+            <ArrowRight />
+          </Button>
+        </Link>
+        <Link href="/cses">
+          <Button
+            variant="outline"
+            className="w-full flex justify-between"
+            size="lg"
+          >
+            <span>CSES Problem Set</span>
             <ArrowRight />
           </Button>
         </Link>
