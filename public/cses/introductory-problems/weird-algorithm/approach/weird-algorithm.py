@@ -12,11 +12,13 @@ def setup():
             sys.stdout = open(output_path, 'w')
         except Exception as e:
             pass
+
+
+setup()
 # setup-end
 
 
 def main():
-    setup()
     n = int(input())
     while n != 1:
         print(n, end=" ")
