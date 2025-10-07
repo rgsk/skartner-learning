@@ -1,6 +1,8 @@
 import axios from "axios";
 import { clsx, type ClassValue } from "clsx";
+import katex from "katex";
 import { twMerge } from "tailwind-merge";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -59,5 +61,20 @@ export function checkIsYoutubeVideo(url: string): boolean {
 }
 
 export function wrapInlineCode(text: string): string {
-  return text.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+  return text
+    .replace(/\\`([^`]+)\\`/g, '<code class="inline-code">$1</code>')
+    .replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
+    .replace(/\$(.+?)\$/g, (_match, expr: string) => {
+      try {
+        return `<span class="text-sm">
+      ${katex.renderToString(expr, {
+        throwOnError: false,
+        displayMode: false,
+      })}
+        </span>`;
+      } catch (err) {
+        // fallback: keep original if rendering fails
+        return `<span class="text-sm">$${expr}$</span>`;
+      }
+    });
 }

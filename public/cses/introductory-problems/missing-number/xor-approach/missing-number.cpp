@@ -16,16 +16,16 @@ void setup() {
 int main() {
     setup();
 
-    long long n;
+    int n;
     cin >> n;
-
-    while (n != 1) {
-        cout << n << " ";
-        if (n % 2) {
-            n = n * 3 + 1;
-        } else {
-            n /= 2;
-        }
+    int acc = 0;
+    for (int i = 0; i < n - 1; i++) {
+        int v;
+        cin >> v;
+        acc ^= v;
     }
-    cout << 1 << endl;
+    for (int i = 1; i <= n; i++) {
+        acc ^= i;
+    }
+    cout << acc << endl;
 }

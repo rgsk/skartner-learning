@@ -12,45 +12,40 @@ import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
 import TaskConstraints from "../Common/TaskConstraints";
-interface WeirdAlgorithmProps {}
-const WeirdAlgorithm: React.FC<WeirdAlgorithmProps> = ({}) => {
+interface MissingNumberProps {}
+const MissingNumber: React.FC<MissingNumberProps> = ({}) => {
   return (
     <Container>
-      <Heading>Weird Algorithm</Heading>
-      <PracticeLinks cses="1068" />
+      <Heading>Missing Number</Heading>
+      <PracticeLinks cses="1083" />
       <Problem>
         <TaskConstraints time="1.00 s" memory="512 MB" />
         <Section>
-          <Paragraph>
-            Consider an algorithm that takes as input a positive integer n. If n
-            is even, the algorithm divides it by two, and if n is odd, the
-            algorithm multiplies it by three and adds one. The algorithm repeats
-            this, until n is one. For example, the sequence for n=3 is as
-            follows:
-          </Paragraph>
           <Paragraph
             text={String.raw`
-            $3 \rightarrow 10 \rightarrow 5 \rightarrow 16 \rightarrow 8 \rightarrow 4 \rightarrow 2 \rightarrow 1$
+            You are given all numbers between $1,2,\ldots,n$ except one. Your task is to find the missing number.
             `}
           ></Paragraph>
-          <Paragraph>
-            Your task is to simulate the execution of the algorithm for a given
-            value of n.
-          </Paragraph>
         </Section>
         <Section>
           <SubHeading>Input</SubHeading>
-          <Paragraph>The only input line contains an integer n.</Paragraph>
+          <Paragraph
+            text={String.raw`The first input line contains an integer $n$.`}
+          ></Paragraph>
+          <Paragraph
+            text={String.raw`
+            The second line contains $n-1$ numbers. Each number is distinct and
+            between $1$ and $n$ (inclusive).
+            `}
+          ></Paragraph>
         </Section>
         <Section>
           <SubHeading>Output</SubHeading>
-          <Paragraph>
-            Print a line that contains all values of n during the algorithm.
-          </Paragraph>
+          <Paragraph>Print the missing number.</Paragraph>
         </Section>
         <Section>
           <SubHeading>Constraints</SubHeading>
-          <UnorderedList items={[String.raw`$1 \le n \le 10^6$`]} />
+          <UnorderedList items={[String.raw`$2 \le n \le 2 \cdot 10^5$`]} />
         </Section>
         <Section>
           <MinorHeading>Example</MinorHeading>
@@ -58,10 +53,11 @@ const WeirdAlgorithm: React.FC<WeirdAlgorithmProps> = ({}) => {
             items={[
               `\
 Input:
-3
+5
+2 3 1 5
 
 Output:
-3 10 5 16 8 4 2 1
+4
 `,
             ]}
           />
@@ -69,22 +65,22 @@ Output:
       </Problem>
       <Solution>
         <Section>
-          <SubHeading>Approach</SubHeading>
+          <SubHeading>XOR Approach</SubHeading>
           <Paragraph>
-            Perform the steps as mentioned in the problem and print n at each
-            step.
+            Because XOR of two identical numbers cancels out (a ^ a = 0), all
+            pairs cancel, leaving only the missing number.
           </Paragraph>
         </Section>
 
         <Section>
           <SubHeading>Implementation</SubHeading>
           <CodeFetcher
-            cppFile="/cses/introductory-problems/weird-algorithm/approach/weird-algorithm.cpp"
-            pythonFile="/cses/introductory-problems/weird-algorithm/approach/weird-algorithm.py"
+            cppFile="/cses/introductory-problems/missing-number/xor-approach/missing-number.cpp"
+            pythonFile="/cses/introductory-problems/missing-number/xor-approach/missing-number.py"
           />
         </Section>
       </Solution>
     </Container>
   );
 };
-export default WeirdAlgorithm;
+export default MissingNumber;

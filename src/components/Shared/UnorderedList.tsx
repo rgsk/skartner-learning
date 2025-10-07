@@ -1,6 +1,5 @@
 import { wrapInlineCode } from "@/lib/utils";
 import React from "react";
-import SimpleLatex from "./SimpleLatex";
 
 export interface UnorderedListProps {
   items: (string | { text: string; children?: UnorderedListProps["items"] })[];
@@ -11,13 +10,6 @@ function renderItem(
   idx: number
 ): React.ReactNode {
   if (typeof item === "string") {
-    if (item[0] === "$" && item[item.length - 1] === "$") {
-      return (
-        <li key={idx}>
-          <SimpleLatex expr={item.slice(1, item.length - 1)} />
-        </li>
-      );
-    }
     return (
       <li
         key={idx}
