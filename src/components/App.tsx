@@ -1,17 +1,16 @@
 "use client";
 import { AppSidebar } from "@/components/AppSidebar/AppSidebar";
 import Navbar from "@/components/Navbar/Navbar";
-import { usePathname } from "next/navigation";
+import useGlobalContext from "@/hooks/useGlobalContext";
 
-export const noSidebarPaths = ["/", "/practice"];
 interface AppProps {
   children: any;
 }
 const App: React.FC<AppProps> = ({ children }) => {
-  const pathname = usePathname();
+  const { showSidebar } = useGlobalContext();
   return (
     <>
-      {!noSidebarPaths.includes(pathname) && <AppSidebar />}
+      {showSidebar && <AppSidebar />}
       <div className="w-full">
         <Navbar />
         <main>{children}</main>
