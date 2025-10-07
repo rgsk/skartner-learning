@@ -2,6 +2,8 @@
 using namespace std;
 
 int main() {
+
+// setup-start
 #ifndef ONLINE_JUDGE
     // For getting input from input.txt file
     freopen("../input.txt", "r", stdin);
@@ -9,6 +11,8 @@ int main() {
     // Prlong longing the Output to output.txt file
     freopen("../output.txt", "w", stdout);
 #endif
+// setup-end
+
     long long n;
     cin >> n;
 
