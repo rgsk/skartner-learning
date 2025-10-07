@@ -77,7 +77,10 @@ Output:
 
         <Section>
           <SubHeading>Implementation</SubHeading>
-          <CodeFetcher cppFile="/cses/introductory-problems/weird-algorithm/approach/weird-algorithm.cpp" />
+          <CodeFetcher
+            cppFile="/cses/introductory-problems/weird-algorithm/approach/weird-algorithm.cpp"
+            pythonFile="/cses/introductory-problems/weird-algorithm/approach/weird-algorithm.py"
+          />
         </Section>
       </Solution>
     </Container>

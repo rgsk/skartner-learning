@@ -9,7 +9,7 @@
     "lint": "next lint",
     "shad": "npx shadcn@latest add",
     "type-check": "tsc -b",
-    "cpp": "sh -c 'g++-15 $1 -o temp && ./temp && rm temp' --",
+    "cpp": "sh scripts/run_cpp.sh",
     "py": "python",
     "ts": "ts-node"
   },
