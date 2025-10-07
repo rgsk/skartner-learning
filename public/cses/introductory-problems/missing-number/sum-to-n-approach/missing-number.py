@@ -18,13 +18,10 @@ def setup():
 def main():
     setup()
     n = int(input())
-    while n != 1:
-        print(n, end=" ")
-        if n % 2:
-            n = n * 3 + 1
-        else:
-            n //= 2
-    print(1)
+    elements = [int(v) for v in input().split()]
+    sum_upto_n = (n * (n + 1)) // 2
+    res = sum_upto_n - sum(elements)
+    print(res)
 
 
 main()

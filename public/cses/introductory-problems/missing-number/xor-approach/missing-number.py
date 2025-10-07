@@ -14,6 +14,7 @@ def setup():
             pass
 # setup-end
 
+
 def main():
     setup()
     n = int(input())
@@ -25,6 +26,5 @@ def main():
         acc ^= i
     print(acc)
 
+
 main()
-
-

@@ -80,6 +80,23 @@ Output:
           />
         </Section>
       </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Sum upto N Approach</SubHeading>
+          <Paragraph>
+            Calculates the expected sum of numbers 1 to n, subtracts the sum of
+            given elements, and prints the difference — the missing number.
+          </Paragraph>
+        </Section>
+
+        <Section>
+          <SubHeading>Implementation</SubHeading>
+          <CodeFetcher
+            cppFile="/cses/introductory-problems/missing-number/sum-to-n-approach/missing-number.cpp"
+            pythonFile="/cses/introductory-problems/missing-number/sum-to-n-approach/missing-number.py"
+          />
+        </Section>
+      </Solution>
     </Container>
   );
 };
