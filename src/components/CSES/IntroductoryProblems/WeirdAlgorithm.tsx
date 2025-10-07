@@ -78,6 +78,7 @@ Output:
 
         <Section>
           <SubHeading>Implementation</SubHeading>
+          <p>✅ Accepted</p>
           <CodeFetcher
             cppFile="/cses/introductory-problems/weird-algorithm/approach/weird-algorithm.cpp"
             pythonFile="/cses/introductory-problems/weird-algorithm/approach/weird-algorithm.py"

@@ -74,6 +74,8 @@ Output:
 
         <Section>
           <SubHeading>Implementation</SubHeading>
+          <p>✅ Accepted</p>
+          {/* <p>⏱️ TLE</p> */}
           <CodeFetcher
             cppFile="/cses/introductory-problems/missing-number/xor-approach/missing-number.cpp"
             pythonFile="/cses/introductory-problems/missing-number/xor-approach/missing-number.py"
@@ -91,6 +93,7 @@ Output:
 
         <Section>
           <SubHeading>Implementation</SubHeading>
+          <p>✅ Accepted</p>
           <CodeFetcher
             cppFile="/cses/introductory-problems/missing-number/sum-to-n-approach/missing-number.cpp"
             pythonFile="/cses/introductory-problems/missing-number/sum-to-n-approach/missing-number.py"
