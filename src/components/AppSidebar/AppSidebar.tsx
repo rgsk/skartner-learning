@@ -128,7 +128,12 @@ const topics = {
   cses: [
     {
       name: "Introductory Problems",
-      problems: ["Weird Algorithm", "Missing Number", "Repetitions"],
+      problems: [
+        "Weird Algorithm",
+        "Missing Number",
+        "Repetitions",
+        "Increasing Array",
+      ],
     },
   ],
   dsa: [
