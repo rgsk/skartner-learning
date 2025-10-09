@@ -3,6 +3,7 @@ import MissingNumber from "./IntroductoryProblems/MissingNumber";
 import Permutations from "./IntroductoryProblems/Permutations";
 import Repetitions from "./IntroductoryProblems/Repetitions";
 import WeirdAlgorithm from "./IntroductoryProblems/WeirdAlgorithm";
+import DistinctNumbers from "./SortingandSearching/DistinctNumbers";
 
 const csesComponentsMap: any = {
   "introductory-problems": {
@@ -11,6 +12,9 @@ const csesComponentsMap: any = {
     repetitions: <Repetitions />,
     "increasing-array": <IncreasingArray />,
     permutations: <Permutations />,
+  },
+  "sorting-and-searching": {
+    "distinct-numbers": <DistinctNumbers />,
   },
 };
 export default csesComponentsMap;

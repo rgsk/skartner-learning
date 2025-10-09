@@ -136,6 +136,16 @@ const topics = {
         "Permutations",
       ],
     },
+    {
+      name: "Sorting and Searching",
+      problems: [
+        "Distinct Numbers",
+        "Apartments",
+        "Ferris Wheel",
+        "Concert Tickets",
+        "Restaurant Customers",
+      ],
+    },
   ],
   dsa: [
     {
