@@ -5,6 +5,7 @@ import Repetitions from "./IntroductoryProblems/Repetitions";
 import WeirdAlgorithm from "./IntroductoryProblems/WeirdAlgorithm";
 import Apartments from "./SortingandSearching/Apartments";
 import DistinctNumbers from "./SortingandSearching/DistinctNumbers";
+import FerrisWheel from "./SortingandSearching/FerrisWheel";
 
 const csesComponentsMap: any = {
   "introductory-problems": {
@@ -17,6 +18,7 @@ const csesComponentsMap: any = {
   "sorting-and-searching": {
     "distinct-numbers": <DistinctNumbers />,
     apartments: <Apartments />,
+    "ferris-wheel": <FerrisWheel />,
   },
 };
 export default csesComponentsMap;
