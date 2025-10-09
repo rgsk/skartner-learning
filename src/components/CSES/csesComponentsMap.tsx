@@ -7,6 +7,7 @@ import Apartments from "./SortingandSearching/Apartments";
 import ConcertTickets from "./SortingandSearching/ConcertTickets";
 import DistinctNumbers from "./SortingandSearching/DistinctNumbers";
 import FerrisWheel from "./SortingandSearching/FerrisWheel";
+import RestaurantCustomers from "./SortingandSearching/RestaurantCustomers";
 
 const csesComponentsMap: any = {
   "introductory-problems": {
@@ -21,6 +22,7 @@ const csesComponentsMap: any = {
     apartments: <Apartments />,
     "ferris-wheel": <FerrisWheel />,
     "concert-tickets": <ConcertTickets />,
+    "restaurant-customers": <RestaurantCustomers />,
   },
 };
 export default csesComponentsMap;
