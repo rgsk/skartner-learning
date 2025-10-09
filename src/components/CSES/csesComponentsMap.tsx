@@ -4,6 +4,7 @@ import Permutations from "./IntroductoryProblems/Permutations";
 import Repetitions from "./IntroductoryProblems/Repetitions";
 import WeirdAlgorithm from "./IntroductoryProblems/WeirdAlgorithm";
 import Apartments from "./SortingandSearching/Apartments";
+import ConcertTickets from "./SortingandSearching/ConcertTickets";
 import DistinctNumbers from "./SortingandSearching/DistinctNumbers";
 import FerrisWheel from "./SortingandSearching/FerrisWheel";
 
@@ -19,6 +20,7 @@ const csesComponentsMap: any = {
     "distinct-numbers": <DistinctNumbers />,
     apartments: <Apartments />,
     "ferris-wheel": <FerrisWheel />,
+    "concert-tickets": <ConcertTickets />,
   },
 };
 export default csesComponentsMap;
