@@ -2,13 +2,13 @@ import { wrapInlineCode } from "@/lib/utils";
 import React from "react";
 
 export interface UnorderedListProps {
-  items: any;
+  items: (string | { text: string; children?: UnorderedListProps["items"] })[];
 }
 
-function renderItem(item: any, idx: number): React.ReactNode {
-  if (typeof item === "object") {
-    return <li key={idx}>{item}</li>;
-  }
+function renderItem(
+  item: string | { text: string; children?: UnorderedListProps["items"] },
+  idx: number
+): React.ReactNode {
   if (typeof item === "string") {
     return (
       <li
@@ -23,7 +23,7 @@ function renderItem(item: any, idx: number): React.ReactNode {
         <div className="h-2"></div>
         {item.children && item.children.length > 0 && (
           <ul className="list-disc pl-5 space-y-2">
-            {item.children.map((child: any, childIdx: any) =>
+            {item.children.map((child, childIdx) =>
               renderItem(child, childIdx)
             )}
           </ul>

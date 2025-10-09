@@ -21,11 +21,11 @@ const IncreasingArray: React.FC<IncreasingArrayProps> = ({}) => {
       <Problem>
         <TaskConstraints time="1.00 s" memory="512 MB" />
         <Section>
-          <Paragraph>
-            You are given an array of $n$ integers. You want to modify the array
+          <Paragraph
+            text={String.raw`You are given an array of $n$ integers. You want to modify the array
             so that it is increasing, i.e., every element is at least as large
-            as the previous element.
-          </Paragraph>
+            as the previous element.`}
+          ></Paragraph>
           <Paragraph>
             On each move, you may increase the value of any element by one. What
             is the minimum number of moves required?
@@ -33,13 +33,14 @@ const IncreasingArray: React.FC<IncreasingArrayProps> = ({}) => {
         </Section>
         <Section>
           <SubHeading>Input</SubHeading>
-          <Paragraph>
-            The first input line contains an integer $n$: the size of the array.
-          </Paragraph>
-          <Paragraph>
-            Then, the second line contains $n$ integers $x_1,x_2,\ldots,x_n$:
-            the contents of the array.
-          </Paragraph>
+          <Paragraph
+            text={String.raw`The first input line contains an integer $n$: the size of the array.`}
+          ></Paragraph>
+          <Paragraph
+            text={String.raw`Then, the second line contains 
+          $n$ integers $x_1,x_2,\ldots,x_n$:
+            the contents of the array.`}
+          ></Paragraph>
         </Section>
         <Section>
           <SubHeading>Output</SubHeading>
@@ -49,8 +50,8 @@ const IncreasingArray: React.FC<IncreasingArrayProps> = ({}) => {
           <SubHeading>Constraints</SubHeading>
           <UnorderedList
             items={[
-              <Paragraph key={1}>$1 \le n \le 2 \cdot 10^5$</Paragraph>,
-              <Paragraph key={1}>$1 \le x_i \le 10^9$</Paragraph>,
+              String.raw`$1 \le n \le 2 \cdot 10^5$`,
+              String.raw`$1 \le x_i \le 10^9$`,
             ]}
           />
         </Section>
