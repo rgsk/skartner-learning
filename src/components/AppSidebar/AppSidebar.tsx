@@ -55,11 +55,18 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <Link href="/dsa">
-            <SidebarGroupLabel>
-              Data Structures and Algorithms
-            </SidebarGroupLabel>
-          </Link>
+          {category === "dsa" ? (
+            <Link href="/dsa">
+              <SidebarGroupLabel>
+                Data Structures and Algorithms
+              </SidebarGroupLabel>
+            </Link>
+          ) : category === "cses" ? (
+            <Link href="/cses">
+              <SidebarGroupLabel>CSES Problem Set</SidebarGroupLabel>
+            </Link>
+          ) : null}
+
           <SidebarGroupContent>
             {/* <SidebarMenu>
               {items.map((item) => (
