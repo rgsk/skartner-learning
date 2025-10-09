@@ -133,6 +133,7 @@ const topics = {
         "Missing Number",
         "Repetitions",
         "Increasing Array",
+        "Permutations",
       ],
     },
   ],
