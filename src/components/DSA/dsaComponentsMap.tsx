@@ -24,6 +24,7 @@ import SquareSortedArray from "./Arrays/SquareSortedArray";
 import AddElementAtKthPositionInLinkedList from "./LinkedLists/AddElementAtKthPositionInLinkedList";
 import AppendLinkedLists from "./LinkedLists/AppendLinkedLists";
 import DeleteNodeFromLinkedList from "./LinkedLists/DeleteNodeFromLinkedList";
+import IntersectionOfTwoLinkedLists from "./LinkedLists/IntersectionOfTwoLinkedLists";
 import KthElementInLinkedList from "./LinkedLists/KthElementInLinkedList";
 import LinkedListPalindrome from "./LinkedLists/LinkedListPalindrome";
 import LinkedListToArray from "./LinkedLists/LinkedListToArray";
@@ -132,6 +133,7 @@ const dsaComponentsMap: any = {
     "merge-two-sorted-linked-list": <MergeTwoSortedLinkedList />,
     "delete-node-from-linked-list": <DeleteNodeFromLinkedList />,
     "linked-list-palindrome": <LinkedListPalindrome />,
+    "intersection-of-two-linked-lists": <IntersectionOfTwoLinkedLists />,
   },
 };
 export default dsaComponentsMap;
