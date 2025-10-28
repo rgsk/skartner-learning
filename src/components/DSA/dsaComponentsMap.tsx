@@ -33,6 +33,7 @@ import MiddleElementOfLinkedList from "./LinkedLists/MiddleElementOfLinkedList";
 import PrintLinkedList from "./LinkedLists/PrintLinkedList";
 import PrintReversedLinkedList from "./LinkedLists/PrintReversedLinkedList";
 import RemoveDuplicatesFromSortedLinkedList from "./LinkedLists/RemoveDuplicatesFromSortedLinkedList";
+import RemoveDuplicatesFromSortedLinkedListII from "./LinkedLists/RemoveDuplicatesFromSortedLinkedListII";
 import RemoveElementAtKthPositionInLinkedList from "./LinkedLists/RemoveElementAtKthPositionInLinkedList";
 import RemoveOccurrencesInLinkedList from "./LinkedLists/RemoveOccurrencesInLinkedList";
 import ReverseALinkedList from "./LinkedLists/ReverseALinkedList";
@@ -137,6 +138,9 @@ const dsaComponentsMap: any = {
     "intersection-of-two-linked-lists": <IntersectionOfTwoLinkedLists />,
     "remove-duplicates-from-sorted-linked-list": (
       <RemoveDuplicatesFromSortedLinkedList />
+    ),
+    "remove-duplicates-from-sorted-linked-list---ii": (
+      <RemoveDuplicatesFromSortedLinkedListII />
     ),
   },
 };
