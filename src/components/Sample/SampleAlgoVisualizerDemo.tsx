@@ -23,22 +23,36 @@ const SampleAlgoVisualizerDemo: React.FC<
   progressRef.current = progress;
   const stepsRef = useRef(steps);
   stepsRef.current = steps;
-  // --- Define Increment Functions ---
-  const incrementCount1 = () => setCount1((prev) => prev + 1);
-  const incrementCount2 = () => setCount2((prev) => prev + 1);
-  const incrementCount3 = () => setCount3((prev) => prev + 1);
 
-  // --- Create Tasks ---
+  const resetCount = () => {
+    setCount1(0);
+    setCount2(0);
+    setCount3(0);
+  };
+
   function algo() {
-    const newSteps: (() => void)[] = [];
-    for (let i = 0; i < 5; i++) newSteps.push(incrementCount1);
-    for (let i = 0; i < 6; i++) newSteps.push(incrementCount2);
-    for (let i = 0; i < 7; i++) newSteps.push(incrementCount3);
+    const newSteps: typeof steps = [];
+    for (let i = 0; i < 5; i++) {
+      newSteps.push(() => setCount1((prev) => prev + 1));
+    }
+    for (let i = 0; i < 6; i++) {
+      newSteps.push(() => setCount2((prev) => prev + 1));
+    }
+    for (let i = 0; i < 7; i++) {
+      newSteps.push(() => setCount3((prev) => prev + 1));
+    }
     setSteps((prev) => [...prev, ...newSteps]);
   }
 
-  // --- Sequential Execution Logic ---
-  const executeSequentially = async () => {
+  const pause = () => {
+    setIsRunning(false);
+  };
+
+  const play = async () => {
+    if (progress === steps.length) {
+      resetCount();
+      setProgress(0);
+    }
     setIsRunning(true);
     while (true) {
       await new Promise((resolve) =>
@@ -57,24 +71,6 @@ const SampleAlgoVisualizerDemo: React.FC<
     setIsRunning(false);
   };
 
-  const pause = () => {
-    setIsRunning(false);
-  };
-
-  const play = () => {
-    if (progress === steps.length) {
-      resetCount();
-      setProgress(0);
-    }
-    executeSequentially();
-  };
-
-  const resetCount = () => {
-    setCount1(0);
-    setCount2(0);
-    setCount3(0);
-  };
-
   // --- Slider Logic: Scrub Back/Forth ---
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newIndex = Number(e.target.value);
@@ -85,6 +81,13 @@ const SampleAlgoVisualizerDemo: React.FC<
       steps[i]?.();
     }
     setProgress(newIndex);
+  };
+
+  const resetSteps = () => {
+    setProgress(0);
+    setIsRunning(false);
+    resetCount();
+    setSteps([]);
   };
 
   return (
@@ -142,16 +145,7 @@ const SampleAlgoVisualizerDemo: React.FC<
           className="w-full cursor-pointer"
         />
         <div className="text-sm">Pause Duration {pauseDuration}</div>
-        <Button
-          onClick={() => {
-            setProgress(0);
-            setIsRunning(false);
-            resetCount();
-            setSteps([]);
-          }}
-        >
-          Reset Tasks
-        </Button>
+        <Button onClick={resetSteps}>Reset Steps</Button>
       </div>
     </div>
   );
