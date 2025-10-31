@@ -40,7 +40,6 @@ const SampleAlgoVisualizerDemo: React.FC<
   // --- Sequential Execution Logic ---
   const executeSequentially = async () => {
     setIsRunning(true);
-    await new Promise((resolve) => setTimeout(resolve));
     while (true) {
       await new Promise((resolve) =>
         setTimeout(resolve, pauseDurationRef.current)
