@@ -47,7 +47,8 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
     }
   };
 
-  const runAlgo = (addStep: (step: () => void | Promise<void>) => void) => {
+  const runAlgo: ControlsProps["runAlgo"] = ({ addStep }) => {
+    controlsRef.current?.resetSteps();
     binarySearch(arr, target);
 
     function binarySearch(arr: number[], key: number): number {
@@ -211,6 +212,7 @@ const Arrow = ({
     </motion.div>
   );
 };
+export type Step = () => void | Promise<void>;
 
 // --- TYPES ---
 export type ControlsHandle = {
@@ -219,12 +221,15 @@ export type ControlsHandle = {
 
 export type ControlsProps = {
   resetState: () => void;
-  runAlgo: (addStep: (step: () => void | Promise<void>) => void) => void;
+  runAlgo: (props: {
+    addStep: (step: Step) => void;
+    addSteps: (steps: Array<Step>) => void;
+  }) => void;
 };
 
-const Controls = forwardRef<ControlsHandle, ControlsProps>(
+export const Controls = forwardRef<ControlsHandle, ControlsProps>(
   ({ resetState, runAlgo }, ref) => {
-    const [steps, setSteps] = useState<(() => void | Promise<void>)[]>([]);
+    const [steps, setSteps] = useState<Step[]>([]);
     const [isRunning, setIsRunning] = useState(false);
     const [progress, setProgress] = useState(0); // slider progress (index)
     const [pauseDuration, setPauseDuration] = useState(1000);
@@ -291,9 +296,13 @@ const Controls = forwardRef<ControlsHandle, ControlsProps>(
         <div className="flex gap-2">
           <Button
             onClick={() => {
-              resetSteps();
-              runAlgo((step) => {
-                setSteps((prev) => [...prev, step]);
+              runAlgo({
+                addStep: (step) => {
+                  setSteps((prev) => [...prev, step]);
+                },
+                addSteps: (steps) => {
+                  setSteps((prev) => [...prev, ...steps]);
+                },
               });
             }}
           >
