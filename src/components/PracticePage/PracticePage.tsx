@@ -11,14 +11,46 @@ interface PracticePageProps {}
 const PracticePage: React.FC<PracticePageProps> = ({}) => {
   return (
     <div className="p-4">
-      <SampleBinarySearch />
+      <AccordionDemo />
     </div>
   );
 };
 export default PracticePage;
 
 import { Pause, Play } from "lucide-react";
-import SampleBinarySearch from "../Sample/SampleBinarySearch";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+export function AccordionDemo() {
+  return (
+    <Accordion
+      type="single"
+      collapsible
+      className="w-full"
+      defaultValue="item-1"
+    >
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Product Information</AccordionTrigger>
+        <AccordionContent className="flex flex-col gap-4 text-balance">
+          <p>
+            Our flagship product combines cutting-edge technology with sleek
+            design. Built with premium materials, it offers unparalleled
+            performance and reliability.
+          </p>
+          <p>
+            Key features include advanced processing capabilities, and an
+            intuitive user interface designed for both beginners and experts.
+          </p>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
 
 function PlayPauseButton() {
   const [isPlaying, setIsPlaying] = useState(false);
