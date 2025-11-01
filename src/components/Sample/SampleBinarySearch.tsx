@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpIcon } from "lucide-react";
-import { useRef, useState } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { Button } from "../ui/button";
 
 import { motion } from "motion/react";
@@ -19,6 +19,7 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
   const [target, setTarget] = useState<number>(12);
   const [targetInput, setTargetInput] = useState("12");
   const [errorMessage, setErrorMessage] = useState("");
+  const controlsRef = useRef<ControlsHandle>(null);
 
   const handleSubmit = () => {
     try {
@@ -39,6 +40,7 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
         setTarget(Number(targetInput));
       }
       setErrorMessage("");
+      controlsRef.current?.resetSteps();
     } catch (e: any) {
       setErrorMessage(e.message);
     }
@@ -168,7 +170,7 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
         </div>
       </div>
       <div className="h-[10vh]"></div>
-      <Controls resetState={resetState} runAlgo={runAlgo} />
+      <Controls ref={controlsRef} resetState={resetState} runAlgo={runAlgo} />
     </div>
   );
 };
@@ -193,128 +195,140 @@ const Arrow = ({ index, children }: { index: number; children: any }) => {
   );
 };
 
-const Controls = ({
-  resetState,
-  runAlgo,
-}: {
+// --- TYPES ---
+export type ControlsHandle = {
+  resetSteps: () => void;
+};
+
+export type ControlsProps = {
   resetState: () => void;
   runAlgo: (addStep: (step: () => void | Promise<void>) => void) => void;
-}) => {
-  const [steps, setSteps] = useState<(() => void | Promise<void>)[]>([]);
-  const [isRunning, setIsRunning] = useState(false);
-  const [progress, setProgress] = useState(0); // slider progress (index)
-  const [pauseDuration, setPauseDuration] = useState(1000);
-  const isRunningRef = useRef(isRunning);
-  isRunningRef.current = isRunning;
-  const pauseDurationRef = useRef(pauseDuration);
-  pauseDurationRef.current = pauseDuration;
-  const progressRef = useRef(progress);
-  progressRef.current = progress;
-  const stepsRef = useRef(steps);
-  stepsRef.current = steps;
+};
 
-  const pause = () => {
-    setIsRunning(false);
-  };
+const Controls = forwardRef<ControlsHandle, ControlsProps>(
+  ({ resetState, runAlgo }, ref) => {
+    const [steps, setSteps] = useState<(() => void | Promise<void>)[]>([]);
+    const [isRunning, setIsRunning] = useState(false);
+    const [progress, setProgress] = useState(0); // slider progress (index)
+    const [pauseDuration, setPauseDuration] = useState(1000);
+    const isRunningRef = useRef(isRunning);
+    isRunningRef.current = isRunning;
+    const pauseDurationRef = useRef(pauseDuration);
+    pauseDurationRef.current = pauseDuration;
+    const progressRef = useRef(progress);
+    progressRef.current = progress;
+    const stepsRef = useRef(steps);
+    stepsRef.current = steps;
 
-  const play = async () => {
-    if (progress === steps.length) {
+    useImperativeHandle(ref, () => ({
+      resetSteps,
+    }));
+
+    const pause = () => {
+      setIsRunning(false);
+    };
+
+    const play = async () => {
+      if (progress === steps.length) {
+        resetState();
+        setProgress(0);
+      }
+      setIsRunning(true);
+      while (true) {
+        await new Promise((resolve) =>
+          setTimeout(resolve, pauseDurationRef.current)
+        );
+        if (!isRunningRef.current) {
+          return;
+        }
+        if (progressRef.current < stepsRef.current.length) {
+          await stepsRef.current[progressRef.current]();
+          setProgress(progressRef.current + 1);
+        } else {
+          break;
+        }
+      }
+      setIsRunning(false);
+    };
+
+    // --- Slider Logic: Scrub Back/Forth ---
+    const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newIndex = Number(e.target.value);
       resetState();
+
+      // Replay tasks up to the chosen index
+      for (let i = 0; i < newIndex; i++) {
+        steps[i]?.();
+      }
+      setProgress(newIndex);
+    };
+
+    const resetSteps = () => {
       setProgress(0);
-    }
-    setIsRunning(true);
-    while (true) {
-      await new Promise((resolve) =>
-        setTimeout(resolve, pauseDurationRef.current)
-      );
-      if (!isRunningRef.current) {
-        return;
-      }
-      if (progressRef.current < stepsRef.current.length) {
-        await stepsRef.current[progressRef.current]();
-        setProgress(progressRef.current + 1);
-      } else {
-        break;
-      }
-    }
-    setIsRunning(false);
-  };
+      setIsRunning(false);
+      resetState();
+      setSteps([]);
+    };
+    return (
+      <div className="flex flex-col gap-4 p-6 items-center">
+        <div className="flex gap-2">
+          <Button
+            onClick={() => {
+              resetSteps();
+              runAlgo((step) => {
+                setSteps((prev) => [...prev, step]);
+              });
+            }}
+          >
+            Run Algo
+          </Button>
+          <Button onClick={play} disabled={isRunning || steps.length === 0}>
+            Play
+          </Button>
+          <Button onClick={pause} disabled={!isRunning}>
+            Pause
+          </Button>
+        </div>
 
-  // --- Slider Logic: Scrub Back/Forth ---
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIndex = Number(e.target.value);
-    resetState();
-
-    // Replay tasks up to the chosen index
-    for (let i = 0; i < newIndex; i++) {
-      steps[i]?.();
-    }
-    setProgress(newIndex);
-  };
-
-  const resetSteps = () => {
-    setProgress(0);
-    setIsRunning(false);
-    resetState();
-    setSteps([]);
-  };
-  return (
-    <div className="flex flex-col gap-4 p-6 items-center">
-      <div className="flex gap-2">
-        <Button
-          onClick={() => {
-            resetSteps();
-            runAlgo((step) => {
-              setSteps((prev) => [...prev, step]);
-            });
-          }}
-        >
-          Run Algo
-        </Button>
-        <Button onClick={play} disabled={isRunning || steps.length === 0}>
-          Play
-        </Button>
-        <Button onClick={pause} disabled={!isRunning}>
-          Pause
-        </Button>
-      </div>
-
-      {/* --- Slider Control --- */}
-      {steps.length > 0 && (
+        {/* --- Slider Control --- */}
+        {steps.length > 0 && (
+          <div className="flex flex-col items-center gap-2 w-64">
+            <input
+              type="range"
+              min={0}
+              max={steps.length}
+              value={progress}
+              onChange={handleSliderChange}
+              className="w-full cursor-pointer"
+            />
+            <div className="text-sm text-gray-600">
+              Step {progress} / {steps.length}
+            </div>
+          </div>
+        )}
+        {steps.length > 0 && (
+          <>
+            {isRunning && <p>⏳ Running</p>}
+            {!isRunning && <p>⏸️ Paused</p>}
+          </>
+        )}
         <div className="flex flex-col items-center gap-2 w-64">
           <input
             type="range"
-            min={0}
-            max={steps.length}
-            value={progress}
-            onChange={handleSliderChange}
+            min={100}
+            max={2000}
+            value={pauseDuration}
+            onChange={(e) => {
+              setPauseDuration(Number(e.target.value));
+            }}
             className="w-full cursor-pointer"
           />
-          <div className="text-sm text-gray-600">
-            Step {progress} / {steps.length}
-          </div>
+          <div className="text-sm">Pause Duration {pauseDuration}</div>
+          <Button onClick={resetSteps}>Reset Steps</Button>
         </div>
-      )}
-      {steps.length > 0 && (
-        <>
-          {isRunning && <p>⏳ Running</p>}
-          {!isRunning && <p>⏸️ Paused</p>}
-        </>
-      )}
-      <div className="flex flex-col items-center gap-2 w-64">
-        <input
-          type="range"
-          min={100}
-          max={2000}
-          value={pauseDuration}
-          onChange={(e) => {
-            setPauseDuration(Number(e.target.value));
-          }}
-          className="w-full cursor-pointer"
-        />
-        <div className="text-sm">Pause Duration {pauseDuration}</div>
-        <Button onClick={resetSteps}>Reset Steps</Button>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
+
+Controls.displayName = "Controls";
