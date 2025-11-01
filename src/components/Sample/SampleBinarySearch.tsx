@@ -317,19 +317,24 @@ export const Controls = forwardRef<ControlsHandle, ControlsProps>(
 
     useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
+        const blurCurrentElement = () => {
+          (document.activeElement as HTMLElement | null)?.blur();
+        };
         if (
           e.key === " " &&
           !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)
         ) {
-          e.preventDefault();
-          (document.activeElement as HTMLElement | null)?.blur();
+          blurCurrentElement();
           handlePlayPauseRef.current();
         } else {
           if (document.activeElement !== progressBarRef.current) {
-            (document.activeElement as HTMLElement | null)?.blur();
+            // if progress bar is in focus, then we listen to it's left or right events
+            // otherwise we listen from window left/right
             if (e.key === "ArrowRight") {
+              blurCurrentElement();
               handleNavigationRef.current("right");
             } else if (e.key === "ArrowLeft") {
+              blurCurrentElement();
               handleNavigationRef.current("left");
             }
           }
