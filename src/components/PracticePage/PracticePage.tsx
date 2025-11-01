@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "motion/react";
 
 import { useState } from "react";
 
-import SampleBinarySearch from "../Sample/SampleBinarySearch";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
@@ -17,6 +16,45 @@ const PracticePage: React.FC<PracticePageProps> = ({}) => {
   );
 };
 export default PracticePage;
+
+import { Pause, Play } from "lucide-react";
+import SampleBinarySearch from "../Sample/SampleBinarySearch";
+
+function PlayPauseButton() {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  return (
+    <Button
+      variant="outline"
+      onClick={() => setIsPlaying((p) => !p)}
+      className="p-4 transition"
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {isPlaying ? (
+          <motion.span
+            key="pause"
+            initial={{ scale: 0.6, opacity: 0, rotate: -90 }}
+            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+            exit={{ scale: 0.6, opacity: 0, rotate: 90 }}
+            transition={{ duration: 0.25 }}
+          >
+            <Pause size={28} />
+          </motion.span>
+        ) : (
+          <motion.span
+            key="play"
+            initial={{ scale: 0.6, opacity: 0, rotate: 90 }}
+            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+            exit={{ scale: 0.6, opacity: 0, rotate: -90 }}
+            transition={{ duration: 0.25 }}
+          >
+            <Play size={28} />
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </Button>
+  );
+}
 
 function ArrayInput({ onSubmit }: { onSubmit: (arr: number[]) => void }) {
   const [arrinput, setArrInput] = useState("1, 2, 4, 7, 8, 10, 12, 13, 17, 19");

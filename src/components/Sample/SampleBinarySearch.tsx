@@ -11,6 +11,8 @@ import { Button } from "../ui/button";
 
 import { motion } from "motion/react";
 
+import { cn } from "@/lib/utils";
+import { PauseIcon, PlayIcon, RefreshCwIcon } from "lucide-react";
 import { GoArrowUp } from "react-icons/go";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -232,17 +234,18 @@ export type ControlsProps = {
     addSteps: (steps: Array<Step>) => void;
   }) => void;
 };
+const speedDurationRange = { min: 100, max: 2000 };
 
 export const Controls = forwardRef<ControlsHandle, ControlsProps>(
   ({ resetState, runAlgo }, ref) => {
     const [steps, setSteps] = useState<Step[]>([]);
     const [isRunning, setIsRunning] = useState(false);
     const [progress, setProgress] = useState(0); // slider progress (index)
-    const [pauseDuration, setPauseDuration] = useState(1000);
+    const [speedPercent, setSpeedPercent] = useState(50);
     const isRunningRef = useRef(isRunning);
     isRunningRef.current = isRunning;
-    const pauseDurationRef = useRef(pauseDuration);
-    pauseDurationRef.current = pauseDuration;
+    const speedPercentRef = useRef(speedPercent);
+    speedPercentRef.current = speedPercent;
     const progressRef = useRef(progress);
     progressRef.current = progress;
     const progressBarRef = useRef<HTMLInputElement>(null);
@@ -264,9 +267,14 @@ export const Controls = forwardRef<ControlsHandle, ControlsProps>(
       }
       setIsRunning(true);
       while (true) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, pauseDurationRef.current)
-        );
+        await new Promise((resolve) => {
+          const pauseDuration =
+            speedDurationRange.min +
+            (speedDurationRange.max - speedDurationRange.min) *
+              ((100 - speedPercentRef.current) / 100);
+
+          setTimeout(resolve, pauseDuration);
+        });
         if (!isRunningRef.current) {
           return;
         }
@@ -320,9 +328,10 @@ export const Controls = forwardRef<ControlsHandle, ControlsProps>(
       setSteps([]);
     };
     return (
-      <div className="flex flex-col gap-4 p-6 items-center">
-        <div className="flex gap-2">
+      <div className="flex flex-col gap-4 p-6">
+        <div className="flex gap-2 justify-between">
           <Button
+            variant={"outline"}
             onClick={() => {
               runAlgo({
                 addStep: (step) => {
@@ -334,52 +343,62 @@ export const Controls = forwardRef<ControlsHandle, ControlsProps>(
               });
             }}
           >
-            Run Algo
+            Run Algorithm
           </Button>
-          <Button onClick={play} disabled={isRunning || steps.length === 0}>
-            Play
-          </Button>
-          <Button onClick={pause} disabled={!isRunning}>
-            Pause
+          <Button
+            variant={"outline"}
+            size={"icon"}
+            onClick={resetSteps}
+            disabled={steps.length == 0}
+          >
+            <RefreshCwIcon />
           </Button>
         </div>
 
         {/* --- Slider Control --- */}
-        {steps.length > 0 && (
-          <div className="flex flex-col items-center gap-2 w-64">
-            <input
-              ref={progressBarRef}
-              type="range"
-              min={0}
-              max={steps.length}
-              value={progress}
-              onChange={(e) => handleSliderChange(Number(e.target.value))}
-              className="w-full cursor-pointer"
-            />
-            <div className="text-sm text-gray-600">
-              Step {progress} / {steps.length}
+
+        <div className={cn("flex flex-col gap-2")}>
+          <input
+            disabled={steps.length === 0}
+            ref={progressBarRef}
+            type="range"
+            min={0}
+            max={steps.length}
+            value={progress}
+            onChange={(e) => handleSliderChange(Number(e.target.value))}
+            className="w-full cursor-pointer focus:outline-none"
+          />
+          <div className="h-[10px]"></div>
+          <div className="flex justify-between">
+            <div className="flex items-center gap-4">
+              <div>
+                <Button
+                  onClick={isRunning ? pause : play}
+                  disabled={steps.length === 0}
+                  variant="outline"
+                >
+                  {isRunning ? <PauseIcon size={28} /> : <PlayIcon size={28} />}
+                </Button>
+              </div>
+              <span className="text-sm">
+                Step : {progress} / {steps.length}
+              </span>
+            </div>
+            <div className="flex gap-2 items-center">
+              <span className="whitespace-nowrap text-sm">Speed :</span>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                value={speedPercent}
+                onChange={(e) => {
+                  const percent = Number(e.target.value);
+                  setSpeedPercent(percent);
+                }}
+                className="w-full cursor-pointer"
+              />
             </div>
           </div>
-        )}
-        {steps.length > 0 && (
-          <>
-            {isRunning && <p>⏳ Running</p>}
-            {!isRunning && <p>⏸️ Paused</p>}
-          </>
-        )}
-        <div className="flex flex-col items-center gap-2 w-64">
-          <input
-            type="range"
-            min={100}
-            max={2000}
-            value={pauseDuration}
-            onChange={(e) => {
-              setPauseDuration(Number(e.target.value));
-            }}
-            className="w-full cursor-pointer"
-          />
-          <div className="text-sm">Pause Duration {pauseDuration}</div>
-          <Button onClick={resetSteps}>Reset Steps</Button>
         </div>
       </div>
     );
