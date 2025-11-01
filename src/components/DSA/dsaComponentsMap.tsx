@@ -24,6 +24,7 @@ import SquareSortedArray from "./Arrays/SquareSortedArray";
 import AddElementAtKthPositionInLinkedList from "./LinkedLists/AddElementAtKthPositionInLinkedList";
 import AppendLinkedLists from "./LinkedLists/AppendLinkedLists";
 import DeleteNodeFromLinkedList from "./LinkedLists/DeleteNodeFromLinkedList";
+import DeleteXthNodeFromEndOfLinkedList from "./LinkedLists/DeleteXthNodeFromEndOfLinkedList";
 import FindXthNodeFromEndOfLinkedList from "./LinkedLists/FindXthNodeFromEndOfLinkedList";
 import IntersectionOfTwoLinkedLists from "./LinkedLists/IntersectionOfTwoLinkedLists";
 import KthElementInLinkedList from "./LinkedLists/KthElementInLinkedList";
@@ -144,6 +145,9 @@ const dsaComponentsMap: any = {
       <RemoveDuplicatesFromSortedLinkedListII />
     ),
     "find-xth-node-from-end-of-linked-list": <FindXthNodeFromEndOfLinkedList />,
+    "delete-xth-node-from-end-of-linked-list": (
+      <DeleteXthNodeFromEndOfLinkedList />
+    ),
   },
 };
 export default dsaComponentsMap;
