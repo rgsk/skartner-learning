@@ -1,7 +1,7 @@
 "use client";
 
+import { Controls, ControlsProps, Step } from "@/components/Shared/Controls";
 import { useState } from "react";
-import { Controls, ControlsProps, Step } from "./SampleBinarySearch";
 
 interface SampleAlgoVisualizerDemoWithControlsExtractedProps {}
 

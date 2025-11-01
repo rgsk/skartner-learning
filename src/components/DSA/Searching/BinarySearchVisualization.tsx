@@ -1,18 +1,24 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
-import { Button } from "../ui/button";
 
 import { motion } from "motion/react";
 
+import {
+  Controls,
+  ControlsHandle,
+  ControlsProps,
+} from "@/components/Shared/Controls";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { GoArrowUp } from "react-icons/go";
-import { Controls, ControlsHandle, ControlsProps } from "../Shared/Controls";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 
-interface SampleBinarySearchProps {}
+interface BinarySearchVisualizationProps {}
 
-const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
+const BinarySearchVisualization: React.FC<
+  BinarySearchVisualizationProps
+> = ({}) => {
   const [leftIndex, setLeftIndex] = useState(-2);
   const [rightIndex, setRightIndex] = useState(-2);
   const [midIndex, setMidIndex] = useState(-2);
@@ -104,7 +110,7 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
   };
 
   return (
-    <div className="p-4">
+    <div>
       <div className="h-[30px]"></div>
       <div className="grid gap-2 justify-center">
         <div className="flex items-center gap-2">
@@ -149,7 +155,7 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
           </div>
         </div>
       </div>
-
+      <div className="h-[10vh]"></div>
       <div className="flex flex-col items-stretch gap-2 w-80">
         <div className="flex items-center gap-2">
           <Label className="w-[70px]">target : </Label>
@@ -183,7 +189,7 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
   );
 };
 
-export default SampleBinarySearch;
+export default BinarySearchVisualization;
 
 const Arrow = ({
   index,

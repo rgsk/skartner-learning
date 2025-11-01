@@ -11,6 +11,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import BinarySearchVisualization from "./BinarySearchVisualization";
 
 interface ContainsElementProps {}
 const ContainsElement: React.FC<ContainsElementProps> = ({}) => {
@@ -87,6 +88,10 @@ Answer: false
             pythonFile="/dsa/searching/contains_element/optimal/contains_element.py"
             cppFile="/dsa/searching/contains_element/optimal/contains_element.cpp"
           />
+        </Section>
+        <Section>
+          <SubHeading>Visualization</SubHeading>
+          <BinarySearchVisualization />
         </Section>
       </Solution>
       <Solution>
