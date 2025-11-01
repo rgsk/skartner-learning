@@ -1,12 +1,12 @@
 "use client";
 
-import SampleAlgoVisualizerDemo from "../Sample/SampleAlgoVisualizerDemo";
+import SampleBinarySearch from "../Sample/SampleBinarySearch";
 
 interface PracticePageProps {}
 const PracticePage: React.FC<PracticePageProps> = ({}) => {
   return (
     <div>
-      <SampleAlgoVisualizerDemo />
+      <SampleBinarySearch />
     </div>
   );
 };
