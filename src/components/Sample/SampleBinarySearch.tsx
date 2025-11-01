@@ -1,6 +1,12 @@
 "use client";
 
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { Button } from "../ui/button";
 
 import { motion } from "motion/react";
@@ -239,6 +245,7 @@ export const Controls = forwardRef<ControlsHandle, ControlsProps>(
     pauseDurationRef.current = pauseDuration;
     const progressRef = useRef(progress);
     progressRef.current = progress;
+    const progressBarRef = useRef<HTMLInputElement>(null);
     const stepsRef = useRef(steps);
     stepsRef.current = steps;
 
@@ -273,17 +280,38 @@ export const Controls = forwardRef<ControlsHandle, ControlsProps>(
       setIsRunning(false);
     };
 
-    // --- Slider Logic: Scrub Back/Forth ---
-    const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newIndex = Number(e.target.value);
+    const handleSliderChange = (newIndex: number) => {
       resetState();
-
-      // Replay tasks up to the chosen index
       for (let i = 0; i < newIndex; i++) {
         steps[i]?.();
       }
       setProgress(newIndex);
     };
+    const handleNavigation = (type: "left" | "right") => {
+      if (type === "left") {
+        handleSliderChange(Math.max(progress - 1, 0));
+      } else {
+        handleSliderChange(Math.min(progress + 1, steps.length));
+      }
+    };
+    const handleNavigationRef = useRef(handleNavigation);
+    handleNavigationRef.current = handleNavigation;
+
+    useEffect(() => {
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (document.activeElement === progressBarRef.current) {
+          return;
+        }
+        if (e.key === "ArrowRight") {
+          handleNavigationRef.current("right");
+        } else if (e.key === "ArrowLeft") {
+          handleNavigationRef.current("left");
+        }
+      };
+
+      window.addEventListener("keydown", handleKeyDown);
+      return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
 
     const resetSteps = () => {
       setProgress(0);
@@ -320,11 +348,12 @@ export const Controls = forwardRef<ControlsHandle, ControlsProps>(
         {steps.length > 0 && (
           <div className="flex flex-col items-center gap-2 w-64">
             <input
+              ref={progressBarRef}
               type="range"
               min={0}
               max={steps.length}
               value={progress}
-              onChange={handleSliderChange}
+              onChange={(e) => handleSliderChange(Number(e.target.value))}
               className="w-full cursor-pointer"
             />
             <div className="text-sm text-gray-600">
