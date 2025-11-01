@@ -11,12 +11,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import Visualization from "@/components/Shared/Visualization";
 import BinarySearchVisualization from "./BinarySearchVisualization";
 interface ContainsElementProps {}
 const ContainsElement: React.FC<ContainsElementProps> = ({}) => {
@@ -95,16 +90,9 @@ Answer: false
           />
         </Section>
         <Section>
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>
-                <SubHeading>Visualization</SubHeading>
-              </AccordionTrigger>
-              <AccordionContent>
-                <BinarySearchVisualization />
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+          <Visualization>
+            <BinarySearchVisualization />
+          </Visualization>
         </Section>
       </Solution>
       <Solution>
