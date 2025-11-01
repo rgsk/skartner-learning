@@ -1,10 +1,12 @@
 "use client";
 
 import { ArrowUpIcon } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "../ui/button";
 
 import { motion } from "motion/react";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 
 interface SampleBinarySearchProps {}
 
@@ -12,10 +14,40 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
   const [leftIndex, setLeftIndex] = useState(-2);
   const [rightIndex, setRightIndex] = useState(-2);
   const [midIndex, setMidIndex] = useState(-2);
-  const arr = useMemo(() => [1, 2, 4, 7, 8, 10, 12, 13, 17, 19], []);
+  const [arrinput, setArrInput] = useState("1, 2, 4, 7, 8, 10, 12, 13, 17, 19");
+  const [arr, setArr] = useState([1, 2, 4, 7, 8, 10, 12, 13, 17, 19]);
+  const [target, setTarget] = useState<number>(12);
+  const [targetInput, setTargetInput] = useState("12");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = () => {
+    try {
+      if (!arrinput) {
+        throw new Error("Array is empty");
+      }
+      const arr = arrinput
+        .split(",")
+        .map((x) => Number(x.trim()))
+        .filter((x) => !isNaN(x));
+      if (arr.length === 0) {
+        throw new Error("Array is empty");
+      }
+      setArr(arr);
+      if (targetInput.length === 0 || isNaN(Number(targetInput))) {
+        throw new Error("Please set the target");
+      } else {
+        setTarget(Number(targetInput));
+      }
+      setErrorMessage("");
+    } catch (e: any) {
+      setErrorMessage(e.message);
+    }
+  };
 
   const runAlgo = (addStep: (step: () => void | Promise<void>) => void) => {
-    const binarySearch = (arr: number[], key: number): number => {
+    binarySearch(arr, target);
+
+    function binarySearch(arr: number[], key: number): number {
       const updateLeftIndex = () => {
         const currentLeft = left;
         addStep(() => {
@@ -57,9 +89,7 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
       }
 
       return -1;
-    };
-
-    binarySearch(arr, 8);
+    }
   };
 
   const resetState = () => {
@@ -71,34 +101,70 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
   return (
     <div className="p-4">
       <div className="h-[30px]"></div>
-      <div className="flex justify-center">
-        <div className="flex border border-accent relative">
-          {arr.map((v, i) => {
-            return (
-              <div key={i} className="relative">
-                <div className="absolute top-0 -translate-y-[120%] left-1/2 -translate-x-1/2">
-                  {i}
+      <div className="grid gap-2 justify-center">
+        <div className="flex items-center gap-2">
+          <p className="w-[70px]">target : </p>
+          <p>{target}</p>
+        </div>
+        <div className="h-[30px]"></div>
+        <div className="flex items-center gap-2">
+          <p className="w-[70px]">arr : </p>
+          <div className="flex border border-accent relative">
+            {arr.map((v, i) => {
+              return (
+                <div key={i} className="relative">
+                  <div className="absolute top-0 -translate-y-[120%] left-1/2 -translate-x-1/2">
+                    {i}
+                  </div>
+                  <div className="border border-accent min-w-[36px] min-h-[36px] flex justify-center items-center">
+                    {v}
+                  </div>
                 </div>
-                <div className="border border-accent min-w-[36px] min-h-[36px] flex justify-center items-center">
-                  {v}
-                </div>
-              </div>
-            );
-          })}
-          <div>
-            <Arrow index={leftIndex}>
-              <ArrowUpIcon />
-              <p>left</p>
-            </Arrow>
-            <Arrow index={midIndex}>
-              <ArrowUpIcon />
-              <p>mid</p>
-            </Arrow>
-            <Arrow index={rightIndex}>
-              <ArrowUpIcon />
-              <p>right</p>
-            </Arrow>
+              );
+            })}
+            <div>
+              <Arrow index={leftIndex}>
+                <ArrowUpIcon />
+                <p>left</p>
+              </Arrow>
+              <Arrow index={midIndex}>
+                <ArrowUpIcon />
+                <p>mid</p>
+              </Arrow>
+              <Arrow index={rightIndex}>
+                <ArrowUpIcon />
+                <p>right</p>
+              </Arrow>
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-stretch gap-2 w-80">
+        <div className="flex items-center gap-2">
+          <Label className="w-[70px]">target : </Label>
+          <Input
+            type="number"
+            value={targetInput}
+            placeholder="Element to search"
+            onChange={(e) => setTargetInput(e.target.value)}
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <Label className="w-[70px]">arr : </Label>
+          <Input
+            type="text"
+            value={arrinput}
+            onChange={(e) => setArrInput(e.target.value)}
+            placeholder="Enter numbers separated by commas"
+          />
+        </div>
+
+        {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
+        <div className="flex justify-start">
+          <Button variant={"outline"} onClick={handleSubmit}>
+            Submit
+          </Button>
         </div>
       </div>
       <div className="h-[10vh]"></div>
@@ -196,11 +262,12 @@ const Controls = ({
     <div className="flex flex-col gap-4 p-6 items-center">
       <div className="flex gap-2">
         <Button
-          onClick={() =>
+          onClick={() => {
+            resetSteps();
             runAlgo((step) => {
               setSteps((prev) => [...prev, step]);
-            })
-          }
+            });
+          }}
         >
           Run Algo
         </Button>

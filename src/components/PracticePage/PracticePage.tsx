@@ -3,7 +3,10 @@
 import { AnimatePresence, motion } from "motion/react";
 
 import { useState } from "react";
+
 import SampleBinarySearch from "../Sample/SampleBinarySearch";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 interface PracticePageProps {}
 const PracticePage: React.FC<PracticePageProps> = ({}) => {
@@ -14,6 +17,39 @@ const PracticePage: React.FC<PracticePageProps> = ({}) => {
   );
 };
 export default PracticePage;
+
+function ArrayInput({ onSubmit }: { onSubmit: (arr: number[]) => void }) {
+  const [arrinput, setArrInput] = useState("1, 2, 4, 7, 8, 10, 12, 13, 17, 19");
+  const [error, setError] = useState("");
+
+  const handleSubmit = () => {
+    try {
+      const arr = arrinput
+        .split(",")
+        .map((x) => Number(x.trim()))
+        .filter((x) => !isNaN(x));
+      if (arr.length === 0) throw new Error("Array is empty");
+      onSubmit(arr);
+      setError("");
+    } catch (e: any) {
+      setError(e.message);
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-start gap-2 w-80">
+      <Input
+        type="text"
+        value={arrinput}
+        onChange={(e) => setArrInput(e.target.value)}
+        className="border border-gray-300 rounded-md px-3 py-2 w-full"
+        placeholder="Enter numbers separated by commas"
+      />
+      {error && <p className="text-red-500 text-sm">{error}</p>}
+      <Button onClick={handleSubmit}>Set Array</Button>
+    </div>
+  );
+}
 
 function SimpleExample() {
   return (
