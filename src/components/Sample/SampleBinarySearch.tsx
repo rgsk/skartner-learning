@@ -125,18 +125,23 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
               );
             })}
             <div>
-              <Arrow index={leftIndex}>
-                <ArrowUpIcon />
-                <p>left</p>
-              </Arrow>
-              <Arrow index={midIndex}>
-                <ArrowUpIcon />
-                <p>mid</p>
-              </Arrow>
-              <Arrow index={rightIndex}>
-                <ArrowUpIcon />
-                <p>right</p>
-              </Arrow>
+              <Arrow index={leftIndex} text="left" />
+              <Arrow
+                index={midIndex}
+                level={midIndex === leftIndex ? 2 : 1}
+                text="mid"
+              />
+              <Arrow
+                index={rightIndex}
+                level={
+                  rightIndex === midIndex && rightIndex === leftIndex
+                    ? 3
+                    : rightIndex === midIndex || rightIndex === leftIndex
+                    ? 2
+                    : 1
+                }
+                text="right"
+              />
             </div>
           </div>
         </div>
@@ -177,12 +182,20 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
 
 export default SampleBinarySearch;
 
-const Arrow = ({ index, children }: { index: number; children: any }) => {
+const Arrow = ({
+  index,
+  text,
+  level = 1,
+}: {
+  index: number;
+  text: string;
+  level?: number;
+}) => {
   if (index == -2) return null;
   return (
     <motion.div
       className="absolute translate-y-full w-[36px] pt-2 flex flex-col justify-center items-center"
-      style={{ bottom: 0, left: -2 }}
+      style={{ left: -2, bottom: 0 }}
       animate={{ left: 36 * index }}
       transition={{
         type: "spring",
@@ -190,7 +203,10 @@ const Arrow = ({ index, children }: { index: number; children: any }) => {
         damping: 25,
       }}
     >
-      {children}
+      <ArrowUpIcon />
+      <motion.span animate={{ translateY: (level - 1) * 20 }}>
+        {text}
+      </motion.span>
     </motion.div>
   );
 };
