@@ -1,14 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { ArrowUpIcon } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
 import { Button } from "../ui/button";
+
+import { motion } from "motion/react";
 
 interface SampleBinarySearchProps {}
 
 const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
-  const [count1, setCount1] = useState(0);
-  const [count2, setCount2] = useState(0);
-  const [count3, setCount3] = useState(0);
   const [steps, setSteps] = useState<(() => void | Promise<void>)[]>([]);
   const [isRunning, setIsRunning] = useState(false);
   const [progress, setProgress] = useState(0); // slider progress (index)
@@ -22,25 +22,11 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
   const stepsRef = useRef(steps);
   stepsRef.current = steps;
 
-  const resetCount = () => {
-    setCount1(0);
-    setCount2(0);
-    setCount3(0);
+  const resetState = () => {
+    setLeftIndex(-2);
+    setRightIndex(-2);
+    setMidIndex(-2);
   };
-
-  function algo() {
-    const newSteps: typeof steps = [];
-    for (let i = 0; i < 5; i++) {
-      newSteps.push(() => setCount1((prev) => prev + 1));
-    }
-    for (let i = 0; i < 6; i++) {
-      newSteps.push(() => setCount2((prev) => prev + 1));
-    }
-    for (let i = 0; i < 7; i++) {
-      newSteps.push(() => setCount3((prev) => prev + 1));
-    }
-    setSteps((prev) => [...prev, ...newSteps]);
-  }
 
   const pause = () => {
     setIsRunning(false);
@@ -48,7 +34,7 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
 
   const play = async () => {
     if (progress === steps.length) {
-      resetCount();
+      resetState();
       setProgress(0);
     }
     setIsRunning(true);
@@ -72,7 +58,7 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
   // --- Slider Logic: Scrub Back/Forth ---
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newIndex = Number(e.target.value);
-    resetCount();
+    resetState();
 
     // Replay tasks up to the chosen index
     for (let i = 0; i < newIndex; i++) {
@@ -84,15 +70,73 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
   const resetSteps = () => {
     setProgress(0);
     setIsRunning(false);
-    resetCount();
+    resetState();
     setSteps([]);
   };
-  const arr = [1, 2, 4, 7, 8, 10, 12, 13, 17, 19];
+
+  const [leftIndex, setLeftIndex] = useState(-2);
+  const [rightIndex, setRightIndex] = useState(-2);
+  const [midIndex, setMidIndex] = useState(-2);
+  const arr = useMemo(() => [1, 2, 4, 7, 8, 10, 12, 13, 17, 19], []);
+
+  function binarySearch(arr: number[], key: number): number {
+    const updateLeftIndex = () => {
+      const currentLeft = left;
+      setSteps((prev) => [
+        ...prev,
+        () => {
+          setLeftIndex(currentLeft);
+        },
+      ]);
+    };
+    const updateRightIndex = () => {
+      const currentRight = right;
+      setSteps((prev) => [
+        ...prev,
+        () => {
+          setRightIndex(currentRight);
+        },
+      ]);
+    };
+    const updateMidIndex = () => {
+      const currentMid = mid;
+      setSteps((prev) => [
+        ...prev,
+        () => {
+          setMidIndex(currentMid);
+        },
+      ]);
+    };
+
+    let left = 0;
+    updateLeftIndex();
+    let right = arr.length - 1;
+    updateRightIndex();
+    let mid = -1;
+
+    while (left <= right) {
+      mid = Math.floor((left + right) / 2);
+      updateMidIndex();
+
+      if (arr[mid] === key) {
+        return mid;
+      } else if (arr[mid] < key) {
+        left = mid + 1;
+        updateLeftIndex();
+      } else {
+        right = mid - 1;
+        updateRightIndex();
+      }
+    }
+
+    return -1;
+  }
+
   return (
     <div className="p-4">
       <div className="h-[30px]"></div>
-      <div className="flex">
-        <div className="flex border border-accent">
+      <div className="flex justify-center">
+        <div className="flex border border-accent relative">
           {arr.map((v, i) => {
             return (
               <div key={i} className="relative">
@@ -105,21 +149,32 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
               </div>
             );
           })}
-        </div>
-      </div>
-      <div className="h-[100vh]"></div>
-      <div className="flex flex-col gap-4 p-6 items-center">
-        <div className="flex flex-col gap-2 items-center">
-          <span className="text-lg font-medium">Counters</span>
-          <div className="flex gap-3">
-            <button>count1: {count1}</button>
-            <button>count2: {count2}</button>
-            <button>count3: {count3}</button>
+          <div>
+            <Arrow index={leftIndex}>
+              <ArrowUpIcon />
+              <p>left</p>
+            </Arrow>
+            <Arrow index={midIndex}>
+              <ArrowUpIcon />
+              <p>mid</p>
+            </Arrow>
+            <Arrow index={rightIndex}>
+              <ArrowUpIcon />
+              <p>right</p>
+            </Arrow>
           </div>
         </div>
-
+      </div>
+      <div className="h-[10vh]"></div>
+      <div className="flex flex-col gap-4 p-6 items-center">
         <div className="flex gap-2">
-          <Button onClick={algo}>Run Algo</Button>
+          <Button
+            onClick={() => {
+              binarySearch(arr, 0);
+            }}
+          >
+            Run Algo
+          </Button>
           <Button onClick={play} disabled={isRunning || steps.length === 0}>
             Play
           </Button>
@@ -170,3 +225,21 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
 };
 
 export default SampleBinarySearch;
+
+const Arrow = ({ index, children }: { index: number; children: any }) => {
+  if (index == -2) return null;
+  return (
+    <motion.div
+      className="absolute translate-y-full w-[36px] pt-2 flex flex-col justify-center items-center"
+      style={{ bottom: 0, left: -2 }}
+      animate={{ left: 36 * index }}
+      transition={{
+        type: "spring",
+        stiffness: 300,
+        damping: 25,
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+};
