@@ -305,15 +305,34 @@ export const Controls = forwardRef<ControlsHandle, ControlsProps>(
     const handleNavigationRef = useRef(handleNavigation);
     handleNavigationRef.current = handleNavigation;
 
+    const handlePlayPause = () => {
+      if (isRunning) {
+        pause();
+      } else {
+        play();
+      }
+    };
+    const handlePlayPauseRef = useRef(handlePlayPause);
+    handlePlayPauseRef.current = handlePlayPause;
+
     useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
-        if (document.activeElement === progressBarRef.current) {
-          return;
-        }
-        if (e.key === "ArrowRight") {
-          handleNavigationRef.current("right");
-        } else if (e.key === "ArrowLeft") {
-          handleNavigationRef.current("left");
+        if (
+          e.key === " " &&
+          !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)
+        ) {
+          e.preventDefault();
+          (document.activeElement as HTMLElement | null)?.blur();
+          handlePlayPauseRef.current();
+        } else {
+          if (document.activeElement !== progressBarRef.current) {
+            (document.activeElement as HTMLElement | null)?.blur();
+            if (e.key === "ArrowRight") {
+              handleNavigationRef.current("right");
+            } else if (e.key === "ArrowLeft") {
+              handleNavigationRef.current("left");
+            }
+          }
         }
       };
 
@@ -373,7 +392,7 @@ export const Controls = forwardRef<ControlsHandle, ControlsProps>(
             <div className="flex items-center gap-4">
               <div>
                 <Button
-                  onClick={isRunning ? pause : play}
+                  onClick={handlePlayPause}
                   disabled={steps.length === 0}
                   variant="outline"
                 >
