@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowUpIcon } from "lucide-react";
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { Button } from "../ui/button";
 
 import { motion } from "motion/react";
+
+import { GoArrowUp } from "react-icons/go";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
@@ -203,7 +204,7 @@ const Arrow = ({
         damping: 25,
       }}
     >
-      <ArrowUpIcon />
+      <GoArrowUp size={24} />
       <motion.span animate={{ translateY: (level - 1) * 20 }}>
         {text}
       </motion.span>
