@@ -11,6 +11,7 @@ interface AppProps {
 const App: React.FC<AppProps> = ({ children }) => {
   const { showAppSidebar, showControlsSidebar } = useGlobalContext();
   const [navbarContainerRef, navbarContainerBounds] = useMeasure();
+
   return (
     <div className="flex w-full">
       {showAppSidebar && <AppSidebar />}
@@ -18,12 +19,17 @@ const App: React.FC<AppProps> = ({ children }) => {
         <div className="absolute top-0 w-full" ref={navbarContainerRef}>
           <Navbar />
         </div>
-        <div
-          className="absolute h-full w-full overflow-auto"
-          style={{ top: navbarContainerBounds.height }}
-        >
-          <main>{children}</main>
-        </div>
+        {navbarContainerBounds.height > 0 && (
+          <div
+            className="absolute h-full w-full overflow-auto"
+            style={{
+              top: navbarContainerBounds.height,
+              paddingBottom: navbarContainerBounds.height,
+            }}
+          >
+            <main>{children}</main>
+          </div>
+        )}
       </div>
       {showControlsSidebar && <ControlsSidebar />}
     </div>
