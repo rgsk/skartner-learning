@@ -27,7 +27,7 @@ const Visualization: React.FC<VisualizationProps> = ({ children }) => {
       defaultValue={visualizationExpandedOnPageLoad ? "item-1" : undefined}
     >
       <AccordionItem value="item-1">
-        <AccordionTrigger iconClassName="size-5 text-white">
+        <AccordionTrigger iconClassName="size-5 text-black dark:text-white">
           <SubHeading>Visualization</SubHeading>
         </AccordionTrigger>
         <AccordionContent className="border border-accent p-6 rounded-sm">
