@@ -8,8 +8,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   appendLinkedLists,
+  appendNodeToLinkedList,
   containsNode,
+  copyLinkedList,
   formLinkedList,
+  getNodeIndex,
   ListNode,
 } from "@/components/Visualization/DataStructures/LinkedList";
 import { useMemo, useRef, useState } from "react";
@@ -17,6 +20,11 @@ import { useMemo, useRef, useState } from "react";
 const arrA = [11, 12, 13];
 const arrB = [21, 22];
 const arrC = [1, 2, 3];
+
+type TempIndex = {
+  list: "A" | "B" | "C";
+  index: number;
+};
 
 const IntersectionOfTwoLinkedListsApproachVisualization = () => {
   const [headC, setHeadC] = useState(formLinkedList(arrC));
@@ -39,8 +47,14 @@ const IntersectionOfTwoLinkedListsApproachVisualization = () => {
     return arrC.join(", ");
   });
   const controlsRef = useRef<ControlsHandle>(null);
-  const [tempAIndex, setTempAIndex] = useState(-2);
-  const [tempBIndex, setTempBIndex] = useState(-2);
+  const [tempAIndex, setTempAIndex] = useState<TempIndex>({
+    list: "A",
+    index: -2,
+  });
+  const [tempBIndex, setTempBIndex] = useState<TempIndex>({
+    list: "B",
+    index: -2,
+  });
   const handleSubmit = () => {
     try {
       if (!arrAInput) {
@@ -105,8 +119,8 @@ const IntersectionOfTwoLinkedListsApproachVisualization = () => {
   };
 
   const resetState = () => {
-    setTempAIndex(-2);
-    setTempBIndex(-2);
+    setTempAIndex({ list: "A", index: -2 });
+    setTempBIndex({ list: "B", index: -2 });
   };
 
   const runAlgo: ControlsProps["runAlgo"] = ({ addStep }) => {
@@ -121,18 +135,16 @@ const IntersectionOfTwoLinkedListsApproachVisualization = () => {
       let tempA: ListNode | null = headA;
       let tempB: ListNode | null = headB;
 
-      const getIndex = (node: ListNode | null, head: ListNode | null) => {
-        let index = 0;
-        let current = head;
-        while (current) {
-          if (current === node) return index;
-          current = current.next;
-          index++;
-        }
-        return index;
+      const localTempA: TempIndex = {
+        list: "A",
+        index: 0,
       };
-      const currentTempAIndex = getIndex(tempA, headA);
-      const currentTempBIndex = getIndex(tempB, headB);
+      const localTempB: TempIndex = {
+        list: "B",
+        index: 0,
+      };
+      const currentTempAIndex = { ...localTempA };
+      const currentTempBIndex = { ...localTempB };
       addStep(() => {
         setTempAIndex(currentTempAIndex);
         setTempBIndex(currentTempBIndex);
@@ -141,11 +153,24 @@ const IntersectionOfTwoLinkedListsApproachVisualization = () => {
       // Traverse both lists; when one pointer reaches the end,
       // switch it to the head of the other list.
       while (tempA !== tempB) {
-        tempA = tempA ? tempA.next : headB;
-        tempB = tempB ? tempB.next : headA;
-
-        const currentTempAIndex = getIndex(tempA, headA);
-        const currentTempBIndex = getIndex(tempB, headB);
+        if (tempA) {
+          tempA = tempA.next;
+          localTempA.index += 1;
+        } else {
+          tempA = headB;
+          localTempA.list = "B";
+          localTempA.index = 0;
+        }
+        if (tempB) {
+          tempB = tempB.next;
+          localTempB.index += 1;
+        } else {
+          tempB = headA;
+          localTempB.list = "A";
+          localTempB.index = 0;
+        }
+        const currentTempAIndex = { ...localTempA };
+        const currentTempBIndex = { ...localTempB };
         addStep(() => {
           setTempAIndex(currentTempAIndex);
           setTempBIndex(currentTempBIndex);
@@ -163,30 +188,66 @@ const IntersectionOfTwoLinkedListsApproachVisualization = () => {
 
   const renderHead = (head: ListNode | null) => {
     const nodes = [];
-    let current = head;
+    let current =
+      head === headC || !intersecting
+        ? appendNodeToLinkedList(copyLinkedList(head), new ListNode(-2))
+        : head;
     let index = 0;
 
     while (current) {
       if (intersecting && current === headC && headC !== head) {
         return nodes;
       }
+
       nodes.push(
         <div key={index} className="flex items-center">
           <div className="relative">
-            <div className="border-2 border-accent min-w-[36px] min-h-[36px] flex justify-center items-center">
-              {current.data}
+            <div className="border-2 border-accent min-w-[36px] px-2 min-h-[36px] flex justify-center items-center">
+              {current.data === -2 ? "NULL" : current.data}
             </div>
             <div>
-              {head === headA && tempAIndex === index && (
-                <div className="absolute top-0 -translate-y-[120%] left-1/2 -translate-x-1/2">
-                  ↓
-                </div>
-              )}
-              {head === headB && tempBIndex === index && (
-                <div className="absolute bottom-0 translate-y-[120%] left-1/2 -translate-x-1/2">
-                  ↑
-                </div>
-              )}
+              {tempAIndex.list === "A" &&
+                ((head === headA && tempAIndex.index === index) ||
+                  (head === headC &&
+                    tempAIndex.index - getNodeIndex(headA, headC) ===
+                      index)) && (
+                  <div className="absolute top-0 -translate-y-[120%] left-1/2 -translate-x-1/2 flex flex-col items-center">
+                    <span>tempA</span>
+                    <span>↓</span>
+                  </div>
+                )}
+              {tempAIndex.list === "B" &&
+                ((head === headB && tempAIndex.index === index) ||
+                  (head === headC &&
+                    tempAIndex.index - getNodeIndex(headB, headC) ===
+                      index)) && (
+                  <div className="absolute bottom-0 translate-y-[120%] left-1/2 -translate-x-1/2 flex flex-col items-center">
+                    <span>↑</span>
+                    <span>tempA</span>
+                  </div>
+                )}
+
+              {tempBIndex.list === "B" &&
+                ((head === headB && tempBIndex.index === index) ||
+                  (head === headC &&
+                    tempBIndex.index - getNodeIndex(headB, headC) ===
+                      index)) && (
+                  <div className="absolute bottom-0 translate-y-[120%] left-1/2 -translate-x-1/2 flex flex-col items-center">
+                    <span>↑</span>
+                    <span>tempB</span>
+                  </div>
+                )}
+
+              {tempBIndex.list === "A" &&
+                ((head === headA && tempBIndex.index === index) ||
+                  (head === headC &&
+                    tempBIndex.index - getNodeIndex(headA, headC) ===
+                      index)) && (
+                  <div className="absolute top-0 -translate-y-[120%] left-1/2 -translate-x-1/2 flex flex-col items-center">
+                    <span>tempB</span>
+                    <span>↓</span>
+                  </div>
+                )}
             </div>
           </div>
           {current.next && (intersecting ? current.next !== headC : true) && (
@@ -207,6 +268,7 @@ const IntersectionOfTwoLinkedListsApproachVisualization = () => {
         <div className="grid gap-2 justify-center">
           <div className="flex items-center gap-2">
             <p className="w-[50px]">listA : </p>
+            <div className="flex-1"></div>
             <div className="flex relative">{renderHead(headA)}</div>
           </div>
           <div className="flex items-center gap-2">

@@ -79,3 +79,33 @@ export function containsNode(
   }
   return false;
 }
+
+export function getNodeIndex(
+  head: ListNode | null,
+  target: ListNode | null
+): number {
+  let current = head;
+  let index = 0;
+  while (current) {
+    if (current === target) {
+      return index;
+    }
+    current = current.next;
+    index++;
+  }
+  return -1; // Target node not found
+}
+
+export function appendNodeToLinkedList(
+  head: ListNode | null,
+  nodeToAppend: ListNode | null
+): ListNode | null {
+  if (!head) return nodeToAppend;
+
+  let current = head;
+  while (current.next) {
+    current = current.next;
+  }
+  current.next = nodeToAppend;
+  return head;
+}
