@@ -47,7 +47,6 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
   };
 
   const runAlgo: ControlsProps["runAlgo"] = ({ addStep }) => {
-    controlsRef.current?.resetSteps();
     binarySearch(arr, target);
 
     function binarySearch(arr: number[], key: number): number {

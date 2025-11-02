@@ -53,7 +53,6 @@ const BinarySearchVisualization: React.FC<
   };
 
   const runAlgo: ControlsProps["runAlgo"] = ({ addStep }) => {
-    controlsRef.current?.resetSteps();
     binarySearch(arr, target);
 
     function binarySearch(arr: number[], key: number): number {

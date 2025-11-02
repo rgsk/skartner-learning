@@ -45,7 +45,11 @@ const SampleAlgoVisualizerDemoWithControlsExtracted: React.FC<
           <button>count3: {count3}</button>
         </div>
       </div>
-      <Controls resetState={resetCount} runAlgo={runAlgo} />
+      <Controls
+        resetState={resetCount}
+        runAlgo={runAlgo}
+        resetStepsBeforeAlgoRun={false}
+      />
     </div>
   );
 };

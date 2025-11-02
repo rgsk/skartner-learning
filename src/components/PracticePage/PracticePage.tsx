@@ -11,7 +11,7 @@ interface PracticePageProps {}
 const PracticePage: React.FC<PracticePageProps> = ({}) => {
   return (
     <div className="p-4">
-      <SamplePractice />
+      <SampleAlgoVisualizerDemoWithControlsExtracted />
     </div>
   );
 };
@@ -19,13 +19,13 @@ export default PracticePage;
 
 import { Pause, Play } from "lucide-react";
 
+import SampleAlgoVisualizerDemoWithControlsExtracted from "@/components/Sample/SampleAlgoVisualizerDemoWithControlsExtracted";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import SamplePractice from "../Sample/SamplePractice";
 
 export function AccordionDemo() {
   return (

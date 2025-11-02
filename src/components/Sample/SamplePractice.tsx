@@ -54,7 +54,6 @@ const SamplePractice = () => {
   };
 
   const runAlgo: ControlsProps["runAlgo"] = ({ addStep }) => {
-    controlsRef.current?.resetSteps();
     const resultNode = xthNodeFromEnd(head, x);
     function xthNodeFromEnd(head: ListNode | null, x: number): ListNode | null {
       if (!head) return null;

@@ -24,11 +24,12 @@ export type ControlsProps = {
     addStep: (step: Step) => void;
     addSteps: (steps: Array<Step>) => void;
   }) => void;
+  resetStepsBeforeAlgoRun?: boolean;
 };
 const speedDurationRange = { min: 100, max: 2000 };
 
 export const Controls = forwardRef<ControlsHandle, ControlsProps>(
-  ({ resetState, runAlgo }, ref) => {
+  ({ resetState, runAlgo, resetStepsBeforeAlgoRun = true }, ref) => {
     const [steps, setSteps] = useState<Step[]>([]);
     const [isRunning, setIsRunning] = useState(false);
     const [progress, setProgress] = useState(0); // slider progress (index)
@@ -144,13 +145,20 @@ export const Controls = forwardRef<ControlsHandle, ControlsProps>(
       resetState();
       setSteps([]);
     };
+
+    const runAlgoRef = useRef(runAlgo);
+    runAlgoRef.current = runAlgo;
     return (
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 justify-between">
           <Button
             variant={"outline"}
-            onClick={() => {
-              runAlgo({
+            onClick={async () => {
+              if (resetStepsBeforeAlgoRun) {
+                resetSteps();
+                await new Promise((resolve) => setTimeout(resolve)); // wait for reset
+              }
+              runAlgoRef.current({
                 addStep: (step) => {
                   setSteps((prev) => [...prev, step]);
                 },

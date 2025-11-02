@@ -51,11 +51,17 @@ const DeleteXthNodeFromEndOfLinkedListApproachVisualization = () => {
   const resetState = () => {
     setFastIndex(-2);
     setSlowIndex(-2);
+    setHead(formList(defaultArr));
   };
 
   const runAlgo: ControlsProps["runAlgo"] = ({ addStep }) => {
-    controlsRef.current?.resetSteps();
     const resultNode = removeXthNodeFromEnd(head, x);
+
+    addStep(() => {
+      setHead(resultNode);
+      setFastIndex(-2);
+      setSlowIndex(-2);
+    });
 
     function removeXthNodeFromEnd(
       head: ListNode | null,
@@ -174,7 +180,7 @@ const DeleteXthNodeFromEndOfLinkedListApproachVisualization = () => {
           />
         </div>
         <div className="flex items-center gap-2">
-          <Label className="w-[70px]">arr : </Label>
+          <Label className="w-[70px]">list : </Label>
           <Input
             type="text"
             value={arrinput}
