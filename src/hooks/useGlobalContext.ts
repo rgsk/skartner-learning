@@ -1,16 +1,20 @@
 // context/GlobalContext.tsx
 
 import { usePathname } from "next/navigation";
-import { createContext, useContext, useRef } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 const sidebarPaths = ["/dsa", "/cses"];
 
 export const useGlobalContextValue = () => {
   const currentExecuteCodeRef = useRef<any>(null);
   const pathname = usePathname();
-  const showSidebar = sidebarPaths.some((p) => pathname.startsWith(p));
+  const showAppSidebar = sidebarPaths.some((p) => pathname.startsWith(p));
+  const [showControlsSidebar, setShowControlsSidebar] = useState(false);
+
   return {
     currentExecuteCodeRef,
-    showSidebar,
+    showAppSidebar,
+    showControlsSidebar,
+    setShowControlsSidebar,
   };
 };
 

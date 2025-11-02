@@ -52,7 +52,7 @@ export function AppSidebar() {
     }));
   };
   return (
-    <Sidebar>
+    <Sidebar side="left">
       <SidebarContent>
         <SidebarGroup>
           {category === "dsa" ? (
