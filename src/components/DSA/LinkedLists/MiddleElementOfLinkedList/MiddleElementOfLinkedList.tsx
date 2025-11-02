@@ -1,4 +1,5 @@
 "use client";
+import MiddleElementOfLinkedListSlowFastPointerBasedApproachVisualization from "@/components/DSA/LinkedLists/MiddleElementOfLinkedList/MiddleElementOfLinkedListSlowFastPointerBasedApproachVisualization";
 import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Examples from "@/components/Shared/Examples";
@@ -11,6 +12,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import Visualization from "@/components/Visualization/Visualization";
 interface MiddleElementOfLinkedListProps {}
 const MiddleElementOfLinkedList: React.FC<
   MiddleElementOfLinkedListProps
@@ -91,6 +93,9 @@ Middle element: 3
             cppFile="/dsa/linked_lists/middle_element_of_linked_list/slow_fast_pointer/middle_element_of_linked_list.cpp"
           />
         </Section>
+        <Visualization>
+          <MiddleElementOfLinkedListSlowFastPointerBasedApproachVisualization />
+        </Visualization>
       </Solution>
     </Container>
   );

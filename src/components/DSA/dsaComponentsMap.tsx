@@ -31,7 +31,7 @@ import KthElementInLinkedList from "./LinkedLists/KthElementInLinkedList";
 import LinkedListPalindrome from "./LinkedLists/LinkedListPalindrome";
 import LinkedListToArray from "./LinkedLists/LinkedListToArray";
 import MergeTwoSortedLinkedList from "./LinkedLists/MergeTwoSortedLinkedList";
-import MiddleElementOfLinkedList from "./LinkedLists/MiddleElementOfLinkedList";
+import MiddleElementOfLinkedList from "./LinkedLists/MiddleElementOfLinkedList/MiddleElementOfLinkedList";
 import PrintLinkedList from "./LinkedLists/PrintLinkedList";
 import PrintReversedLinkedList from "./LinkedLists/PrintReversedLinkedList";
 import RemoveDuplicatesFromSortedLinkedList from "./LinkedLists/RemoveDuplicatesFromSortedLinkedList";
