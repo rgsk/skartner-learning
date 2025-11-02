@@ -24,7 +24,7 @@ import SquareSortedArray from "./Arrays/SquareSortedArray";
 import AddElementAtKthPositionInLinkedList from "./LinkedLists/AddElementAtKthPositionInLinkedList";
 import AppendLinkedLists from "./LinkedLists/AppendLinkedLists";
 import DeleteNodeFromLinkedList from "./LinkedLists/DeleteNodeFromLinkedList";
-import DeleteXthNodeFromEndOfLinkedList from "./LinkedLists/DeleteXthNodeFromEndOfLinkedList";
+import DeleteXthNodeFromEndOfLinkedList from "./LinkedLists/DeleteXthNodeFromEndOfLinkedList/DeleteXthNodeFromEndOfLinkedList";
 import FindXthNodeFromEndOfLinkedList from "./LinkedLists/FindXthNodeFromEndOfLinkedList/FindXthNodeFromEndOfLinkedList";
 import IntersectionOfTwoLinkedLists from "./LinkedLists/IntersectionOfTwoLinkedLists";
 import KthElementInLinkedList from "./LinkedLists/KthElementInLinkedList";

@@ -1,4 +1,5 @@
 "use client";
+import DeleteXthNodeFromEndOfLinkedListApproachVisualization from "@/components/DSA/LinkedLists/DeleteXthNodeFromEndOfLinkedList/DeleteXthNodeFromEndOfLinkedListApproachVisualization";
 import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Examples from "@/components/Shared/Examples";
@@ -11,6 +12,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import Visualization from "@/components/Visualization/Visualization";
 interface DeleteXthNodeFromEndOfLinkedListProps {}
 const DeleteXthNodeFromEndOfLinkedList: React.FC<
   DeleteXthNodeFromEndOfLinkedListProps
@@ -66,6 +68,9 @@ Result: 1→2→4
             cppFile="/dsa/linked_lists/delete_xth_node_from_end_of_linked_list/approach/delete_xth_node_from_end_of_linked_list.cpp"
           />
         </Section>
+        <Visualization>
+          <DeleteXthNodeFromEndOfLinkedListApproachVisualization />
+        </Visualization>
       </Solution>
     </Container>
   );
