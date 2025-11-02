@@ -1,4 +1,5 @@
 "use client";
+import FindXthNodeFromEndOfLinkedListApproachVisualization from "@/components/DSA/LinkedLists/FindXthNodeFromEndOfLinkedList/FindXthNodeFromEndOfLinkedListApproachVisualization";
 import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Examples from "@/components/Shared/Examples";
@@ -11,6 +12,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import Visualization from "@/components/Visualization/Visualization";
 interface FindXthNodeFromEndOfLinkedListProps {}
 const FindXthNodeFromEndOfLinkedList: React.FC<
   FindXthNodeFromEndOfLinkedListProps
@@ -62,6 +64,11 @@ Result: 3
             pythonFile="/dsa/linked_lists/find_xth_node_from_end_of_linked_list/approach/find_xth_node_from_end_of_linked_list.py"
             cppFile="/dsa/linked_lists/find_xth_node_from_end_of_linked_list/approach/find_xth_node_from_end_of_linked_list.cpp"
           />
+        </Section>
+        <Section>
+          <Visualization>
+            <FindXthNodeFromEndOfLinkedListApproachVisualization />
+          </Visualization>
         </Section>
       </Solution>
     </Container>

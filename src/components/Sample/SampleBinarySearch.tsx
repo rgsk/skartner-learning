@@ -3,9 +3,7 @@
 import { useRef, useState } from "react";
 import { Button } from "../ui/button";
 
-import { motion } from "motion/react";
-
-import { GoArrowUp } from "react-icons/go";
+import Arrow from "@/components/Visualization/Arrow";
 import { Controls, ControlsHandle, ControlsProps } from "../Shared/Controls";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -128,13 +126,15 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
               );
             })}
             <div>
-              <Arrow index={leftIndex} text="left" />
+              <Arrow space={36} index={leftIndex} text="left" />
               <Arrow
+                space={36}
                 index={midIndex}
                 level={midIndex === leftIndex ? 2 : 1}
                 text="mid"
               />
               <Arrow
+                space={36}
                 index={rightIndex}
                 level={
                   rightIndex === midIndex && rightIndex === leftIndex
@@ -184,32 +184,3 @@ const SampleBinarySearch: React.FC<SampleBinarySearchProps> = ({}) => {
 };
 
 export default SampleBinarySearch;
-
-const Arrow = ({
-  index,
-  text,
-  level = 1,
-}: {
-  index: number;
-  text: string;
-  level?: number;
-}) => {
-  if (index == -2) return null;
-  return (
-    <motion.div
-      className="absolute translate-y-full w-[36px] pt-2 flex flex-col justify-center items-center"
-      style={{ left: -2, bottom: 0 }}
-      animate={{ left: 36 * index }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 25,
-      }}
-    >
-      <GoArrowUp size={24} />
-      <motion.span animate={{ translateY: (level - 1) * 20 }}>
-        {text}
-      </motion.span>
-    </motion.div>
-  );
-};

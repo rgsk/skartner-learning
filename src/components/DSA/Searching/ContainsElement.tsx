@@ -11,7 +11,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
-import Visualization from "@/components/Shared/Visualization";
+import Visualization from "@/components/Visualization/Visualization";
 import BinarySearchVisualization from "./BinarySearchVisualization";
 interface ContainsElementProps {}
 const ContainsElement: React.FC<ContainsElementProps> = ({}) => {

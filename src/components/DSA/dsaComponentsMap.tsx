@@ -25,7 +25,7 @@ import AddElementAtKthPositionInLinkedList from "./LinkedLists/AddElementAtKthPo
 import AppendLinkedLists from "./LinkedLists/AppendLinkedLists";
 import DeleteNodeFromLinkedList from "./LinkedLists/DeleteNodeFromLinkedList";
 import DeleteXthNodeFromEndOfLinkedList from "./LinkedLists/DeleteXthNodeFromEndOfLinkedList";
-import FindXthNodeFromEndOfLinkedList from "./LinkedLists/FindXthNodeFromEndOfLinkedList";
+import FindXthNodeFromEndOfLinkedList from "./LinkedLists/FindXthNodeFromEndOfLinkedList/FindXthNodeFromEndOfLinkedList";
 import IntersectionOfTwoLinkedLists from "./LinkedLists/IntersectionOfTwoLinkedLists";
 import KthElementInLinkedList from "./LinkedLists/KthElementInLinkedList";
 import LinkedListPalindrome from "./LinkedLists/LinkedListPalindrome";

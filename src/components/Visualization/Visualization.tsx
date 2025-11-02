@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import SubHeading from "./SubHeading";
+import SubHeading from "../Shared/SubHeading";
 interface VisualizationProps {
   children: any;
 }
@@ -15,7 +15,9 @@ const Visualization: React.FC<VisualizationProps> = ({ children }) => {
         <AccordionTrigger iconClassName="size-5 text-white">
           <SubHeading>Visualization</SubHeading>
         </AccordionTrigger>
-        <AccordionContent>{children}</AccordionContent>
+        <AccordionContent className="border border-accent p-6 rounded-sm">
+          {children}
+        </AccordionContent>
       </AccordionItem>
     </Accordion>
   );

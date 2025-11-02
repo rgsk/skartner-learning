@@ -11,7 +11,7 @@ interface PracticePageProps {}
 const PracticePage: React.FC<PracticePageProps> = ({}) => {
   return (
     <div className="p-4">
-      <AccordionDemo />
+      <SamplePractice />
     </div>
   );
 };
@@ -25,6 +25,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import SamplePractice from "../Sample/SamplePractice";
 
 export function AccordionDemo() {
   return (
