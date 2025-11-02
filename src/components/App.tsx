@@ -9,13 +9,13 @@ interface AppProps {
 const App: React.FC<AppProps> = ({ children }) => {
   const { showSidebar } = useGlobalContext();
   return (
-    <>
+    <div className="flex w-full">
       {showSidebar && <AppSidebar />}
-      <div className="w-full">
+      <div className="flex-1 min-w-0">
         <Navbar />
         <main>{children}</main>
       </div>
-    </>
+    </div>
   );
 };
 export default App;
