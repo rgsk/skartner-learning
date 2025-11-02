@@ -3,6 +3,7 @@ import CumulativeSum from "@/components/DSA/Arrays/CumulativeSum";
 import MergeSort from "@/components/DSA/Arrays/MergeSort";
 import PositiveCumulativeSum from "@/components/DSA/Arrays/PositiveCumulativeSum";
 import QuickSort from "@/components/DSA/Arrays/QuickSort";
+import AddTwoNumbersAsLists from "@/components/DSA/LinkedLists/AddTwoNumbersAsLists/AddTwoNumbersAsLists";
 import BinarySearchConcept from "@/components/DSA/Searching/BinarySearchConcept";
 import ArithmeticSequence from "./Arrays/ArithmeticSequence";
 import EvenNumberOfDigits from "./Arrays/EvenNumberOfDigits";
@@ -148,6 +149,7 @@ const dsaComponentsMap: any = {
     "delete-xth-node-from-end-of-linked-list": (
       <DeleteXthNodeFromEndOfLinkedList />
     ),
+    "add-two-numbers-as-lists": <AddTwoNumbersAsLists />,
   },
 };
 export default dsaComponentsMap;
