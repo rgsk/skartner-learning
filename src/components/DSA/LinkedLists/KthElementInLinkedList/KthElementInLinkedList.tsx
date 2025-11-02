@@ -1,4 +1,5 @@
 "use client";
+import KthElementInLinkedListApproachVisualization from "@/components/DSA/LinkedLists/KthElementInLinkedList/KthElementInLinkedListApproachVisualization";
 import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Examples from "@/components/Shared/Examples";
@@ -11,6 +12,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import Visualization from "@/components/Visualization/Visualization";
 interface KthElementInLinkedListProps {}
 const KthElementInLinkedList: React.FC<KthElementInLinkedListProps> = ({}) => {
   return (
@@ -54,6 +56,11 @@ Answer: 3
             pythonFile="/dsa/linked_lists/kth_element_in_linked_list/approach/kth_element_in_linked_list.py"
             cppFile="/dsa/linked_lists/kth_element_in_linked_list/approach/kth_element_in_linked_list.cpp"
           />
+        </Section>
+        <Section>
+          <Visualization>
+            <KthElementInLinkedListApproachVisualization />
+          </Visualization>
         </Section>
       </Solution>
     </Container>

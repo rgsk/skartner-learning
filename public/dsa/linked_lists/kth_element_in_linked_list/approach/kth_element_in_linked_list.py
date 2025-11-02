@@ -12,9 +12,13 @@ class ListNode:
 class Solution:
     def kthElement(self, head: ListNode, k: int) -> ListNode:
         temp = head
-        while k > 1:
+        count = 1
+
+        # Move (k - 1) steps ahead to reach the kth node
+        while temp is not None and count < k:
             temp = temp.next
-            k -= 1
+            count += 1
+
         return temp
 
 

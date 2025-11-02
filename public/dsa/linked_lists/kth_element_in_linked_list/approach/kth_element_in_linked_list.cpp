@@ -12,11 +12,15 @@ class ListNode {
 // defs-end
 
 ListNode* kthElement(ListNode* head, int k) {
-    auto temp = head;
-    while (k > 1) {
+    ListNode* temp = head;
+
+    // Move (k - 1) steps ahead to reach the kth node
+    int count = 1;
+    while (temp != NULL && count < k) {
         temp = temp->next;
-        k--;
+        count++;
     }
+
     return temp;
 }
 

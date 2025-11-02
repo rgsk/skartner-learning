@@ -9,24 +9,25 @@ import { Label } from "@/components/ui/label";
 import Arrow from "@/components/Visualization/Arrow";
 import {
   formLinkedList,
+  getNodeIndex,
   ListNode,
 } from "@/components/Visualization/DataStructures/LinkedList";
 import { useRef, useState } from "react";
 
-const defaultArr = [1, 2, 3, 4, 5, 6];
-const defaultX = 2;
+const defaultArr = [1, 2, 3, 4, 5];
+const defaultK = 3;
 
-const FindXthNodeFromEndOfLinkedListApproachVisualization = () => {
+const KthElementInLinkedListApproachVisualization = () => {
   const [head, setHead] = useState(formLinkedList(defaultArr));
-  const [x, setX] = useState(defaultX);
-  const [xInput, setXInput] = useState(String(defaultX));
+  const [count, setCount] = useState(0);
+  const [k, setK] = useState(defaultK);
+  const [kInput, setKInput] = useState(String(defaultK));
   const [errorMessage, setErrorMessage] = useState("");
   const [arrinput, setArrInput] = useState(() => {
     return defaultArr.join(", ");
   });
   const controlsRef = useRef<ControlsHandle>(null);
-  const [fastIndex, setFastIndex] = useState(-2);
-  const [slowIndex, setSlowIndex] = useState(-2);
+  const [tempIndex, setTempIndex] = useState(-2);
   const handleSubmit = () => {
     try {
       if (!arrinput) {
@@ -40,11 +41,13 @@ const FindXthNodeFromEndOfLinkedListApproachVisualization = () => {
         throw new Error("List is empty");
       }
       setHead(formLinkedList(arr));
-      if (xInput.length === 0 || isNaN(Number(xInput))) {
-        throw new Error("Please set x");
+
+      if (kInput.length === 0 || isNaN(Number(kInput))) {
+        throw new Error("Please set k");
       } else {
-        setX(Number(xInput));
+        setK(Number(kInput));
       }
+
       setErrorMessage("");
       controlsRef.current?.resetSteps();
     } catch (e: any) {
@@ -53,58 +56,36 @@ const FindXthNodeFromEndOfLinkedListApproachVisualization = () => {
   };
 
   const resetState = () => {
-    setFastIndex(-2);
-    setSlowIndex(-2);
+    setCount(0);
+    setTempIndex(-2);
   };
 
   const runAlgo: ControlsProps["runAlgo"] = ({ addStep }) => {
-    const resultNode = xthNodeFromEnd(head, x);
-    function xthNodeFromEnd(head: ListNode | null, x: number): ListNode | null {
-      if (!head) return null;
+    const kthNode = kthElement(head, k);
+    function kthElement(head: ListNode | null, k: number): ListNode | null {
+      let temp: ListNode | null = head;
 
-      let fast: ListNode | null = head;
+      let count = 1;
+
       addStep(() => {
-        setFastIndex(0);
+        setTempIndex(0);
+        setCount(1);
       });
-      const getIndex = (node: ListNode | null, head: ListNode | null) => {
-        let index = 0;
-        let current = head;
-        while (current) {
-          if (current === node) return index;
-          current = current.next;
-          index++;
-        }
-        return index;
-      };
 
-      // Move fast pointer x steps ahead
-      for (let i = 0; i < x; i++) {
-        if (!fast) return null; // x is greater than list length
-        fast = fast.next;
-        const currentFastIndex = getIndex(fast, head);
+      // Traverse until reaching the kth node
+      while (temp !== null && count < k) {
+        temp = temp.next;
+        count++;
+        const currentTempIndex = getNodeIndex(head, temp);
+        const currentCount = count;
         addStep(() => {
-          setFastIndex(currentFastIndex);
+          setTempIndex(currentTempIndex);
+          setCount(currentCount);
         });
       }
 
-      let slow: ListNode | null = head;
-      addStep(() => {
-        setSlowIndex(0);
-      });
-
-      // Move both pointers until fast reaches the end
-      while (fast) {
-        fast = fast.next;
-        slow = slow!.next;
-        const currentFastIndex = getIndex(fast, head);
-        const currentSlowIndex = getIndex(slow, head);
-        addStep(() => {
-          setFastIndex(currentFastIndex);
-          setSlowIndex(currentSlowIndex);
-        });
-      }
-
-      return slow;
+      // Return the kth node (assuming k is always valid)
+      return temp;
     }
   };
 
@@ -113,10 +94,10 @@ const FindXthNodeFromEndOfLinkedListApproachVisualization = () => {
       <div className="h-[30px]"></div>
       <div className="grid gap-2 justify-center">
         <div className="flex items-center gap-2">
-          <p className="w-[70px]">x : </p>
-          <p>{x}</p>
+          <p className="w-[70px]">k : </p>
+          <p>{k}</p>
         </div>
-        <div className="h-[30px]"></div>
+        <div className="h-[10px]"></div>
         <div className="flex items-center gap-2">
           <p className="w-[70px]">list : </p>
           <div className="flex relative">
@@ -142,21 +123,29 @@ const FindXthNodeFromEndOfLinkedListApproachVisualization = () => {
               return nodes;
             })()}
             <div>
-              <Arrow space={72} index={fastIndex} text="fast" />
-              <Arrow space={72} index={slowIndex} text="slow" />
+              <Arrow space={72} index={tempIndex} text="temp" />
             </div>
           </div>
         </div>
+        {count !== 0 && (
+          <>
+            <div className="h-[50px]"></div>
+            <div className="flex items-center gap-2">
+              <p className="w-[70px]">count : </p>
+              <p>{count}</p>
+            </div>
+          </>
+        )}
       </div>
-      <div className="h-[60px]"></div>
-      <div className="flex flex-col items-stretch gap-2 w-80">
+      <div className="h-[100px]"></div>
+      <div className="flex flex-col items-stretch gap-4 w-80">
         <div className="flex items-center gap-2">
-          <Label className="w-[70px]">x : </Label>
+          <Label className="w-[70px]">k : </Label>
           <Input
             type="number"
-            value={xInput}
-            placeholder="Which element from end?"
-            onChange={(e) => setXInput(e.target.value)}
+            value={kInput}
+            placeholder="Element at which position?"
+            onChange={(e) => setKInput(e.target.value)}
           />
         </div>
         <div className="flex items-center gap-2">
@@ -182,4 +171,4 @@ const FindXthNodeFromEndOfLinkedListApproachVisualization = () => {
   );
 };
 
-export default FindXthNodeFromEndOfLinkedListApproachVisualization;
+export default KthElementInLinkedListApproachVisualization;

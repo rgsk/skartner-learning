@@ -1,0 +1,1 @@
+write most optimal solution for this problem in c++, include basic comments.
