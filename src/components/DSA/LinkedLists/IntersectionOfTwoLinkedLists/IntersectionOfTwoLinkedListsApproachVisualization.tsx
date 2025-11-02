@@ -269,12 +269,12 @@ const IntersectionOfTwoLinkedListsApproachVisualization = () => {
           <div className="flex items-center gap-2">
             <p className="w-[50px]">listA : </p>
             <div className="flex-1"></div>
-            <div className="flex relative">{renderHead(headA)}</div>
+            <div className="flex">{renderHead(headA)}</div>
           </div>
           <div className="flex items-center gap-2">
             <p className="w-[50px]">listB : </p>
             <div className="flex-1"></div>
-            <div className="flex relative">{renderHead(headB)}</div>
+            <div className="flex">{renderHead(headB)}</div>
           </div>
         </div>
         {intersecting && (
@@ -287,11 +287,7 @@ const IntersectionOfTwoLinkedListsApproachVisualization = () => {
                 <div className="w-[36px] flex justify-center">→</div>
               </div>
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <div className="flex relative">{renderHead(headC)}</div>
-              </div>
-            </div>
+            <div className="flex">{renderHead(headC)}</div>
           </>
         )}
       </div>
