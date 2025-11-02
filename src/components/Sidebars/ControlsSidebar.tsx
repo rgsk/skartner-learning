@@ -2,12 +2,7 @@
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-} from "@/components/ui/sidebar";
+
 import useLocalStorageState from "@/hooks/useLocalStorageState";
 
 export function ControlsSidebar() {
@@ -15,12 +10,12 @@ export function ControlsSidebar() {
     useLocalStorageState("visualizationExpandedOnPageLoad", false);
 
   return (
-    <Sidebar side="right">
-      <SidebarContent>
-        <SidebarGroup>
+    <div className="bg-sidebar p-4 w-72">
+      <div>
+        <div>
           <span className="text-sm">Settings</span>
           <div className="h-4"></div>
-          <SidebarGroupContent>
+          <div>
             <Label className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950">
               <Checkbox
                 id="toggle-2"
@@ -39,9 +34,9 @@ export function ControlsSidebar() {
                 </p>
               </div>
             </Label>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
