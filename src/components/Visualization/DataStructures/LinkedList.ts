@@ -48,3 +48,34 @@ export function copyLinkedList(head: ListNode | null): ListNode | null {
 
   return newHead;
 }
+
+export function appendLinkedLists(
+  list1: ListNode | null,
+  list2: ListNode | null
+): ListNode | null {
+  if (!list1) return list2;
+
+  let temp = list1;
+
+  while (temp.next !== null) {
+    temp = temp.next;
+  }
+
+  temp.next = list2;
+
+  return list1;
+}
+
+export function containsNode(
+  head: ListNode | null,
+  target: ListNode | null
+): boolean {
+  let current = head;
+  while (current) {
+    if (current === target) {
+      return true;
+    }
+    current = current.next;
+  }
+  return false;
+}
