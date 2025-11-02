@@ -7,13 +7,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Arrow from "@/components/Visualization/Arrow";
+import {
+  formLinkedList,
+  ListNode,
+} from "@/components/Visualization/DataStructures/LinkedList";
 import { useRef, useState } from "react";
 
 const defaultArr = [1, 2, 3, 4, 5, 6];
 const defaultX = 2;
 
 const FindXthNodeFromEndOfLinkedListApproachVisualization = () => {
-  const [head, setHead] = useState(formList(defaultArr));
+  const [head, setHead] = useState(formLinkedList(defaultArr));
   const [x, setX] = useState(defaultX);
   const [xInput, setXInput] = useState(String(defaultX));
   const [errorMessage, setErrorMessage] = useState("");
@@ -35,7 +39,7 @@ const FindXthNodeFromEndOfLinkedListApproachVisualization = () => {
       if (arr.length === 0) {
         throw new Error("List is empty");
       }
-      setHead(formList(arr));
+      setHead(formLinkedList(arr));
       if (xInput.length === 0 || isNaN(Number(xInput))) {
         throw new Error("Please set x");
       } else {
@@ -179,28 +183,3 @@ const FindXthNodeFromEndOfLinkedListApproachVisualization = () => {
 };
 
 export default FindXthNodeFromEndOfLinkedListApproachVisualization;
-
-// Definition for singly-linked list node
-class ListNode {
-  data: number;
-  next: ListNode | null;
-
-  constructor(data: number, next: ListNode | null = null) {
-    this.data = data;
-    this.next = next;
-  }
-}
-
-function formList(arr: number[]): ListNode | null {
-  if (arr.length === 0) return null;
-
-  const head = new ListNode(arr[0]);
-  let curr = head;
-
-  for (let i = 1; i < arr.length; i++) {
-    curr.next = new ListNode(arr[i]);
-    curr = curr.next;
-  }
-
-  return head;
-}

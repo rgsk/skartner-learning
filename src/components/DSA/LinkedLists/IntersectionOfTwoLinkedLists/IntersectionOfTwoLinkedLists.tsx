@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import IntersectionOfTwoLinkedListsApproachVisualization from "@/components/DSA/LinkedLists/IntersectionOfTwoLinkedLists/IntersectionOfTwoLinkedListsApproachVisualization";
 import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Heading from "@/components/Shared/Heading";
@@ -10,6 +11,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import Visualization from "@/components/Visualization/Visualization";
 interface IntersectionOfTwoLinkedListsProps {}
 const IntersectionOfTwoLinkedLists: React.FC<
   IntersectionOfTwoLinkedListsProps
@@ -58,6 +60,11 @@ const IntersectionOfTwoLinkedLists: React.FC<
             pythonFile="/dsa/linked_lists/intersection_of_two_linked_lists/approach/intersection_of_two_linked_lists.py"
             cppFile="/dsa/linked_lists/intersection_of_two_linked_lists/approach/intersection_of_two_linked_lists.cpp"
           />
+        </Section>
+        <Section>
+          <Visualization>
+            <IntersectionOfTwoLinkedListsApproachVisualization />
+          </Visualization>
         </Section>
       </Solution>
     </Container>

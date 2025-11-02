@@ -7,13 +7,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Arrow from "@/components/Visualization/Arrow";
+import {
+  copyLinkedList,
+  formLinkedList,
+  linkedListtoArray,
+  ListNode,
+} from "@/components/Visualization/DataStructures/LinkedList";
 import { useRef, useState } from "react";
 
 const defaultArr = [1, 2, 3, 4, 5, 6];
 const defaultX = 2;
 
 const DeleteXthNodeFromEndOfLinkedListApproachVisualization = () => {
-  const [head, setHead] = useState(formList(defaultArr));
+  const [head, setHead] = useState(formLinkedList(defaultArr));
   const [x, setX] = useState(defaultX);
   const [xInput, setXInput] = useState(String(defaultX));
   const [errorMessage, setErrorMessage] = useState("");
@@ -35,7 +41,7 @@ const DeleteXthNodeFromEndOfLinkedListApproachVisualization = () => {
       if (arr.length === 0) {
         throw new Error("List is empty");
       }
-      setHead(formList(arr));
+      setHead(formLinkedList(arr));
       if (xInput.length === 0 || isNaN(Number(xInput))) {
         throw new Error("Please set x");
       } else {
@@ -51,7 +57,7 @@ const DeleteXthNodeFromEndOfLinkedListApproachVisualization = () => {
   const resetState = () => {
     setFastIndex(-2);
     setSlowIndex(-2);
-    setHead(formList(defaultArr));
+    setHead(formLinkedList(defaultArr));
   };
 
   const runAlgo: ControlsProps["runAlgo"] = ({ addStep }) => {
@@ -146,7 +152,7 @@ const DeleteXthNodeFromEndOfLinkedListApproachVisualization = () => {
           <p className="w-[70px]">list : </p>
           <div className="flex relative">
             {(() => {
-              const arr = toArray(head);
+              const arr = linkedListtoArray(head);
 
               return arr.map((v, index) => {
                 return (
@@ -203,54 +209,3 @@ const DeleteXthNodeFromEndOfLinkedListApproachVisualization = () => {
 };
 
 export default DeleteXthNodeFromEndOfLinkedListApproachVisualization;
-
-// Definition for singly-linked list node
-class ListNode {
-  data: number;
-  next: ListNode | null;
-
-  constructor(data: number, next: ListNode | null = null) {
-    this.data = data;
-    this.next = next;
-  }
-}
-
-function formList(arr: number[]): ListNode | null {
-  if (arr.length === 0) return null;
-
-  const head = new ListNode(arr[0]);
-  let curr = head;
-
-  for (let i = 1; i < arr.length; i++) {
-    curr.next = new ListNode(arr[i]);
-    curr = curr.next;
-  }
-
-  return head;
-}
-
-function toArray(head: ListNode | null): number[] {
-  const arr: number[] = [];
-  let current = head;
-  while (current) {
-    arr.push(current.data);
-    current = current.next;
-  }
-  return arr;
-}
-
-function copyLinkedList(head: ListNode | null): ListNode | null {
-  if (!head) return null;
-
-  const newHead = new ListNode(head.data);
-  let currentOld = head.next;
-  let currentNew = newHead;
-
-  while (currentOld) {
-    currentNew.next = new ListNode(currentOld.data);
-    currentNew = currentNew.next;
-    currentOld = currentOld.next;
-  }
-
-  return newHead;
-}
