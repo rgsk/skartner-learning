@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import AddTwoNumbersAsListsApproachVisualization from "@/components/DSA/LinkedLists/AddTwoNumbersAsLists/AddTwoNumbersAsListsApproachVisualization";
 import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Example from "@/components/Shared/Example";
@@ -12,6 +13,7 @@ import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
+import Visualization from "@/components/Visualization/Visualization";
 interface AddTwoNumbersAsListsProps {}
 const AddTwoNumbersAsLists: React.FC<AddTwoNumbersAsListsProps> = ({}) => {
   return (
@@ -94,6 +96,9 @@ c: 1140 :   0 → 4 → 1 → 1
             cppFile="/dsa/linked_lists/add_two_numbers_as_lists/approach/add_two_numbers_as_lists.cpp"
           />
         </Section>
+        <Visualization>
+          <AddTwoNumbersAsListsApproachVisualization />
+        </Visualization>
       </Solution>
     </Container>
   );

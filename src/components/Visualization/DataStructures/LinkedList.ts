@@ -23,6 +23,18 @@ export function formLinkedList(arr: number[]): ListNode | null {
   return head;
 }
 
+export function getLinkedListLength(head: ListNode | null): number {
+  let length = 0;
+  let current = head;
+
+  while (current) {
+    length++;
+    current = current.next;
+  }
+
+  return length;
+}
+
 export function linkedListtoArray(head: ListNode | null): number[] {
   const arr: number[] = [];
   let current = head;
