@@ -78,3 +78,21 @@ export function wrapInlineCode(text: string): string {
       }
     });
 }
+export function timestampToSeconds(ts: string): number {
+  const parts = ts.split(":").map(Number);
+
+  if (parts.length === 3) {
+    // hh:mm:ss
+    const [h, m, s] = parts;
+    return h * 3600 + m * 60 + s;
+  }
+
+  if (parts.length === 2) {
+    // mm:ss
+    const [m, s] = parts;
+    return m * 60 + s;
+  }
+
+  // ss
+  return Number(ts);
+}

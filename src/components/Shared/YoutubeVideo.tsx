@@ -1,13 +1,14 @@
 import ReactPlayer from "react-player";
 
 interface YoutubeVideoProps {
-  id: string;
+  id?: string;
+  url?: string;
 }
-const YoutubeVideo: React.FC<YoutubeVideoProps> = ({ id }) => {
+const YoutubeVideo: React.FC<YoutubeVideoProps> = ({ id, url }) => {
   return (
     <div className="aspect-video">
       <ReactPlayer
-        src={`https://www.youtube.com/watch?v=${id}`}
+        src={id ? `https://www.youtube.com/watch?v=${id}` : url}
         width="100%"
         height="100%"
         controls
