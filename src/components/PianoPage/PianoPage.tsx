@@ -2,29 +2,168 @@
 
 interface PianoPageProps {}
 const PianoPage: React.FC<PianoPageProps> = ({}) => {
+  const renderPiecesGroup = ({
+    title,
+    key,
+  }: {
+    title: string;
+    key: string;
+  }) => {
+    return (
+      <div>
+        <h1 className="text-2xl font-medium">{title}</h1>
+        <div className="h-[20px]"></div>
+        <div className="grid grid-cols-3 gap-4">
+          {pianoPieces[key].map((piece, i) => {
+            return <YoutubeVideoAdvanced piece={piece} key={piece.title + i} />;
+          })}
+        </div>
+      </div>
+    );
+  };
   return (
     <div className="p-4">
-      <div className="grid grid-cols-3 gap-4">
-        {pianoPieces.level1.map((piece, i) => {
-          return <YoutubeVideoAdvanced piece={piece} key={piece.title + i} />;
-        })}
+      <div className="space-y-[40px]">
+        {renderPiecesGroup({ title: "Gibran Alcocer", key: "gibran-alcocer" })}
+        {renderPiecesGroup({ title: "Level 1", key: "level1" })}
+        {renderPiecesGroup({ title: "Level 2", key: "level2" })}
+        {renderPiecesGroup({ title: "Level 3", key: "level3" })}
       </div>
     </div>
   );
 };
 export default PianoPage;
 
-const pianoPieces = {
+type PianoPiece = {
+  title: string;
+  url: string;
+  skips?: string[];
+};
+const pianoPieces: Record<string, PianoPiece[]> = {
+  ["gibran-alcocer"]: [
+    {
+      title: "Idea 1",
+      url: "https://www.youtube.com/watch?v=HagoDidoFMw",
+    },
+    {
+      title: "Idea 5",
+      url: "https://www.youtube.com/watch?v=6osfcmCt12w",
+    },
+    {
+      title: "Idea 7",
+      url: "https://www.youtube.com/watch?v=AVO4rEoGg8Q",
+    },
+    {
+      title: "Idea 9",
+      url: "https://www.youtube.com/watch?v=V4pWRfOEqfw",
+    },
+    {
+      title: "Idea 10",
+      url: "https://www.youtube.com/watch?v=NfOg7uNLolA",
+    },
+    {
+      title: "Idea 15",
+      url: "https://www.youtube.com/watch?v=LQAXuCAuBfE",
+    },
+    {
+      title: "Idea 20",
+      url: "https://www.youtube.com/watch?v=Ncfd89EZ1mY",
+    },
+    {
+      title: "Idea 22",
+      url: "https://www.youtube.com/watch?v=8Da7RgPXCmU",
+    },
+    {
+      title: "Idea 25",
+      url: "https://www.youtube.com/watch?v=BIlwuughFM8",
+    },
+
+    {
+      title: "Solas",
+      url: "https://www.youtube.com/watch?v=5UzKfjTl9ns",
+    },
+
+    {
+      title: "Hotline Bling",
+      url: "https://www.youtube.com/watch?v=XZizUNtuTIA",
+    },
+  ],
   level1: [
     {
       title: "Ludovico Einaudi - Nuvole Bianche",
       url: "https://www.youtube.com/watch?v=4VR-6AS0-l4",
-      bestPart: "32",
+      skips: ["32"],
     },
     {
-      title: "Ludovico Einaudi - Una Mattina (The Intouchables)",
+      title: "Ludovico Einaudi - Una Mattina",
       url: "https://www.youtube.com/watch?v=-8X_aMT5z0A",
-      bestPart: "50",
+      skips: ["50"],
+    },
+    {
+      title: "Via",
+      url: "https://www.youtube.com/watch?v=2S8c09C6J7Q",
+    },
+    {
+      title: "Ofelia - Juan Arenosa",
+      url: "https://www.youtube.com/watch?v=OaXPV3dbamU",
+    },
+    {
+      title: "Andrea Vanzo - Valzer d'Inverno",
+      url: "https://www.youtube.com/watch?v=D5uc2mJi3Mg",
+    },
+    {
+      title: "Amélie - Comptine",
+      url: "https://www.youtube.com/watch?v=3Gq1DJrwEnQ",
+    },
+    {
+      title: "The Interstellar Experience",
+      url: "https://www.youtube.com/watch?v=t6zd6BNduTE",
+    },
+    {
+      title: "Passacaglia",
+      url: "https://www.youtube.com/watch?v=I3-r11YeKAk",
+    },
+    {
+      title: "Tony Ann – ICARUS",
+      url: "https://www.youtube.com/watch?v=HTvsvuadT74",
+    },
+  ],
+  level2: [
+    {
+      title: "Canon in D - Pachelbel",
+      url: "https://www.youtube.com/watch?v=6jSLH9CDPPQ",
+      skips: ["47", "1:14"],
+    },
+    {
+      title: "Beanie",
+      url: "https://www.youtube.com/watch?v=31IpgnLkk0w",
+    },
+    {
+      title: "Andrea Vanzo - Soulmate",
+      url: "https://www.youtube.com/watch?v=b7OyPg5JBnQ",
+    },
+    {
+      title: "Van Gogh - Virginio Aiello",
+      url: "https://www.youtube.com/watch?v=l-fxH--8LFI",
+    },
+    {
+      title: "Hijo de la Luna - Mecano // Alexander Motovilov",
+      url: "https://www.youtube.com/watch?v=Id4mjy6viLA",
+    },
+  ],
+  level3: [
+    {
+      title: "Yiruma - River Flows in You",
+      url: "https://www.youtube.com/watch?v=7maJOI3QMu0",
+    },
+    {
+      title: "Einaudi - Experience",
+      url: "https://www.youtube.com/watch?v=kjlu9RRHcbE",
+    },
+
+    {
+      title: "Mariage d'Amour (II)",
+      url: "https://www.youtube.com/watch?v=SoGm7P1PBMo",
     },
   ],
 };
@@ -35,11 +174,7 @@ import { useRef } from "react";
 import ReactPlayer from "react-player";
 
 interface YoutubeVideoAdvancedProps {
-  piece: {
-    title: string;
-    url: string;
-    bestPart: string;
-  };
+  piece: PianoPiece;
 }
 const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
   piece,
@@ -67,15 +202,24 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
       </div>
       <div className="flex items-center justify-between">
         <p>{piece.title}</p>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => {
-            handleSkip(timestampToSeconds(piece.bestPart));
-          }}
-        >
-          Best
-        </Button>
+        {piece.skips && (
+          <div className="flex gap-2">
+            {piece.skips.map((skip, i) => {
+              return (
+                <Button
+                  key={skip + i}
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    handleSkip(timestampToSeconds(skip));
+                  }}
+                >
+                  {i + 1}
+                </Button>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
