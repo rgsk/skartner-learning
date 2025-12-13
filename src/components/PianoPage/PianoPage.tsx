@@ -170,7 +170,7 @@ const pianoPieces: Record<string, PianoPiece[]> = {
 
 import { Button } from "@/components/ui/button";
 import { timestampToSeconds } from "@/lib/utils";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 
 interface YoutubeVideoAdvancedProps {
@@ -189,12 +189,37 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
     }
   };
 
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // When another video starts playing → stop this one
+  useEffect(() => {
+    const stopHandler = (event: CustomEvent<string>) => {
+      if (event.detail !== piece.url) {
+        setIsPlaying(false);
+      }
+    };
+
+    window.addEventListener("video-playing", stopHandler as any);
+    return () =>
+      window.removeEventListener("video-playing", stopHandler as any);
+  }, [piece.url]);
+
+  const handlePlay = () => {
+    // Tell everyone else to stop
+    window.dispatchEvent(
+      new CustomEvent("video-playing", { detail: piece.url })
+    );
+    setIsPlaying(true);
+  };
+
   return (
     <div className="space-y-2 border p-4 rounded-sm">
       <div className="aspect-video">
         <ReactPlayer
           ref={playerRef}
           src={piece.url}
+          playing={isPlaying}
+          onPlay={handlePlay}
           width="100%"
           height="100%"
           controls
