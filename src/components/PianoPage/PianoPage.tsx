@@ -127,13 +127,13 @@ const pianoPieces: Record<string, PianoPiece[]> = {
       title: "Tony Ann – ICARUS",
       url: "https://www.youtube.com/watch?v=HTvsvuadT74",
     },
-  ],
-  level2: [
     {
       title: "Canon in D - Pachelbel",
       url: "https://www.youtube.com/watch?v=6jSLH9CDPPQ",
       skips: ["47", "1:14"],
     },
+  ],
+  level2: [
     {
       title: "Beanie",
       url: "https://www.youtube.com/watch?v=31IpgnLkk0w",
