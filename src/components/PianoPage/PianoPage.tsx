@@ -165,10 +165,13 @@ const pianoPieces: Record<string, PianoPiece[]> = {
       url: "https://www.youtube.com/watch?v=7maJOI3QMu0",
     },
     {
-      title: "Einaudi - Experience",
-      url: "https://www.youtube.com/watch?v=kjlu9RRHcbE",
+      title: "Ludovico Einaudi - Experience",
+      url: "https://www.youtube.com/watch?v=G35WR5SVAMw",
     },
-
+    {
+      title: "Hans Zimmer - Interstellar - Main Theme",
+      url: "https://www.youtube.com/watch?v=4y33h81phKU",
+    },
     {
       title: "Mariage d'Amour (II)",
       url: "https://www.youtube.com/watch?v=SoGm7P1PBMo",
@@ -235,24 +238,22 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
       </div>
       <div className="flex items-center justify-between">
         <p>{piece.title}</p>
-        {piece.skips && (
-          <div className="flex gap-2">
-            {piece.skips.map((skip, i) => {
-              return (
-                <Button
-                  key={skip + i}
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    handleSkip(timestampToSeconds(skip));
-                  }}
-                >
-                  {i + 1}
-                </Button>
-              );
-            })}
-          </div>
-        )}
+        <div className="flex gap-2">
+          {["0", ...(piece.skips ?? [])].map((skip, i) => {
+            return (
+              <Button
+                key={skip + i}
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  handleSkip(timestampToSeconds(skip));
+                }}
+              >
+                {skip}
+              </Button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
