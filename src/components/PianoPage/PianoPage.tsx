@@ -46,6 +46,10 @@ const pianoPieces: Record<string, PianoPiece[]> = {
       url: "https://www.youtube.com/watch?v=HagoDidoFMw",
     },
     {
+      title: "Idea 2",
+      url: "https://www.youtube.com/watch?v=aroY4ak2lb8",
+    },
+    {
       title: "Idea 5",
       url: "https://www.youtube.com/watch?v=6osfcmCt12w",
     },
@@ -60,6 +64,10 @@ const pianoPieces: Record<string, PianoPiece[]> = {
     {
       title: "Idea 10",
       url: "https://www.youtube.com/watch?v=NfOg7uNLolA",
+    },
+    {
+      title: "Idea 12",
+      url: "https://www.youtube.com/watch?v=_UUArHUUiq8",
     },
     {
       title: "Idea 15",
