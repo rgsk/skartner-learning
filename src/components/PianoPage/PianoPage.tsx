@@ -27,13 +27,6 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
             detail: nextShuffledUrl.url,
           })
         );
-        setShuffledUrls(
-          shuffledUrls.map((item) =>
-            item.url === nextShuffledUrl.url
-              ? { ...item, played: true, playing: true }
-              : { ...item, playing: false }
-          )
-        );
       } else {
         setShuffleActive(false);
       }
@@ -43,6 +36,11 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
     const handler = (event: CustomEvent<PianoPiece>) => {
       const piece = event.detail;
       setPlayingPiece(piece);
+      setShuffledUrls((prev) =>
+        prev?.map((item) =>
+          item.url === piece.url ? { ...item, played: true } : { ...item }
+        )
+      );
     };
 
     window.addEventListener("video-playing", handler as any);
@@ -78,16 +76,26 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
         <div className="h-[20px]"></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {pianoPieces[key].map((piece, i) => {
-            return <YoutubeVideoAdvanced piece={piece} key={piece.title + i} />;
+            return (
+              <YoutubeVideoAdvanced
+                piece={piece}
+                key={piece.title + i}
+                scrollMarginTop={navbarContainerBounds.height}
+              />
+            );
           })}
         </div>
       </div>
     );
   };
+  const [navbarContainerRef, navbarContainerBounds] = useMeasure();
 
   return (
     <div>
-      <div className="fixed top-0 bg-background z-50 w-full px-4 py-4 border-b">
+      <div
+        ref={navbarContainerRef}
+        className="fixed top-0 bg-background z-50 w-full px-4 py-4 border-b"
+      >
         <div className="flex items-center justify-between">
           <div>
             {playingPiece && (
@@ -132,16 +140,21 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
           </div>
         </div>
       </div>
-      <div className="h-[100px]"></div>
-      <div className="p-4">
-        <div className="space-y-[40px]">
-          {renderPiecesGroup({
-            title: "Gibran Alcocer",
-            key: "gibran-alcocer",
-          })}
-          {renderPiecesGroup({ title: "Level 1", key: "level1" })}
-          {renderPiecesGroup({ title: "Level 2", key: "level2" })}
-          {renderPiecesGroup({ title: "Level 3", key: "level3" })}
+      <div
+        style={{
+          paddingTop: navbarContainerBounds.height,
+        }}
+      >
+        <div className="p-4">
+          <div className="space-y-[40px]">
+            {renderPiecesGroup({
+              title: "Gibran Alcocer",
+              key: "gibran-alcocer",
+            })}
+            {renderPiecesGroup({ title: "Level 1", key: "level1" })}
+            {renderPiecesGroup({ title: "Level 2", key: "level2" })}
+            {renderPiecesGroup({ title: "Level 3", key: "level3" })}
+          </div>
         </div>
       </div>
     </div>
@@ -307,12 +320,15 @@ import { timestampToSeconds } from "@/lib/utils";
 import { MusicIcon, ShuffleIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
+import useMeasure from "react-use-measure";
 
 interface YoutubeVideoAdvancedProps {
   piece: PianoPiece;
+  scrollMarginTop: number;
 }
 const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
   piece,
+  scrollMarginTop,
 }) => {
   const playerRef = useRef<HTMLVideoElement>(null);
   const [playerKey, setPlayerKey] = useState(0);
@@ -371,8 +387,9 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
 
   return (
     <div
-      className="space-y-2 border p-4 rounded-sm scroll-mt-[80px]"
+      className="space-y-2 border p-4 rounded-sm"
       id={piece.url}
+      style={{ scrollMarginTop: scrollMarginTop + 16 }}
     >
       <div className="aspect-video">
         <ReactPlayer
