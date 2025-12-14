@@ -1,7 +1,58 @@
 "use client";
+function getRandomUnplayed(shuffledUrls: ShuffledUrl[]) {
+  if (shuffledUrls.length === 0) return undefined;
 
+  // Filter unplayed
+  const unplayed = shuffledUrls.filter((item) => !item.played);
+
+  // If none left, return undefined
+  if (unplayed.length === 0) return undefined;
+
+  // Pick a random one
+  const randomIndex = Math.floor(Math.random() * unplayed.length);
+  return unplayed[randomIndex];
+}
+type ShuffledUrl = { played: boolean; piece: PianoPiece; playing: boolean };
 interface PianoPageProps {}
 const PianoPage: React.FC<PianoPageProps> = ({}) => {
+  const [shuffledUrls, setShuffledUrls] = useState<ShuffledUrl[]>();
+  const [shuffleActive, setShuffleActive] = useState(false);
+  const playNextInShuffle = () => {
+    if (shuffledUrls && shuffleActive) {
+      const nextUrl = getRandomUnplayed(shuffledUrls);
+      if (nextUrl) {
+        window.dispatchEvent(
+          new CustomEvent("play-video", {
+            detail: nextUrl.piece.url,
+          })
+        );
+        setShuffledUrls(
+          shuffledUrls.map((item) =>
+            item.piece.url === nextUrl.piece.url
+              ? { ...item, played: true, playing: true }
+              : { ...item, playing: false }
+          )
+        );
+      } else {
+        setShuffleActive(false);
+      }
+    }
+  };
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("reset-video-keys"));
+  }, [shuffleActive]);
+  const playNextInShuffleRef = useRef(playNextInShuffle);
+  playNextInShuffleRef.current = playNextInShuffle;
+  useEffect(() => {
+    const endedHandler = (event: CustomEvent<string>) => {
+      const endedUrl = event.detail;
+      playNextInShuffleRef.current();
+    };
+
+    window.addEventListener("video-ended", endedHandler as any);
+    return () => window.removeEventListener("video-ended", endedHandler as any);
+  }, []);
+
   const renderPiecesGroup = ({
     title,
     key,
@@ -21,13 +72,63 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
       </div>
     );
   };
+  const shuffledPiecePlaying = shuffledUrls?.find(
+    (item) => item.playing
+  )?.piece;
   return (
-    <div className="p-4">
-      <div className="space-y-[40px]">
-        {renderPiecesGroup({ title: "Gibran Alcocer", key: "gibran-alcocer" })}
-        {renderPiecesGroup({ title: "Level 1", key: "level1" })}
-        {renderPiecesGroup({ title: "Level 2", key: "level2" })}
-        {renderPiecesGroup({ title: "Level 3", key: "level3" })}
+    <div>
+      <div className="fixed top-0 bg-background z-50 w-full px-4 py-4 border-b">
+        <div className="flex items-center gap-2">
+          <Button
+            variant={shuffleActive ? "secondary" : "outline"}
+            onClick={() => {
+              if (shuffleActive) {
+                setShuffleActive(false);
+                return;
+              }
+              setShuffledUrls(
+                Object.values(pianoPieces)
+                  .reduce(
+                    (acc, v) => [...acc, ...v.map((p) => p)],
+                    [] as PianoPiece[]
+                  )
+                  .map((piece) => {
+                    return {
+                      piece,
+                      played: false,
+                      playing: false,
+                    };
+                  })
+              );
+              setShuffleActive(true);
+              setTimeout(() => {
+                playNextInShuffleRef.current();
+              });
+            }}
+          >
+            <span>Shuffle</span>
+            <ShuffleIcon />
+          </Button>
+          <div>
+            {shuffleActive && shuffledPiecePlaying && (
+              <a href={`#${shuffledPiecePlaying.url}`}>
+                Playing - {shuffledPiecePlaying.title}
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="h-[100px]"></div>
+      <div className="p-4">
+        <div className="space-y-[40px]">
+          {renderPiecesGroup({
+            title: "Gibran Alcocer",
+            key: "gibran-alcocer",
+          })}
+          {renderPiecesGroup({ title: "Level 1", key: "level1" })}
+          {renderPiecesGroup({ title: "Level 2", key: "level2" })}
+          {renderPiecesGroup({ title: "Level 3", key: "level3" })}
+        </div>
       </div>
     </div>
   );
@@ -189,6 +290,7 @@ const pianoPieces: Record<string, PianoPiece[]> = {
 
 import { Button } from "@/components/ui/button";
 import { timestampToSeconds } from "@/lib/utils";
+import { ShuffleIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 
@@ -199,6 +301,7 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
   piece,
 }) => {
   const playerRef = useRef<HTMLVideoElement>(null);
+  const [playerKey, setPlayerKey] = useState(0);
 
   const handleSkip = (seconds: number) => {
     const player = playerRef.current;
@@ -231,14 +334,46 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
     setIsPlaying(true);
   };
 
+  useEffect(() => {
+    const playHandler = (event: CustomEvent<string>) => {
+      if (event.detail === piece.url) {
+        handlePlay();
+      }
+    };
+
+    window.addEventListener("play-video", playHandler as any);
+    return () => window.removeEventListener("play-video", playHandler as any);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const resetKeys = (event: CustomEvent) => {
+      setIsPlaying(false);
+      setPlayerKey((prev) => prev + 1);
+    };
+
+    window.addEventListener("reset-video-keys", resetKeys as any);
+    return () =>
+      window.removeEventListener("reset-video-keys", resetKeys as any);
+  }, [piece.url]);
+
   return (
-    <div className="space-y-2 border p-4 rounded-sm">
+    <div
+      className="space-y-2 border p-4 rounded-sm scroll-mt-[80px]"
+      id={piece.url}
+    >
       <div className="aspect-video">
         <ReactPlayer
           ref={playerRef}
           src={piece.url}
           playing={isPlaying}
           onPlay={handlePlay}
+          key={playerKey}
+          onEnded={() => {
+            window.dispatchEvent(
+              new CustomEvent("video-ended", { detail: piece.url })
+            );
+          }}
           width="100%"
           height="100%"
           controls
