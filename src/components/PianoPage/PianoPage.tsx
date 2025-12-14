@@ -140,6 +140,10 @@ const pianoPieces: Record<string, PianoPiece[]> = {
       url: "https://www.youtube.com/watch?v=6jSLH9CDPPQ",
       skips: ["47", "1:14"],
     },
+    {
+      title: "Ascension",
+      url: "https://www.youtube.com/watch?v=U4zWqtfbkjk",
+    },
   ],
   level2: [
     {
@@ -175,6 +179,10 @@ const pianoPieces: Record<string, PianoPiece[]> = {
     {
       title: "Mariage d'Amour (II)",
       url: "https://www.youtube.com/watch?v=SoGm7P1PBMo",
+    },
+    {
+      title: "Yann Tiersen - La valse d'Amélie",
+      url: "https://www.youtube.com/watch?v=uj9BihmugmI",
     },
   ],
 };
