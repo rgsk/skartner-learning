@@ -16,7 +16,7 @@ type ShuffledUrl = { played: boolean; url: string };
 interface PianoPageProps {}
 const PianoPage: React.FC<PianoPageProps> = ({}) => {
   const [shuffledUrls, setShuffledUrls] = useState<ShuffledUrl[]>();
-  const [shuffleActive, setShuffleActive] = useState(false);
+  const [shuffleActive, setShuffleActive] = useState<string | null>(null);
   const [playingPiece, setPlayingPiece] = useState<PianoPiece>();
   const playNextInShuffle = () => {
     if (shuffledUrls && shuffleActive) {
@@ -28,7 +28,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
           })
         );
       } else {
-        setShuffleActive(false);
+        setShuffleActive(null);
       }
     }
   };
@@ -49,6 +49,9 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
   useEffect(() => {
     window.dispatchEvent(new CustomEvent("reset-video-keys"));
     setPlayingPiece(undefined);
+    if (!shuffleActive) {
+      setShuffledUrls(undefined);
+    }
   }, [shuffleActive]);
   const playNextInShuffleRef = useRef(playNextInShuffle);
   playNextInShuffleRef.current = playNextInShuffle;
@@ -72,7 +75,32 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
   }) => {
     return (
       <div>
-        <h1 className="text-2xl font-medium">{title}</h1>
+        <div className="flex justify-between">
+          <h1 className="text-2xl font-medium">{title}</h1>
+          <Button
+            variant={shuffleActive ? "secondary" : "outline"}
+            onClick={() => {
+              if (shuffleActive) {
+                setShuffleActive(null);
+                return;
+              }
+              setShuffledUrls(
+                pianoPieces[key].map((piece) => {
+                  return {
+                    url: piece.url,
+                    played: false,
+                  };
+                })
+              );
+              setShuffleActive(title);
+              setTimeout(() => {
+                playNextInShuffleRef.current();
+              });
+            }}
+          >
+            <ShuffleIcon />
+          </Button>
+        </div>
         <div className="h-[20px]"></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {pianoPieces[key].map((piece, i) => {
@@ -112,7 +140,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
               variant={shuffleActive ? "secondary" : "outline"}
               onClick={() => {
                 if (shuffleActive) {
-                  setShuffleActive(false);
+                  setShuffleActive(null);
                   return;
                 }
                 setShuffledUrls(
@@ -128,13 +156,13 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
                       };
                     })
                 );
-                setShuffleActive(true);
+                setShuffleActive("All");
                 setTimeout(() => {
                   playNextInShuffleRef.current();
                 });
               }}
             >
-              <span>Shuffle</span>
+              {shuffleActive && <span>{shuffleActive}</span>}
               <ShuffleIcon />
             </Button>
           </div>
