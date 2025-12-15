@@ -63,20 +63,20 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
   const playNextInQueue = (index?: number) => {
     if (queuedPieces.length > 0) {
       if (typeof index === "number") {
+        setQueueIndex(index);
         window.dispatchEvent(
           new CustomEvent("play-video-from-start", {
             detail: queuedPieces[index].url,
           })
         );
-        setQueueIndex(index);
       } else {
         if (queueIndex + 1 < queuedPieces.length) {
+          setQueueIndex(queueIndex + 1);
           window.dispatchEvent(
             new CustomEvent("play-video-from-start", {
               detail: queuedPieces[queueIndex + 1].url,
             })
           );
-          setQueueIndex((prev) => prev + 1);
         } else {
         }
       }
@@ -90,29 +90,25 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
     setQueueIndex(-1);
   };
 
-  const resetQueueIndexIfOtherPieceIsPlayed = (piece: PianoPiece) => {
-    const indexesWithPieceUrl: number[] = [];
-    for (let i = 0; i < queuedPieces.length; i++) {
-      if (queuedPieces[i].url === piece.url) {
-        indexesWithPieceUrl.push(i);
+  useEffect(() => {
+    if (playingPiece && queueIndex !== -1) {
+      const indexesWithPieceUrl: number[] = [];
+      for (let i = 0; i < queuedPieces.length; i++) {
+        if (queuedPieces[i].url === playingPiece.url) {
+          indexesWithPieceUrl.push(i);
+        }
+      }
+      if (!indexesWithPieceUrl.includes(queueIndex)) {
+        resetQueueIndex();
       }
     }
-    if (!indexesWithPieceUrl.includes(queueIndex)) {
-      resetQueueIndex();
-    }
-  };
-  const resetQueueIndexIfOtherPieceIsPlayedRef = useRef(
-    resetQueueIndexIfOtherPieceIsPlayed
-  );
-  resetQueueIndexIfOtherPieceIsPlayedRef.current =
-    resetQueueIndexIfOtherPieceIsPlayed;
+  }, [playingPiece, queueIndex, queuedPieces]);
 
   useEffect(() => {
     const handler = (event: CustomEvent<PianoPiece>) => {
       const piece = event.detail;
       setPlayingPiece({ ...piece, paused: false });
       setPlayedUrls((prev) => [...prev, piece.url]);
-      resetQueueIndexIfOtherPieceIsPlayedRef.current(piece);
     };
 
     window.addEventListener("video-playing", handler as any);
