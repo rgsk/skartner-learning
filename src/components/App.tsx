@@ -18,7 +18,7 @@ const App: React.FC<AppProps> = ({ children }) => {
       {showAppSidebar && <AppSidebar />}
       {hideNavbarUrls.includes(pathname) ? (
         <>
-          <main>{children}</main>
+          <main className="flex-1">{children}</main>
         </>
       ) : (
         <>
