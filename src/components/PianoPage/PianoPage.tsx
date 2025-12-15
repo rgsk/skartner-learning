@@ -100,7 +100,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
           <div>
             {playingPiece && (
               <a
-                href={`#${playingPiece.url}`}
+                href={`#${extractYTId(playingPiece.url)}`}
                 className="flex gap-2 items-center font-medium"
               >
                 <MusicIcon size={16} /> {playingPiece.title}
@@ -316,7 +316,7 @@ const pianoPieces: Record<string, PianoPiece[]> = {
 };
 
 import { Button } from "@/components/ui/button";
-import { timestampToSeconds } from "@/lib/utils";
+import { getQueryParam, timestampToSeconds } from "@/lib/utils";
 import { MusicIcon, ShuffleIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
@@ -388,7 +388,7 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
   return (
     <div
       className="space-y-2 border p-4 rounded-sm"
-      id={piece.url}
+      id={extractYTId(piece.url) ?? undefined}
       style={{ scrollMarginTop: scrollMarginTop + 16 }}
     >
       <div className="aspect-video">
@@ -431,3 +431,7 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
     </div>
   );
 };
+
+function extractYTId(url: string) {
+  return getQueryParam(url, "v");
+}

@@ -124,3 +124,8 @@ export function range(
 
   return result;
 }
+
+export function getQueryParam(url: string, key: string): string | null {
+  const parsed = new URL(url);
+  return parsed.searchParams.get(key);
+}
