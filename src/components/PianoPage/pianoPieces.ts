@@ -148,5 +148,9 @@ export const pianoPieces: Record<string, PianoPiece[]> = {
       title: "Yann Tiersen - La valse d'Amélie",
       url: "https://www.youtube.com/watch?v=uj9BihmugmI",
     },
+    {
+      title: "Hymn to the Sea - Titanic",
+      url: "https://www.youtube.com/watch?v=LLcLuaA9gCg",
+    },
   ],
 };
