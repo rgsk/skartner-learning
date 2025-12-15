@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { getQueryParam, timestampToSeconds } from "@/lib/utils";
+import { ListEndIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { PianoPiece } from "./pianoPieces";
@@ -7,10 +8,12 @@ import { PianoPiece } from "./pianoPieces";
 interface YoutubeVideoAdvancedProps {
   piece: PianoPiece;
   scrollMarginTop: number;
+  onAddToQueue: () => void;
 }
 const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
   piece,
   scrollMarginTop,
+  onAddToQueue,
 }) => {
   const playerRef = useRef<HTMLVideoElement>(null);
   const [playerKey, setPlayerKey] = useState(0);
@@ -19,7 +22,7 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
     const player = playerRef.current;
     if (player) {
       player.currentTime = seconds;
-      player.play();
+      handlePlay();
     }
   };
 
@@ -69,32 +72,47 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
   }, [piece.url]);
 
   useEffect(() => {
+    const events = {
+      "play-video": "play-video",
+      "play-video-from-start": "play-video-from-start",
+      "pause-video": "pause-video",
+      "resume-video": "resume-video",
+      "stop-video": "stop-video",
+    };
     const handler = (event: Event) => {
       const customEvent = event as CustomEvent<string>;
       if (customEvent.detail !== piece.url) return;
 
       switch (event.type) {
-        case "play-video":
+        case events["play-video"]:
+          handlePlayRef.current?.();
+          break;
+        case events["play-video-from-start"]:
+          const player = playerRef.current;
+          if (player) {
+            player.currentTime = 0;
+          }
           handlePlayRef.current?.();
           break;
 
-        case "pause-video":
+        case events["pause-video"]:
           setIsPlaying(false);
           break;
 
-        case "resume-video":
+        case events["resume-video"]:
           setIsPlaying(true);
           break;
-        case "stop-video":
+        case events["stop-video"]:
           setIsPlaying(false);
           break;
       }
     };
 
-    const events = ["play-video", "pause-video", "resume-video", "stop-video"];
-
-    events.forEach((e) => window.addEventListener(e, handler));
-    return () => events.forEach((e) => window.removeEventListener(e, handler));
+    Object.keys(events).forEach((e) => window.addEventListener(e, handler));
+    return () =>
+      Object.keys(events).forEach((e) =>
+        window.removeEventListener(e, handler)
+      );
   }, [piece.url]);
 
   return (
@@ -103,6 +121,11 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
       id={extractYTId(piece.url) ?? undefined}
       style={{ scrollMarginTop: scrollMarginTop + 16 }}
     >
+      <div className="flex justify-end">
+        <Button size={"icon"} variant={"outline"} onClick={onAddToQueue}>
+          <ListEndIcon />
+        </Button>
+      </div>
       <div className="aspect-video">
         <ReactPlayer
           ref={playerRef}
@@ -132,7 +155,11 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
                 variant="outline"
                 size="sm"
                 onClick={() => {
-                  handleSkip(timestampToSeconds(skip));
+                  const player = playerRef.current;
+                  if (player) {
+                    player.currentTime = timestampToSeconds(skip);
+                    handlePlay();
+                  }
                 }}
               >
                 {skip}

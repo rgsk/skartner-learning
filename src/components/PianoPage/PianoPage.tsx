@@ -5,6 +5,9 @@ import YoutubeVideoAdvanced, {
 } from "@/components/PianoPage/YoutubeVideoAdvanced";
 import TooltipWrapper from "@/components/Shared/TooltipWrapper";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { useWindowSize } from "@/hooks/useWindowSize";
+import { cn } from "@/lib/utils";
 import {
   MusicIcon,
   PauseIcon,
@@ -33,6 +36,8 @@ function getRandomUnplayed(shuffledUrls: string[], playedUrls: string[]) {
 interface PianoPageProps {}
 const PianoPage: React.FC<PianoPageProps> = ({}) => {
   const [shuffledUrls, setShuffledUrls] = useState<string[]>();
+  const [queuedPieces, setQueuedPieces] = useState<PianoPiece[]>([]);
+  const [queueIndex, setQueueIndex] = useState(-1);
   const [playedUrls, setPlayedUrls] = useState<string[]>([]);
   const [shuffleActive, setShuffleActive] = useState<string | null>(null);
   const [playingPiece, setPlayingPiece] = useState<
@@ -52,6 +57,32 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
       }
     }
   };
+  const playNextInShuffleRef = useRef(playNextInShuffle);
+  playNextInShuffleRef.current = playNextInShuffle;
+  const playNextInQueue = (index?: number) => {
+    if (queuedPieces.length > 0) {
+      if (typeof index === "number") {
+        window.dispatchEvent(
+          new CustomEvent("play-video-from-start", {
+            detail: queuedPieces[index].url,
+          })
+        );
+        setQueueIndex(index);
+      } else {
+        if (queueIndex + 1 < queuedPieces.length) {
+          window.dispatchEvent(
+            new CustomEvent("play-video-from-start", {
+              detail: queuedPieces[queueIndex + 1].url,
+            })
+          );
+          setQueueIndex((prev) => prev + 1);
+        } else {
+        }
+      }
+    }
+  };
+  const playNextInQueueRef = useRef(playNextInQueue);
+  playNextInQueueRef.current = playNextInQueue;
   useEffect(() => {
     const handler = (event: CustomEvent<PianoPiece>) => {
       const piece = event.detail;
@@ -96,13 +127,13 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
       setShuffledUrls(undefined);
     }
   }, [shuffleActive]);
-  const playNextInShuffleRef = useRef(playNextInShuffle);
-  playNextInShuffleRef.current = playNextInShuffle;
+
   useEffect(() => {
     const endedHandler = (event: CustomEvent<string>) => {
       const endedUrl = event.detail;
       setPlayingPiece((prev) => (prev?.url === endedUrl ? undefined : prev));
       playNextInShuffleRef.current();
+      playNextInQueueRef.current();
     };
 
     window.addEventListener("video-ended", endedHandler as any);
@@ -150,13 +181,23 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
           </TooltipWrapper>
         </div>
         <div className="h-[20px]"></div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div
+          className={cn(
+            "grid gap-4",
+            queuedPieces.length > 0
+              ? "grid-cols-2"
+              : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+          )}
+        >
           {pianoPieces[key].map((piece, i) => {
             return (
               <YoutubeVideoAdvanced
                 piece={piece}
                 key={piece.title + i}
                 scrollMarginTop={navbarContainerBounds.height}
+                onAddToQueue={() => {
+                  setQueuedPieces((prev) => [...prev, piece]);
+                }}
               />
             );
           })}
@@ -165,6 +206,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
     );
   };
   const [navbarContainerRef, navbarContainerBounds] = useMeasure();
+  const windowSize = useWindowSize();
 
   return (
     <div>
@@ -278,16 +320,69 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
           paddingTop: navbarContainerBounds.height,
         }}
       >
-        <div className="p-4">
-          <div className="space-y-[40px]">
-            {renderPiecesGroup({
-              title: "Gibran Alcocer",
-              key: "gibran-alcocer",
-            })}
-            {renderPiecesGroup({ title: "Level 1", key: "level1" })}
-            {renderPiecesGroup({ title: "Level 2", key: "level2" })}
-            {renderPiecesGroup({ title: "Level 3", key: "level3" })}
+        <div
+          className="flex"
+          style={{ height: windowSize.height - navbarContainerBounds.height }}
+        >
+          <div className="p-4 flex-1 overflow-auto">
+            <div className="space-y-[40px]">
+              {renderPiecesGroup({
+                title: "Gibran Alcocer",
+                key: "gibran-alcocer",
+              })}
+              {renderPiecesGroup({ title: "Level 1", key: "level1" })}
+              {renderPiecesGroup({ title: "Level 2", key: "level2" })}
+              {renderPiecesGroup({ title: "Level 3", key: "level3" })}
+            </div>
           </div>
+          {queuedPieces.length > 0 && (
+            <div className="w-[300px] border-l">
+              <div className="flex items-center justify-between p-4">
+                <h2 className="font-medium">Queue</h2>
+                <div className="flex gap-2">
+                  <Button
+                    size={"icon"}
+                    variant={"outline"}
+                    onClick={() => {
+                      playNextInQueue(0);
+                    }}
+                  >
+                    <PlayIcon />
+                  </Button>
+                  <Button
+                    variant={"outline"}
+                    onClick={() => {
+                      setQueuedPieces([]);
+                    }}
+                  >
+                    Clear
+                  </Button>
+                </div>
+              </div>
+              <Separator />
+              <div className="p-4">
+                {queuedPieces.map((piece, i) => {
+                  return (
+                    <div key={piece.url + i}>
+                      <div
+                        className={cn(
+                          "cursor-pointer",
+                          queueIndex === i && playingPiece?.url === piece.url
+                            ? "text-blue-300 font-medium"
+                            : ""
+                        )}
+                        onClick={() => {
+                          playNextInQueue(i);
+                        }}
+                      >
+                        {piece.title}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
