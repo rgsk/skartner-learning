@@ -16,8 +16,6 @@ interface PianoPageProps {}
 const PianoPage: React.FC<PianoPageProps> = ({}) => {
   const [shuffledUrls, setShuffledUrls] = useState<string[]>();
   const [playedUrls, setPlayedUrls] = useState<string[]>([]);
-  const playedUrlsRef = useRef(playedUrls);
-  playedUrlsRef.current = playedUrls;
   const [shuffleActive, setShuffleActive] = useState<string | null>(null);
   const [playingPiece, setPlayingPiece] = useState<PianoPiece>();
   const playNextInShuffle = () => {
@@ -45,14 +43,20 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
     return () => window.removeEventListener("video-playing", handler as any);
   }, []);
 
-  useEffect(() => {
+  const resetPieces = () => {
     window.dispatchEvent(
       new CustomEvent<{ playedUrls: string[] }>("reset-video-keys", {
-        detail: { playedUrls: playedUrlsRef.current },
+        detail: { playedUrls: playedUrls },
       })
     );
     setPlayedUrls([]);
     setPlayingPiece(undefined);
+  };
+  const resetPiecesRef = useRef(resetPieces);
+  resetPiecesRef.current = resetPieces;
+
+  useEffect(() => {
+    resetPiecesRef.current();
     if (!shuffleActive) {
       setShuffledUrls(undefined);
     }
@@ -77,30 +81,38 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
     title: string;
     key: string;
   }) => {
+    const piecesGroupShuffleActive = shuffleActive === title;
     return (
       <div>
         <div className="flex justify-between">
           <h1 className="text-2xl font-medium">{title}</h1>
-          <Button
-            variant={shuffleActive ? "secondary" : "outline"}
-            onClick={() => {
-              if (shuffleActive) {
-                setShuffleActive(null);
-                return;
-              }
-              setShuffledUrls(
-                pianoPieces[key].map((piece) => {
-                  return piece.url;
-                })
-              );
-              setShuffleActive(title);
-              setTimeout(() => {
-                playNextInShuffleRef.current();
-              });
-            }}
+          <TooltipWrapper
+            tooltip={
+              piecesGroupShuffleActive ? "Stop Shuffle!" : `Shuffle (${title})`
+            }
           >
-            <ShuffleIcon />
-          </Button>
+            <Button
+              size={"icon"}
+              variant={piecesGroupShuffleActive ? "secondary" : "outline"}
+              onClick={() => {
+                if (piecesGroupShuffleActive) {
+                  setShuffleActive(null);
+                  return;
+                }
+                setShuffledUrls(
+                  pianoPieces[key].map((piece) => {
+                    return piece.url;
+                  })
+                );
+                setShuffleActive(title);
+                setTimeout(() => {
+                  playNextInShuffleRef.current();
+                });
+              }}
+            >
+              <ShuffleIcon />
+            </Button>
+          </TooltipWrapper>
         </div>
         <div className="h-[20px]"></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -136,33 +148,50 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
               </a>
             )}
           </div>
-          <div>
-            <Button
-              variant={shuffleActive ? "secondary" : "outline"}
-              onClick={() => {
-                if (shuffleActive) {
-                  setShuffleActive(null);
-                  return;
-                }
-                setShuffledUrls(
-                  Object.values(pianoPieces)
-                    .reduce(
-                      (acc, v) => [...acc, ...v.map((p) => p.url)],
-                      [] as string[]
-                    )
-                    .map((url) => {
-                      return url;
-                    })
-                );
-                setShuffleActive("All");
-                setTimeout(() => {
-                  playNextInShuffleRef.current();
-                });
-              }}
+          <div className="flex gap-2">
+            <TooltipWrapper
+              tooltip={shuffleActive ? "Stop Shuffle!" : "Shuffle (All)"}
             >
-              {shuffleActive && <span>{shuffleActive}</span>}
-              <ShuffleIcon />
-            </Button>
+              <Button
+                size={shuffleActive ? "default" : "icon"}
+                variant={shuffleActive ? "secondary" : "outline"}
+                onClick={() => {
+                  if (shuffleActive) {
+                    setShuffleActive(null);
+                    return;
+                  }
+                  setShuffledUrls(
+                    Object.values(pianoPieces)
+                      .reduce(
+                        (acc, v) => [...acc, ...v.map((p) => p.url)],
+                        [] as string[]
+                      )
+                      .map((url) => {
+                        return url;
+                      })
+                  );
+                  setShuffleActive("All");
+                  setTimeout(() => {
+                    playNextInShuffleRef.current();
+                  });
+                }}
+              >
+                {shuffleActive && <span>{shuffleActive}</span>}
+                <ShuffleIcon />
+              </Button>
+            </TooltipWrapper>
+            <TooltipWrapper tooltip="Reset">
+              <Button
+                variant={"outline"}
+                size={"icon"}
+                onClick={() => {
+                  resetPieces();
+                  setShuffleActive(null);
+                }}
+              >
+                <RotateCwIcon />
+              </Button>
+            </TooltipWrapper>
           </div>
         </div>
       </div>
@@ -341,9 +370,10 @@ const pianoPieces: Record<string, PianoPiece[]> = {
   ],
 };
 
+import TooltipWrapper from "@/components/Shared/TooltipWrapper";
 import { Button } from "@/components/ui/button";
 import { getQueryParam, timestampToSeconds } from "@/lib/utils";
-import { MusicIcon, ShuffleIcon } from "lucide-react";
+import { MusicIcon, RotateCwIcon, ShuffleIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import useMeasure from "react-use-measure";
