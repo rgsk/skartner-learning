@@ -435,7 +435,10 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
                       setQueuedPieces(data);
                       if (queueIndex === toIndex || queueIndex === fromIndex) {
                         setTimeout(() => {
+                          // we would like to remove below,
+                          // but videos were not loading correctly post drag, without this
                           resetPiecesRef.current();
+
                           playNextInQueueRef.current(queueIndex);
                         });
                       }
