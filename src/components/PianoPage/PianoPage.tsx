@@ -82,13 +82,37 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
       }
     }
   };
+
   const playNextInQueueRef = useRef(playNextInQueue);
   playNextInQueueRef.current = playNextInQueue;
+
+  const resetQueueIndex = () => {
+    setQueueIndex(-1);
+  };
+
+  const resetQueueIndexIfOtherPieceIsPlayed = (piece: PianoPiece) => {
+    const indexesWithPieceUrl: number[] = [];
+    for (let i = 0; i < queuedPieces.length; i++) {
+      if (queuedPieces[i].url === piece.url) {
+        indexesWithPieceUrl.push(i);
+      }
+    }
+    if (!indexesWithPieceUrl.includes(queueIndex)) {
+      resetQueueIndex();
+    }
+  };
+  const resetQueueIndexIfOtherPieceIsPlayedRef = useRef(
+    resetQueueIndexIfOtherPieceIsPlayed
+  );
+  resetQueueIndexIfOtherPieceIsPlayedRef.current =
+    resetQueueIndexIfOtherPieceIsPlayed;
+
   useEffect(() => {
     const handler = (event: CustomEvent<PianoPiece>) => {
       const piece = event.detail;
       setPlayingPiece({ ...piece, paused: false });
       setPlayedUrls((prev) => [...prev, piece.url]);
+      resetQueueIndexIfOtherPieceIsPlayedRef.current(piece);
     };
 
     window.addEventListener("video-playing", handler as any);
@@ -251,6 +275,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
                     size={"icon"}
                     variant={"outline"}
                     onClick={() => {
+                      resetQueueIndex();
                       if (shuffleActive) {
                         setShuffleActive(null);
                       } else {
