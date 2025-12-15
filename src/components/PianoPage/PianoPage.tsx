@@ -1,9 +1,9 @@
 "use client";
-function getRandomUnplayed(shuffledUrls: ShuffledUrl[]) {
+function getRandomUnplayed(shuffledUrls: string[], playedUrls: string[]) {
   if (shuffledUrls.length === 0) return undefined;
 
   // Filter unplayed
-  const unplayed = shuffledUrls.filter((item) => !item.played);
+  const unplayed = shuffledUrls.filter((item) => !playedUrls.includes(item));
 
   // If none left, return undefined
   if (unplayed.length === 0) return undefined;
@@ -12,19 +12,21 @@ function getRandomUnplayed(shuffledUrls: ShuffledUrl[]) {
   const randomIndex = Math.floor(Math.random() * unplayed.length);
   return unplayed[randomIndex];
 }
-type ShuffledUrl = { played: boolean; url: string };
 interface PianoPageProps {}
 const PianoPage: React.FC<PianoPageProps> = ({}) => {
-  const [shuffledUrls, setShuffledUrls] = useState<ShuffledUrl[]>();
+  const [shuffledUrls, setShuffledUrls] = useState<string[]>();
+  const [playedUrls, setPlayedUrls] = useState<string[]>([]);
+  const playedUrlsRef = useRef(playedUrls);
+  playedUrlsRef.current = playedUrls;
   const [shuffleActive, setShuffleActive] = useState<string | null>(null);
   const [playingPiece, setPlayingPiece] = useState<PianoPiece>();
   const playNextInShuffle = () => {
     if (shuffledUrls && shuffleActive) {
-      const nextShuffledUrl = getRandomUnplayed(shuffledUrls);
+      const nextShuffledUrl = getRandomUnplayed(shuffledUrls, playedUrls);
       if (nextShuffledUrl) {
         window.dispatchEvent(
           new CustomEvent("play-video", {
-            detail: nextShuffledUrl.url,
+            detail: nextShuffledUrl,
           })
         );
       } else {
@@ -36,18 +38,20 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
     const handler = (event: CustomEvent<PianoPiece>) => {
       const piece = event.detail;
       setPlayingPiece(piece);
-      setShuffledUrls((prev) =>
-        prev?.map((item) =>
-          item.url === piece.url ? { ...item, played: true } : { ...item }
-        )
-      );
+      setPlayedUrls((prev) => [...prev, piece.url]);
     };
 
     window.addEventListener("video-playing", handler as any);
     return () => window.removeEventListener("video-playing", handler as any);
   }, []);
+
   useEffect(() => {
-    window.dispatchEvent(new CustomEvent("reset-video-keys"));
+    window.dispatchEvent(
+      new CustomEvent<{ playedUrls: string[] }>("reset-video-keys", {
+        detail: { playedUrls: playedUrlsRef.current },
+      })
+    );
+    setPlayedUrls([]);
     setPlayingPiece(undefined);
     if (!shuffleActive) {
       setShuffledUrls(undefined);
@@ -86,10 +90,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
               }
               setShuffledUrls(
                 pianoPieces[key].map((piece) => {
-                  return {
-                    url: piece.url,
-                    played: false,
-                  };
+                  return piece.url;
                 })
               );
               setShuffleActive(title);
@@ -150,10 +151,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
                       [] as string[]
                     )
                     .map((url) => {
-                      return {
-                        url,
-                        played: false,
-                      };
+                      return url;
                     })
                 );
                 setShuffleActive("All");
@@ -403,9 +401,12 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
   }, []);
 
   useEffect(() => {
-    const resetKeys = (event: CustomEvent) => {
-      setIsPlaying(false);
-      setPlayerKey((prev) => prev + 1);
+    const resetKeys = (event: CustomEvent<{ playedUrls: string[] }>) => {
+      const { playedUrls } = event.detail;
+      if (playedUrls.includes(piece.url)) {
+        setIsPlaying(false);
+        setPlayerKey((prev) => prev + 1);
+      }
     };
 
     window.addEventListener("reset-video-keys", resetKeys as any);
