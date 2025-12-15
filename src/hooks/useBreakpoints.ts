@@ -12,7 +12,7 @@ export const breakpoints = {
 };
 
 const useBreakpoints = () => {
-  const windowSize = useWindowSize();
+  const { windowSize } = useWindowSize();
   const windowWidth = windowSize.width;
   const result = useMemo(() => {
     const breakpoint = (() => {

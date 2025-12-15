@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { cn } from "@/lib/utils";
 import {
+  ListVideoIcon,
   MusicIcon,
   PauseIcon,
   PlayIcon,
@@ -206,7 +207,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
     );
   };
   const [navbarContainerRef, navbarContainerBounds] = useMeasure();
-  const windowSize = useWindowSize();
+  const { windowSize } = useWindowSize();
 
   return (
     <div>
@@ -347,7 +348,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
                       playNextInQueue(0);
                     }}
                   >
-                    <PlayIcon />
+                    <ListVideoIcon />
                   </Button>
                   <Button
                     variant={"outline"}

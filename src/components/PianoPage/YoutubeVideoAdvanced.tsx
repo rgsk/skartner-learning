@@ -18,14 +18,6 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
   const playerRef = useRef<HTMLVideoElement>(null);
   const [playerKey, setPlayerKey] = useState(0);
 
-  const handleSkip = (seconds: number) => {
-    const player = playerRef.current;
-    if (player) {
-      player.currentTime = seconds;
-      handlePlay();
-    }
-  };
-
   const [isPlaying, setIsPlaying] = useState(false);
 
   // When another video starts playing → stop this one
