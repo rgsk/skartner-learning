@@ -86,7 +86,7 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
           setIsPlaying(true);
           break;
         case "stop-video":
-          resetVideoRef.current();
+          setIsPlaying(false);
           break;
       }
     };
