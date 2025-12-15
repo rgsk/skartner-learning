@@ -78,11 +78,17 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
       } else {
         if (queueIndex + 1 < queuedPieces.length) {
           setQueueIndex(queueIndex + 1);
-          window.dispatchEvent(
-            new CustomEvent("play-video-from-start", {
-              detail: queuedPieces[queueIndex + 1].url,
-            })
-          );
+          setTimeout(() => {
+            // if the same song is repeated continously,
+            // it plays at subsequent times (after first) rather than pausing
+            // possibly onEnded sets isPlaying to false
+            // we want to perform below after that, so play-video-from-start sets isPlaying to true
+            window.dispatchEvent(
+              new CustomEvent("play-video-from-start", {
+                detail: queuedPieces[queueIndex + 1].url,
+              })
+            );
+          });
         } else {
           setQueueIndex(-1);
         }
