@@ -78,6 +78,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
             })
           );
         } else {
+          setQueueIndex(-1);
         }
       }
     }
@@ -85,10 +86,6 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
 
   const playNextInQueueRef = useRef(playNextInQueue);
   playNextInQueueRef.current = playNextInQueue;
-
-  const resetQueueIndex = () => {
-    setQueueIndex(-1);
-  };
 
   useEffect(() => {
     if (playingPiece && queueIndex !== -1) {
@@ -99,7 +96,8 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
         }
       }
       if (!indexesWithPieceUrl.includes(queueIndex)) {
-        resetQueueIndex();
+        resetPiecesRef.current(true);
+        setQueueIndex(-1);
       }
     }
   }, [playingPiece, queueIndex, queuedPieces]);
@@ -130,14 +128,25 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
     return () => window.removeEventListener("video-paused", handler as any);
   }, []);
 
-  const resetPieces = () => {
-    window.dispatchEvent(
-      new CustomEvent<{ playedUrls: string[] }>("reset-video-keys", {
-        detail: { playedUrls: playedUrls },
-      })
-    );
-    setPlayedUrls([]);
-    setPlayingPiece(undefined);
+  const resetPieces = (preventCurrent?: boolean) => {
+    if (preventCurrent && playingPiece) {
+      window.dispatchEvent(
+        new CustomEvent<{ playedUrls: string[] }>("reset-video-keys", {
+          detail: {
+            playedUrls: playedUrls.filter((url) => url !== playingPiece.url),
+          },
+        })
+      );
+      setPlayedUrls([playingPiece.url]);
+    } else {
+      window.dispatchEvent(
+        new CustomEvent<{ playedUrls: string[] }>("reset-video-keys", {
+          detail: { playedUrls: playedUrls },
+        })
+      );
+      setPlayedUrls([]);
+      setPlayingPiece(undefined);
+    }
   };
   const resetPiecesRef = useRef(resetPieces);
   resetPiecesRef.current = resetPieces;
@@ -229,6 +238,8 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
   const [navbarContainerRef, navbarContainerBounds] = useMeasure();
   const { windowSize } = useWindowSize();
 
+  const queueActive = queueIndex >= 0 && queueIndex < queuedPieces.length;
+
   return (
     <div>
       <div
@@ -271,8 +282,10 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
                     size={"icon"}
                     variant={"outline"}
                     onClick={() => {
-                      resetQueueIndex();
-                      if (shuffleActive) {
+                      if (queueActive) {
+                        setQueueIndex(-1);
+                        resetPieces();
+                      } else if (shuffleActive) {
                         setShuffleActive(null);
                       } else {
                         window.dispatchEvent(
@@ -363,12 +376,22 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
           {queuedPieces.length > 0 && (
             <div className="w-[300px] border-l">
               <div className="flex items-center justify-between p-4">
-                <h2 className="font-medium">Queue</h2>
+                <h2
+                  className={cn(
+                    "font-medium",
+                    queueActive ? "text-blue-300" : ""
+                  )}
+                >
+                  Queue
+                </h2>
                 <div className="flex gap-2">
                   <Button
                     size={"icon"}
                     variant={"outline"}
                     onClick={() => {
+                      if (!queueActive) {
+                        resetPieces();
+                      }
                       playNextInQueue(0);
                     }}
                   >
@@ -377,6 +400,9 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
                   <Button
                     variant={"outline"}
                     onClick={() => {
+                      if (queueActive) {
+                        resetPieces();
+                      }
                       setQueuedPieces([]);
                     }}
                   >
@@ -397,6 +423,9 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
                             : ""
                         )}
                         onClick={() => {
+                          if (!queueActive) {
+                            resetPieces();
+                          }
                           playNextInQueue(i);
                         }}
                       >
