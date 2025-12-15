@@ -43,18 +43,40 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
     window.dispatchEvent(new CustomEvent("video-playing", { detail: piece }));
     setIsPlaying(true);
   };
+  const handlePlayRef = useRef(handlePlay);
+  handlePlayRef.current = handlePlay;
 
   useEffect(() => {
-    const playHandler = (event: CustomEvent<string>) => {
+    const handler = (event: CustomEvent<string>) => {
       if (event.detail === piece.url) {
-        handlePlay();
+        handlePlayRef.current();
       }
     };
 
-    window.addEventListener("play-video", playHandler as any);
-    return () => window.removeEventListener("play-video", playHandler as any);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    window.addEventListener("play-video", handler as any);
+    return () => window.removeEventListener("play-video", handler as any);
+  }, [piece.url]);
+
+  useEffect(() => {
+    const handler = (event: CustomEvent<string>) => {
+      if (event.detail === piece.url) {
+        setIsPlaying(false);
+      }
+    };
+
+    window.addEventListener("pause-video", handler as any);
+    return () => window.removeEventListener("pause-video", handler as any);
+  }, [piece.url]);
+  useEffect(() => {
+    const handler = (event: CustomEvent<string>) => {
+      if (event.detail === piece.url) {
+        setIsPlaying(true);
+      }
+    };
+
+    window.addEventListener("resume-video", handler as any);
+    return () => window.removeEventListener("resume-video", handler as any);
+  }, [piece.url]);
 
   useEffect(() => {
     const resetKeys = (event: CustomEvent<{ playedUrls: string[] }>) => {
@@ -87,7 +109,7 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
             window.dispatchEvent(
               new CustomEvent("video-ended", { detail: piece.url })
             );
-            setIsPlaying(false);
+            setIsPlaying(false); // ensures that we don't replay the video on end
           }}
           width="100%"
           height="100%"

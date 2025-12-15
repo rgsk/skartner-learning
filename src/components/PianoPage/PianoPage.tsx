@@ -5,7 +5,13 @@ import YoutubeVideoAdvanced, {
 } from "@/components/PianoPage/YoutubeVideoAdvanced";
 import TooltipWrapper from "@/components/Shared/TooltipWrapper";
 import { Button } from "@/components/ui/button";
-import { MusicIcon, RotateCwIcon, ShuffleIcon } from "lucide-react";
+import {
+  MusicIcon,
+  PauseIcon,
+  PlayIcon,
+  RotateCwIcon,
+  ShuffleIcon,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import useMeasure from "react-use-measure";
 import { PianoPiece, pianoPieces } from "./pianoPieces";
@@ -28,7 +34,9 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
   const [shuffledUrls, setShuffledUrls] = useState<string[]>();
   const [playedUrls, setPlayedUrls] = useState<string[]>([]);
   const [shuffleActive, setShuffleActive] = useState<string | null>(null);
-  const [playingPiece, setPlayingPiece] = useState<PianoPiece>();
+  const [playingPiece, setPlayingPiece] = useState<
+    PianoPiece & { paused: boolean }
+  >();
   const playNextInShuffle = () => {
     if (shuffledUrls && shuffleActive) {
       const nextShuffledUrl = getRandomUnplayed(shuffledUrls, playedUrls);
@@ -46,7 +54,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
   useEffect(() => {
     const handler = (event: CustomEvent<PianoPiece>) => {
       const piece = event.detail;
-      setPlayingPiece(piece);
+      setPlayingPiece({ ...piece, paused: false });
       setPlayedUrls((prev) => [...prev, piece.url]);
     };
 
@@ -151,12 +159,37 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
         <div className="flex items-center justify-between">
           <div>
             {playingPiece && (
-              <a
-                href={`#${extractYTId(playingPiece.url)}`}
-                className="flex gap-2 items-center font-medium"
-              >
-                <MusicIcon size={16} /> {playingPiece.title}
-              </a>
+              <div className="flex gap-4">
+                <a
+                  href={`#${extractYTId(playingPiece.url)}`}
+                  className="flex gap-2 items-center font-medium"
+                >
+                  <MusicIcon size={16} /> {playingPiece.title}
+                </a>
+                <Button
+                  size={"icon"}
+                  variant={"outline"}
+                  onClick={() => {
+                    if (playingPiece.paused) {
+                      setPlayingPiece({ ...playingPiece, paused: false });
+                      window.dispatchEvent(
+                        new CustomEvent("resume-video", {
+                          detail: playingPiece.url,
+                        })
+                      );
+                    } else {
+                      setPlayingPiece({ ...playingPiece, paused: true });
+                      window.dispatchEvent(
+                        new CustomEvent("pause-video", {
+                          detail: playingPiece.url,
+                        })
+                      );
+                    }
+                  }}
+                >
+                  {playingPiece.paused ? <PlayIcon /> : <PauseIcon />}
+                </Button>
+              </div>
             )}
           </div>
           <div className="flex gap-2">
