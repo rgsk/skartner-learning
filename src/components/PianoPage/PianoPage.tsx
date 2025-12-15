@@ -3,6 +3,7 @@
 import YoutubeVideoAdvanced, {
   extractYTId,
 } from "@/components/PianoPage/YoutubeVideoAdvanced";
+import DragDots from "@/components/Shared/DragDots";
 import TooltipWrapper from "@/components/Shared/TooltipWrapper";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -16,11 +17,12 @@ import {
   RotateCwIcon,
   ShuffleIcon,
   SquareIcon,
+  XIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import ReactDragListView from "react-drag-listview";
 import useMeasure from "react-use-measure";
 import { PianoPiece, pianoPieces } from "./pianoPieces";
-
 function getRandomUnplayed(shuffledUrls: string[], playedUrls: string[]) {
   if (shuffledUrls.length === 0) return undefined;
 
@@ -63,12 +65,16 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
   const playNextInQueue = (index?: number) => {
     if (queuedPieces.length > 0) {
       if (typeof index === "number") {
-        setQueueIndex(index);
-        window.dispatchEvent(
-          new CustomEvent("play-video-from-start", {
-            detail: queuedPieces[index].url,
-          })
-        );
+        if (index < queuedPieces.length) {
+          setQueueIndex(index);
+          window.dispatchEvent(
+            new CustomEvent("play-video-from-start", {
+              detail: queuedPieces[index].url,
+            })
+          );
+        } else {
+          setQueueIndex(-1);
+        }
       } else {
         if (queueIndex + 1 < queuedPieces.length) {
           setQueueIndex(queueIndex + 1);
@@ -342,6 +348,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
                 onClick={() => {
                   resetPieces();
                   setShuffleActive(null);
+                  setQueueIndex(-1);
                 }}
               >
                 <RotateCwIcon />
@@ -413,28 +420,82 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
               </div>
               <Separator />
               <div className="p-4">
-                {queuedPieces.map((piece, i) => {
-                  return (
-                    <div key={piece.url + i}>
-                      <div
-                        className={cn(
-                          "cursor-pointer",
-                          queueIndex === i && playingPiece?.url === piece.url
-                            ? "text-blue-300 font-medium"
-                            : ""
-                        )}
-                        onClick={() => {
-                          if (!queueActive) {
-                            resetPieces();
-                          }
-                          playNextInQueue(i);
-                        }}
-                      >
-                        {piece.title}
+                <ReactDragListView
+                  {...{
+                    onDragEnd(fromIndex, toIndex) {
+                      const data = [...queuedPieces];
+                      const item = data.splice(fromIndex, 1)[0];
+                      data.splice(toIndex, 0, item!);
+                      setQueuedPieces(data);
+                      if (queueIndex === toIndex || queueIndex === fromIndex) {
+                        setTimeout(() => {
+                          resetPiecesRef.current();
+                          playNextInQueueRef.current(queueIndex);
+                        });
+                      }
+                    },
+                    nodeSelector: "#node",
+                    handleSelector: "#handle",
+                  }}
+                >
+                  {queuedPieces.map((piece, index: number) => {
+                    return (
+                      <div key={index} className="relative group" id="node">
+                        <>
+                          <div className="!border-none absolute top-1/2 left-[5px] -translate-x-[85%] -translate-y-1/2 group-hover:opacity-100 opacity-0">
+                            <div id="handle" className="cursor-move rotate-90">
+                              <DragDots type={"horizontal"} />
+                            </div>
+                          </div>
+                          <div className="!border-none absolute top-1/2 right-[20px] translate-x-[85%] -translate-y-1/2 group-hover:opacity-100 opacity-0">
+                            <Button
+                              className="!p-1 aspect-square rounded-full"
+                              variant={"ghost"}
+                              onClick={() => {
+                                // delete from queue
+                                setQueuedPieces((prev) => {
+                                  const newQueue = [...prev];
+                                  newQueue.splice(index, 1);
+                                  return newQueue;
+                                });
+                                if (index === queueIndex) {
+                                  setTimeout(() => {
+                                    playNextInQueueRef.current(queueIndex);
+                                  });
+                                } else if (index < queueIndex) {
+                                  setQueueIndex(queueIndex - 1);
+                                } else {
+                                  // index > queueIndex
+                                }
+                              }}
+                            >
+                              <XIcon size={18} className="cursor-pointer" />
+                            </Button>
+                          </div>
+                        </>
+                        <div key={piece.url + index}>
+                          <div
+                            className={cn(
+                              "cursor-pointer pl-3",
+                              queueIndex === index &&
+                                playingPiece?.url === piece.url
+                                ? "text-blue-300 font-medium"
+                                : ""
+                            )}
+                            onClick={() => {
+                              if (!queueActive) {
+                                resetPieces();
+                              }
+                              playNextInQueue(index);
+                            }}
+                          >
+                            {piece.title}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </ReactDragListView>
               </div>
             </div>
           )}
