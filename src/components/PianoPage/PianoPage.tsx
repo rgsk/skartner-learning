@@ -11,6 +11,7 @@ import {
   PlayIcon,
   RotateCwIcon,
   ShuffleIcon,
+  SquareIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import useMeasure from "react-use-measure";
@@ -60,6 +61,21 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
 
     window.addEventListener("video-playing", handler as any);
     return () => window.removeEventListener("video-playing", handler as any);
+  }, []);
+
+  useEffect(() => {
+    const handler = (event: CustomEvent<string>) => {
+      const url = event.detail;
+      setPlayingPiece((prev) => {
+        if (prev?.url === url) {
+          return { ...prev, paused: true };
+        }
+        return prev;
+      });
+    };
+
+    window.addEventListener("video-paused", handler as any);
+    return () => window.removeEventListener("video-paused", handler as any);
   }, []);
 
   const resetPieces = () => {
@@ -166,29 +182,47 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
                 >
                   <MusicIcon size={16} /> {playingPiece.title}
                 </a>
-                <Button
-                  size={"icon"}
-                  variant={"outline"}
-                  onClick={() => {
-                    if (playingPiece.paused) {
-                      setPlayingPiece({ ...playingPiece, paused: false });
-                      window.dispatchEvent(
-                        new CustomEvent("resume-video", {
-                          detail: playingPiece.url,
-                        })
-                      );
-                    } else {
-                      setPlayingPiece({ ...playingPiece, paused: true });
-                      window.dispatchEvent(
-                        new CustomEvent("pause-video", {
-                          detail: playingPiece.url,
-                        })
-                      );
-                    }
-                  }}
-                >
-                  {playingPiece.paused ? <PlayIcon /> : <PauseIcon />}
-                </Button>
+                <div className="flex gap-2">
+                  <Button
+                    size={"icon"}
+                    variant={"outline"}
+                    onClick={() => {
+                      if (playingPiece.paused) {
+                        window.dispatchEvent(
+                          new CustomEvent("resume-video", {
+                            detail: playingPiece.url,
+                          })
+                        );
+                      } else {
+                        window.dispatchEvent(
+                          new CustomEvent("pause-video", {
+                            detail: playingPiece.url,
+                          })
+                        );
+                      }
+                    }}
+                  >
+                    {playingPiece.paused ? <PlayIcon /> : <PauseIcon />}
+                  </Button>
+                  <Button
+                    size={"icon"}
+                    variant={"outline"}
+                    onClick={() => {
+                      if (shuffleActive) {
+                        setShuffleActive(null);
+                      } else {
+                        window.dispatchEvent(
+                          new CustomEvent("stop-video", {
+                            detail: playingPiece.url,
+                          })
+                        );
+                        setPlayingPiece(undefined);
+                      }
+                    }}
+                  >
+                    <SquareIcon className="!w-[14px]" />
+                  </Button>
+                </div>
               </div>
             )}
           </div>

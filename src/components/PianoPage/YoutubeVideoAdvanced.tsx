@@ -27,15 +27,14 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
 
   // When another video starts playing → stop this one
   useEffect(() => {
-    const stopHandler = (event: CustomEvent<PianoPiece>) => {
+    const handler = (event: CustomEvent<PianoPiece>) => {
       if (event.detail.url !== piece.url) {
         setIsPlaying(false);
       }
     };
 
-    window.addEventListener("video-playing", stopHandler as any);
-    return () =>
-      window.removeEventListener("video-playing", stopHandler as any);
+    window.addEventListener("video-playing", handler as any);
+    return () => window.removeEventListener("video-playing", handler as any);
   }, [piece.url]);
 
   const handlePlay = () => {
@@ -45,51 +44,57 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
   };
   const handlePlayRef = useRef(handlePlay);
   handlePlayRef.current = handlePlay;
-
+  const handlePause = () => {
+    window.dispatchEvent(
+      new CustomEvent("video-paused", { detail: piece.url })
+    );
+    setIsPlaying(false);
+  };
+  const resetVideo = () => {
+    setIsPlaying(false);
+    setPlayerKey((prev) => prev + 1);
+  };
+  const resetVideoRef = useRef(resetVideo);
+  resetVideoRef.current = resetVideo;
   useEffect(() => {
-    const handler = (event: CustomEvent<string>) => {
-      if (event.detail === piece.url) {
-        handlePlayRef.current();
-      }
-    };
-
-    window.addEventListener("play-video", handler as any);
-    return () => window.removeEventListener("play-video", handler as any);
-  }, [piece.url]);
-
-  useEffect(() => {
-    const handler = (event: CustomEvent<string>) => {
-      if (event.detail === piece.url) {
-        setIsPlaying(false);
-      }
-    };
-
-    window.addEventListener("pause-video", handler as any);
-    return () => window.removeEventListener("pause-video", handler as any);
-  }, [piece.url]);
-  useEffect(() => {
-    const handler = (event: CustomEvent<string>) => {
-      if (event.detail === piece.url) {
-        setIsPlaying(true);
-      }
-    };
-
-    window.addEventListener("resume-video", handler as any);
-    return () => window.removeEventListener("resume-video", handler as any);
-  }, [piece.url]);
-
-  useEffect(() => {
-    const resetKeys = (event: CustomEvent<{ playedUrls: string[] }>) => {
+    const handler = (event: CustomEvent<{ playedUrls: string[] }>) => {
       const { playedUrls } = event.detail;
       if (playedUrls.includes(piece.url)) {
-        setIsPlaying(false);
-        setPlayerKey((prev) => prev + 1);
+        resetVideoRef.current();
       }
     };
 
-    window.addEventListener("reset-video-keys", resetKeys as any);
-    return () =>
-      window.removeEventListener("reset-video-keys", resetKeys as any);
+    window.addEventListener("reset-video-keys", handler as any);
+    return () => window.removeEventListener("reset-video-keys", handler as any);
+  }, [piece.url]);
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const customEvent = event as CustomEvent<string>;
+      if (customEvent.detail !== piece.url) return;
+
+      switch (event.type) {
+        case "play-video":
+          handlePlayRef.current?.();
+          break;
+
+        case "pause-video":
+          setIsPlaying(false);
+          break;
+
+        case "resume-video":
+          setIsPlaying(true);
+          break;
+        case "stop-video":
+          resetVideoRef.current();
+          break;
+      }
+    };
+
+    const events = ["play-video", "pause-video", "resume-video", "stop-video"];
+
+    events.forEach((e) => window.addEventListener(e, handler));
+    return () => events.forEach((e) => window.removeEventListener(e, handler));
   }, [piece.url]);
 
   return (
@@ -104,6 +109,7 @@ const YoutubeVideoAdvanced: React.FC<YoutubeVideoAdvancedProps> = ({
           src={piece.url}
           playing={isPlaying}
           onPlay={handlePlay}
+          onPause={handlePause}
           key={String(playerKey) + extractYTId(piece.url)}
           onEnded={() => {
             window.dispatchEvent(
