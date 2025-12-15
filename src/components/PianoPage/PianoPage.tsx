@@ -174,7 +174,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
   }) => {
     const piecesGroupShuffleActive = shuffleActive === title;
     return (
-      <div>
+      <div className="p-4">
         <div className="flex justify-between">
           <h1 className="text-2xl font-medium">{title}</h1>
           <TooltipWrapper
@@ -350,14 +350,17 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
           className="flex"
           style={{ height: windowSize.height - navbarContainerBounds.height }}
         >
-          <div className="p-4 flex-1 overflow-auto">
-            <div className="space-y-[40px]">
+          <div className="flex-1 overflow-auto">
+            <div>
               {renderPiecesGroup({
                 title: "Gibran Alcocer",
                 key: "gibran-alcocer",
               })}
+              <Separator />
               {renderPiecesGroup({ title: "Level 1", key: "level1" })}
+              <Separator />
               {renderPiecesGroup({ title: "Level 2", key: "level2" })}
+              <Separator />
               {renderPiecesGroup({ title: "Level 3", key: "level3" })}
             </div>
           </div>
