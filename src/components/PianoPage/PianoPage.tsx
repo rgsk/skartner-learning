@@ -404,6 +404,7 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
                         resetPieces();
                       }
                       setQueuedPieces([]);
+                      setQueueIndex(-1);
                     }}
                   >
                     Clear
