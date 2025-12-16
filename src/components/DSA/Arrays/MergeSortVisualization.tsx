@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { useRef, useState } from "react";
 import { GoArrowUp } from "react-icons/go";
 
-const defaultArr = [9, 7, 6, 3, 8, 1, 10, 2, 5];
+const defaultArr = [9, 7, 6, 3, 8, 1, 10, 2];
 interface MergeSortVisualizationProps {}
 
 const MergeSortVisualization: React.FC<MergeSortVisualizationProps> = ({}) => {
@@ -44,6 +44,9 @@ const MergeSortVisualization: React.FC<MergeSortVisualizationProps> = ({}) => {
         .filter((x) => !isNaN(x));
       if (arr.length === 0) {
         throw new Error("Array is empty");
+      }
+      if (arr.length > 8) {
+        throw new Error("Max Array length is 8");
       }
       setArr(arr);
       setErrorMessage("");
@@ -231,11 +234,15 @@ const MergeSortVisualization: React.FC<MergeSortVisualizationProps> = ({}) => {
             return (
               <div
                 key={i}
-                className={cn("flex absolute")}
+                className={cn("flex absolute -translate-x-1/2")}
                 style={{
                   top: entry.y * 80,
-                  left: 560 + entry.x * arr.length * 15,
-                  transform: "translateX(-50%)",
+                  left:
+                    560 +
+                    entry.x * Math.max(Math.log2(arr.length) * 35, 50) +
+                    (entry.direction === "left"
+                      ? entry.y * 8 * Math.abs(entry.x) * 1
+                      : entry.y * 8 * Math.abs(entry.x) * -1),
                 }}
               >
                 {entry.direction === "left" && (
@@ -296,7 +303,7 @@ const MergeSortVisualization: React.FC<MergeSortVisualizationProps> = ({}) => {
       )}
       <div
         style={{
-          height: tree.length > 0 ? Math.ceil(Math.log2(arr.length)) * 100 : 0,
+          height: 340,
         }}
       ></div>
       <div className="flex flex-col items-stretch gap-2 w-80">
