@@ -1,10 +1,13 @@
 "use client";
 
+import Slides from "@/components/PracticePage/Probability/Slides";
+
 interface PracticePageProps {}
 const PracticePage: React.FC<PracticePageProps> = ({}) => {
   return (
-    <div className="p-4">
-      <p>practice</p>
+    <div>
+      <Slides />
+      {/* <p>hi</p> */}
     </div>
   );
 };
