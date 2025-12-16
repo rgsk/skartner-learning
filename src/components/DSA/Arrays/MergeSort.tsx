@@ -1,4 +1,5 @@
 "use client";
+import MergeSortVisualization from "@/components/DSA/Arrays/MergeSortVisualization";
 import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Examples from "@/components/Shared/Examples";
@@ -12,6 +13,7 @@ import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
 import UnorderedList from "@/components/Shared/UnorderedList";
 import YoutubeVideo from "@/components/Shared/YoutubeVideo";
+import Visualization from "@/components/Visualization/Visualization";
 
 interface MergeSortProps {}
 const MergeSort: React.FC<MergeSortProps> = ({}) => {
@@ -66,7 +68,13 @@ const MergeSort: React.FC<MergeSortProps> = ({}) => {
           <CodeFetcher
             pythonFile="/dsa/arrays/merge_sort/sol/merge_sort.py"
             cppFile="/dsa/arrays/merge_sort/sol/merge_sort.cpp"
+            typescriptFile="/dsa/arrays/merge_sort/sol/merge_sort.ts"
           />
+        </Section>
+        <Section>
+          <Visualization>
+            <MergeSortVisualization />
+          </Visualization>
         </Section>
       </Solution>
       <Section>
