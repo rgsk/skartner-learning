@@ -174,5 +174,9 @@ export const pianoPieces: Record<string, PianoPiece[]> = {
       title: "Minuet in G Major - Bach",
       url: "https://www.youtube.com/watch?v=icZob9-1MDw",
     },
+    {
+      title: "Liszt - La Campanella",
+      url: "https://www.youtube.com/watch?v=H1Dvg2MxQn",
+    },
   ],
 };
