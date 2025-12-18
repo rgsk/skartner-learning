@@ -384,6 +384,8 @@ const PianoPage: React.FC<PianoPageProps> = ({}) => {
               {renderPiecesGroup({ title: "Level 2", key: "level2" })}
               <Separator />
               {renderPiecesGroup({ title: "Level 3", key: "level3" })}
+              <Separator />
+              {renderPiecesGroup({ title: "Classical", key: "classical" })}
             </div>
           </div>
           {queuedPieces.length > 0 && (

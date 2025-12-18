@@ -152,5 +152,27 @@ export const pianoPieces: Record<string, PianoPiece[]> = {
       title: "Hymn to the Sea - Titanic",
       url: "https://www.youtube.com/watch?v=LLcLuaA9gCg",
     },
+    {
+      title: "Pirates of the Caribbean - He's a Pirate",
+      url: "https://www.youtube.com/watch?v=2aBtDz87UK0",
+    },
+  ],
+  classical: [
+    {
+      title: "Beethoven - Fur Elise",
+      url: "https://www.youtube.com/watch?v=MgFhNbFvl_s",
+    },
+    {
+      title: "Beethoven - Moonlight Sonata (1st Movement)",
+      url: "https://www.youtube.com/watch?v=sbTVZMJ9Z2I",
+    },
+    {
+      title: "Beethoven - Moonlight Sonata (3rd Movement)",
+      url: "https://www.youtube.com/watch?v=BV7RkEL6oRc",
+    },
+    {
+      title: "Minuet in G Major - Bach",
+      url: "https://www.youtube.com/watch?v=icZob9-1MDw",
+    },
   ],
 };
