@@ -176,7 +176,7 @@ export const pianoPieces: Record<string, PianoPiece[]> = {
     },
     {
       title: "Liszt - La Campanella",
-      url: "https://www.youtube.com/watch?v=H1Dvg2MxQn",
+      url: "https://www.youtube.com/watch?v=H1Dvg2MxQn8",
     },
   ],
 };
