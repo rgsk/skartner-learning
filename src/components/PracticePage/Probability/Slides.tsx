@@ -9,7 +9,7 @@ import {
 } from "@/components/Shared/Controls";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Slides = ({
   steps,
@@ -25,6 +25,12 @@ const Slides = ({
   const resetState = () => {
     setCounter(0);
   };
+  useEffect(() => {
+    const mainContainer = document.getElementById("main-container");
+    if (mainContainer) {
+      mainContainer.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }, [counter]);
   const runAlgo: ControlsProps["runAlgo"] = ({ addSteps }) => {
     algo();
     function algo() {

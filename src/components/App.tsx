@@ -28,6 +28,7 @@ const App: React.FC<AppProps> = ({ children }) => {
             </div>
             {navbarContainerBounds.height > 0 && (
               <div
+                id="main-container"
                 className="absolute h-full w-full overflow-auto"
                 style={{
                   top: navbarContainerBounds.height,
