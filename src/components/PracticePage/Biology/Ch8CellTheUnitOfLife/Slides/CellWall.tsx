@@ -21,10 +21,10 @@ const CellWall = () => {
           cellulose, hemicellulose, pectins and proteins.
         </p>
         <p>
-          The cell wall of a young plant cell, the primary wall is capable of
-          growth, which gradually diminishes as the cell matures and the
-          secondary wall is formed on the inner (towards membrane) side of the
-          cell.
+          The cell wall of a young plant cell, the <strong>primary wall</strong>{" "}
+          is capable of growth, which gradually diminishes as the cell matures
+          and the secondary wall is formed on the inner (towards membrane) side
+          of the cell.
         </p>
         <ParaSeparator />
         <p>

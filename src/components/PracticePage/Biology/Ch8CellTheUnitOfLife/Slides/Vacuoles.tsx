@@ -25,12 +25,12 @@ const Vacuoles = () => {
         </p>
         <ParaSeparator />
         <p>
-          In Amoeba, the contractile vacuole is important for osmoregulation and
-          excretion.
+          In Amoeba, the <strong>contractile vacuole</strong> is important for
+          osmoregulation and excretion.
         </p>
         <p>
-          In many cells, as in protists, food vacuoles are formed by engulfing
-          the food particles.
+          In many cells, as in protists, <strong>food vacuoles</strong> are
+          formed by engulfing the food particles.
         </p>
       </div>
     </div>
