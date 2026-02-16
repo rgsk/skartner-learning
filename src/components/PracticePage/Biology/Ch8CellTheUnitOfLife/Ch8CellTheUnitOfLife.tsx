@@ -1,5 +1,6 @@
 import AnOverviewOfCell from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/AnOverviewOfCell";
 import CellEnvelopeAndItsModifications from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CellEnvelopeAndItsModifications";
+import CellMembrane from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CellMembrane";
 import CellTheory from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CellTheory";
 import DifferentCellSizeAndShapes from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/DifferentCellSizeAndShapes";
 import EukaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/EukaryoticCells";
@@ -19,6 +20,7 @@ const steps = [
   { component: CellEnvelopeAndItsModifications, length: 1 },
   { component: RibosomesAndInclusionBodies, length: 1 },
   { component: EukaryoticCells, length: 1 },
+  { component: CellMembrane, length: 1 },
 ];
 
 const Ch8CellTheUnitOfLife = () => {

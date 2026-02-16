@@ -4,7 +4,7 @@ const Intro = () => {
   return (
     <div>
       <h1 className="text-3xl">Chapter 8</h1>
-      <h2 className="text-3xl">Cell: The Unit Of Life</h2>
+      <h2 className="text-3xl">Cell: The Unit of Life</h2>
       <div className="h-4"></div>
       <div className="space-y-2">
         <p>When you look around, you see both living and non-living things.</p>
