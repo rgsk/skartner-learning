@@ -14,6 +14,7 @@ import GolgiApparatus from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLi
 import Intro from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Intro";
 import Lysosomes from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Lysosomes";
 import Mitochondria from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Mitochondria";
+import Nucleus from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Nucleus";
 import Plastids from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Plastids";
 import ProkaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/ProkaryoticCells";
 import Ribosomes from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Ribosomes";
@@ -45,6 +46,7 @@ const steps = [
   { component: Cytoskeleton, length: 1 },
   { component: CiliaAndFlagella, length: 1 },
   { component: CentrosomeAndCentrioles, length: 1 },
+  { component: Nucleus, length: 1 },
 ];
 
 const Ch8CellTheUnitOfLife = () => {
