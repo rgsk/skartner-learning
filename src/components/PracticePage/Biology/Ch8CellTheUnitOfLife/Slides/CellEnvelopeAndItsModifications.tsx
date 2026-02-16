@@ -23,8 +23,8 @@ const CellEnvelopeAndItsModifications = () => {
           Bacteria can be classified into two groups on the basis of the
           differences in the cell envelopes and the manner in which they respond
           to the staining procedure developed by Gram viz., those that take up
-          the gram stain are Gram positive and the others that do not are called
-          Gram negative bacteria.
+          the gram stain are <strong>Gram positive</strong> and the others that
+          do not are called <strong>Gram negative</strong> bacteria.
         </p>
         <ParaSeparator />
         <p>
@@ -32,13 +32,14 @@ const CellEnvelopeAndItsModifications = () => {
           bacteria.
         </p>
         <p>
-          It could be a loose sheath called the slime layer in some, while in
-          others it may be thick and tough, called the capsule.
+          It could be a loose sheath called the <strong>slime layer</strong> in
+          some, while in others it may be thick and tough, called the{" "}
+          <strong>capsule</strong>.
         </p>
         <p>
-          The cell wall determines the shape of the cell and provides a strong
-          structural support to prevent the bacterium from bursting or
-          collapsing.
+          The <strong>cell wall</strong> determines the shape of the cell and
+          provides a strong structural support to prevent the bacterium from
+          bursting or collapsing.
         </p>
         <ParaSeparator />
         <p>
@@ -48,11 +49,12 @@ const CellEnvelopeAndItsModifications = () => {
         <p>This membrane is similar structurally to that of the eukaryotes.</p>
         <ParaSeparator />
         <p>
-          A special membranous structure is the mesosome which is formed by the
-          extensions of plasma membrane into the cell.
+          A special membranous structure is the <strong>mesosome</strong> which
+          is formed by the extensions of plasma membrane into the cell.
         </p>
         <p>
-          These extensions are in the form of vesicles, tubules and lamellae.
+          These extensions are in the{" "}
+          <strong>form of vesicles, tubules and lamellae</strong>.
         </p>
         <p>
           They help in cell wall formation, DNA replication and distribution to
@@ -75,8 +77,8 @@ const CellEnvelopeAndItsModifications = () => {
         </p>
         <p>Bacteria show a range in the number and arrangement of flagella.</p>
         <p>
-          Bacterial flagellum is composed of three parts – filament, hook and
-          basal body.
+          Bacterial flagellum is composed of three parts –{" "}
+          <strong>filament, hook</strong> and <strong>basal body</strong>.
         </p>
         <p>
           The filament is the longest portion and extends from the cell surface
@@ -88,10 +90,12 @@ const CellEnvelopeAndItsModifications = () => {
           bacteria but do not play a role in motility.
         </p>
         <p>
-          The pili are elongated tubular structures made of a special protein.
+          The <strong>pili</strong> are elongated tubular structures made of a
+          special protein.
         </p>
         <p>
-          The fimbriae are small bristle like fibres sprouting out of the cell.
+          The <strong>fimbriae</strong> are small bristle like fibres sprouting
+          out of the cell.
         </p>
         <p>
           In some bacteria, they are known to help attach the bacteria to rocks

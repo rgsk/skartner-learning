@@ -44,9 +44,9 @@ const AnOverviewOfCell = () => {
         <ParaSeparator />
         <p>
           Besides the nucleus, the eukaryotic cells have other membrane bound
-          distinct structures called organelles like the endoplasmic reticulum
-          (ER), the golgi complex, lysosomes, mitochondria, microbodies and
-          vacuoles.
+          distinct structures called <strong>organelles</strong> like the
+          endoplasmic reticulum (ER), the golgi complex, lysosomes,
+          mitochondria, microbodies and vacuoles.
         </p>
         <p>The prokaryotic cells lack such membrane bound organelles.</p>
 

@@ -17,14 +17,14 @@ const RibosomesAndInclusionBodies = () => {
         </p>
         <p>Ribosomes are the site of protein synthesis.</p>
         <p>
-          Several ribosomes may attach to a single mRNA and form a chain called
-          polyribosomes or polysome.
+          Several ribosomes may attach to a single mRNA and form a chain called{" "}
+          <strong>polyribosomes</strong> or <strong>polysome</strong>.
         </p>
         <p>The ribosomes of a polysome translate the mRNA into proteins.</p>
         <ParaSeparator />
         <p>
-          Inclusion bodies: Reserve material in prokaryotic cells are stored in
-          the cytoplasm in the form of inclusion bodies.
+          <strong>Inclusion bodies:</strong> Reserve material in prokaryotic
+          cells are stored in the cytoplasm in the form of inclusion bodies.
         </p>
         <p>
           These are not bound by any membrane system and lie free in the
