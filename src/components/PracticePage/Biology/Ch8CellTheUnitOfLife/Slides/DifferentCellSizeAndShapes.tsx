@@ -29,9 +29,7 @@ const DifferentCellSizeAndShapes = () => {
           alt="different shapes of cells"
           className="h-[500px]"
         />
-        <p className="">
-          Figure 8.1 Diagram showing different shapes of the cells
-        </p>
+        <p>Figure 8.1 Diagram showing different shapes of the cells</p>
       </div>
     </div>
   );
