@@ -18,6 +18,8 @@ const AnOverviewOfCell = () => {
         </p>
         <p>
           Inside each cell is a dense membrane bound structure called nucleus.
+        </p>
+        <p>
           This nucleus contains the chromosomes which in turn contain the
           genetic material, DNA.
         </p>

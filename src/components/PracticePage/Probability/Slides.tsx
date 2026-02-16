@@ -46,10 +46,11 @@ const Slides = ({
   };
 
   return (
-    <div className="p-4">
-      <div className="border border-foreground h-[60vh] p-[40px]">
+    <div className="p-4 min-h-screen flex flex-col">
+      <div className="border border-foreground p-[40px]">
         <StepRenderer counter={counter} steps={steps} />
       </div>
+      <div className="flex-1"></div>
       <div className="h-[5vh]"></div>
       <div className="flex items-center space-x-2">
         <Switch
@@ -61,6 +62,7 @@ const Slides = ({
       </div>
       <div className="h-[2vh]"></div>
       <Controls ref={controlsRef} resetState={resetState} runAlgo={runAlgo} />
+      <div className="h-[13vh]"></div>
     </div>
   );
 };
