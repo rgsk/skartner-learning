@@ -12,6 +12,7 @@ import Intro from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides
 import Lysosomes from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Lysosomes";
 import ProkaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/ProkaryoticCells";
 import RibosomesAndInclusionBodies from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/RibosomesAndInclusionBodies";
+import Vacuoles from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Vacuoles";
 import WhatIsACell from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/WhatIsACell";
 import Presentation from "@/components/PracticePage/Probability/Presentation";
 
@@ -31,6 +32,7 @@ const steps = [
   { component: EndoplasmicReticulum, length: 1 },
   { component: GolgiApparatus, length: 1 },
   { component: Lysosomes, length: 1 },
+  { component: Vacuoles, length: 1 },
 ];
 
 const Ch8CellTheUnitOfLife = () => {
