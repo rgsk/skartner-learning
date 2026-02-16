@@ -1,3 +1,5 @@
+import ParaSeparator from "@/components/Shared/ParaSeparator";
+
 const AnOverviewOfCell = () => {
   return (
     <div>
@@ -39,6 +41,7 @@ const AnOverviewOfCell = () => {
           Various chemical reactions occur in it to keep the cell in the ‘living
           state’.
         </p>
+        <ParaSeparator />
         <p>
           Besides the nucleus, the eukaryotic cells have other membrane bound
           distinct structures called organelles like the endoplasmic reticulum
@@ -46,6 +49,8 @@ const AnOverviewOfCell = () => {
           vacuoles.
         </p>
         <p>The prokaryotic cells lack such membrane bound organelles.</p>
+
+        <ParaSeparator />
         <p>
           Ribosomes are non-membrane bound organelles found in all cells – both
           eukaryotic as well as prokaryotic.
@@ -55,6 +60,7 @@ const AnOverviewOfCell = () => {
           also within the two organelles – chloroplasts (in plants) and
           mitochondria and on rough ER.
         </p>
+        <ParaSeparator />
         <p>
           Animal cells contain another non-membrane bound organelle called
           centrosome which helps in cell division.

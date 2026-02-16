@@ -1,3 +1,5 @@
+import ParaSeparator from "@/components/Shared/ParaSeparator";
+
 const ProkaryoticCells = () => {
   return (
     <div>
@@ -20,10 +22,10 @@ const ProkaryoticCells = () => {
           <li>vibrio (comma shaped)</li>
           <li>spirillum (spiral)</li>
         </ol>
+        <ParaSeparator />
         <p>
-          The organisation of the prokaryotic cell is fundamentally similar
-          even though prokaryotes exhibit a wide variety of shapes and
-          functions.
+          The organisation of the prokaryotic cell is fundamentally similar even
+          though prokaryotes exhibit a wide variety of shapes and functions.
         </p>
         <p>
           All prokaryotes have a cell wall surrounding the cell membrane except
@@ -56,8 +58,8 @@ const ProkaryoticCells = () => {
         </p>
         <p>Prokaryotes have something unique in the form of inclusions.</p>
         <p>
-          A specialised differentiated form of cell membrane called mesosome
-          is the characteristic of prokaryotes.
+          A specialised differentiated form of cell membrane called mesosome is
+          the characteristic of prokaryotes.
         </p>
         <p>They are essentially infoldings of cell membrane.</p>
       </div>

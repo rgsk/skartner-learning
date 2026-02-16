@@ -1,3 +1,5 @@
+import ParaSeparator from "@/components/Shared/ParaSeparator";
+
 const CellEnvelopeAndItsModifications = () => {
   return (
     <div>
@@ -24,6 +26,7 @@ const CellEnvelopeAndItsModifications = () => {
           the gram stain are Gram positive and the others that do not are called
           Gram negative bacteria.
         </p>
+        <ParaSeparator />
         <p>
           Glycocalyx differs in composition and thickness among different
           bacteria.
@@ -37,11 +40,13 @@ const CellEnvelopeAndItsModifications = () => {
           structural support to prevent the bacterium from bursting or
           collapsing.
         </p>
+        <ParaSeparator />
         <p>
           The plasma membrane is selectively permeable in nature and interacts
           with the outside world.
         </p>
         <p>This membrane is similar structurally to that of the eukaryotes.</p>
+        <ParaSeparator />
         <p>
           A special membranous structure is the mesosome which is formed by the
           extensions of plasma membrane into the cell.
@@ -62,6 +67,7 @@ const CellEnvelopeAndItsModifications = () => {
           extensions into the cytoplasm called chromatophores which contain
           pigments.
         </p>
+        <ParaSeparator />
         <p>Bacterial cells may be motile or non-motile.</p>
         <p>
           If motile, they have thin filamentous extensions from their cell wall
@@ -76,6 +82,7 @@ const CellEnvelopeAndItsModifications = () => {
           The filament is the longest portion and extends from the cell surface
           to the outside.
         </p>
+        <ParaSeparator />
         <p>
           Besides flagella, Pili and Fimbriae are also surface structures of the
           bacteria but do not play a role in motility.

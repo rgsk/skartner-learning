@@ -1,3 +1,5 @@
+import ParaSeparator from "@/components/Shared/ParaSeparator";
+
 const CellTheory = () => {
   return (
     <div>
@@ -22,6 +24,7 @@ const CellTheory = () => {
           On the basis of this, Schwann proposed the hypothesis that the bodies
           of animals and plants are composed of cells and products of cells.
         </p>
+        <ParaSeparator />
         <p>Schleiden and Schwann together formulated the cell theory.</p>
         <p>
           This theory however, did not explain as to how new cells were formed.

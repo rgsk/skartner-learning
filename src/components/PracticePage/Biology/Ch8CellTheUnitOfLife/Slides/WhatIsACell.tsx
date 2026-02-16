@@ -1,3 +1,5 @@
+import ParaSeparator from "@/components/Shared/ParaSeparator";
+
 const WhatIsACell = () => {
   return (
     <div>
@@ -17,6 +19,7 @@ const WhatIsACell = () => {
           Hence, cell is the fundamental structural and functional unit of all
           living organisms.
         </p>
+        <ParaSeparator />
         <p>Antonie Von Leeuwenhoek first saw and described a live cell.</p>
         <p>Robert Brown later discovered the nucleus.</p>
         <p>

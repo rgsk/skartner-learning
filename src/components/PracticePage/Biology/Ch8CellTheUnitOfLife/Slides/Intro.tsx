@@ -1,3 +1,5 @@
+import ParaSeparator from "@/components/Shared/ParaSeparator";
+
 const Intro = () => {
   return (
     <div>
@@ -15,6 +17,7 @@ const Intro = () => {
           The answer to this is the presence of the basic unit of life – the
           cell in all living organisms.
         </p>
+        <ParaSeparator />
         <p>All organisms are composed of cells.</p>
         <p>
           Some are composed of a single cell and are called unicellular
