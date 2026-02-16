@@ -1,7 +1,7 @@
 const CellTheory = () => {
   return (
     <div>
-      <h3 className="text-2xl">8.2 Cell Theory</h3>
+      <h3 className="text-2xl">Cell Theory</h3>
       <div className="h-4"></div>
       <div className="space-y-2">
         <p>
@@ -27,8 +27,8 @@ const CellTheory = () => {
           This theory however, did not explain as to how new cells were formed.
         </p>
         <p>
-          Rudolf Virchow (1855) first explained that cells divided and new
-          cells are formed from pre-existing cells (Omnis cellula-e cellula).
+          Rudolf Virchow (1855) first explained that cells divided and new cells
+          are formed from pre-existing cells (Omnis cellula-e cellula).
         </p>
         <p>
           He modified the hypothesis of Schleiden and Schwann to give the cell
@@ -36,7 +36,9 @@ const CellTheory = () => {
         </p>
         <p>Cell theory as understood today is:</p>
         <ol className="list-decimal pl-6">
-          <li>all living organisms are composed of cells and products of cells</li>
+          <li>
+            all living organisms are composed of cells and products of cells
+          </li>
           <li>all cells arise from pre-existing cells</li>
         </ol>
       </div>

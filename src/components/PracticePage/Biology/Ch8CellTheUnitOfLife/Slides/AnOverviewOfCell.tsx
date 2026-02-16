@@ -1,7 +1,7 @@
 const AnOverviewOfCell = () => {
   return (
     <div>
-      <h3 className="text-2xl">8.3 An Overview of Cell</h3>
+      <h3 className="text-2xl">An Overview of Cell</h3>
       <div className="h-4"></div>
       <div className="space-y-2">
         <p>
