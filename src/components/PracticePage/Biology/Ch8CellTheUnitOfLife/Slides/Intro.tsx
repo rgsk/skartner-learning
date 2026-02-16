@@ -3,8 +3,8 @@ import ParaSeparator from "@/components/Shared/ParaSeparator";
 const Intro = () => {
   return (
     <div>
-      <h1 className="text-4xl">Chapter 8</h1>
-      <h2 className="text-4xl">Cell: The Unit of Life</h2>
+      <h1 className="text-4xl text-[#0074bd]">Chapter 8</h1>
+      <h2 className="text-4xl text-[#0074bd]">Cell: The Unit of Life</h2>
       <div className="h-4"></div>
       <div className="space-y-2">
         <p>When you look around, you see both living and non-living things.</p>
