@@ -1,5 +1,3 @@
-import ParaSeparator from "@/components/Shared/ParaSeparator";
-
 const EndomembraneSystem = () => {
   return (
     <div>
@@ -15,7 +13,6 @@ const EndomembraneSystem = () => {
           The endomembrane system include endoplasmic reticulum (ER), golgi
           complex, lysosomes and vacuoles.
         </p>
-        <ParaSeparator />
         <p>
           Since the functions of the mitochondria, chloroplast and peroxisomes
           are not coordinated with the above components, these are not
