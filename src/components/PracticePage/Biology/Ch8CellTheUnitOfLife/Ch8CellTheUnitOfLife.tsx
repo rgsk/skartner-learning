@@ -10,6 +10,7 @@ import EukaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfL
 import GolgiApparatus from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/GolgiApparatus";
 import Intro from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Intro";
 import Lysosomes from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Lysosomes";
+import Mitochondria from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Mitochondria";
 import ProkaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/ProkaryoticCells";
 import RibosomesAndInclusionBodies from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/RibosomesAndInclusionBodies";
 import Vacuoles from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Vacuoles";
@@ -33,6 +34,7 @@ const steps = [
   { component: GolgiApparatus, length: 1 },
   { component: Lysosomes, length: 1 },
   { component: Vacuoles, length: 1 },
+  { component: Mitochondria, length: 1 },
 ];
 
 const Ch8CellTheUnitOfLife = () => {
