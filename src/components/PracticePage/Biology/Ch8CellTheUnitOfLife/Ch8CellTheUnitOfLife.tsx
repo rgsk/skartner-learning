@@ -7,6 +7,7 @@ import DifferentCellSizeAndShapes from "@/components/PracticePage/Biology/Ch8Cel
 import EndomembraneSystem from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/EndomembraneSystem";
 import EndoplasmicReticulum from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/EndoplasmicReticulum";
 import EukaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/EukaryoticCells";
+import GolgiApparatus from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/GolgiApparatus";
 import Intro from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Intro";
 import ProkaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/ProkaryoticCells";
 import RibosomesAndInclusionBodies from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/RibosomesAndInclusionBodies";
@@ -27,6 +28,7 @@ const steps = [
   { component: CellWall, length: 1 },
   { component: EndomembraneSystem, length: 1 },
   { component: EndoplasmicReticulum, length: 1 },
+  { component: GolgiApparatus, length: 1 },
 ];
 
 const Ch8CellTheUnitOfLife = () => {
