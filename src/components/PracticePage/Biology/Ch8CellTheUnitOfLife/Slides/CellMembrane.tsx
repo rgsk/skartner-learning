@@ -69,7 +69,20 @@ const CellMembrane = () => {
         <p>
           This ability to move within the membrane is measured as its fluidity.
         </p>
-        <ParaSeparator />
+      </div>
+      <div className="h-8"></div>
+      <div className="flex flex-col items-center gap-4">
+        <img
+          src="/biology/fluid-mosaic-model-of-plasma-membrane.png"
+          alt="fluid mosaic model of plasma membrane.png"
+          className="h-[500px]"
+        />
+        <p>
+          <strong>Figure 8.4</strong> Fluid mosaic model of plasma membrane
+        </p>
+      </div>
+      <div className="h-8"></div>
+      <div className="space-y-2">
         <p>
           The fluid nature of the membrane is also important from the point of
           view of functions like cell growth, formation of intercellular
