@@ -13,6 +13,7 @@ import Lysosomes from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Sl
 import Mitochondria from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Mitochondria";
 import Plastids from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Plastids";
 import ProkaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/ProkaryoticCells";
+import Ribosomes from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Ribosomes";
 import RibosomesAndInclusionBodies from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/RibosomesAndInclusionBodies";
 import Vacuoles from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Vacuoles";
 import WhatIsACell from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/WhatIsACell";
@@ -37,6 +38,7 @@ const steps = [
   { component: Vacuoles, length: 1 },
   { component: Mitochondria, length: 1 },
   { component: Plastids, length: 1 },
+  { component: Ribosomes, length: 1 },
 ];
 
 const Ch8CellTheUnitOfLife = () => {
