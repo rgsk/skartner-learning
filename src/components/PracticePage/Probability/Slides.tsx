@@ -1,8 +1,5 @@
 "use client";
 
-import IntroductionToProbability from "@/components/PracticePage/Probability/IntroductionToProbability";
-import IntroductionToProbabilityCoinExample1 from "@/components/PracticePage/Probability/IntroductionToProbabilityCoinExample1";
-import IntroductionToProbabilityVennDiagram from "@/components/PracticePage/Probability/IntroductionToProbabilityVennDiagram";
 import StepRenderer from "@/components/PracticePage/Probability/StepRenderer";
 import {
   Controls,
@@ -10,38 +7,59 @@ import {
   ControlsProps,
   Step,
 } from "@/components/Shared/Controls";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { useRef, useState } from "react";
 
-const Slides = () => {
+const Slides = ({
+  steps,
+}: {
+  steps: {
+    component: ({ counter }: { counter: number }) => any;
+    length: number;
+  }[];
+}) => {
   const controlsRef = useRef<ControlsHandle>(null);
   const [counter, setCounter] = useState(0);
+  const [slideMode, setSlideMode] = useState(true);
   const resetState = () => {
     setCounter(0);
   };
   const runAlgo: ControlsProps["runAlgo"] = ({ addSteps }) => {
     algo();
     function algo() {
-      const newSteps: Step[] = [];
-      for (let i = 0; i < 100; i++) {
-        newSteps.push(() => setCounter((prev) => prev + 1));
+      let newSteps: Step[];
+      if (slideMode) {
+        newSteps = steps.map(
+          (s) => () => setCounter((prev) => prev + s.length),
+        );
+      } else {
+        newSteps = [];
+        const totalLength = steps.reduce((t, s) => t + s.length, 0);
+        for (let i = 0; i < totalLength; i++) {
+          newSteps.push(() => setCounter((prev) => prev + 1));
+        }
       }
 
       addSteps(newSteps);
     }
   };
+
   return (
     <div className="p-4">
       <div className="border border-foreground h-[60vh] p-[40px]">
-        <StepRenderer
-          counter={counter}
-          steps={[
-            { component: IntroductionToProbability, length: 14 },
-            { component: IntroductionToProbabilityVennDiagram, length: 3 },
-            { component: IntroductionToProbabilityCoinExample1, length: 3 },
-          ]}
-        />
+        <StepRenderer counter={counter} steps={steps} />
       </div>
-      <div className="h-[10vh]"></div>
+      <div className="h-[5vh]"></div>
+      <div className="flex items-center space-x-2">
+        <Switch
+          id="slide-mode"
+          checked={slideMode}
+          onCheckedChange={setSlideMode}
+        />
+        <Label htmlFor="slide-mode">Slide Mode</Label>
+      </div>
+      <div className="h-[2vh]"></div>
       <Controls ref={controlsRef} resetState={resetState} runAlgo={runAlgo} />
     </div>
   );

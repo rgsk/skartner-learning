@@ -1,12 +1,12 @@
 "use client";
 
-import LeetCodeTitle from "@/components/MiniApps/LeetCodeTitle";
+import IntroductionToProbabilitySlides from "@/components/PracticePage/Probability/IntroductionToProbabilitySlides";
 
 interface PracticePageProps {}
 const PracticePage: React.FC<PracticePageProps> = ({}) => {
   return (
     <div>
-      <LeetCodeTitle />
+      <IntroductionToProbabilitySlides />
     </div>
   );
 };
