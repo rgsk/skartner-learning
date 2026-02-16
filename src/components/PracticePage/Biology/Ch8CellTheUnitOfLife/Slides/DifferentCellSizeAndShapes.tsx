@@ -27,7 +27,7 @@ const DifferentCellSizeAndShapes = () => {
       <div className="h-8"></div>
       <div className="flex flex-col items-center gap-4">
         <img
-          src="/biology/different-shapes-of-cells.png"
+          src="/biology/different-shapes-of-cells-2.png"
           alt="different shapes of cells"
           className="h-[500px]"
         />
