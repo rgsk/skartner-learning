@@ -4,6 +4,8 @@ import CellMembrane from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife
 import CellTheory from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CellTheory";
 import CellWall from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CellWall";
 import DifferentCellSizeAndShapes from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/DifferentCellSizeAndShapes";
+import EndomembraneSystem from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/EndomembraneSystem";
+import EndoplasmicReticulum from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/EndoplasmicReticulum";
 import EukaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/EukaryoticCells";
 import Intro from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Intro";
 import ProkaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/ProkaryoticCells";
@@ -23,6 +25,8 @@ const steps = [
   { component: EukaryoticCells, length: 1 },
   { component: CellMembrane, length: 1 },
   { component: CellWall, length: 1 },
+  { component: EndomembraneSystem, length: 1 },
+  { component: EndoplasmicReticulum, length: 1 },
 ];
 
 const Ch8CellTheUnitOfLife = () => {

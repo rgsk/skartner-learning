@@ -3,7 +3,7 @@ import ParaSeparator from "@/components/Shared/ParaSeparator";
 const ProkaryoticCells = () => {
   return (
     <div>
-      <h3 className="text-2xl">Prokaryotic Cells</h3>
+      <h3 className="text-3xl text-purple-500">8.4 Prokaryotic Cells</h3>
       <div className="h-4"></div>
       <div className="space-y-2">
         <p>

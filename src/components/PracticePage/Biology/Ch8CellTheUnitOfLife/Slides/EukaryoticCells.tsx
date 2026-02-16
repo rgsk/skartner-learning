@@ -3,7 +3,7 @@ import ParaSeparator from "@/components/Shared/ParaSeparator";
 const EukaryoticCells = () => {
   return (
     <div>
-      <h3 className="text-2xl">Eukaryotic Cells</h3>
+      <h3 className="text-3xl text-purple-500">8.5 Eukaryotic Cells</h3>
       <div className="h-4"></div>
       <div className="space-y-2">
         <p>
@@ -14,22 +14,18 @@ const EukaryoticCells = () => {
           cytoplasm through the presence of membrane bound organelles.
         </p>
         <p>
-          Eukaryotic cells possess an organised nucleus with a nuclear
-          envelope.
+          Eukaryotic cells possess an organised nucleus with a nuclear envelope.
         </p>
         <p>
-          In addition, eukaryotic cells have a variety of complex locomotory
-          and cytoskeletal structures.
+          In addition, eukaryotic cells have a variety of complex locomotory and
+          cytoskeletal structures.
         </p>
         <p>Their genetic material is organised into chromosomes.</p>
         <ParaSeparator />
+        <p>All eukaryotic cells are not identical.</p>
         <p>
-          All eukaryotic cells are not identical.
-        </p>
-        <p>
-          Plant and animal cells are different as the former possess cell
-          walls, plastids and a large central vacuole which are absent in animal
-          cells.
+          Plant and animal cells are different as the former possess cell walls,
+          plastids and a large central vacuole which are absent in animal cells.
         </p>
         <p>
           On the other hand, animal cells have centrioles which are absent in

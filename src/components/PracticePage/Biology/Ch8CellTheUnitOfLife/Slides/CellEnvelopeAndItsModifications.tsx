@@ -3,7 +3,9 @@ import ParaSeparator from "@/components/Shared/ParaSeparator";
 const CellEnvelopeAndItsModifications = () => {
   return (
     <div>
-      <h3 className="text-2xl">Cell Envelope and its Modifications</h3>
+      <h3 className="text-2xl text-blue-500">
+        8.4.1 Cell Envelope and its Modifications
+      </h3>
       <div className="h-4"></div>
       <div className="space-y-2">
         <p>

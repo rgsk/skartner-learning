@@ -1,7 +1,9 @@
 const DifferentCellSizeAndShapes = () => {
   return (
     <div>
-      <h3 className="text-2xl">Different Cell Sizes and Shapes</h3>
+      <h3 className="text-2xl text-cyan-600">
+        Different Cell Sizes and Shapes
+      </h3>
       <div className="h-4"></div>
       <div className="space-y-2">
         <p>Cells differ greatly in size, shape and activities (Figure 8.1).</p>
