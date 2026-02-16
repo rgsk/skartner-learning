@@ -1,8 +1,4 @@
-import { useSlideMaker } from "@/components/PracticePage/Probability/common";
-
-const Intro = ({ counter }: { counter: number }) => {
-  const { showAt, happenAt, showOnlyAt } = useSlideMaker(counter);
-
+const Intro = () => {
   return (
     <div>
       <h1 className="text-3xl">Chapter 8</h1>
