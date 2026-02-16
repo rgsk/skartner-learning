@@ -3,7 +3,7 @@ import CellTheory from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/S
 import DifferentCellSizeAndShapes from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/DifferentCellSizeAndShapes";
 import Intro from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Intro";
 import WhatIsACell from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/WhatIsACell";
-import Slides from "@/components/PracticePage/Probability/Slides";
+import Presentation from "@/components/PracticePage/Probability/Presentation";
 
 const steps = [
   { component: Intro, length: 1 },
@@ -14,7 +14,7 @@ const steps = [
 ];
 
 const Ch8CellTheUnitOfLife = () => {
-  return <Slides steps={steps} />;
+  return <Presentation steps={steps} />;
 };
 
 export default Ch8CellTheUnitOfLife;

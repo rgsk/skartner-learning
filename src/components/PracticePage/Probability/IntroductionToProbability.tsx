@@ -9,7 +9,7 @@ const IntroductionToProbability = ({ counter }: { counter: number }) => {
   const { showAt, happenAt, showOnlyAt } = useSlideMaker(counter);
 
   return (
-    <div>
+    <div className="min-h-[470px]">
       <h1 className={cn(showAt(1), "text-3xl")}>Introduction to Probability</h1>
       <div className="h-[20px]"></div>
       <div className={cn(showAt(2), "flex gap-1 items-center")}>
@@ -51,7 +51,7 @@ const IntroductionToProbability = ({ counter }: { counter: number }) => {
               <div
                 className={cn(
                   showAt(13),
-                  "absolute left-full top-[-40px] text-[#007885] font-medium"
+                  "absolute left-full top-[-40px] text-[#007885] font-medium",
                 )}
               >
                 Event
@@ -59,7 +59,7 @@ const IntroductionToProbability = ({ counter }: { counter: number }) => {
               <div
                 className={cn(
                   "flex gap-0.5 p-1 border-2 rounded-lg border-transparent",
-                  happenAt(13) && "border-[#007885]"
+                  happenAt(13) && "border-[#007885]",
                 )}
               >
                 {range(0, 3).map((v) => (
@@ -74,7 +74,7 @@ const IntroductionToProbability = ({ counter }: { counter: number }) => {
               <div
                 className={cn(
                   showAt(14),
-                  "absolute left-[80%] top-[60px] text-[#007885] font-medium w-full"
+                  "absolute left-[80%] top-[60px] text-[#007885] font-medium w-full",
                 )}
               >
                 Sample space
@@ -82,7 +82,7 @@ const IntroductionToProbability = ({ counter }: { counter: number }) => {
               <div
                 className={cn(
                   "flex gap-0.5 p-1 border-2 rounded-lg border-transparent",
-                  happenAt(14) && "border-[#007885]"
+                  happenAt(14) && "border-[#007885]",
                 )}
               >
                 {range(0, 3).map((v) => (
