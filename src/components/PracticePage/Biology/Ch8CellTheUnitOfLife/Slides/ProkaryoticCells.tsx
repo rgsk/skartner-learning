@@ -71,8 +71,8 @@ const ProkaryoticCells = () => {
           className="h-[500px]"
         />
         <p>
-          Figure 8.2 Diagram showing comparison of eukaryotic cell with other
-          organisms
+          <strong>Figure 8.2</strong> Diagram showing comparison of eukaryotic
+          cell with other organisms
         </p>
       </div>
     </div>

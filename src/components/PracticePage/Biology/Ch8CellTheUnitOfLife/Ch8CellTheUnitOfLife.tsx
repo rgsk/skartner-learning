@@ -2,6 +2,7 @@ import AnOverviewOfCell from "@/components/PracticePage/Biology/Ch8CellTheUnitOf
 import CellEnvelopeAndItsModifications from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CellEnvelopeAndItsModifications";
 import CellTheory from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CellTheory";
 import DifferentCellSizeAndShapes from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/DifferentCellSizeAndShapes";
+import EukaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/EukaryoticCells";
 import Intro from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Intro";
 import ProkaryoticCells from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/ProkaryoticCells";
 import RibosomesAndInclusionBodies from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/RibosomesAndInclusionBodies";
@@ -17,6 +18,7 @@ const steps = [
   { component: ProkaryoticCells, length: 1 },
   { component: CellEnvelopeAndItsModifications, length: 1 },
   { component: RibosomesAndInclusionBodies, length: 1 },
+  { component: EukaryoticCells, length: 1 },
 ];
 
 const Ch8CellTheUnitOfLife = () => {
