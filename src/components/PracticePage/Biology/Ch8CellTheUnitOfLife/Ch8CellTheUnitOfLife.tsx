@@ -3,6 +3,7 @@ import CellEnvelopeAndItsModifications from "@/components/PracticePage/Biology/C
 import CellMembrane from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CellMembrane";
 import CellTheory from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CellTheory";
 import CellWall from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CellWall";
+import CentrosomeAndCentrioles from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CentrosomeAndCentrioles";
 import CiliaAndFlagella from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/CiliaAndFlagella";
 import Cytoskeleton from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/Cytoskeleton";
 import DifferentCellSizeAndShapes from "@/components/PracticePage/Biology/Ch8CellTheUnitOfLife/Slides/DifferentCellSizeAndShapes";
@@ -43,6 +44,7 @@ const steps = [
   { component: Ribosomes, length: 1 },
   { component: Cytoskeleton, length: 1 },
   { component: CiliaAndFlagella, length: 1 },
+  { component: CentrosomeAndCentrioles, length: 1 },
 ];
 
 const Ch8CellTheUnitOfLife = () => {
