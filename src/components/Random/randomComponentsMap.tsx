@@ -1,4 +1,4 @@
-import { FindMissingAndRepeatedValues } from "@/components/PracticePage/PracticePage";
+import FindMissingAndRepeatedValues from "@/components/Random/Problems/FindMissingAndRepeatedValues";
 
 const randomComponentsMap: any = {
   general: {
