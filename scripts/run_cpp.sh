@@ -14,7 +14,7 @@ fi
 DIR=$(dirname "$SRC")
 
 # compile
-"$COMPILER" -std=gnu++17 -O2 "$SRC" -o "$OUT_BIN"
+"$COMPILER" -std=c++23 -O2 "$SRC" -o "$OUT_BIN"
 
 # run the binary from the source directory so relative files (input.txt) are found
 (
