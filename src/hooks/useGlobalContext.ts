@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useRef, useState } from "react";
-const sidebarPaths = ["/dsa", "/cses"];
+const sidebarPaths = ["/dsa", "/cses", "/random"];
 
 export const useGlobalContextValue = () => {
   const currentExecuteCodeRef = useRef<any>(null);

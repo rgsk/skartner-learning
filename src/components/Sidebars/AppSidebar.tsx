@@ -102,7 +102,7 @@ export function AppSidebar() {
                         <SidebarMenuSub>
                           {topic.problems.map((problem, i) => {
                             const link = `/${category}/${slugify(
-                              topic.name
+                              topic.name,
                             )}/${slugify(problem)}`;
                             return (
                               <SidebarMenuSubItem key={i}>
@@ -132,6 +132,12 @@ export function AppSidebar() {
 }
 
 const topics = {
+  random: [
+    {
+      name: "General",
+      problems: ["Find Missing and Repeated Values"],
+    },
+  ],
   cses: [
     {
       name: "Introductory Problems",

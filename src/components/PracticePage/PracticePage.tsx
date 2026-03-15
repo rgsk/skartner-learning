@@ -17,7 +17,7 @@ const PracticePage: React.FC<PracticePageProps> = ({}) => {
 };
 export default PracticePage;
 
-const FindMissingAndRepeatedValues = () => {
+export const FindMissingAndRepeatedValues = () => {
   return (
     <Container>
       <Heading>2965. Find Missing and Repeated Values</Heading>

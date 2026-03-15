@@ -45,6 +45,16 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
             <ArrowRight />
           </Button>
         </Link>
+        <Link href="/random">
+          <Button
+            variant="outline"
+            className="w-full flex justify-between"
+            size="lg"
+          >
+            <span>Random</span>
+            <ArrowRight />
+          </Button>
+        </Link>
       </div>
     </div>
   );
