@@ -15,19 +15,19 @@ const FindMissingAndRepeatedValues = () => {
       <Solution>
         <Section>
           <SubHeading>Counting Frequencies</SubHeading>
-          <CodeFetcher cppFile="/random/find-missing-and-repeated-values/counting_frequencies.cpp" />
+          <CodeFetcher cppFile="/random/find_missing_and_repeated_values/counting_frequencies.cpp" />
         </Section>
       </Solution>
       <Solution>
         <Section>
           <SubHeading>Sum to N^2</SubHeading>
-          <CodeFetcher cppFile="/random/find-missing-and-repeated-values/sum_to_n_square.cpp" />
+          <CodeFetcher cppFile="/random/find_missing_and_repeated_values/sum_to_n_square.cpp" />
         </Section>
       </Solution>
       <Solution>
         <Section>
           <SubHeading>Xor Bucket</SubHeading>
-          <CodeFetcher cppFile="/random/find-missing-and-repeated-values/xor_bucket.cpp" />
+          <CodeFetcher cppFile="/random/find_missing_and_repeated_values/xor_bucket.cpp" />
         </Section>
       </Solution>
     </Container>
