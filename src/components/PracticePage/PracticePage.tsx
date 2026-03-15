@@ -1,6 +1,5 @@
 "use client";
 
-import AddTwoNumbersAsListsApproachVisualization from "@/components/DSA/LinkedLists/AddTwoNumbersAsLists/AddTwoNumbersAsListsApproachVisualization";
 import CodeFetcher from "@/components/Shared/CodeFetcher";
 import Container from "@/components/Shared/Container";
 import Heading from "@/components/Shared/Heading";
@@ -8,7 +7,6 @@ import PracticeLinks from "@/components/Shared/PracticeLinks";
 import Section from "@/components/Shared/Section";
 import Solution from "@/components/Shared/Solution";
 import SubHeading from "@/components/Shared/SubHeading";
-import Visualization from "@/components/Visualization/Visualization";
 interface PracticePageProps {}
 const PracticePage: React.FC<PracticePageProps> = ({}) => {
   return (
@@ -29,9 +27,18 @@ const FindMissingAndRepeatedValues = () => {
           <SubHeading>Counting Frequencies</SubHeading>
           <CodeFetcher cppFile="/random/find-missing-and-repeated-values/counting_frequencies.cpp" />
         </Section>
-        <Visualization>
-          <AddTwoNumbersAsListsApproachVisualization />
-        </Visualization>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Sum to N^2</SubHeading>
+          <CodeFetcher cppFile="/random/find-missing-and-repeated-values/sum_to_n_square.cpp" />
+        </Section>
+      </Solution>
+      <Solution>
+        <Section>
+          <SubHeading>Xor Bucket</SubHeading>
+          <CodeFetcher cppFile="/random/find-missing-and-repeated-values/xor_bucket.cpp" />
+        </Section>
       </Solution>
     </Container>
   );
