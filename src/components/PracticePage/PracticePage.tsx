@@ -5,7 +5,7 @@ interface PracticePageProps { }
 
 const PracticePage: React.FC<PracticePageProps> = ({ }) => {
   return <div>
-    <p>practice page para changed</p>
+    <p>practice page para changed again</p>
   </div>
 };
 
