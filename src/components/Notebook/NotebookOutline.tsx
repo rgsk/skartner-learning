@@ -50,12 +50,17 @@ const OutlineItem: React.FC<{ node: OutlineNode; depth: number }> = ({
             />
           </button>
         ) : (
-          <span className="shrink-0 w-3.5" />
+          <span
+            aria-hidden
+            className="shrink-0 mt-2 flex h-3.5 w-3.5 items-center justify-center"
+          >
+            <span className="h-1 w-1 rounded-full bg-muted-foreground/60" />
+          </span>
         )}
         <button
           onClick={() => scrollTo(node.id)}
           title={node.text}
-          className="text-left py-1.5 pl-1 leading-snug cursor-pointer text-muted-foreground hover:text-foreground"
+          className="text-left py-1.5 pl-1 leading-tight cursor-pointer text-muted-foreground hover:text-foreground"
         >
           {node.text}
         </button>
