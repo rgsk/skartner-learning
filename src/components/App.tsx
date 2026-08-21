@@ -48,10 +48,7 @@ const App: React.FC<AppProps> = ({ children }) => {
                 id="main-container"
                 ref={mainContainerRef}
                 className="absolute bottom-0 w-full overflow-auto"
-                style={{
-                  top: navbarContainerBounds.height,
-                  paddingBottom: navbarContainerBounds.height,
-                }}
+                style={{ top: navbarContainerBounds.height }}
               >
                 <main>{children}</main>
               </div>
