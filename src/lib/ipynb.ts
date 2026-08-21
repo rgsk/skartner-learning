@@ -1,8 +1,11 @@
 // Minimal nbformat v4 reader - enough to render a notebook, not to round-trip one.
 
-// long outputs collapse to this many lines, the way vscode does it
-export const HEAD_LINES = 24;
-export const TAIL_LINES = 12;
+// long outputs collapse to this many lines, the way vscode does it. sized so the
+// collapsed cell fits the visible area without a scrollbar of its own: head +
+// separator + tail lines at text-sm/leading-relaxed (~23px), plus the pre's
+// padding and the truncation footer, lands around 630px.
+export const HEAD_LINES = 20;
+export const TAIL_LINES = 8;
 
 type Multiline = string | string[];
 
@@ -75,7 +78,10 @@ function normalizeRichOutput(
 
   if (data["image/svg+xml"]) {
     const svg = join(data["image/svg+xml"]);
-    return { kind: "image", src: `data:image/svg+xml;utf8,${encodeURIComponent(svg)}` };
+    return {
+      kind: "image",
+      src: `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`,
+    };
   }
 
   const plain = join(data["text/plain"]);
@@ -176,7 +182,9 @@ export interface TruncatedText {
 const MAX_PREVIEW_CHARS = 20_000;
 
 const capChars = (text: string) =>
-  text.length > MAX_PREVIEW_CHARS ? `${text.slice(0, MAX_PREVIEW_CHARS)}…` : text;
+  text.length > MAX_PREVIEW_CHARS
+    ? `${text.slice(0, MAX_PREVIEW_CHARS)}…`
+    : text;
 
 export function truncate(text: string): TruncatedText {
   const lines = text.replace(/\n+$/, "").split("\n");
