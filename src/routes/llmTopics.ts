@@ -1,4 +1,4 @@
-import type { Topic } from "./topics";
+import type { Topic } from "../lib/topics";
 
 const llmTopics: Topic[] = [
   {
@@ -8,6 +8,7 @@ const llmTopics: Topic[] = [
       {
         name: "Attention",
         slug: "attention",
+        previousSlugs: ["self-attention"], // added for example
         devLink: "http://localhost:3005/llm/fundamentals/attention",
         prodLink: "https://www.skartner.com/llm/fundamentals/attention",
         notebook:

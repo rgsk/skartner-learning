@@ -5,6 +5,11 @@ import { NextResponse, type NextRequest } from "next/server";
 // redirect() is delivered inside the streamed payload - the browser follows it,
 // but the response is still a 200, so search engines never see the move.
 // middleware runs before rendering and can answer with a real 308.
+// 308 is cached by browsers indefinitely, which is the point in production and a
+// nuisance while editing slugs - a stale one keeps firing without asking the
+// server. 307 is the same redirect without the permanence
+const status = process.env.NODE_ENV === "production" ? 308 : 307;
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const segments = pathname.split("/").filter(Boolean);
@@ -14,7 +19,7 @@ export function middleware(request: NextRequest) {
 
   const url = request.nextUrl.clone();
   url.pathname = canonical;
-  return NextResponse.redirect(url, 308);
+  return NextResponse.redirect(url, status);
 }
 
 // undefined for anything this app does not own - dsa, cses and random keep

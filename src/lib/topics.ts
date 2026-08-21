@@ -1,6 +1,5 @@
 import { slugify } from "@/lib/slugify";
-import llmTopics from "./llmTopics";
-import rlTopics from "./rlTopics";
+import categories from "../routes/categories";
 
 export interface Problem {
   name: string;
@@ -51,11 +50,6 @@ export interface Category {
   topics: Topic[];
 }
 
-export const notebookCategories: Category[] = [
-  { slug: "llm", topics: llmTopics },
-  { slug: "rl", topics: rlTopics },
-];
-
 // current slug first, retired ones after - the order the matcher relies on
 const categorySlugs = (category: Category) => [
   category.slug,
@@ -88,7 +82,7 @@ const findRoute = (
   problem: string,
   currentOnly: boolean,
 ): ResolvedRoute | undefined => {
-  for (const c of notebookCategories) {
+  for (const c of categories) {
     if (!matches(categorySlugs(c), category, currentOnly)) continue;
     for (const t of c.topics) {
       if (!matches(topicSlugs(t), topic, currentOnly)) continue;
@@ -111,8 +105,8 @@ export const resolveNotebookRoute = (
   findRoute(category, topic, problem, false);
 
 export const resolveCategory = (category: string): Category | undefined =>
-  notebookCategories.find((c) => c.slug === category) ??
-  notebookCategories.find((c) => categorySlugs(c).includes(category));
+  categories.find((c) => c.slug === category) ??
+  categories.find((c) => categorySlugs(c).includes(category));
 
 // the entry serving one route, retired slugs included
 export const getEntryForRoute = (
@@ -125,7 +119,7 @@ export const getEntryForRoute = (
 // every notebook url worth prerendering. retired slugs are left out on purpose:
 // they render on demand and redirect, rather than being published as pages
 export const notebookRoutes = () =>
-  notebookCategories.flatMap((c) =>
+  categories.flatMap((c) =>
     c.topics.flatMap((t) =>
       t.problems
         .filter((p) => typeof p !== "string" && Boolean(p.notebook))
@@ -139,7 +133,7 @@ export const notebookRoutes = () =>
 
 // the content tree behind the sidebar and the notebook page titles
 export const topics: Record<string, Topic[]> = {
-  ...Object.fromEntries(notebookCategories.map((c) => [c.slug, c.topics])),
+  ...Object.fromEntries(categories.map((c) => [c.slug, c.topics])),
   random: [
     {
       name: "General",
