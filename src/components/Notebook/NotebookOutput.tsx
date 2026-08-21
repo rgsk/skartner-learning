@@ -1,7 +1,8 @@
 "use client";
 import type { PreparedOutput } from "@/lib/ipynb";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import TargetBlankLink from "../Shared/TargetBlankLink";
 
 const preClasses =
   "bg-[#1E1E1E] text-[#D4D4D4] text-xs font-mono px-4 py-3 overflow-x-auto whitespace-pre";
@@ -11,17 +12,28 @@ type TextOutput = Extract<PreparedOutput, { kind: "text" }>;
 function TextOutputView({ output }: { output: TextOutput }) {
   const { head, tail, totalLines, truncated, isError, fullUrl } = output;
   const [full, setFull] = useState<string>();
+  const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const preRef = useRef<HTMLPreElement>(null);
+  // the collapsed preview's height, so expanding does not resize the page
+  const [collapsedHeight, setCollapsedHeight] = useState<number>();
 
   const showScrollable = async () => {
-    if (full !== undefined) return;
+    setCollapsedHeight(preRef.current?.offsetHeight);
+
+    if (full !== undefined) {
+      setExpanded(true);
+      return;
+    }
+
     setLoading(true);
     setError(false);
     try {
       const response = await fetch(fullUrl);
       if (!response.ok) throw new Error(String(response.status));
       setFull(await response.text());
+      setExpanded(true);
     } catch {
       setError(true);
     } finally {
@@ -30,41 +42,38 @@ function TextOutputView({ output }: { output: TextOutput }) {
   };
 
   if (!truncated) {
-    return <pre className={cn(preClasses, isError && "text-red-400")}>{head}</pre>;
+    return (
+      <pre className={cn(preClasses, isError && "text-red-400")}>{head}</pre>
+    );
   }
 
   return (
     <div>
-      {full !== undefined ? (
-        <pre
-          className={cn(
-            preClasses,
-            "max-h-[420px] overflow-y-auto",
-            isError && "text-red-400",
-          )}
-        >
-          {full}
-        </pre>
-      ) : (
-        <pre className={cn(preClasses, isError && "text-red-400")}>
-          {head}
-          {"\n...\n"}
-          {tail}
-        </pre>
-      )}
+      <pre
+        ref={preRef}
+        className={cn(
+          preClasses,
+          expanded && "overflow-y-auto",
+          // only if the measurement was unavailable
+          expanded && collapsedHeight === undefined && "max-h-[420px]",
+          isError && "text-red-400",
+        )}
+        style={expanded ? { height: collapsedHeight } : undefined}
+      >
+        {expanded ? full : `${head}\n...\n${tail}`}
+      </pre>
 
-      <div className="bg-[#1E1E1E] text-[#9c9c9c] text-xs italic px-4 pb-3">
-        {full !== undefined ? (
+      <div className="bg-[#1E1E1E] text-[#9c9c9c] text-sm italic px-4 pt-2 pb-3">
+        {expanded ? (
           <>
-            Showing all {totalLines} lines.{" "}
+            Showing all {totalLines.toLocaleString()} lines.{" "}
             <button
               className="underline hover:text-white cursor-pointer"
-              onClick={() => setFull(undefined)}
+              onClick={() => setExpanded(false)}
             >
               Collapse
             </button>{" "}
-            or{" "}
-            <FullOutputLink href={fullUrl} />.
+            or <FullOutputLink href={fullUrl} />.
           </>
         ) : (
           <>
@@ -78,7 +87,10 @@ function TextOutputView({ output }: { output: TextOutput }) {
             </button>{" "}
             or <FullOutputLink href={fullUrl} />.
             {error && (
-              <span className="text-red-400"> Could not load the full output.</span>
+              <span className="text-red-400">
+                {" "}
+                Could not load the full output.
+              </span>
             )}
           </>
         )}
@@ -88,14 +100,9 @@ function TextOutputView({ output }: { output: TextOutput }) {
 }
 
 const FullOutputLink = ({ href }: { href: string }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="underline hover:text-white"
-  >
-    open in a text editor
-  </a>
+  <TargetBlankLink href={href}>
+    <span className="underline hover:text-white">open in new tab</span>
+  </TargetBlankLink>
 );
 
 const NotebookOutput: React.FC<{ output: PreparedOutput }> = ({ output }) => {
