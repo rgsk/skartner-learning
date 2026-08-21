@@ -12,7 +12,7 @@ const rlTopics: Topic[] = [
         prodLink:
           "https://www.skartner.com/rl/tabular/value-and-policy-iteration",
         notebook:
-          "https://github.com/rgsk/ml-tracks/blob/practice/nb/rl/final/value_and_policy_iteration.ipynb",
+          "https://github.com/rgsk/rl/blob/main/src/tabular/value_and_policy_iteration.ipynb",
         localPath:
           "/home/rahul/Documents/codes/projects/rl/src/tabular/value_and_policy_iteration.ipynb",
       },
