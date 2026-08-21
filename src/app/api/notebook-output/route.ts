@@ -1,5 +1,5 @@
 import { outputText, parseNotebook } from "@/lib/ipynb";
-import { getNotebook, notebookRawUrl } from "@/lib/notebooks";
+import { getNotebook } from "@/lib/notebooks";
 import type { NextRequest } from "next/server";
 
 // matches the page, so both read the same cached copy of the notebook
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
     return text("Bad cell or output index", 400);
   }
 
-  const response = await fetch(notebookRawUrl(source), { next: { revalidate } });
+  const response = await fetch(source.rawUrl, { next: { revalidate } });
   if (!response.ok) {
     return text(`Could not load notebook from GitHub (${response.status})`, 502);
   }

@@ -1,41 +1,52 @@
+// paste the github blob url straight from the browser, keyed by
+// `${category}/${topic}/${problem}` so it matches the route
+const notebooks: Record<string, string> = {
+  "llm/fundamentals/attention":
+    "https://github.com/rgsk/llm/blob/main/src/walkthroughs/attention.ipynb",
+  "rl/tabular/value-and-policy-iteration":
+    "https://github.com/rgsk/ml-tracks/blob/practice/nb/rl/final/value_and_policy_iteration.ipynb",
+};
+
 export interface NotebookSource {
-  title: string;
-  owner: string;
+  // the blob url as pasted, for the link on the page
+  url: string;
+  // fetchable url for the same file
+  rawUrl: string;
   repo: string;
-  // branch, tag or commit sha - pin to a sha to freeze a page at a verified version
-  ref: string;
-  path: string;
+  file: string;
 }
 
-// keyed by `${category}/${topic}/${problem}`, matching the route
-const notebooks: Record<string, NotebookSource> = {
-  "llm/fundamentals/attention": {
-    title: "Attention",
-    owner: "rgsk",
-    repo: "llm",
-    ref: "main",
-    path: "src/walkthroughs/attention.ipynb",
-  },
-  "rl/tabular/value-and-policy-iteration": {
-    title: "Value and Policy Iteration",
-    owner: "rgsk",
-    repo: "ml-tracks",
-    ref: "rgsk/practice",
-    path: "nb/rl/final/value_and_policy_iteration.ipynb",
-  },
-};
+const BLOB_URL = /^https:\/\/github\.com\/([^/]+\/[^/]+)\/blob\/(.+)$/;
+
+export function parseGithubBlobUrl(url: string): NotebookSource {
+  const match = BLOB_URL.exec(url);
+  if (!match) {
+    throw new Error(
+      `Not a github blob url (expected https://github.com/<owner>/<repo>/blob/<ref>/<path>): ${url}`,
+    );
+  }
+
+  const [, repo, refAndPath] = match;
+
+  return {
+    url,
+    // the ref and the path stay glued together exactly as github wrote them.
+    // splitting them would mean guessing where a branch name ends, which is
+    // unanswerable for a branch like `rgsk/practice` - github resolves it for us
+    rawUrl: `https://raw.githubusercontent.com/${repo}/${refAndPath}`,
+    repo,
+    file: refAndPath.split("/").pop() ?? refAndPath,
+  };
+}
 
 export const getNotebook = (
   category: string,
   topic: string,
   problem: string,
-) => notebooks[`${category}/${topic}/${problem}`];
-
-export const notebookRawUrl = (n: NotebookSource) =>
-  `https://raw.githubusercontent.com/${n.owner}/${n.repo}/${n.ref}/${n.path}`;
-
-export const notebookGithubUrl = (n: NotebookSource) =>
-  `https://github.com/${n.owner}/${n.repo}/blob/${n.ref}/${n.path}`;
+): NotebookSource | undefined => {
+  const url = notebooks[`${category}/${topic}/${problem}`];
+  return url ? parseGithubBlobUrl(url) : undefined;
+};
 
 export interface NotebookOutputRef {
   category: string;

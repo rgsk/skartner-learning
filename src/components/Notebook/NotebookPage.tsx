@@ -1,10 +1,8 @@
 import { parseNotebook } from "@/lib/ipynb";
-import {
-  getNotebook,
-  notebookGithubUrl,
-  notebookRawUrl,
-} from "@/lib/notebooks";
+import { getNotebook } from "@/lib/notebooks";
+import { getContentTitle } from "@/lib/topics";
 import { FaGithub } from "react-icons/fa";
+import TargetBlankLink from "../Shared/TargetBlankLink";
 import NotebookView from "./NotebookView";
 
 interface NotebookPageProps {
@@ -26,26 +24,23 @@ const NotebookPage = async ({
     return <div>Page not implemented</div>;
   }
 
-  const githubUrl = notebookGithubUrl(source);
-  const response = await fetch(notebookRawUrl(source), {
+  const githubUrl = source.url;
+  const title = getContentTitle(category, topic, problem) ?? source.file;
+
+  const response = await fetch(source.rawUrl, {
     next: { revalidate },
   });
 
   return (
     <div className="max-w-[900px]">
-      <h1 className="text-3xl font-medium">{source.title}</h1>
+      <h1 className="text-3xl font-medium">{title}</h1>
       <div className="h-3"></div>
-      <a
-        href={githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:underline"
-      >
-        <FaGithub />
-        <span>
-          {source.owner}/{source.repo}/{source.path}
+      <TargetBlankLink href={githubUrl}>
+        <span className="flex gap-2">
+          <FaGithub size={22} />
+          <span>Github</span>
         </span>
-      </a>
+      </TargetBlankLink>
       <div className="h-8"></div>
       {response.ok ? (
         <NotebookView
