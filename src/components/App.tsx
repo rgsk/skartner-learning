@@ -4,6 +4,7 @@ import { AppSidebar } from "@/components/Sidebars/AppSidebar";
 import { ControlsSidebar } from "@/components/Sidebars/ControlsSidebar";
 import useGlobalContext from "@/hooks/useGlobalContext";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 import useMeasure from "react-use-measure";
 const hideNavbarUrls = "/piano";
 interface AppProps {
@@ -13,6 +14,16 @@ const App: React.FC<AppProps> = ({ children }) => {
   const { showAppSidebar, showControlsSidebar } = useGlobalContext();
   const [navbarContainerRef, navbarContainerBounds] = useMeasure();
   const pathname = usePathname();
+  const mainContainerRef = useRef<HTMLDivElement>(null);
+
+  // next's scroll-to-top on navigation assumes the document is the scroller;
+  // here it is #main-container, so reset it ourselves. a hash target is left
+  // alone so anchor links can do their own scrolling.
+  useEffect(() => {
+    if (window.location.hash) return;
+    mainContainerRef.current?.scrollTo({ top: 0, behavior: "instant" });
+  }, [pathname]);
+
   return (
     <div className="flex w-full">
       {showAppSidebar && <AppSidebar />}
@@ -29,7 +40,8 @@ const App: React.FC<AppProps> = ({ children }) => {
             {navbarContainerBounds.height > 0 && (
               <div
                 id="main-container"
-                className="absolute h-full w-full overflow-auto"
+                ref={mainContainerRef}
+                className="absolute bottom-0 w-full overflow-auto"
                 style={{
                   top: navbarContainerBounds.height,
                   paddingBottom: navbarContainerBounds.height,
