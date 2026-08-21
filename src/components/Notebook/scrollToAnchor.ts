@@ -10,7 +10,13 @@ export const scrollToAnchor = (id: string) => {
   const target = document.getElementById(id);
   if (!target) return false;
 
-  const block = target.closest(BLOCKS) ?? target;
+  // a marker with no size of its own - a heading's span - is not the thing to
+  // put at the top of the view; the block around it is. anything with a box of
+  // its own (a code line, an anchor div, a paragraph) already is that thing
+  const block =
+    target.getBoundingClientRect().height === 0
+      ? (target.closest(BLOCKS) ?? target)
+      : target;
 
   const container = document.getElementById("main-container");
   if (!container) {

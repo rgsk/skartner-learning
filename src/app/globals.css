@@ -228,3 +228,15 @@ body {
 .dark .notebook-code pre {
   background-color: var(--shiki-dark-bg, #1e1e1e);
 }
+
+/* a link written inside a comment. the same blue as every other link on the
+   page, so it reads as one without an underline cutting through the code. the
+   underline is kept for hover, where it confirms the target rather than
+   decorating the line */
+.notebook-code pre a {
+  @apply text-blue-600 no-underline dark:text-blue-400;
+}
+
+.notebook-code pre a:hover {
+  @apply underline;
+}

@@ -44,7 +44,6 @@ export type NotebookCell =
       source: string;
       executionCount: number | null;
       outputs: NotebookOutput[];
-      anchor?: string;
     };
 
 export interface Notebook {
@@ -139,34 +138,22 @@ function normalizeOutputs(raw: RawOutput[]): NotebookOutput[] {
   return outputs;
 }
 
-// one directive, both cell kinds, so there is a single habit and a single thing
-// to search for:
-//
-//   #| anchor: value-iteration-trace
-//
-// in a code cell it names the cell, and is stripped before rendering because the
-// cell shows its own source anyway. in a markdown cell it names the paragraph
-// under it and stays visible, the way the code-cell one is visible - a rendered
-// markdown cell hides its source, and an anchor nobody can see is an anchor
-// nobody can find
-const ANCHOR = /^[ \t]*#\|[ \t]*anchor:[ \t]*([\w-]+)[ \t]*\r?\n?/;
-const ANCHOR_EVERY_LINE = new RegExp(ANCHOR.source, "gm");
+// `#| anchor: id` marks a link target. code cells handle it in the highlighter,
+// where it can land on the exact line; here it is the markdown spelling of the
+// same thing, naming the paragraph below it. it stays visible either way, since
+// a rendered markdown cell hides its source and an anchor nobody can see is an
+// anchor nobody can find
+const ANCHOR = /^[ \t]*#\|[ \t]*anchor:[ \t]*([\w-]+)[ \t]*\r?\n?/gm;
 
 // muted and monospaced, so it reads as machinery next to the prose
 const ANCHOR_STYLE =
   "font-family:var(--font-mono,ui-monospace,monospace);font-size:.8em;opacity:.45";
 
-const takeAnchor = (source: string) => {
-  const match = source.match(ANCHOR);
-  if (!match) return { source, anchor: undefined };
-  return { source: source.slice(match[0].length), anchor: match[1] };
-};
-
 // the blank line matters: a raw html block runs to the next one, and without it
 // the prose below would be swallowed into the div instead of parsed as markdown
 const showAnchors = (source: string) =>
   source.replace(
-    ANCHOR_EVERY_LINE,
+    ANCHOR,
     (_match, id: string) =>
       `<div id="${id}" style="${ANCHOR_STYLE}">#| anchor: ${id}</div>\n\n`,
   );
@@ -182,7 +169,7 @@ export function parseNotebook(json: string): Notebook {
     }
 
     if (cell.cell_type === "code") {
-      const { source, anchor } = takeAnchor(join(cell.source));
+      const source = join(cell.source);
       const outputs = normalizeOutputs(cell.outputs ?? []);
       if (!source.trim() && outputs.length === 0) return [];
 
@@ -192,7 +179,6 @@ export function parseNotebook(json: string): Notebook {
           source: source.replace(/\n+$/, ""),
           executionCount: cell.execution_count ?? null,
           outputs,
-          anchor,
         },
       ];
     }
