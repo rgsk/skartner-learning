@@ -2,13 +2,10 @@ import axios from "axios";
 import { clsx, type ClassValue } from "clsx";
 import katex from "katex";
 import { twMerge } from "tailwind-merge";
+export { slugify } from "./slugify";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
-}
-
-export function slugify(title: string): string {
-  return title.replaceAll("'", "").toLowerCase().trim().replace(/\s+/g, "-");
 }
 
 export function unslugify(slug: string): string {

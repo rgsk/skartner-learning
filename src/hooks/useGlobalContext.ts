@@ -1,8 +1,12 @@
 // context/GlobalContext.tsx
 
+import { topics } from "@/lib/topics";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useRef, useState } from "react";
-const sidebarPaths = ["/dsa", "/cses", "/random", "/llm", "/rl"];
+
+// every category with a content tree gets the sidebar, so renaming one does not
+// need a matching edit here
+const sidebarPaths = Object.keys(topics).map((category) => `/${category}`);
 
 export const useGlobalContextValue = () => {
   const currentExecuteCodeRef = useRef<any>(null);

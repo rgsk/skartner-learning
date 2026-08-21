@@ -1,7 +1,8 @@
 import { parseNotebook } from "@/lib/ipynb";
 import { getNotebook } from "@/lib/notebooks";
 import { buildOutline } from "@/lib/outline";
-import { getEntryForRoute } from "@/lib/topics";
+import { resolveNotebookRoute } from "@/lib/topics";
+import { notFound } from "next/navigation";
 import { FaGithub } from "react-icons/fa";
 import TargetBlankLink from "../Shared/TargetBlankLink";
 import NotebookOutline from "./NotebookOutline";
@@ -20,12 +21,17 @@ const NotebookPage = async ({
   problem,
   revalidate,
 }: NotebookPageProps) => {
-  const entry = getEntryForRoute(category, topic, problem);
+  // retired slugs never arrive here - middleware redirects them, and the route
+  // only renders params from generateStaticParams. this is the type guard
+  const resolved = resolveNotebookRoute(category, topic, problem);
+  if (!resolved) notFound();
+
+  const entry = resolved.entry;
   const source = getNotebook(
-    typeof entry === "string" ? undefined : entry?.notebook,
+    typeof entry === "string" ? undefined : entry.notebook,
   );
 
-  if (!entry || !source) {
+  if (!source) {
     return <div>Page not implemented</div>;
   }
 
