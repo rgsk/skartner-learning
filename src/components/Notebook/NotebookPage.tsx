@@ -43,7 +43,7 @@ const NotebookPage = async ({
     : undefined;
 
   return (
-    <div className="flex items-start gap-10">
+    <div className="flex items-start gap-6 xl:gap-10">
       <div className="flex-1 min-w-0 max-w-[900px]">
         <h1 className="text-3xl font-medium">{title}</h1>
         <div className="h-3"></div>
@@ -78,7 +78,7 @@ const NotebookPage = async ({
       </div>
 
       {parsed && (
-        <aside className="hidden xl:block w-[260px] shrink-0 sticky top-2 max-h-[calc(100vh-140px)] overflow-y-auto">
+        <aside className="hidden md:block w-[200px] lg:w-[230px] xl:w-[260px] shrink-0 sticky top-2 max-h-[calc(100vh-140px)] overflow-y-auto">
           <NotebookOutline nodes={parsed.outline} />
         </aside>
       )}

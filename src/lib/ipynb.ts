@@ -213,6 +213,8 @@ export type PreparedOutput =
   | {
       kind: "text";
       isError: boolean;
+      // a returned value rather than printed output, so it earns an Out[] prompt
+      isResult: boolean;
       head: string;
       tail: string;
       totalLines: number;
@@ -232,6 +234,7 @@ export function prepareOutput(
   return {
     kind: "text",
     isError: output.kind === "error" || output.stream === "stderr",
+    isResult: output.kind === "text" && output.stream === "result",
     fullUrl,
     ...truncate(text),
   };
