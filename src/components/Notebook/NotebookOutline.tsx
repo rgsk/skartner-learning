@@ -3,28 +3,7 @@ import type { OutlineNode } from "@/lib/outline";
 import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "lucide-react";
 import { useState } from "react";
-
-// breathing room between the heading and the navbar above it
-const SCROLL_OFFSET = 24;
-
-// scrollIntoView also scrolls the overflow-hidden ancestor that #main-container
-// overhangs, which slides the absolutely positioned navbar out of view. scrolling
-// the container directly moves only what we mean to move.
-const scrollTo = (id: string) => {
-  const target = document.getElementById(id);
-  if (!target) return;
-
-  const container = document.getElementById("main-container");
-  if (!container) {
-    target.scrollIntoView({ behavior: "instant", block: "start" });
-    return;
-  }
-
-  container.scrollTop +=
-    target.getBoundingClientRect().top -
-    container.getBoundingClientRect().top -
-    SCROLL_OFFSET;
-};
+import { scrollToAnchor } from "./scrollToAnchor";
 
 const OutlineItem: React.FC<{ node: OutlineNode; depth: number }> = ({
   node,
@@ -58,7 +37,7 @@ const OutlineItem: React.FC<{ node: OutlineNode; depth: number }> = ({
           </span>
         )}
         <button
-          onClick={() => scrollTo(node.id)}
+          onClick={() => scrollToAnchor(node.id)}
           title={node.text}
           className="text-left py-1.5 pl-1 leading-tight cursor-pointer text-muted-foreground hover:text-foreground"
         >

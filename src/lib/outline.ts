@@ -18,6 +18,26 @@ const plainText = (markdown: string) =>
     .replace(/[`*]/g, "")
     .trim();
 
+// github's heading anchor, so a link an author wrote against the notebook as it
+// renders on github resolves here too. underscores survive, which matters for
+// headings like `value_iteration`
+const slugify = (text: string) =>
+  text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+
+// github appends -1, -2 to repeats of the same heading, and so do we
+const uniqueId = (text: string, taken: Map<string, number>, index: number) => {
+  const base = slugify(text);
+  if (!base) return `nb-heading-${index}`;
+
+  const seen = taken.get(base) ?? 0;
+  taken.set(base, seen + 1);
+  return seen === 0 ? base : `${base}-${seen}`;
+};
+
 // headings become siblings or children by comparing levels, so a notebook whose
 // headings are all ### (the rl one) comes out as a flat list rather than nested
 function nest(flat: OutlineNode[]): OutlineNode[] {
@@ -42,6 +62,7 @@ function nest(flat: OutlineNode[]): OutlineNode[] {
  */
 export function buildOutline(notebook: Notebook) {
   const flat: OutlineNode[] = [];
+  const taken = new Map<string, number>();
 
   const cells = notebook.cells.map<NotebookCell>((cell) => {
     if (cell.kind !== "markdown") return cell;
@@ -60,11 +81,12 @@ export function buildOutline(notebook: Notebook) {
         if (!match) return line;
 
         const [, hashes, content] = match;
-        const id = `nb-heading-${flat.length}`;
+        const text = plainText(content);
+        const id = uniqueId(text, taken, flat.length);
         flat.push({
           id,
           level: hashes.length,
-          text: plainText(content),
+          text,
           children: [],
         });
         return `${hashes} <span id="${id}"></span>${content}`;

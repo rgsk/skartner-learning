@@ -66,11 +66,14 @@ const NotebookView = async ({
     <div className="flex flex-col gap-6">
       {cells.map(({ cell, html, outputs, prompt }, i) => {
         if (cell.kind === "markdown") {
-          return <NotebookMarkdown key={i} source={cell.source} />;
+          return (
+            <NotebookMarkdown key={i} source={cell.source} />
+          );
         }
 
+        // a `#| anchor: x` directive in this cell makes it a link target
         return (
-          <div key={i} className="flex flex-col gap-2">
+          <div key={i} id={cell.anchor} className="flex flex-col gap-2">
             <div className="flex gap-3">
               <Prompt>Inp[{prompt}]:</Prompt>
               <div className="flex-1 min-w-0 rounded-md overflow-hidden border">

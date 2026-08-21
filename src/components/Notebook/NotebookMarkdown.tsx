@@ -5,6 +5,7 @@ import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
+import { scrollToAnchor } from "./scrollToAnchor";
 
 // notebooks render their own markdown rather than going through the shared
 // MarkdownRenderer, which was built for the chat app: it pulls in monaco,
@@ -12,19 +13,34 @@ import remarkMath from "remark-math";
 // wraps every fenced block in a header bar with a copy button
 
 const components = {
-  a: ({ className, children, ...props }: any) => (
-    <a
-      {...props}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cn(
-        "text-blue-600 dark:text-blue-400 hover:underline",
-        className,
-      )}
-    >
-      {children}
-    </a>
-  ),
+  a: ({ className, children, href, ...props }: any) => {
+    // a link the author wrote against another part of the same notebook. it
+    // stays on the page: the anchor is somewhere in this render, and the url
+    // is left alone so navigating away still resets the scroll
+    const internal = typeof href === "string" && href.startsWith("#");
+
+    return (
+      <a
+        {...props}
+        href={href}
+        target={internal ? undefined : "_blank"}
+        rel={internal ? undefined : "noopener noreferrer"}
+        onClick={
+          internal
+            ? (event) => {
+                if (scrollToAnchor(href.slice(1))) event.preventDefault();
+              }
+            : undefined
+        }
+        className={cn(
+          "text-blue-600 dark:text-blue-400 hover:underline",
+          className,
+        )}
+      >
+        {children}
+      </a>
+    );
+  },
 
   code: ({ node, className, children, ...props }: any) => {
     // inline code cannot span lines; anything without a position is treated as
