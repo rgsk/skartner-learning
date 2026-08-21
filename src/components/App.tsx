@@ -4,9 +4,15 @@ import { AppSidebar } from "@/components/Sidebars/AppSidebar";
 import { ControlsSidebar } from "@/components/Sidebars/ControlsSidebar";
 import useGlobalContext from "@/hooks/useGlobalContext";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import useMeasure from "react-use-measure";
 const hideNavbarUrls = "/piano";
+
+// the scroll reset has to land in the commit phase, before the browser paints
+// the new page — a useEffect would paint one frame at the old offset first.
+// there is no dom to scroll while server rendering, hence the fallback.
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 interface AppProps {
   children: any;
 }
@@ -19,7 +25,7 @@ const App: React.FC<AppProps> = ({ children }) => {
   // next's scroll-to-top on navigation assumes the document is the scroller;
   // here it is #main-container, so reset it ourselves. a hash target is left
   // alone so anchor links can do their own scrolling.
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (window.location.hash) return;
     mainContainerRef.current?.scrollTo({ top: 0, behavior: "instant" });
   }, [pathname]);
