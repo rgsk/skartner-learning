@@ -5,7 +5,7 @@ import { notebookRoutes } from "@/lib/notebooks";
 export const revalidate = 3600;
 
 export function generateStaticParams() {
-  return notebookRoutes("llm");
+  return notebookRoutes("rl");
 }
 
 const Page = async ({
@@ -16,7 +16,7 @@ const Page = async ({
   const { topic, problem } = await params;
   return (
     <NotebookPage
-      category="llm"
+      category="rl"
       topic={topic}
       problem={problem}
       revalidate={revalidate}

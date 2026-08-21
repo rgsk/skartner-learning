@@ -172,15 +172,67 @@ export interface TruncatedText {
   truncated: boolean;
 }
 
+// a cell can print a single line megabytes long, so cap the preview by characters too
+const MAX_PREVIEW_CHARS = 20_000;
+
+const capChars = (text: string) =>
+  text.length > MAX_PREVIEW_CHARS ? `${text.slice(0, MAX_PREVIEW_CHARS)}…` : text;
+
 export function truncate(text: string): TruncatedText {
   const lines = text.replace(/\n+$/, "").split("\n");
+
   if (lines.length <= HEAD_LINES + TAIL_LINES + 1) {
-    return { head: lines.join("\n"), tail: "", totalLines: lines.length, truncated: false };
+    const whole = lines.join("\n");
+    const capped = capChars(whole);
+    return {
+      head: capped,
+      tail: "",
+      totalLines: lines.length,
+      truncated: capped !== whole,
+    };
   }
+
   return {
-    head: lines.slice(0, HEAD_LINES).join("\n"),
-    tail: lines.slice(-TAIL_LINES).join("\n"),
+    head: capChars(lines.slice(0, HEAD_LINES).join("\n")),
+    tail: capChars(lines.slice(-TAIL_LINES).join("\n")),
     totalLines: lines.length,
     truncated: true,
+  };
+}
+
+export function outputText(output: NotebookOutput): string | undefined {
+  if (output.kind === "text") return output.text;
+  if (output.kind === "error") {
+    return output.text || `${output.ename}: ${output.evalue}`;
+  }
+  return undefined;
+}
+
+// what actually crosses to the browser: a preview plus a url for the rest
+export type PreparedOutput =
+  | {
+      kind: "text";
+      isError: boolean;
+      head: string;
+      tail: string;
+      totalLines: number;
+      truncated: boolean;
+      fullUrl: string;
+    }
+  | { kind: "image"; src: string }
+  | { kind: "html"; html: string };
+
+export function prepareOutput(
+  output: NotebookOutput,
+  fullUrl: string,
+): PreparedOutput {
+  if (output.kind === "image" || output.kind === "html") return output;
+
+  const text = outputText(output) ?? "";
+  return {
+    kind: "text",
+    isError: output.kind === "error" || output.stream === "stderr",
+    fullUrl,
+    ...truncate(text),
   };
 }

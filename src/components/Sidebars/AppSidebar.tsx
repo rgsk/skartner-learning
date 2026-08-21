@@ -69,6 +69,10 @@ export function AppSidebar() {
             <Link href="/llm">
               <SidebarGroupLabel>LLM</SidebarGroupLabel>
             </Link>
+          ) : category === "rl" ? (
+            <Link href="/rl">
+              <SidebarGroupLabel>Reinforcement Learning</SidebarGroupLabel>
+            </Link>
           ) : null}
 
           <SidebarGroupContent>
@@ -140,6 +144,12 @@ const topics = {
     {
       name: "Fundamentals",
       problems: ["Attention"],
+    },
+  ],
+  rl: [
+    {
+      name: "Tabular",
+      problems: ["Value and Policy Iteration"],
     },
   ],
   random: [
