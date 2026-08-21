@@ -1,5 +1,6 @@
 import { parseNotebook } from "@/lib/ipynb";
 import { getNotebook } from "@/lib/notebooks";
+import { readNotebook } from "@/lib/readNotebook";
 import { buildOutline } from "@/lib/outline";
 import { resolveNotebookRoute } from "@/lib/topics";
 import { notFound } from "next/navigation";
@@ -27,9 +28,7 @@ const NotebookPage = async ({
   if (!resolved) notFound();
 
   const entry = resolved.entry;
-  const source = getNotebook(
-    typeof entry === "string" ? undefined : entry.notebook,
-  );
+  const source = getNotebook(entry);
 
   if (!source) {
     return <div>Page not implemented</div>;
@@ -38,15 +37,17 @@ const NotebookPage = async ({
   const githubUrl = source.url;
   const title = typeof entry === "string" ? entry : entry.name;
 
-  const response = await fetch(source.rawUrl, {
-    next: { revalidate },
-  });
+  const read = await readNotebook(source, revalidate);
 
   // anchors are injected into the markdown cells here, so the outline in the
   // right column and the headings in the render share the same ids
-  const parsed = response.ok
-    ? buildOutline(parseNotebook(await response.text()))
-    : undefined;
+  const parsed = read.ok ? buildOutline(parseNotebook(read.text)) : undefined;
+
+  const failure = read.ok
+    ? undefined
+    : read.from === "disk"
+      ? `Could not read this notebook from ${source.localPath} (${read.status}).`
+      : `Could not load this notebook from GitHub (${read.status}).`;
 
   return (
     <div className="flex items-start justify-between gap-6 xl:gap-10">
@@ -69,8 +70,7 @@ const NotebookPage = async ({
           />
         ) : (
           <p className="text-red-500">
-            Could not load this notebook from GitHub ({response.status}). Open
-            it{" "}
+            {failure} Open it{" "}
             <a
               href={githubUrl}
               target="_blank"

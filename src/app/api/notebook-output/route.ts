@@ -1,5 +1,6 @@
 import { outputText, parseNotebook } from "@/lib/ipynb";
 import { getNotebook } from "@/lib/notebooks";
+import { readNotebook } from "@/lib/readNotebook";
 import { getEntryForRoute } from "@/lib/topics";
 import type { NextRequest } from "next/server";
 
@@ -20,9 +21,7 @@ export async function GET(request: NextRequest) {
     params.get("topic") ?? "",
     params.get("problem") ?? "",
   );
-  const source = getNotebook(
-    typeof entry === "string" ? undefined : entry?.notebook,
-  );
+  const source = getNotebook(entry);
   if (!source) return text("Notebook not found", 404);
 
   const cellIndex = Number(params.get("cell"));
@@ -31,13 +30,13 @@ export async function GET(request: NextRequest) {
     return text("Bad cell or output index", 400);
   }
 
-  const response = await fetch(source.rawUrl, { next: { revalidate } });
-  if (!response.ok) {
-    return text(`Could not load notebook from GitHub (${response.status})`, 502);
+  const read = await readNotebook(source, revalidate);
+  if (!read.ok) {
+    return text(`Could not load notebook from ${read.from} (${read.status})`, 502);
   }
 
   // the page renders the same parse, so indices line up
-  const cell = parseNotebook(await response.text()).cells[cellIndex];
+  const cell = parseNotebook(read.text).cells[cellIndex];
   if (cell?.kind !== "code") return text("Output not found", 404);
 
   const output = cell.outputs[outputIndex];

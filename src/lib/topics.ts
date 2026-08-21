@@ -15,6 +15,10 @@ export interface Problem {
   prodLink?: string;
   // github blob url of the notebook this entry renders, pasted from the browser
   notebook: string;
+  // absolute path to that same notebook on the author's machine. read in place
+  // of github during development, ignored by a production build, where it does
+  // not exist - so `notebook` stays the source of truth for the live site
+  localPath?: string;
 }
 
 // a plain string keeps the old behaviour: the link is derived from the name

@@ -1,6 +1,11 @@
+import type { ProblemEntry } from "./topics";
+
 export interface NotebookSource {
   // the blob url as pasted, for the link on the page
   url: string;
+  // absolute path to the same file on the author's machine, read instead of
+  // github while developing so edits show up on refresh
+  localPath?: string;
   // fetchable url for the same file
   rawUrl: string;
   repo: string;
@@ -31,8 +36,12 @@ export function parseGithubBlobUrl(url: string): NotebookSource {
 }
 
 // a malformed url is a config mistake, so it throws rather than rendering nothing
-export const getNotebook = (url?: string): NotebookSource | undefined =>
-  url ? parseGithubBlobUrl(url) : undefined;
+export const getNotebook = (
+  entry?: ProblemEntry,
+): NotebookSource | undefined => {
+  if (!entry || typeof entry === "string" || !entry.notebook) return undefined;
+  return { ...parseGithubBlobUrl(entry.notebook), localPath: entry.localPath };
+};
 
 export interface NotebookOutputRef {
   category: string;
