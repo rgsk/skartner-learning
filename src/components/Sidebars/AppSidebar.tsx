@@ -65,6 +65,10 @@ export function AppSidebar() {
             <Link href="/cses">
               <SidebarGroupLabel>CSES Problem Set</SidebarGroupLabel>
             </Link>
+          ) : category === "llm" ? (
+            <Link href="/llm">
+              <SidebarGroupLabel>LLM</SidebarGroupLabel>
+            </Link>
           ) : null}
 
           <SidebarGroupContent>
@@ -132,6 +136,12 @@ export function AppSidebar() {
 }
 
 const topics = {
+  llm: [
+    {
+      name: "Fundamentals",
+      problems: ["Attention"],
+    },
+  ],
   random: [
     {
       name: "General",

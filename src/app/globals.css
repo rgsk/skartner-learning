@@ -202,3 +202,8 @@ body {
 .inline-code {
   @apply px-1 py-0.5 rounded bg-gray-100 text-sm text-gray-800 dark:bg-gray-800 dark:text-gray-100 font-mono;
 }
+
+/* shiki emits a bare <pre>, these are the bits it leaves to the page */
+.notebook-code pre {
+  @apply px-4 py-3 overflow-x-auto text-sm leading-relaxed;
+}
