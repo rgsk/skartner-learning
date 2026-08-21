@@ -18,8 +18,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import { topics } from "@/lib/topics";
-import { slugify } from "@/lib/utils";
+import { problemLink, problemName, topics, topicSlug } from "@/lib/topics";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -91,12 +90,13 @@ export function AppSidebar() {
             </SidebarMenu> */}
             <SidebarMenu>
               {(topics[category] ?? []).map((topic, i) => {
-                const isOpen = openState[slugify(topic.name)] ?? false; // default close
+                // keyed by the url segment, which is what the pathname effect stores
+                const isOpen = openState[topicSlug(topic)] ?? false; // default close
                 return (
                   <Collapsible
                     key={i}
                     open={isOpen}
-                    onOpenChange={() => toggle(slugify(topic.name))}
+                    onOpenChange={() => toggle(topicSlug(topic))}
                     className="group/collapsible"
                   >
                     <SidebarMenuItem>
@@ -110,9 +110,7 @@ export function AppSidebar() {
                       <CollapsibleContent>
                         <SidebarMenuSub>
                           {topic.problems.map((problem, i) => {
-                            const link = `/${category}/${slugify(
-                              topic.name,
-                            )}/${slugify(problem)}`;
+                            const link = problemLink(category, topic, problem);
                             return (
                               <SidebarMenuSubItem key={i}>
                                 <SidebarMenuButton
@@ -120,7 +118,7 @@ export function AppSidebar() {
                                   isActive={pathname === link}
                                 >
                                   <Link href={link}>
-                                    <span>{problem}</span>
+                                    <span>{problemName(problem)}</span>
                                   </Link>
                                 </SidebarMenuButton>
                               </SidebarMenuSubItem>

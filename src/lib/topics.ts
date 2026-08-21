@@ -1,35 +1,84 @@
 import { slugify } from "@/lib/utils";
+import llmTopics from "./llmTopics";
+import rlTopics from "./rlTopics";
+
+export interface Problem {
+  name: string;
+  // the last url segment, written out rather than derived from `name`,
+  // so renaming never moves the url
+  slug: string;
+  // the same page as absolute urls, purely so they are clickable from the editor.
+  // nothing reads these - keep them in step with the slugs by hand
+  devLink?: string;
+  prodLink?: string;
+  // github blob url of the notebook this entry renders, pasted from the browser
+  notebook: string;
+}
+
+// a plain string keeps the old behaviour: the link is derived from the name
+export type ProblemEntry = string | Problem;
 
 export interface Topic {
   name: string;
-  problems: string[];
+  // same idea one level up - omit it and the slug falls back to the name
+  slug?: string;
+  problems: ProblemEntry[];
 }
 
-// the display title for a route, so it is written once here rather than
-// repeated in the notebook registry
-export const getContentTitle = (
+export const problemName = (problem: ProblemEntry) =>
+  typeof problem === "string" ? problem : problem.name;
+
+export const topicSlug = (topic: Topic) => topic.slug ?? slugify(topic.name);
+
+export const problemSlug = (problem: ProblemEntry) =>
+  typeof problem === "string" ? slugify(problem) : problem.slug;
+
+export const problemLink = (
+  category: string,
+  topic: Topic,
+  problem: ProblemEntry,
+) => `/${category}/${topicSlug(topic)}/${problemSlug(problem)}`;
+
+// every entry across every category, paired with the link it is published at
+const allEntries = () =>
+  Object.entries(topics).flatMap(([category, groups]) =>
+    groups.flatMap((group) =>
+      group.problems.map((problem) => ({
+        link: problemLink(category, group, problem),
+        problem,
+      })),
+    ),
+  );
+
+// the entry serving one route. a notebook listed in several places resolves
+// through whichever entry owns that link.
+export const getEntryForRoute = (
   category: string,
   topic: string,
   problem: string,
-) =>
-  topics[category]
-    ?.find((t) => slugify(t.name) === topic)
-    ?.problems.find((p) => slugify(p) === problem);
+): ProblemEntry | undefined =>
+  allEntries().find((e) => e.link === `/${category}/${topic}/${problem}`)
+    ?.problem;
+
+// notebook routes under a category, taken from the links rather than the names,
+// so an entry may live under one category and publish under another
+export const notebookRoutes = (category: string) =>
+  allEntries()
+    .filter(
+      (e) =>
+        typeof e.problem !== "string" &&
+        e.problem.notebook &&
+        e.link.startsWith(`/${category}/`),
+    )
+    .map((e) => {
+      const [, , topic, problem] = e.link.split("/");
+      return { topic, problem };
+    });
 
 // the content tree behind the sidebar and the notebook page titles
 export const topics: Record<string, Topic[]> = {
-  llm: [
-    {
-      name: "Fundamentals",
-      problems: ["Attention"],
-    },
-  ],
-  rl: [
-    {
-      name: "Tabular",
-      problems: ["Value and Policy Iteration"],
-    },
-  ],
+  llm: llmTopics,
+  rl: rlTopics,
   random: [
     {
       name: "General",

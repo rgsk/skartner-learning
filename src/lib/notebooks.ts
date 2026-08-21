@@ -1,12 +1,3 @@
-// paste the github blob url straight from the browser, keyed by
-// `${category}/${topic}/${problem}` so it matches the route
-const notebooks: Record<string, string> = {
-  "llm/fundamentals/attention":
-    "https://github.com/rgsk/llm/blob/main/src/walkthroughs/attention.ipynb",
-  "rl/tabular/value-and-policy-iteration":
-    "https://github.com/rgsk/ml-tracks/blob/practice/nb/rl/final/value_and_policy_iteration.ipynb",
-};
-
 export interface NotebookSource {
   // the blob url as pasted, for the link on the page
   url: string;
@@ -39,14 +30,9 @@ export function parseGithubBlobUrl(url: string): NotebookSource {
   };
 }
 
-export const getNotebook = (
-  category: string,
-  topic: string,
-  problem: string,
-): NotebookSource | undefined => {
-  const url = notebooks[`${category}/${topic}/${problem}`];
-  return url ? parseGithubBlobUrl(url) : undefined;
-};
+// a malformed url is a config mistake, so it throws rather than rendering nothing
+export const getNotebook = (url?: string): NotebookSource | undefined =>
+  url ? parseGithubBlobUrl(url) : undefined;
 
 export interface NotebookOutputRef {
   category: string;
@@ -66,10 +52,3 @@ export const notebookOutputUrl = (ref: NotebookOutputRef) =>
     out: String(ref.out),
   })}`;
 
-export const notebookRoutes = (category: string) =>
-  Object.keys(notebooks)
-    .filter((key) => key.startsWith(`${category}/`))
-    .map((key) => {
-      const [, topic, problem] = key.split("/");
-      return { topic, problem };
-    });

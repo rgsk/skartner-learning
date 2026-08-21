@@ -1,6 +1,6 @@
 import { parseNotebook } from "@/lib/ipynb";
 import { getNotebook } from "@/lib/notebooks";
-import { getContentTitle } from "@/lib/topics";
+import { getEntryForRoute } from "@/lib/topics";
 import { FaGithub } from "react-icons/fa";
 import TargetBlankLink from "../Shared/TargetBlankLink";
 import NotebookView from "./NotebookView";
@@ -18,14 +18,17 @@ const NotebookPage = async ({
   problem,
   revalidate,
 }: NotebookPageProps) => {
-  const source = getNotebook(category, topic, problem);
+  const entry = getEntryForRoute(category, topic, problem);
+  const source = getNotebook(
+    typeof entry === "string" ? undefined : entry?.notebook,
+  );
 
-  if (!source) {
+  if (!entry || !source) {
     return <div>Page not implemented</div>;
   }
 
   const githubUrl = source.url;
-  const title = getContentTitle(category, topic, problem) ?? source.file;
+  const title = typeof entry === "string" ? entry : entry.name;
 
   const response = await fetch(source.rawUrl, {
     next: { revalidate },

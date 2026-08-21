@@ -1,5 +1,6 @@
 import { outputText, parseNotebook } from "@/lib/ipynb";
 import { getNotebook } from "@/lib/notebooks";
+import { getEntryForRoute } from "@/lib/topics";
 import type { NextRequest } from "next/server";
 
 // matches the page, so both read the same cached copy of the notebook
@@ -14,10 +15,13 @@ const text = (body: string, status = 200) =>
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
 
-  const source = getNotebook(
+  const entry = getEntryForRoute(
     params.get("category") ?? "",
     params.get("topic") ?? "",
     params.get("problem") ?? "",
+  );
+  const source = getNotebook(
+    typeof entry === "string" ? undefined : entry?.notebook,
   );
   if (!source) return text("Notebook not found", 404);
 
