@@ -43,7 +43,7 @@ const NotebookPage = async ({
     : undefined;
 
   return (
-    <div className="flex items-start gap-6 xl:gap-10">
+    <div className="flex items-start justify-between gap-6 xl:gap-10">
       <div className="flex-1 min-w-0 max-w-[900px]">
         <h1 className="text-3xl font-medium">{title}</h1>
         <div className="h-3"></div>
@@ -63,7 +63,8 @@ const NotebookPage = async ({
           />
         ) : (
           <p className="text-red-500">
-            Could not load this notebook from GitHub ({response.status}). Open it{" "}
+            Could not load this notebook from GitHub ({response.status}). Open
+            it{" "}
             <a
               href={githubUrl}
               target="_blank"
@@ -76,9 +77,9 @@ const NotebookPage = async ({
           </p>
         )}
       </div>
-
+      {/* sticky  top-[32px] because layout has p-[32px] */}
       {parsed && (
-        <aside className="hidden md:block w-[200px] lg:w-[230px] xl:w-[260px] shrink-0 sticky top-2 max-h-[calc(100vh-140px)] overflow-y-auto">
+        <aside className="hidden md:block w-[200px] lg:w-[230px] xl:w-[260px] shrink-0 sticky top-[32px] max-h-[calc(100vh-140px)] overflow-y-auto">
           <NotebookOutline nodes={parsed.outline} />
         </aside>
       )}

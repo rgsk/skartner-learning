@@ -40,7 +40,7 @@ const OutlineItem: React.FC<{ node: OutlineNode; depth: number }> = ({
           <button
             onClick={() => setOpen((prev) => !prev)}
             aria-label={open ? "Collapse section" : "Expand section"}
-            className="shrink-0 mt-[5px] cursor-pointer text-muted-foreground"
+            className="shrink-0 mt-2 cursor-pointer text-muted-foreground"
           >
             <ChevronRightIcon
               className={cn(
@@ -55,7 +55,7 @@ const OutlineItem: React.FC<{ node: OutlineNode; depth: number }> = ({
         <button
           onClick={() => scrollTo(node.id)}
           title={node.text}
-          className="text-left py-[2px] pl-1 cursor-pointer text-muted-foreground hover:text-foreground hover:underline"
+          className="text-left py-1.5 pl-1 leading-snug cursor-pointer text-muted-foreground hover:text-foreground"
         >
           {node.text}
         </button>

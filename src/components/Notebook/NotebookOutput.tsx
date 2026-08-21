@@ -6,7 +6,7 @@ import TargetBlankLink from "../Shared/TargetBlankLink";
 
 // matches the shiki themes used for code cells, so output sits flush with the code
 const preClasses =
-  "bg-[#f6f8fa] text-[#24292e] dark:bg-[#1E1E1E] dark:text-[#D4D4D4] text-xs font-mono px-4 py-3 overflow-x-auto whitespace-pre";
+  "bg-[#f6f8fa] text-[#24292e] dark:bg-[#1E1E1E] dark:text-[#D4D4D4] text-sm leading-relaxed font-mono px-4 py-3 overflow-x-auto whitespace-pre";
 
 type TextOutput = Extract<PreparedOutput, { kind: "text" }>;
 
