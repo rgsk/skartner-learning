@@ -4,8 +4,9 @@ import { cn } from "@/lib/utils";
 import { useRef, useState } from "react";
 import TargetBlankLink from "../Shared/TargetBlankLink";
 
+// matches the shiki themes used for code cells, so output sits flush with the code
 const preClasses =
-  "bg-[#1E1E1E] text-[#D4D4D4] text-xs font-mono px-4 py-3 overflow-x-auto whitespace-pre";
+  "bg-[#f6f8fa] text-[#24292e] dark:bg-[#1E1E1E] dark:text-[#D4D4D4] text-xs font-mono px-4 py-3 overflow-x-auto whitespace-pre";
 
 type TextOutput = Extract<PreparedOutput, { kind: "text" }>;
 
@@ -43,7 +44,7 @@ function TextOutputView({ output }: { output: TextOutput }) {
 
   if (!truncated) {
     return (
-      <pre className={cn(preClasses, isError && "text-red-400")}>{head}</pre>
+      <pre className={cn(preClasses, isError && "text-red-600 dark:text-red-400")}>{head}</pre>
     );
   }
 
@@ -56,19 +57,19 @@ function TextOutputView({ output }: { output: TextOutput }) {
           expanded && "overflow-y-auto",
           // only if the measurement was unavailable
           expanded && collapsedHeight === undefined && "max-h-[420px]",
-          isError && "text-red-400",
+          isError && "text-red-600 dark:text-red-400",
         )}
         style={expanded ? { height: collapsedHeight } : undefined}
       >
         {expanded ? full : `${head}\n...\n${tail}`}
       </pre>
 
-      <div className="bg-[#1E1E1E] text-[#9c9c9c] text-sm italic px-4 pt-2 pb-3">
+      <div className="bg-[#f6f8fa] dark:bg-[#1E1E1E] text-muted-foreground text-sm italic px-4 pt-2 pb-3">
         {expanded ? (
           <>
             Showing all {totalLines.toLocaleString()} lines.{" "}
             <button
-              className="underline hover:text-white cursor-pointer"
+              className="underline hover:text-foreground cursor-pointer"
               onClick={() => setExpanded(false)}
             >
               Collapse
@@ -79,7 +80,7 @@ function TextOutputView({ output }: { output: TextOutput }) {
           <>
             Output is truncated ({totalLines.toLocaleString()} lines). View as a{" "}
             <button
-              className="underline hover:text-white cursor-pointer disabled:no-underline"
+              className="underline hover:text-foreground cursor-pointer disabled:no-underline"
               onClick={showScrollable}
               disabled={loading}
             >
@@ -87,7 +88,7 @@ function TextOutputView({ output }: { output: TextOutput }) {
             </button>{" "}
             or <FullOutputLink href={fullUrl} />.
             {error && (
-              <span className="text-red-400">
+              <span className="text-red-600 dark:text-red-400">
                 {" "}
                 Could not load the full output.
               </span>
@@ -101,7 +102,7 @@ function TextOutputView({ output }: { output: TextOutput }) {
 
 const FullOutputLink = ({ href }: { href: string }) => (
   <TargetBlankLink href={href}>
-    <span className="underline hover:text-white">open in new tab</span>
+    <span className="underline hover:text-foreground">open in new tab</span>
   </TargetBlankLink>
 );
 

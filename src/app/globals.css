@@ -207,3 +207,24 @@ body {
 .notebook-code pre {
   @apply px-4 py-3 overflow-x-auto text-sm leading-relaxed;
 }
+
+/* shiki writes both themes as css variables; pick one by the .dark class.
+   its light background is plain white, which is the page colour, so the block
+   gets its own light grey instead. */
+.notebook-code pre,
+.notebook-code pre span {
+  color: var(--shiki-light);
+}
+
+.notebook-code pre {
+  background-color: #f6f8fa;
+}
+
+.dark .notebook-code pre,
+.dark .notebook-code pre span {
+  color: var(--shiki-dark);
+}
+
+.dark .notebook-code pre {
+  background-color: var(--shiki-dark-bg, #1e1e1e);
+}

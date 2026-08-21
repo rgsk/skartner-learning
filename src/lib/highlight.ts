@@ -1,21 +1,22 @@
 import { createHighlighter, type Highlighter } from "shiki";
 
-// dark-plus is vscode's Dark+, so notebook code matches the monaco blocks elsewhere
-const THEME = "dark-plus";
+// both themes are emitted at once as css variables, and globals.css picks one
+// based on the .dark class - dark-plus keeps notebook code matching vscode
+const THEMES = { light: "github-light", dark: "dark-plus" } as const;
 const LANGS = ["python", "typescript", "javascript", "json", "bash"] as const;
 
 let highlighterPromise: Promise<Highlighter> | undefined;
 
 const getHighlighter = () => {
-  highlighterPromise ??= createHighlighter({ themes: [THEME], langs: [...LANGS] });
+  highlighterPromise ??= createHighlighter({
+    themes: [THEMES.light, THEMES.dark],
+    langs: [...LANGS],
+  });
   return highlighterPromise;
 };
 
 const escapeHtml = (code: string) =>
-  code
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
+  code.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 
 export async function highlightToHtml(code: string, language: string) {
   const lang = (LANGS as readonly string[]).includes(language)
@@ -23,11 +24,14 @@ export async function highlightToHtml(code: string, language: string) {
     : undefined;
 
   if (!lang) {
-    return `<pre class="shiki" style="background-color:#1E1E1E;color:#D4D4D4"><code>${escapeHtml(
-      code,
-    )}</code></pre>`;
+    return `<pre class="shiki"><code>${escapeHtml(code)}</code></pre>`;
   }
 
   const highlighter = await getHighlighter();
-  return highlighter.codeToHtml(code, { lang, theme: THEME });
+  return highlighter.codeToHtml(code, {
+    lang,
+    themes: THEMES,
+    // leaves colours as --shiki-light / --shiki-dark rather than baking one in
+    defaultColor: false,
+  });
 }

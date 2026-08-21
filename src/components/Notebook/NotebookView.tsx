@@ -48,7 +48,7 @@ const NotebookView = async ({
               dangerouslySetInnerHTML={{ __html: html }}
             />
             {outputs.map((output, j) => (
-              <div key={j} className="border-t border-[#333]">
+              <div key={j} className="border-t">
                 <NotebookOutput output={output} />
               </div>
             ))}
