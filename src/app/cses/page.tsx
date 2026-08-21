@@ -1,6 +1,6 @@
-import CSESPage from "@/components/CSES/CSESPage";
+import SelectTopicPage from "@/components/Shared/SelectTopicPage";
 
 const Page = () => {
-  return <CSESPage />;
+  return <SelectTopicPage />;
 };
 export default Page;

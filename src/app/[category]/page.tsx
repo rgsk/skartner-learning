@@ -1,4 +1,4 @@
-import DSAPage from "@/components/DSA/DSAPage";
+import SelectTopicPage from "@/components/Shared/SelectTopicPage";
 import categories from "@/routes/categories";
 
 // see the note in [topic]/[problem] - unknown categories 404 from the router,
@@ -9,6 +9,6 @@ export function generateStaticParams() {
   return categories.map((c) => ({ category: c.slug }));
 }
 
-const Page = () => <DSAPage />;
+const Page = () => <SelectTopicPage />;
 
 export default Page;

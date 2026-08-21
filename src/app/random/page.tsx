@@ -1,6 +1,6 @@
-import DSAPage from "@/components/DSA/DSAPage";
+import SelectTopicPage from "@/components/Shared/SelectTopicPage";
 
 const Page = () => {
-  return <DSAPage />;
+  return <SelectTopicPage />;
 };
 export default Page;
